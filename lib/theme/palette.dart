@@ -9,5 +9,8 @@ class Palette {
   static const Color colorOrange = Color(0xffffc164);
   static const Color colorOrangePale = Color(0xffffc084);
 
+  static const Color colorWhite = Color(0xffffffff);
+  static const Color colorDark = Color(0xff292929);
+
   static const Color colorPrimary = colorRed;
 }

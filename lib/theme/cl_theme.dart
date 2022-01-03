@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ClTheme {
   static ThemeData theme(BuildContext context) {
@@ -7,7 +8,17 @@ class ClTheme {
       colorScheme: ColorScheme.fromSwatch(
         primarySwatch: colorSwatch(Palette.colorPrimary.value),
         accentColor: Palette.colorPrimary,
-        backgroundColor: Palette.colorScaffold
+        backgroundColor: Palette.colorScaffold,
+        cardColor: Palette.colorScaffold
+      ),
+
+      scaffoldBackgroundColor: Palette.colorScaffold,
+
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Palette.colorScaffold,
+        elevation: 0,
+        foregroundColor: Palette.colorDark,
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       )
     );
   }
