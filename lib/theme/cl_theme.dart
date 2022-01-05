@@ -19,6 +19,10 @@ class ClTheme {
         elevation: 0,
         foregroundColor: Palette.colorDark,
         systemOverlayStyle: SystemUiOverlayStyle.light,
+      ),
+
+      textTheme: const TextTheme(
+        headline2: TextStyle(fontSize: 24, color: Palette.colorDark),
       )
     );
   }

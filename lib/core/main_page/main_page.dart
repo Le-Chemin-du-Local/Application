@@ -1,6 +1,7 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/main_page/page_item.dart';
 import 'package:chemin_du_local/core/main_page/widgets/menu_drawer.dart';
+import 'package:chemin_du_local/features/dashboard/dashboard_page.dart';
 import 'package:flutter/material.dart';
 
 const Map<PagesId, PageItem> pagesItem = {
@@ -18,13 +19,19 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   PagesId _currentPageId = PagesId.dashboard;
 
-  final Map<PagesId, Widget> pages = {
-    PagesId.dashboard: const Center(child: Text("Hello page 1")),
-    PagesId.products: const Center(child: Text("Hello page 2")),
-  };
-
   @override
   Widget build(BuildContext context) {
+    final Map<PagesId, Widget> pages = {
+      PagesId.dashboard: DashboardPage(
+        onPageChanged: (page) {
+          setState(() {
+            _currentPageId = page;
+          });
+        }
+      ),
+      PagesId.products: const Center(child: Text("Hello page 2")),
+    };
+
     return LayoutBuilder(
       builder: (context, constraints) {
         bool useBigLayout = constraints.maxWidth >= ScreenHelper.breakpointPC;
