@@ -33,7 +33,7 @@ class BottomAppBar extends StatelessWidget {
       ],
       unselectedItemColor: Palette.colorDark,
       selectedItemColor: Palette.colorPrimary,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: Theme.of(context).cardColor,
       currentIndex: pageIds.indexOf(currentPageId),
       onTap: (index) => onSelectedPage(pageIds[index]),
     );

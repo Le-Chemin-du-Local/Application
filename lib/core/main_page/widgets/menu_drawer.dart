@@ -21,7 +21,15 @@ class MenuDrawer extends StatelessWidget {
     return Drawer(
       elevation: 0,
       child: Container(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          border: const Border(
+            right: BorderSide(
+              color: Color(0xffd9d9d9),
+              width: 0.5
+            )
+          )
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -45,7 +53,7 @@ class MenuDrawer extends StatelessWidget {
 
   Widget _buildPageItem(BuildContext context, PageItem item, {required bool isActive}) {
     return DefaultTextStyle(
-      style: TextStyle(color: isActive ? Palette.colorRed : Palette.colorRedPale),
+      style: TextStyle(color: isActive ? Theme.of(context).primaryColor : Palette.colorDarkGrey),
       child: InkWell(
          onTap: () {
           onSelectedPage(item.id);
@@ -55,11 +63,11 @@ class MenuDrawer extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: Palette.colorScaffold,
+            color: Theme.of(context).cardColor,
             border: Border(
               left: BorderSide(
                 width: 5,
-                color: isActive ? Palette.colorRed : Colors.transparent
+                color: isActive ? Theme.of(context).primaryColor : Colors.transparent
               )
             )
           ),
@@ -67,7 +75,7 @@ class MenuDrawer extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Icon(item.icon, size: 24, color: isActive ? Palette.colorRed : Palette.colorRedPale),
+                child: Icon(item.icon, size: 24, color: isActive ? Theme.of(context).primaryColor : Palette.colorDarkGrey),
               ),
               const SizedBox(width: 16,),
               Expanded(

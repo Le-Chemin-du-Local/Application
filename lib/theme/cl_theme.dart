@@ -13,6 +13,7 @@ class ClTheme {
       ),
 
       scaffoldBackgroundColor: Palette.colorScaffold,
+      primaryColor: Palette.colorPrimary,
 
       appBarTheme: const AppBarTheme(
         backgroundColor: Palette.colorScaffold,
