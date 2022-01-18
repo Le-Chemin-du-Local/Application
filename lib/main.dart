@@ -1,8 +1,9 @@
 import 'package:chemin_du_local/core/main_page/main_page.dart';
 import 'package:chemin_du_local/theme/cl_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
