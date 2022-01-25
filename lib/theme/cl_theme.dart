@@ -24,7 +24,11 @@ class ClTheme {
 
       textTheme: const TextTheme(
         headline2: TextStyle(fontSize: 24, color: Palette.colorDark),
-      )
+        bodyText1: TextStyle(fontSize: 12, color: Palette.colorDark),
+        bodyText2: TextStyle(fontSize: 18, color: Palette.colorDark)
+      ),
+
+      visualDensity: VisualDensity.standard
     );
   }
 

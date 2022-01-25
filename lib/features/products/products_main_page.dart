@@ -25,7 +25,7 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
             // The categories pannel
             Flexible(
               child: Container(
-                constraints: BoxConstraints(maxWidth: isBigLayout ? 400 : double.infinity),
+                constraints: BoxConstraints(maxWidth: isBigLayout ? 200 : double.infinity),
                 decoration: const BoxDecoration(
                   border: Border(
                     right: BorderSide(

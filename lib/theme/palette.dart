@@ -6,7 +6,7 @@ class Palette {
   static const Color colorRed = Color(0xffff6767);
   static const Color colorRedPale = Color(0xffffa7a7);
 
-  static const Color colorOrange = Color(0xffff8a00);
+  static const Color colorOrange = Color(0xffff8c60);
   static const Color colorOrangePale = Color(0xffffc084);
 
   static const Color colorWhite = Color(0xffffffff);

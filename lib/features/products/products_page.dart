@@ -22,8 +22,8 @@ class ProductsPage extends ConsumerWidget {
       body: ref.watch(productsControllerProvider).productsByCategory(category).when(
         data: (products) => GridView(
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 200,
-            mainAxisExtent: 212,
+            maxCrossAxisExtent: 270,
+            mainAxisExtent: 273,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16
           ),

@@ -35,7 +35,7 @@ class ClCard extends StatelessWidget {
         border: borderColor != null ? Border.all(
           color: borderColor!,
         ) : null,
-        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(12.0)),
         boxShadow: const [
           BoxShadow(
             color: Color(0x0c000000),

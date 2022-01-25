@@ -13,36 +13,66 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTextStyle(
-      style: const TextStyle(color: Palette.colorWhite),
-      textAlign: TextAlign.center,
-      child: ClCard(
-        padding: EdgeInsets.zero,
-        backgroundColor: Theme.of(context).primaryColor, 
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // The image of the product
-            Expanded(
-              flex: 7,
-              child: ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(12),
-                  topRight: Radius.circular(12),
-                ),
-                child: Image.asset("assets/images/beer.png", fit: BoxFit.cover,),
+    return ClCard(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          // The image of the product
+          Expanded(
+            flex: 7,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              child: _buildImageWithPrice(context),
+            )
+          ),
+          const SizedBox(height: 8.0,),
+          // The name of the product
+          Flexible(child: Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold),)),
+          const SizedBox(height: 8.0,),
+          // The flag if it's a breton product
+          Flexible(
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Image.asset("assets/images/drapeau_breton.png")
+            )
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildImageWithPrice(BuildContext context) {
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Image.asset("assets/images/beer.png", fit: BoxFit.cover,),
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(12.0),
+                bottomRight: Radius.circular(12.0)
               )
             ),
-            const SizedBox(height: 8.0,),
-            // The name of the product
-            Flexible(child: Text(product.name)),
-            const SizedBox(height: 4.0,),
-            // The price
-            Flexible(child: Text("${product.price}€"))
-          ],
-        ),
-      ),
+            child: RichText(
+              text: TextSpan(
+                text: "${product.price}€",
+                style: const TextStyle(fontWeight: FontWeight.w500),
+                children: const [
+                  TextSpan(text: "/pièce", style: TextStyle(fontSize: 12.0))
+                ]
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 }
