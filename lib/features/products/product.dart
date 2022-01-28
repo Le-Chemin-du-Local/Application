@@ -8,13 +8,15 @@ const Map<String, IconData> categoryIcon = {
 
 @immutable
 class Product {
-  const Product({
+  const Product(this.id, {
     required this.name,
     required this.categories,
     required this.description,
     required this.price,
     required this.isBreton,
   });
+
+  final String? id;
 
   final String name;
   final String description;
@@ -25,6 +27,7 @@ class Product {
   final bool isBreton;
 
   Product copyWith({
+    String? id,
     String? name,
     String? description,
     List<String>? categories,
@@ -32,6 +35,7 @@ class Product {
     bool? isBreton,
   }) {
     return Product(
+      id ?? this.id,
       name: name ?? this.name, 
       categories: categories ?? this.categories,
       description: description ?? this.description,
@@ -45,6 +49,7 @@ class Product {
     if (identical(this, other)) return true;
 
     return other is Product &&
+      other.id == id &&
       other.name == name &&
       other.categories == categories &&
       other.description == description &&
@@ -53,7 +58,8 @@ class Product {
   }
 
   @override
-  int get hashCode => name.hashCode ^
+  int get hashCode => id.hashCode ^
+                      name.hashCode ^
                       categories.hashCode ^
                       description.hashCode ^
                       price.hashCode ^

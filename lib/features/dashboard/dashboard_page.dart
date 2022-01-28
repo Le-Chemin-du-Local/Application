@@ -14,7 +14,7 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(ScreenHelper.horizontalPadding),
+      padding: const EdgeInsets.only(top: ScreenHelper.horizontalPadding, left: ScreenHelper.horizontalPadding, right: ScreenHelper.horizontalPadding),
       child: CustomScrollView(
         slivers: [
           _buildMainView(),
@@ -87,6 +87,7 @@ class DashboardPage extends StatelessWidget {
           ),
         ]),
       ),
+      const SliverToBoxAdapter(child: SizedBox(height: 24,)),
     ];
   }
 }

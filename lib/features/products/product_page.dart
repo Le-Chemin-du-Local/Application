@@ -5,10 +5,12 @@ import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/products/product.dart';
+import 'package:chemin_du_local/features/products/products_controller.dart';
 import 'package:chemin_du_local/features/products/widgets/product_categories_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ProductPage extends StatefulWidget {
+class ProductPage extends ConsumerStatefulWidget {
   const ProductPage({
     Key? key,
     this.product
@@ -17,10 +19,10 @@ class ProductPage extends StatefulWidget {
   final Product? product;
 
   @override
-  State<ProductPage> createState() => _ProductPageState();
+  ConsumerState<ProductPage> createState() => _ProductPageState();
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _ProductPageState extends ConsumerState<ProductPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _nameTextController = TextEditingController();
@@ -31,6 +33,9 @@ class _ProductPageState extends State<ProductPage> {
 
   String _currentUnit = '';
   bool _isBreton = false;
+
+  bool _isLoading = false;
+  String _errorMessage = '';
 
   @override
   void initState() {
@@ -97,7 +102,7 @@ class _ProductPageState extends State<ProductPage> {
               const SizedBox(height: 12,),
               Flexible(
                 child: ProductCategoriesPicker(
-                  initialCategories: widget.product?.categories ?? [],
+                  initialCategories: _productCategories,
                   onAddCategory: (category) => _productCategories.add(category),
                   onRemoveCategory: (category) => _productCategories.remove(category),
                 ),
@@ -120,6 +125,10 @@ class _ProductPageState extends State<ProductPage> {
                 padding: const EdgeInsets.all(ScreenHelper.horizontalPadding),
                 child: LayoutBuilder(
                   builder: (context, constraints) {
+                    if (_isLoading) {
+                      return const Center(child: CircularProgressIndicator(),);
+                    }
+
                     if (constraints.maxWidth > ScreenHelper.breakpointPC) {
                       return Row(
                         children: content,
@@ -141,7 +150,7 @@ class _ProductPageState extends State<ProductPage> {
             child: Padding(
               padding: const EdgeInsets.only(bottom: 16.0),
               child: ClElevatedButton(
-                onPressed: () {},
+                onPressed: _onSave,
                 child: Text(widget.product == null ? "Ajouter mon produit" : "Modifier mon produit"),
               ),
             ),
@@ -183,7 +192,7 @@ class _ProductPageState extends State<ProductPage> {
                   labelText: "Prix",
                   hintText: "Ex : 5,00",
                   validator: (price) {
-                    if (int.tryParse(price) == null) return "Vous devez rentrer un nombre valide";
+                    if (double.tryParse(price) == null) return "Vous devez rentrer un nombre valide";
 
                     return null;
                   },
@@ -230,4 +239,48 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
+  Future _onSave() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    Product result = _resultProduct();
+
+    if (widget.product == null) {
+      ref.read(productsControllerProvider.notifier).addProduct(
+        result.copyWith(id: 'fakeId')
+      );
+    }
+    else {
+      ref.read(productsControllerProvider.notifier).updateProduct(result);
+    }
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    Navigator.of(context).pop();
+  }
+
+  Product _resultProduct() {
+    if (widget.product != null) {
+      return widget.product!.copyWith(
+        name: _nameTextController.text,
+        price: double.parse(_priceTextController.text),
+        isBreton: _isBreton,
+        description: _descriptionTextController.text,
+        categories: _productCategories
+      );
+    }
+
+    return Product(null, 
+      name: _nameTextController.text, 
+      categories: _productCategories,
+      description: _descriptionTextController.text,
+      price: double.parse(_priceTextController.text),
+      isBreton: _isBreton
+    );
+  }
 }
