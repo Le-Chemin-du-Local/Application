@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'dart:math' as math;
 
 class Palette {
   static const Color colorScaffold = Color(0xfffafafe);
@@ -21,7 +22,8 @@ class Palette {
       Color(0xffe60669),
       Color(0xffff8c60)
     ],
-    begin: Alignment(-1.0, -1.0),
-    end: Alignment(1, 1)
+    begin: Alignment(-1.0, 0.0),
+    end: Alignment(1.0, 0.0),
+    transform: GradientRotation(math.pi / 4)
   );
 }
