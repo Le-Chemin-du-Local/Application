@@ -17,11 +17,12 @@ class ProductsConstroller extends StateNotifier<ProductsState> {
     state = state.copyWith(products: const AsyncValue.loading());
 
     List<Product> productsToPut = const [
-      Product(name: "Bière blonde", category: "Brasserie", description: "Une super bière blonde", price: 12.0),
-      Product(name: "Bière ambrée", category: "Brasserie", description: "Une super bière ambrée", price: 10.24),
-      Product(name: "Carrotte", category: "Fruits", description: "Peut-être que je suis dans la mauvaise catégorie...", price: 2.16)
+      Product(name: "Bière blonde", categories: ["Bières & cidres"], description: "Une super bière blonde", price: 12.0, isBreton: true),
+      Product(name: "Bière ambrée", categories: ["Bières & cidres"], description: "Une super bière ambrée", price: 10.24, isBreton:  true),
+      Product(name: "Carrotte", categories: ["Fruits"], description: "Peut-être que je suis dans la mauvaise catégorie...", price: 2.16, isBreton: false)
     ];
 
     state = state.copyWith(products: AsyncValue.data(productsToPut));
   }
+
 }

@@ -22,8 +22,12 @@ class Palette {
       Color(0xffe60669),
       Color(0xffff8c60)
     ],
+    stops: [
+      0.0,
+      0.61,
+    ],
     begin: Alignment(-1.0, 0.0),
     end: Alignment(1.0, 0.0),
-    transform: GradientRotation(math.pi / 4)
+    transform: GradientRotation(math.pi / 3.7)
   );
 }

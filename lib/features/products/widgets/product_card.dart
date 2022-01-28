@@ -1,6 +1,5 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/features/products/product.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -32,12 +31,13 @@ class ProductCard extends StatelessWidget {
           Flexible(child: Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold),)),
           const SizedBox(height: 8.0,),
           // The flag if it's a breton product
-          Flexible(
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Image.asset("assets/images/drapeau_breton.png")
+          if (product.isBreton)
+            Flexible(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Image.asset("assets/images/drapeau_breton.png")
+              )
             )
-          )
         ],
       ),
     );

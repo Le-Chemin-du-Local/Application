@@ -15,7 +15,9 @@ class ProductsState {
       final List<String> result = [];
 
       for (final product in products) {
-        if (!result.contains(product.category)) result.add(product.category);
+        for (final category in product.categories) {
+          if (!result.contains(category)) result.add(category);
+        }
       }
 
       return AsyncValue.data(result);
@@ -27,7 +29,7 @@ class ProductsState {
   AsyncValue<List<Product>> productsByCategory(String category) => products.when(
     data: (products) => AsyncValue.data([
       for (final product in products) 
-        if (product.category == category)
+        if (product.categories.contains(category))
           product
     ]),
     loading: () => const AsyncValue.loading(),

@@ -1,6 +1,6 @@
+import 'package:chemin_du_local/features/products/product_page.dart';
 import 'package:chemin_du_local/features/products/products_controller.dart';
 import 'package:chemin_du_local/features/products/widgets/product_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -30,7 +30,16 @@ class ProductsPage extends ConsumerWidget {
           padding: const EdgeInsets.all(18),
           children: [
             for (final product in products) 
-              ProductCard(product: product)
+              InkWell(
+                onTap: () async {
+                  await Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => ProductPage(product: product,)
+                    )
+                  );
+                },
+                child: ProductCard(product: product)
+              )
           ],
         ),
         loading: () => const Center(child: CircularProgressIndicator(),),
