@@ -10,6 +10,7 @@ class ClCard extends StatelessWidget {
     required this.child,
     this.borderColor,
     this.backgroundColor,
+    this.backgroundGradient,
   }) : super(key: key);
 
   final Widget child;
@@ -22,6 +23,7 @@ class ClCard extends StatelessWidget {
 
   final Color? borderColor;
   final Color? backgroundColor;
+  final Gradient? backgroundGradient;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +34,7 @@ class ClCard extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor ?? Theme.of(context).cardColor,
+        gradient: backgroundGradient,
         border: borderColor != null ? Border.all(
           color: borderColor!,
         ) : null,
