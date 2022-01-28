@@ -15,4 +15,13 @@ class Palette {
   static const Color colorPrimary = colorOrange;
 
   static const Color colorDarkGrey = Color(0xff454545);
+
+  static const LinearGradient gradientPrimary = LinearGradient(
+    colors: [
+      Color(0xffe60669),
+      Color(0xffff8c60)
+    ],
+    begin: Alignment(-1.0, -1.0),
+    end: Alignment(1, 1)
+  );
 }

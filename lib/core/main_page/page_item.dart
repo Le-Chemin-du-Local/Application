@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-enum PagesId { dashboard, products }
+enum PagesId { dashboard, products, page, services, settings }
 
 @immutable
 class PageItem {

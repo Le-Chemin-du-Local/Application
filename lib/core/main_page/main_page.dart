@@ -5,12 +5,16 @@ import 'package:chemin_du_local/core/main_page/widgets/menu_drawer.dart';
 import 'package:chemin_du_local/features/dashboard/dashboard_page.dart';
 import 'package:chemin_du_local/features/products/products_controller.dart';
 import 'package:chemin_du_local/features/products/products_main_page.dart';
+import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const Map<PagesId, PageItem> pagesItem = {
-    PagesId.dashboard: PageItem(id: PagesId.dashboard, title: "Accueil", appBarTitle: "Bienvenue Guillaume", icon: Icons.home),
-    PagesId.products: PageItem(id: PagesId.products, title: "Mes Produits", appBarTitle: "Mes Produits", icon: Icons.shopping_basket),
+    PagesId.dashboard: PageItem(id: PagesId.dashboard, title: "Accueil", appBarTitle: "Bienvenue Guillaume", icon: CLIcons.accueil),
+    PagesId.products: PageItem(id: PagesId.products, title: "Mes Produits", appBarTitle: "Mes Produits", icon: CLIcons.mesproduits),
+    PagesId.page: PageItem(id: PagesId.page, title: "Ma Page", appBarTitle: "Gérer ma page", icon: CLIcons.mapage),
+    PagesId.services: PageItem(id: PagesId.services, title: "Mes services", appBarTitle: "Gérer mes services", icon: CLIcons.messervices),
+    PagesId.settings: PageItem(id: PagesId.settings, title: "Paramètres", appBarTitle: "Paramètres", icon: CLIcons.parametres)
 };
 
 class MainPage extends ConsumerStatefulWidget {
@@ -47,10 +51,9 @@ class _MainPageState extends ConsumerState<MainPage> {
       builder: (context, constraints) {
         bool useBigLayout = constraints.maxWidth >= ScreenHelper.breakpointPC;
 
-        return Column(
-          mainAxisSize: MainAxisSize.min,
+        return Stack(
           children: [
-            Expanded(
+            Positioned.fill(
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,17 +96,9 @@ class _MainPageState extends ConsumerState<MainPage> {
               ),
             ),
             if (!useBigLayout)
-              Container(
-                height: 64,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  border: const Border(
-                    top: BorderSide(
-                      color: Color(0xffd9d9d9),
-                      width: 0.5
-                    )
-                  )
-                ),
+              Positioned(
+                bottom: 0,
+                left: 0,
                 child: custom.BottomAppBar(
                   currentPageId: _currentPageId,
                   onSelectedPage: (page) {
