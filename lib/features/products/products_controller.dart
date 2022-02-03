@@ -16,8 +16,17 @@ class ProductsConstroller extends StateNotifier<ProductsState> {
 
     state = state.copyWith(products: const AsyncValue.loading());
 
+    await Future.delayed(const Duration(seconds: 20));
+
     List<Product> productsToPut = const [
       Product('1', name: "Bière blonde", categories: ["Bières & cidres"], description: "Une super bière blonde", price: 12.0, isBreton: true),
+      Product('2', name: "Bière ambrée", categories: ["Bières & cidres"], description: "Une super bière ambrée", price: 10.24, isBreton:  true),
+      Product('2', name: "Bière ambrée", categories: ["Bières & cidres"], description: "Une super bière ambrée", price: 10.24, isBreton:  true),
+      Product('2', name: "Bière ambrée", categories: ["Bières & cidres"], description: "Une super bière ambrée", price: 10.24, isBreton:  true),
+      Product('2', name: "Bière ambrée", categories: ["Bières & cidres"], description: "Une super bière ambrée", price: 10.24, isBreton:  true),
+      Product('2', name: "Bière ambrée", categories: ["Bières & cidres"], description: "Une super bière ambrée", price: 10.24, isBreton:  true),
+      Product('2', name: "Bière ambrée", categories: ["Bières & cidres"], description: "Une super bière ambrée", price: 10.24, isBreton:  true),
+      Product('2', name: "Bière ambrée", categories: ["Bières & cidres"], description: "Une super bière ambrée", price: 10.24, isBreton:  true),
       Product('2', name: "Bière ambrée", categories: ["Bières & cidres"], description: "Une super bière ambrée", price: 10.24, isBreton:  true),
       Product('3', name: "Carrotte", categories: ["Fruits"], description: "Peut-être que je suis dans la mauvaise catégorie...", price: 2.16, isBreton: false)
     ];

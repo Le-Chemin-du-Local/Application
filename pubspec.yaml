@@ -31,14 +31,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_riverpod: ^1.0.3
+  sliver_tools: ^0.2.5
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
@@ -67,9 +62,10 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family:  CLIcons
+    - family: CLIcons
       fonts:
         - asset: fonts/CLIcons.ttf
+          weight: 900
   # fonts:
   #   - family: Schyler
   #     fonts:

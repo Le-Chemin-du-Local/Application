@@ -2,6 +2,8 @@
 import 'package:chemin_du_local/core/main_page/main_page.dart';
 import 'package:chemin_du_local/core/main_page/page_item.dart';
 import 'package:chemin_du_local/core/main_page/widgets/user_drawer_widget.dart';
+import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
+import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 class MenuDrawer extends StatelessWidget {
@@ -34,6 +36,26 @@ class MenuDrawer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(color: Colors.grey, height: 52,),
+            const SizedBox(height: 32,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 48),
+              child: ClElevatedButton(
+                onPressed: () {
+                  onSelectedPage(PagesId.page);
+                  if (shouldPop) {
+                    Navigator.of(context).pop();
+                  }
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(CLIcons.mapage),
+                    SizedBox(width: 8),
+                    Text("Ma Page"),
+                  ],
+                ),
+              ),
+            ),
             const SizedBox(height: 32,),
             Expanded(
               child: ListView(

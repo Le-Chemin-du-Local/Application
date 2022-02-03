@@ -3,6 +3,7 @@ import 'package:chemin_du_local/core/main_page/page_item.dart';
 import 'package:chemin_du_local/core/main_page/widgets/bottom_app_bar.dart' as custom;
 import 'package:chemin_du_local/core/main_page/widgets/menu_drawer.dart';
 import 'package:chemin_du_local/features/dashboard/dashboard_page.dart';
+import 'package:chemin_du_local/features/commerce/mypage_page.dart';
 import 'package:chemin_du_local/features/products/products_controller.dart';
 import 'package:chemin_du_local/features/products/products_main_page.dart';
 import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
@@ -44,7 +45,8 @@ class _MainPageState extends ConsumerState<MainPage> {
           });
         }
       ),
-      PagesId.products: const ProductsMainPage()
+      PagesId.products: const ProductsMainPage(),
+      PagesId.page: const MyPagePage(),
     };
 
     return LayoutBuilder(
@@ -73,7 +75,10 @@ class _MainPageState extends ConsumerState<MainPage> {
                       onGenerateRoute: (route) => MaterialPageRoute<dynamic>(
                         settings: route,
                         builder: (context) => Scaffold(
-                          appBar: AppBar(title: Text(pagesItem[_currentPageId]?.appBarTitle ?? ""),),
+                          // We need to do an exeption for the "ma page" page
+                          appBar: _currentPageId == PagesId.page ?
+                            null :
+                            AppBar(title: Text(pagesItem[_currentPageId]?.appBarTitle ?? ""),),
                           body: pages[_currentPageId],
                         )
                       ),
