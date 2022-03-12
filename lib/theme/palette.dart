@@ -17,6 +17,24 @@ class Palette {
   static const Color colorPrimary = colorOrange;
 
   static const Color colorDarkGrey = Color(0xff454545);
+  
+  static const Color colorInfo = Color(0xff36a2b1);
+  static const Color colorWarning = Color(0xffffc21f);
+  static const Color colorSuccess = Color(0xff17ba63);
+  static const Color colorError = Color(0xffe01c1c);
+
+  static const Color colorBackgroundSuccess = Color(0xffd4edda);
+  static const Color colorBorderSuccess = Color(0xffc2e5ca);
+  static const Color colorTextSuccess = Color(0xff155724);
+
+  static const Color colorBackgroundError = Color(0xfff8d7da);
+  static const Color colorBorderError = Color(0xfff4c2c7);
+  static const Color colorTextError = Color(0xff721c24);
+
+  static const Color colorBackgroundInfo = Color(0xffd1ecf1);
+  static const Color colorBorderInfo = Color(0xffbde4eb);
+  static const Color colorTextInfo = Color(0xff0c5460);
+
 
   static const LinearGradient gradientPrimary = LinearGradient(
     colors: [

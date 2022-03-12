@@ -30,7 +30,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_riverpod: ^1.0.3
+  flutter_secure_storage: ^5.0.2
   freezed_annotation: ^1.1.0
+  graphql_flutter: ^5.0.1
   json_annotation: ^4.4.0
 
 dev_dependencies:
@@ -58,7 +61,6 @@ flutter:
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-  
   assets:
     - assets/images/
 
@@ -82,7 +84,7 @@ flutter:
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
   fonts:
-  - family: CLIcons
-    fonts:
-      - asset: assets/fonts/CLIcons.ttf
-        weight: 900
+    - family: CLIcons
+      fonts:
+        - asset: assets/fonts/CLIcons.ttf
+          weight: 900
