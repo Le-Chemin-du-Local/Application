@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="bzh.chemin_du_local.dashboard">
+    package="com.example.chemin_du_local">
    <application
         android:label="chemin_du_local"
         android:name="${applicationName}"
