@@ -32,6 +32,15 @@ class ClTheme {
     );
   }
 
+  static AppBarTheme themeSecondAppBar(BuildContext context) {
+    return const AppBarTheme(
+      backgroundColor: Palette.colorScaffold,
+      elevation: 0,
+      foregroundColor: Palette.colorDark,
+      systemOverlayStyle: SystemUiOverlayStyle.light,
+    );
+  }
+
   static MaterialColor colorSwatch(int value) {
     final color50 = Color(value).withOpacity(0.1);
     final color100 = Color(value).withOpacity(0.2);
