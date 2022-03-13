@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/features/commerces/commerce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -19,6 +20,7 @@ class User with _$User {
     String? firstName,
     String? lastName,
     DateTime? createdAt,
+    Commerce? commerce,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

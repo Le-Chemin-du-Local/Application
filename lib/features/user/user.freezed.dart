@@ -27,7 +27,8 @@ class _$UserTearOff {
       required String email,
       String? firstName,
       String? lastName,
-      DateTime? createdAt}) {
+      DateTime? createdAt,
+      Commerce? commerce}) {
     return _User(
       id,
       role: role,
@@ -35,6 +36,7 @@ class _$UserTearOff {
       firstName: firstName,
       lastName: lastName,
       createdAt: createdAt,
+      commerce: commerce,
     );
   }
 
@@ -54,6 +56,7 @@ mixin _$User {
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
+  Commerce? get commerce => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -70,7 +73,10 @@ abstract class $UserCopyWith<$Res> {
       String email,
       String? firstName,
       String? lastName,
-      DateTime? createdAt});
+      DateTime? createdAt,
+      Commerce? commerce});
+
+  $CommerceCopyWith<$Res>? get commerce;
 }
 
 /// @nodoc
@@ -89,6 +95,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? createdAt = freezed,
+    Object? commerce = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -115,7 +122,22 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      commerce: commerce == freezed
+          ? _value.commerce
+          : commerce // ignore: cast_nullable_to_non_nullable
+              as Commerce?,
     ));
+  }
+
+  @override
+  $CommerceCopyWith<$Res>? get commerce {
+    if (_value.commerce == null) {
+      return null;
+    }
+
+    return $CommerceCopyWith<$Res>(_value.commerce!, (value) {
+      return _then(_value.copyWith(commerce: value));
+    });
   }
 }
 
@@ -130,7 +152,11 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String email,
       String? firstName,
       String? lastName,
-      DateTime? createdAt});
+      DateTime? createdAt,
+      Commerce? commerce});
+
+  @override
+  $CommerceCopyWith<$Res>? get commerce;
 }
 
 /// @nodoc
@@ -150,6 +176,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? createdAt = freezed,
+    Object? commerce = freezed,
   }) {
     return _then(_User(
       id == freezed
@@ -176,6 +203,10 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      commerce: commerce == freezed
+          ? _value.commerce
+          : commerce // ignore: cast_nullable_to_non_nullable
+              as Commerce?,
     ));
   }
 }
@@ -188,7 +219,8 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       required this.email,
       this.firstName,
       this.lastName,
-      this.createdAt});
+      this.createdAt,
+      this.commerce});
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -204,10 +236,12 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   final String? lastName;
   @override
   final DateTime? createdAt;
+  @override
+  final Commerce? commerce;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, role: $role, email: $email, firstName: $firstName, lastName: $lastName, createdAt: $createdAt)';
+    return 'User(id: $id, role: $role, email: $email, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, commerce: $commerce)';
   }
 
   @override
@@ -220,7 +254,8 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('lastName', lastName))
-      ..add(DiagnosticsProperty('createdAt', createdAt));
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('commerce', commerce));
   }
 
   @override
@@ -233,7 +268,8 @@ class _$_User with DiagnosticableTreeMixin implements _User {
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
-            const DeepCollectionEquality().equals(other.createdAt, createdAt));
+            const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
+            const DeepCollectionEquality().equals(other.commerce, commerce));
   }
 
   @override
@@ -244,7 +280,8 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
-      const DeepCollectionEquality().hash(createdAt));
+      const DeepCollectionEquality().hash(createdAt),
+      const DeepCollectionEquality().hash(commerce));
 
   @JsonKey(ignore: true)
   @override
@@ -263,7 +300,8 @@ abstract class _User implements User {
       required String email,
       String? firstName,
       String? lastName,
-      DateTime? createdAt}) = _$_User;
+      DateTime? createdAt,
+      Commerce? commerce}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -279,6 +317,8 @@ abstract class _User implements User {
   String? get lastName;
   @override
   DateTime? get createdAt;
+  @override
+  Commerce? get commerce;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

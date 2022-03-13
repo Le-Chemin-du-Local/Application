@@ -2,7 +2,7 @@ import 'package:chemin_du_local/features/clients/client_account/client_account_p
 import 'package:chemin_du_local/features/clients/client_basket/client_basket_page.dart';
 import 'package:chemin_du_local/features/clients/client_home/client_home_page.dart';
 import 'package:chemin_du_local/features/clients/fidelity/fidelity_page.dart';
-import 'package:chemin_du_local/features/clients/stores/stores_page.dart';
+import 'package:chemin_du_local/features/commerces/commerces_page.dart';
 import 'package:chemin_du_local/features/main_page/main_page.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
@@ -15,7 +15,7 @@ class ClientsMainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // The pages
     final List<Widget> pages = [
-      const StoresPage(),
+      const CommercesPage(),
       const ClientHomePage(),
       const FidelityPage(),
       const ClientBasketPage(),

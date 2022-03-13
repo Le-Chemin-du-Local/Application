@@ -15,6 +15,9 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       createdAt: json['createdAt'] == null
           ? null
           : DateTime.parse(json['createdAt'] as String),
+      commerce: json['commerce'] == null
+          ? null
+          : Commerce.fromJson(json['commerce'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -24,4 +27,5 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'createdAt': instance.createdAt?.toIso8601String(),
+      'commerce': instance.commerce,
     };
