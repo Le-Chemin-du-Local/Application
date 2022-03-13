@@ -17,10 +17,10 @@ class MainPage extends StatefulWidget {
   final List<Widget> pages;
 
   @override
-  _MainPageState createState() => _MainPageState();
+  MainPageState createState() => MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class MainPageState extends State<MainPage> {
   int _currentIndex = 1;
 
   bool _isMenuBarMinimified = false;
@@ -50,7 +50,7 @@ class _MainPageState extends State<MainPage> {
                         child: MenuDrawer(
                           pageItems: widget.pageItems,
                           currentPageIndex: _currentIndex,
-                          onSelectedPage: _selectedPage,
+                          onSelectedPage: selectedPage,
                           shouldPop: false,
                           isMinimified: _isMenuBarMinimified,
                         ),
@@ -86,7 +86,7 @@ class _MainPageState extends State<MainPage> {
                 left: 0,
                 child: custom.BottomAppBar(
                   currentPageIndex: _currentIndex,
-                  onSelectedPage: _selectedPage,
+                  onSelectedPage: selectedPage,
                   pageItems: widget.pageItems,
                 ),
               )
@@ -97,7 +97,7 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
-  void _selectedPage(PageItem pageItem) {
+  void selectedPage(PageItem pageItem) {
     setState(() {
       _currentIndex = pageItem.index;
     });
