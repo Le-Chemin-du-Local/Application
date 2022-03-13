@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 class DashboardCard extends StatelessWidget {
