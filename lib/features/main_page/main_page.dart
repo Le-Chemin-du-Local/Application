@@ -38,9 +38,9 @@ class MainPageState extends State<MainPage> {
         builder: (context, constraints) {
           bool useBigLayout = constraints.maxWidth >= ScreenHelper.breakpointPC;
 
-          return Stack(
+          return Column(
             children: [
-              Positioned.fill(
+              Expanded(
                 child: Row(
                   children: [
                     if (useBigLayout) 
@@ -81,15 +81,18 @@ class MainPageState extends State<MainPage> {
                 ),
               ),
               if (!useBigLayout)
-              Positioned(
-                bottom: 0,
-                left: 0,
-                child: custom.BottomAppBar(
-                  currentPageIndex: _currentIndex,
-                  onSelectedPage: selectedPage,
-                  pageItems: widget.pageItems,
-                ),
-              )
+                Positioned(
+                  bottom: 0,
+                  left: 0,
+                  child: Container(
+                    color: Theme.of(context).scaffoldBackgroundColor,
+                    child: custom.BottomAppBar(
+                      currentPageIndex: _currentIndex,
+                      onSelectedPage: selectedPage,
+                      pageItems: widget.pageItems,
+                    ),
+                  ),
+                )
             ],
           );
         },
