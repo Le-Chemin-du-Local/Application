@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/graphql/graphql_client.dart';
+import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/init.dart';
 import 'package:chemin_du_local/core/widgets/splash_screen.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
@@ -35,7 +36,7 @@ class MyApp extends ConsumerWidget {
       client: graphQLClient(token),
       child: MaterialApp(
         title: 'Le Chemin du Local',
-        // navigatorKey: AppManager.instance.appNavigatorKey,
+        navigatorKey: AppManager.instance.appNavigatorKey,
         theme: ClTheme.theme(context),
         home: GraphQLConsumer(
           builder: (client) => FutureBuilder<dynamic>(
