@@ -65,7 +65,7 @@ class LoginPage extends ConsumerWidget {
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                         ),
-                        color: Theme.of(context).cardColor
+                        color: Theme.of(context).scaffoldBackgroundColor
                       ),
                       child: SingleChildScrollView(
                         controller: ScrollController(),
