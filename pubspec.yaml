@@ -37,6 +37,7 @@ dependencies:
   graphql_flutter: ^5.0.1
   http: ^0.13.4
   json_annotation: ^4.4.0
+  sliver_tools: ^0.2.5
 
 dev_dependencies:
   build_runner: ^2.1.7
