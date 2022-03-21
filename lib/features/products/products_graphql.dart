@@ -66,6 +66,7 @@ mutation createProduct(
   $unit: String!,
   $isBreton: Boolean!,
   $categories: [String!]!
+  $image: Upload
 ) {
   createProduct(input: {
     name: $name,
@@ -74,6 +75,7 @@ mutation createProduct(
     unit: $unit,
     isBreton: $isBreton,
     categories: $categories,
+    image: $image,
   }) {
     id, 
     name
@@ -89,7 +91,8 @@ mutation updateProduct(
   $price: Float,
   $unit: String,
   $isBreton: Boolean,
-  $categories: [String!]
+  $categories: [String!],
+  $image: Upload
 ) {
   updateProduct(id: $id, changes: {
     name: $name,
@@ -98,6 +101,7 @@ mutation updateProduct(
     unit: $unit,
     isBreton: $isBreton,
     categories: $categories,
+    image: $image,
   }) {
     id, 
     name

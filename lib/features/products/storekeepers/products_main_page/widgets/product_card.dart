@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +48,20 @@ class ProductCard extends StatelessWidget {
     return Stack(
       children: [
         Positioned.fill(
-          child: Image.asset("assets/images/beer.png", fit: BoxFit.cover,),
+          child: Image.network(
+            "$kImagesBaseUrl/products/${product.id ?? ""}.jpg",
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
+              child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                  ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                  : null,
+              ),
+            ),
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(Icons.image, size: 92, color: Theme.of(context).dividerColor,);
+            },
+          )
         ),
         Positioned(
           bottom: 0,

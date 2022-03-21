@@ -1,15 +1,21 @@
+import 'dart:convert';
+
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/utils/cl_file.dart';
+import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
+import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker_big.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/widgets/product_categories_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:http/http.dart';
 
 class ProductEditForm extends StatefulWidget {
   const ProductEditForm({
@@ -34,6 +40,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
 
   String _currentUnit = '';
   bool _isBreton = false;
+  ClFile? _currentImage;
 
   MutationOptions<dynamic> _createProductMutationOptions(BuildContext context) {
     return MutationOptions<dynamic>(
@@ -145,7 +152,18 @@ class _ProductEditFormState extends State<ProductEditForm> {
                         constraints: const BoxConstraints(maxWidth: 162),
                         child: ClCard(
                           padding: EdgeInsets.zero,
-                          child: Image.asset("assets/images/beer.png"),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: ClImagePickerBig(
+                              imageURL: "$kImagesBaseUrl/products/${widget.product?.id ?? ""}.jpg",
+                              onImageSelected: (image) {
+                                setState(() {
+                                  _currentImage = image;
+                                });
+                              },
+                              imageData: _currentImage,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -317,7 +335,13 @@ class _ProductEditFormState extends State<ProductEditForm> {
         "price": double.parse(_priceTextController.text),
         "unit": _currentUnit,
         "isBreton": _isBreton,
-        "categories": _productCategories
+        "categories": _productCategories,
+        if (_currentImage != null) 
+          "image": MultipartFile.fromBytes(
+            "image",
+            base64Decode(_currentImage!.base64content!),
+            filename: _currentImage!.filename
+          ),
       });
     }
     else {
@@ -327,8 +351,16 @@ class _ProductEditFormState extends State<ProductEditForm> {
         "price": double.parse(_priceTextController.text),
         "unit": _currentUnit,
         "isBreton": _isBreton,
-        "categories": _productCategories
+        "categories": _productCategories,
+        if (_currentImage != null) 
+          "image": MultipartFile.fromBytes(
+            "image",
+            base64Decode(_currentImage!.base64content!),
+            filename: _currentImage!.filename
+          ),
       });
     }
+
+    imageCache?.clear();
   }
 }

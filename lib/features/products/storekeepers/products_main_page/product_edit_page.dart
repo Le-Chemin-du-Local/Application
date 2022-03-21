@@ -8,7 +8,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 class ProductPage extends StatelessWidget {
   const ProductPage({
     Key? key, 
-    required this.productID
+    required this.productID,
   }) : super(key: key);
 
   final String? productID;
@@ -61,7 +61,9 @@ class ProductPage extends StatelessWidget {
           productID != null ? "Modifier un produit" : "Ajouter un produit"
         ),
       ),
-      body: ProductEditForm(product: product),
+      body: ProductEditForm(
+        product: product
+      ),
     );
   }
 }

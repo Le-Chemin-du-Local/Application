@@ -113,7 +113,9 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
   Future _openProductCreationPage() async {
     bool hasProductUpdate = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
-        builder: (context) => const ProductPage(productID: null)
+        builder: (context) => const ProductPage(
+          productID: null,
+        )
       )
     ) ?? false;
 

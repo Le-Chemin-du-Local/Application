@@ -96,7 +96,9 @@ class ProductsPage extends StatelessWidget {
           for (final product in products) 
             InkWell(
               onTap: () => _openProductEditPage(context, product: product, refetch: refetch),
-              child: ProductCard(product: product)
+              child: ProductCard(
+                product: product
+              )
             )
         ]
       ),
@@ -113,7 +115,9 @@ class ProductsPage extends StatelessWidget {
   }) async {
     final bool haveProductUpdate = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
-        builder: (context) => ProductPage(productID: product?.id,)
+        builder: (context) => ProductPage(
+          productID: product?.id,
+        )
       )
     ) ?? false;
 
