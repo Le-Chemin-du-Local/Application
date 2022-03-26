@@ -22,12 +22,14 @@ class _$PageItemTearOff {
       {required int index,
       required String title,
       required String appBarTitle,
+      bool showOnMobile = true,
       IconData? icon,
       Widget? suffixWidget}) {
     return _PageItem(
       index: index,
       title: title,
       appBarTitle: appBarTitle,
+      showOnMobile: showOnMobile,
       icon: icon,
       suffixWidget: suffixWidget,
     );
@@ -42,6 +44,7 @@ mixin _$PageItem {
   int get index => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get appBarTitle => throw _privateConstructorUsedError;
+  bool get showOnMobile => throw _privateConstructorUsedError;
   IconData? get icon => throw _privateConstructorUsedError;
   Widget? get suffixWidget => throw _privateConstructorUsedError;
 
@@ -58,6 +61,7 @@ abstract class $PageItemCopyWith<$Res> {
       {int index,
       String title,
       String appBarTitle,
+      bool showOnMobile,
       IconData? icon,
       Widget? suffixWidget});
 }
@@ -75,6 +79,7 @@ class _$PageItemCopyWithImpl<$Res> implements $PageItemCopyWith<$Res> {
     Object? index = freezed,
     Object? title = freezed,
     Object? appBarTitle = freezed,
+    Object? showOnMobile = freezed,
     Object? icon = freezed,
     Object? suffixWidget = freezed,
   }) {
@@ -91,6 +96,10 @@ class _$PageItemCopyWithImpl<$Res> implements $PageItemCopyWith<$Res> {
           ? _value.appBarTitle
           : appBarTitle // ignore: cast_nullable_to_non_nullable
               as String,
+      showOnMobile: showOnMobile == freezed
+          ? _value.showOnMobile
+          : showOnMobile // ignore: cast_nullable_to_non_nullable
+              as bool,
       icon: icon == freezed
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
@@ -112,6 +121,7 @@ abstract class _$PageItemCopyWith<$Res> implements $PageItemCopyWith<$Res> {
       {int index,
       String title,
       String appBarTitle,
+      bool showOnMobile,
       IconData? icon,
       Widget? suffixWidget});
 }
@@ -130,6 +140,7 @@ class __$PageItemCopyWithImpl<$Res> extends _$PageItemCopyWithImpl<$Res>
     Object? index = freezed,
     Object? title = freezed,
     Object? appBarTitle = freezed,
+    Object? showOnMobile = freezed,
     Object? icon = freezed,
     Object? suffixWidget = freezed,
   }) {
@@ -146,6 +157,10 @@ class __$PageItemCopyWithImpl<$Res> extends _$PageItemCopyWithImpl<$Res>
           ? _value.appBarTitle
           : appBarTitle // ignore: cast_nullable_to_non_nullable
               as String,
+      showOnMobile: showOnMobile == freezed
+          ? _value.showOnMobile
+          : showOnMobile // ignore: cast_nullable_to_non_nullable
+              as bool,
       icon: icon == freezed
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
@@ -165,6 +180,7 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
       {required this.index,
       required this.title,
       required this.appBarTitle,
+      this.showOnMobile = true,
       this.icon,
       this.suffixWidget});
 
@@ -174,6 +190,9 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
   final String title;
   @override
   final String appBarTitle;
+  @JsonKey()
+  @override
+  final bool showOnMobile;
   @override
   final IconData? icon;
   @override
@@ -181,7 +200,7 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PageItem(index: $index, title: $title, appBarTitle: $appBarTitle, icon: $icon, suffixWidget: $suffixWidget)';
+    return 'PageItem(index: $index, title: $title, appBarTitle: $appBarTitle, showOnMobile: $showOnMobile, icon: $icon, suffixWidget: $suffixWidget)';
   }
 
   @override
@@ -192,6 +211,7 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
       ..add(DiagnosticsProperty('index', index))
       ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('appBarTitle', appBarTitle))
+      ..add(DiagnosticsProperty('showOnMobile', showOnMobile))
       ..add(DiagnosticsProperty('icon', icon))
       ..add(DiagnosticsProperty('suffixWidget', suffixWidget));
   }
@@ -205,6 +225,8 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
                 .equals(other.appBarTitle, appBarTitle) &&
+            const DeepCollectionEquality()
+                .equals(other.showOnMobile, showOnMobile) &&
             const DeepCollectionEquality().equals(other.icon, icon) &&
             const DeepCollectionEquality()
                 .equals(other.suffixWidget, suffixWidget));
@@ -216,6 +238,7 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
       const DeepCollectionEquality().hash(index),
       const DeepCollectionEquality().hash(title),
       const DeepCollectionEquality().hash(appBarTitle),
+      const DeepCollectionEquality().hash(showOnMobile),
       const DeepCollectionEquality().hash(icon),
       const DeepCollectionEquality().hash(suffixWidget));
 
@@ -230,6 +253,7 @@ abstract class _PageItem implements PageItem {
       {required int index,
       required String title,
       required String appBarTitle,
+      bool showOnMobile,
       IconData? icon,
       Widget? suffixWidget}) = _$_PageItem;
 
@@ -239,6 +263,8 @@ abstract class _PageItem implements PageItem {
   String get title;
   @override
   String get appBarTitle;
+  @override
+  bool get showOnMobile;
   @override
   IconData? get icon;
   @override

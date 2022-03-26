@@ -13,6 +13,10 @@ _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
               ?.map((e) => e as String)
               .toList() ??
           const <String>[],
+      services: (json['services'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const <String>[],
       description: json['description'] as String?,
       address: json['address'] as String?,
       phone: json['phone'] as String?,
@@ -24,6 +28,7 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
       'id': instance.id,
       'name': instance.name,
       'categories': instance.categories,
+      'services': instance.services,
       'description': instance.description,
       'address': instance.address,
       'phone': instance.phone,

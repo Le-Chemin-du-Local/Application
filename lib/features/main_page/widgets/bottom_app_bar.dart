@@ -68,14 +68,14 @@ class BottomAppBar extends StatelessWidget {
                 ),
                 SizedBox(width: size.width * 0.2,),
                 BottomAppBarItem(
-                  isCurrentItem: currentPageIndex == pageItems[3].index,
+                  isCurrentItem: currentPageIndex == pageItems[pageItems.length - 2].index,
                   onSelectedPage: onSelectedPage,
-                  pageItem: pageItems[3],
+                  pageItem: pageItems[pageItems.length - 2],
                 ),
                 BottomAppBarItem(
-                  isCurrentItem: currentPageIndex == pageItems[4].index,
+                  isCurrentItem: currentPageIndex == pageItems[pageItems.length - 1].index,
                   onSelectedPage: onSelectedPage,
-                  pageItem: pageItems[4],
+                  pageItem: pageItems[pageItems.length - 1],
                 ),
               ],
             ),

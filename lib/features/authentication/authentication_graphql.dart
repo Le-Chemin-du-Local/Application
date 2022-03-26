@@ -17,6 +17,10 @@ query GetLoggedUser {
     createdAt
     email,
     role,
+    commerce {
+      name
+      services
+    }
   }
 }
 ''';

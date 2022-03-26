@@ -11,6 +11,7 @@ class PageItem with _$PageItem {
     required int index,
     required String title,
     required String appBarTitle,
+    @Default(true) bool showOnMobile,
     IconData? icon,
     Widget? suffixWidget,
 

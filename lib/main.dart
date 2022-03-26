@@ -59,7 +59,9 @@ class MyApp extends ConsumerWidget {
       
       
                     if (appUser.role == UserRoles.storeKeeper) {
-                      return const StoreKeepersMainPage();
+                      return StoreKeepersMainPage(
+                        storekeeper: appUser,
+                      );
                     }
 
                     return const ClientsMainPage();

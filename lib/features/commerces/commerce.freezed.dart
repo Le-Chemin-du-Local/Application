@@ -25,6 +25,7 @@ class _$CommerceTearOff {
   _Commerce call(String? id,
       {required String name,
       List<String> categories = const <String>[],
+      List<String> services = const <String>[],
       String? description,
       String? address,
       String? phone,
@@ -33,6 +34,7 @@ class _$CommerceTearOff {
       id,
       name: name,
       categories: categories,
+      services: services,
       description: description,
       address: address,
       phone: phone,
@@ -53,6 +55,7 @@ mixin _$Commerce {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   List<String> get categories => throw _privateConstructorUsedError;
+  List<String> get services => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
@@ -72,6 +75,7 @@ abstract class $CommerceCopyWith<$Res> {
       {String? id,
       String name,
       List<String> categories,
+      List<String> services,
       String? description,
       String? address,
       String? phone,
@@ -91,6 +95,7 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? id = freezed,
     Object? name = freezed,
     Object? categories = freezed,
+    Object? services = freezed,
     Object? description = freezed,
     Object? address = freezed,
     Object? phone = freezed,
@@ -108,6 +113,10 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
       categories: categories == freezed
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      services: services == freezed
+          ? _value.services
+          : services // ignore: cast_nullable_to_non_nullable
               as List<String>,
       description: description == freezed
           ? _value.description
@@ -138,6 +147,7 @@ abstract class _$CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       {String? id,
       String name,
       List<String> categories,
+      List<String> services,
       String? description,
       String? address,
       String? phone,
@@ -158,6 +168,7 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? id = freezed,
     Object? name = freezed,
     Object? categories = freezed,
+    Object? services = freezed,
     Object? description = freezed,
     Object? address = freezed,
     Object? phone = freezed,
@@ -175,6 +186,10 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
       categories: categories == freezed
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      services: services == freezed
+          ? _value.services
+          : services // ignore: cast_nullable_to_non_nullable
               as List<String>,
       description: description == freezed
           ? _value.description
@@ -202,6 +217,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   const _$_Commerce(this.id,
       {required this.name,
       this.categories = const <String>[],
+      this.services = const <String>[],
       this.description,
       this.address,
       this.phone,
@@ -217,6 +233,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   @JsonKey()
   @override
   final List<String> categories;
+  @JsonKey()
+  @override
+  final List<String> services;
   @override
   final String? description;
   @override
@@ -228,7 +247,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, categories: $categories, description: $description, address: $address, phone: $phone, email: $email)';
+    return 'Commerce(id: $id, name: $name, categories: $categories, services: $services, description: $description, address: $address, phone: $phone, email: $email)';
   }
 
   @override
@@ -239,6 +258,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('categories', categories))
+      ..add(DiagnosticsProperty('services', services))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('address', address))
       ..add(DiagnosticsProperty('phone', phone))
@@ -254,6 +274,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.categories, categories) &&
+            const DeepCollectionEquality().equals(other.services, services) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.address, address) &&
@@ -267,6 +288,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(categories),
+      const DeepCollectionEquality().hash(services),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(address),
       const DeepCollectionEquality().hash(phone),
@@ -287,6 +309,7 @@ abstract class _Commerce implements Commerce {
   const factory _Commerce(String? id,
       {required String name,
       List<String> categories,
+      List<String> services,
       String? description,
       String? address,
       String? phone,
@@ -300,6 +323,8 @@ abstract class _Commerce implements Commerce {
   String get name;
   @override
   List<String> get categories;
+  @override
+  List<String> get services;
   @override
   String? get description;
   @override
