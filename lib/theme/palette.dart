@@ -35,6 +35,7 @@ class Palette {
   static const Color colorBorderInfo = Color(0xffbde4eb);
   static const Color colorTextInfo = Color(0xff0c5460);
 
+  static const Color colorCommandReady = Color(0xffd9f8d9);
 
   static const LinearGradient gradientPrimary = LinearGradient(
     colors: [

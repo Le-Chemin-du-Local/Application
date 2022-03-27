@@ -35,7 +35,6 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
 
   final Map<String, String> _schedules = {};
 
-  bool _loadedInitialData = false;
   bool _isEditing = false;
 
   QueryOptions _commerceQueryOptions() {

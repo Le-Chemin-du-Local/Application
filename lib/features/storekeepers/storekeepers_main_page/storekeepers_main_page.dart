@@ -100,7 +100,15 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
         )
       ),
       if (hasClickAndCollect) 
-        const ClickAndCollectPage(),
+         ClipRect(
+          child: Navigator(
+            key: AppManager.instance.clickAndCollectPageKey,
+            onGenerateRoute: (route) => MaterialPageRoute<void>(
+              settings: route,
+              builder: (context) => const ClickAndCollectPage()
+            ),
+          )
+        ),
       const ServicesPage(),
       const StoreKeeperSettingsPage()
     ];
