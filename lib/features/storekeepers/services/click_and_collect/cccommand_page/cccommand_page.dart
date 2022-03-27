@@ -1,7 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/storekeepers/services/cccommand.dart';
+import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand_page/widgets/cccommand_products_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand_page/widgets/cccommand_user_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/click_and_collect_grahpql.dart';

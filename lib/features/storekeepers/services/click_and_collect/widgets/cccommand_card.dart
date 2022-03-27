@@ -1,5 +1,5 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/features/storekeepers/services/cccommand.dart';
+import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand_page/cccommand_page.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';

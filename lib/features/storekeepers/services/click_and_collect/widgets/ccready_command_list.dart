@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/storekeepers/services/cccommand.dart';
+import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/widgets/cccommand_card.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';

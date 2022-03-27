@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/storekeepers/services/cccommand.dart';
+import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/click_and_collect_grahpql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/widgets/ccin_progress_command_list.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/widgets/ccready_command_list.dart';
