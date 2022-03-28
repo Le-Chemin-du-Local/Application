@@ -5,6 +5,7 @@ import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_address_card.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_description_card.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_header_image.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_paniers_list.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_products_list.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_products_list_big.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_schedules_card.dart';
@@ -68,7 +69,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
           }
 
           final User storeKeeper = User.fromJson(storekeeperResult.data!["user"] as Map<String, dynamic>);
-          final Commerce? commerce = storeKeeper.commerce;
+          final Commerce commerce = storeKeeper.commerce!;
 
           // The products
           final List mapProducts = storekeeperResult.data!["user"]["commerce"]["products"]["edges"] as List;
@@ -79,10 +80,10 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
           }
 
           // we need to put the values in the controllers
-          _descriptionTextController.text = commerce?.description ?? "";
-          _phoneTextController.text = commerce?.phone ?? "";
-          _emailTextController.text = commerce?.email ?? "";
-          _addressTextController.text = commerce?.address ?? "";
+          _descriptionTextController.text = commerce.description ?? "";
+          _phoneTextController.text = commerce.phone ?? "";
+          _emailTextController.text = commerce.email ?? "";
+          _addressTextController.text = commerce.address ?? "";
 
           // TODO: remove mock
           _schedules.addAll({
@@ -99,11 +100,12 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
             children: [
               Align(
                 alignment: Alignment.topLeft,
-                child: PageHeaderImage(commerceID: commerce?.id ?? ""),
+                child: PageHeaderImage(commerceID: commerce.id ?? ""),
               ),
               Positioned.fill(
                 child: _buildContent(
-                  products: products
+                  commerceID: commerce.id!,
+                  products: products,
                 ),
               )
             ],
@@ -135,17 +137,19 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
 
   Widget _buildContent({
     required List<Product> products,
+    required String commerceID,
   }) {
     return LayoutBuilder(
       builder: (context, constraints) {
         if (constraints.maxWidth > ScreenHelper.breakpointPC) {
-          return _buildBigLayout(products: products);
+          return _buildBigLayout(commerceID: commerceID, products: products);
         }
 
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
           child: CustomScrollView(
             slivers: _buildSmallLayout(
+              commerceID: commerceID,
               products: products
             ),
           ),
@@ -155,6 +159,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
   }
 
   List<Widget> _buildSmallLayout({
+    required String commerceID,
     required List<Product> products,
   }) {
     return [
@@ -188,11 +193,23 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
         products: products,
         useBigLayout: false,
         enableButton: false,
+      ),
+      const SliverToBoxAdapter(child: SizedBox(height: 18,)),
+
+      // Les paniers
+      SliverToBoxAdapter(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 450),
+          child: PagePaniersList(
+            commerceID: commerceID,
+          ),
+        ),
       )
     ];
   }
 
   Widget _buildBigLayout({
+    required String commerceID,
     required List<Product> products
   }) {
     return SingleChildScrollView(
@@ -263,6 +280,17 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                   ),
                 )
               ],   
+            ),
+          ),
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: ScreenHelper.horizontalPadding
+              ),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxHeight: 540),
+                child: PagePaniersList(commerceID: commerceID,)
+              ),
             ),
           )
         ],

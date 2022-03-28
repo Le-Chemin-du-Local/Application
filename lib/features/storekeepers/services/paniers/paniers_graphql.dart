@@ -15,19 +15,35 @@ query getPaniers(
           name
           category
           description
-          products {
-            quantity
-            product {
-              name
-              price
-            }
-          }
         }
       }
     }
   }
 }
 ''';
+
+const String qAllPaniers = r'''
+query getPaniers(
+  $commerceID: ID,
+) {
+  commerce(id: $commerceID) {
+    id
+    name
+    paniers {
+      edges {
+        node {
+          id
+          name
+          category
+          price
+          description
+        }
+      }
+    }
+  }
+}
+''';
+
 const String qDetailledPanier = r'''
 query getDetailledPanier($id: ID!) {
   panier(id: $id) {

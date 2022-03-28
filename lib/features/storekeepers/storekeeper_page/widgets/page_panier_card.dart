@@ -4,8 +4,8 @@ import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier.dart';
 import 'package:flutter/material.dart';
 
-class PanierCard extends StatelessWidget {
-  const PanierCard({
+class PagePanierCard extends StatelessWidget {
+  const PagePanierCard({
     Key? key,
     required this.panier,
     required this.onOpen,
@@ -62,7 +62,7 @@ class PanierCard extends StatelessWidget {
 
                   ClElevatedButton(
                     onPressed: onOpen,
-                    child: const Text("Voir le panier"),
+                    child: Text("Acheter (${panier.price}€)"),
                   )
                 ],
               ),

@@ -103,14 +103,17 @@ class PanierEditFormState extends State<PanierEditForm> {
                               flex: 38,
                               child: ConstrainedBox(
                                 constraints: const BoxConstraints(maxHeight: 500),
-                                child: ClImagePickerBig(
-                                  imageURL: "$kImagesBaseUrl/paniers/${widget.panier?.id ?? ""}.jpg",
-                                  onImageSelected: (file) {
-                                    setState(() {
-                                      _image = file;
-                                    });
-                                  },
-                                  imageData: _image,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12),
+                                  child: ClImagePickerBig(
+                                    imageURL: "$kImagesBaseUrl/paniers/${widget.panier?.id ?? ""}.jpg",
+                                    onImageSelected: (file) {
+                                      setState(() {
+                                        _image = file;
+                                      });
+                                    },
+                                    imageData: _image,
+                                  ),
                                 ),
                               ),
                             ),
@@ -128,14 +131,17 @@ class PanierEditFormState extends State<PanierEditForm> {
                         children: [
                           // The image picker
                           Flexible(
-                            child:  ClImagePickerBig(
-                              imageURL: "$kImagesBaseUrl/paniers/${widget.panier?.id ?? ""}.jpg",
-                              onImageSelected: (file) {
-                                setState(() {
-                                  _image = file;
-                                });
-                              },
-                              imageData: _image,
+                            child:  ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: ClImagePickerBig(
+                                imageURL: "$kImagesBaseUrl/paniers/${widget.panier?.id ?? ""}.jpg",
+                                onImageSelected: (file) {
+                                  setState(() {
+                                    _image = file;
+                                  });
+                                },
+                                imageData: _image,
+                              ),
                             ),
                           ),
                           const SizedBox(height: 12,),
