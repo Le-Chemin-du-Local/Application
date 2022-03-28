@@ -6,9 +6,11 @@ class StoreKeeperHomePage extends StatelessWidget {
   const StoreKeeperHomePage({
     Key? key,
     required this.onPageChanged,
+    this.servicesOffset = 0
   }) : super(key: key);
 
   final Function(int) onPageChanged;
+  final int servicesOffset;
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +44,14 @@ class StoreKeeperHomePage extends StatelessWidget {
 
         // Carte Gérer ma page
         DashboardCard(
-          onClick: () {}, 
+          onClick: () => onPageChanged(0), 
           backgroundName: "illustration_1.png", 
           title: "Gérer ma page"
         ),
 
         // Carte Gérer mes services
         DashboardCard(
-          onClick: () {}, 
+          onClick: () => onPageChanged(3 + servicesOffset),
           backgroundName: "illustration_1.png", 
           title: "Gérer mes services"
         ),

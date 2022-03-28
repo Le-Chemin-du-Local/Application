@@ -207,20 +207,23 @@ class _ProductEditFormState extends State<ProductEditForm> {
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(ScreenHelper.horizontalPadding),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  if (constraints.maxWidth > ScreenHelper.breakpointPC) {
-                    return Row(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: ScreenHelper.maxContainerWidth),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    if (constraints.maxWidth > ScreenHelper.breakpointPC) {
+                      return Row(
+                        children: content,
+                      );
+                    }
+                
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: content,
                     );
-                  }
-              
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: content,
-                  );
-                },
+                  },
+                ),
               ),
             ),
           ),

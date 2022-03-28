@@ -1,11 +1,20 @@
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_page.dart';
+import 'package:chemin_du_local/features/storekeepers/services/services.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_graphql.dart';
+import 'package:chemin_du_local/features/storekeepers/services/widgets/service_card.dart';
 import 'package:chemin_du_local/features/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ServicesPage extends StatelessWidget {
-  const ServicesPage({Key? key}) : super(key: key);
+  const ServicesPage({
+    Key? key,
+    required this.onPageChanged,
+  }) : super(key: key);
+
+  final Function(int) onPageChanged;
 
   QueryOptions _commerceServicesQueryOption() {
     return QueryOptions<dynamic>(
@@ -43,19 +52,60 @@ class ServicesPage extends StatelessWidget {
             );
           }
 
-          return _buildContent(user.commerce!.services);
+          return _buildContent(context, user.commerce!.services);
         },
       ),
     );
   }
 
-  Widget _buildContent(List<String> services) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(services.join(","))
-      ],
+  Widget _buildContent(BuildContext context, List<String> services) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 20,
+        left: ScreenHelper.horizontalPadding,
+        right: ScreenHelper.horizontalPadding
+      ),
+      child: CustomScrollView(
+        slivers: [
+          _buildActiveServices(context, services)
+        ],
+      ),
+    );
+  }
+
+  Widget _buildActiveServices(BuildContext context, List<String> services) {
+    return SliverGrid(
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: 400,
+        mainAxisExtent: 228,
+        crossAxisSpacing: 16,
+        mainAxisSpacing: 16
+      ),
+      delegate: SliverChildListDelegate([
+        // Click & Collect
+        if (services.contains(Services.clickAndCollect))
+          ServiceCard(
+            onClick: () => onPageChanged(3), 
+            backgroundName: "illustration_click_and_collect.png", 
+            title: "Click and collect"
+          ),
+
+        // Paniers
+        if (services.contains(Services.paniers))
+          ServiceCard(
+            onClick: () => _openPanierService(context),
+            backgroundName: "illustration_1.png",
+            title: "Paniers",
+          ),
+      ]),
+    );
+  }
+
+  Future _openPanierService(BuildContext context) async {
+    await Navigator.of(context).push<dynamic>(
+      MaterialPageRoute<dynamic>(
+        builder: (context) => const PaniersPage()
+      )
     );
   }
 }

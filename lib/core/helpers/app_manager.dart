@@ -10,4 +10,5 @@ class AppManager {
   // STOREKEEPERS KEYS
   final GlobalKey<NavigatorState> productsPageKey = GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> clickAndCollectPageKey = GlobalKey<NavigatorState>();
+  final GlobalKey<NavigatorState> serviesPageKey = GlobalKey<NavigatorState>();
 }

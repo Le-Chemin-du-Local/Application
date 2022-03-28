@@ -89,6 +89,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
       const StoreKeeperPage(),
       StoreKeeperHomePage(
         onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),
+        servicesOffset: clickAndCollectOffset,
       ),
       ClipRect(
         child: Navigator(
@@ -109,7 +110,17 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
             ),
           )
         ),
-      const ServicesPage(),
+      ClipRect(
+        child: Navigator(
+          key: AppManager.instance.serviesPageKey,
+          onGenerateRoute: (route) => MaterialPageRoute<void>(
+            settings: route,
+            builder: (context) => ServicesPage(
+              onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),
+            )
+          ),
+        )
+      ),
       const StoreKeeperSettingsPage()
     ];
 
