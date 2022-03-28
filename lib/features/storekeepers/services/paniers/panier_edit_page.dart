@@ -34,7 +34,7 @@ class _PanierEditPageState extends State<PanierEditPage> {
 
   MutationOptions _productMutationOption() {
     return MutationOptions<dynamic>(
-      document: gql(widget.panierID == null ? mutCreatePanier : ""),
+      document: gql(widget.panierID == null ? mutCreatePanier : mutUpdatePanier),
       onError: (error) {
         _errorMessage = "Nous ne parvenons pas à envoyer le panier...";
       },
@@ -59,8 +59,33 @@ class _PanierEditPageState extends State<PanierEditPage> {
           return _buildContent(null, runMutation);
         } 
     
-        return const Text("Edition");
-        
+        return Query<dynamic>(
+          options: _detailledPanierQueryOptions(),
+          builder: (result, {fetchMore, refetch}) {
+            if (result.isLoading) {
+              return Scaffold(
+                appBar: AppBar(),
+                body: const Center(child: CircularProgressIndicator(),),
+              );
+            }
+
+            if (result.hasException) {
+              return Scaffold(
+                appBar: AppBar(),
+                body: const Align(
+                  alignment: Alignment.topCenter,
+                  child: ClStatusMessage(
+                    message: "Nous ne parvenons pas à charger le panier...",
+                  ),
+                ),
+              );
+            }
+
+            final Panier panier = Panier.fromJson(result.data!["panier"] as Map<String, dynamic>);
+
+            return _buildContent(panier, runMutation);
+          },
+        );
       }, 
     );
   }

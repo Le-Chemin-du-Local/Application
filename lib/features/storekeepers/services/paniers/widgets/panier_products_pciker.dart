@@ -26,6 +26,8 @@ class PanierProductsPicker extends StatelessWidget {
       }
     );
   }
+
+  @override
   Widget build(BuildContext context) {
     return Query<dynamic>(
       options: _categoriesQueryOptions(),

@@ -7,7 +7,6 @@ import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker_big.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier.dart';
-import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/widgets/panier_products_pciker.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -47,7 +46,10 @@ class PanierEditFormState extends State<PanierEditForm> {
       _quantityTextController.text = widget.panier!.quantity.toString();
       _priceTextController.text = widget.panier!.price.toString();
 
-      _selectedProductsIDs.removeRange(0, _selectedProductsIDs.length - 1);
+      if (_selectedProductsIDs.isNotEmpty) {
+        _selectedProductsIDs.removeRange(0, _selectedProductsIDs.length - 1);
+      }
+
       for (final product in widget.panier!.products) {
         _selectedProductsIDs.add(product.product.id!);
       }
