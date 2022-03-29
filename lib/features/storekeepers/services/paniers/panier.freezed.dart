@@ -28,7 +28,8 @@ class _$PanierTearOff {
       String description = "",
       int quantity = 0,
       double price = 0,
-      List<PanierProduct> products = const <PanierProduct>[]}) {
+      List<PanierProduct> products = const <PanierProduct>[],
+      DateTime? endingDate}) {
     return _PanierProduct(
       id,
       name: name,
@@ -37,6 +38,7 @@ class _$PanierTearOff {
       quantity: quantity,
       price: price,
       products: products,
+      endingDate: endingDate,
     );
   }
 
@@ -57,6 +59,7 @@ mixin _$Panier {
   int get quantity => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   List<PanierProduct> get products => throw _privateConstructorUsedError;
+  DateTime? get endingDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -74,7 +77,8 @@ abstract class $PanierCopyWith<$Res> {
       String description,
       int quantity,
       double price,
-      List<PanierProduct> products});
+      List<PanierProduct> products,
+      DateTime? endingDate});
 }
 
 /// @nodoc
@@ -94,6 +98,7 @@ class _$PanierCopyWithImpl<$Res> implements $PanierCopyWith<$Res> {
     Object? quantity = freezed,
     Object? price = freezed,
     Object? products = freezed,
+    Object? endingDate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -124,6 +129,10 @@ class _$PanierCopyWithImpl<$Res> implements $PanierCopyWith<$Res> {
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<PanierProduct>,
+      endingDate: endingDate == freezed
+          ? _value.endingDate
+          : endingDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -141,7 +150,8 @@ abstract class _$PanierProductCopyWith<$Res> implements $PanierCopyWith<$Res> {
       String description,
       int quantity,
       double price,
-      List<PanierProduct> products});
+      List<PanierProduct> products,
+      DateTime? endingDate});
 }
 
 /// @nodoc
@@ -163,6 +173,7 @@ class __$PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
     Object? quantity = freezed,
     Object? price = freezed,
     Object? products = freezed,
+    Object? endingDate = freezed,
   }) {
     return _then(_PanierProduct(
       id == freezed
@@ -193,6 +204,10 @@ class __$PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<PanierProduct>,
+      endingDate: endingDate == freezed
+          ? _value.endingDate
+          : endingDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -206,7 +221,8 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
       this.description = "",
       this.quantity = 0,
       this.price = 0,
-      this.products = const <PanierProduct>[]});
+      this.products = const <PanierProduct>[],
+      this.endingDate});
 
   factory _$_PanierProduct.fromJson(Map<String, dynamic> json) =>
       _$$_PanierProductFromJson(json);
@@ -229,10 +245,12 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
   @JsonKey()
   @override
   final List<PanierProduct> products;
+  @override
+  final DateTime? endingDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Panier(id: $id, name: $name, category: $category, description: $description, quantity: $quantity, price: $price, products: $products)';
+    return 'Panier(id: $id, name: $name, category: $category, description: $description, quantity: $quantity, price: $price, products: $products, endingDate: $endingDate)';
   }
 
   @override
@@ -246,7 +264,8 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('quantity', quantity))
       ..add(DiagnosticsProperty('price', price))
-      ..add(DiagnosticsProperty('products', products));
+      ..add(DiagnosticsProperty('products', products))
+      ..add(DiagnosticsProperty('endingDate', endingDate));
   }
 
   @override
@@ -261,7 +280,9 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.quantity, quantity) &&
             const DeepCollectionEquality().equals(other.price, price) &&
-            const DeepCollectionEquality().equals(other.products, products));
+            const DeepCollectionEquality().equals(other.products, products) &&
+            const DeepCollectionEquality()
+                .equals(other.endingDate, endingDate));
   }
 
   @override
@@ -273,7 +294,8 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(quantity),
       const DeepCollectionEquality().hash(price),
-      const DeepCollectionEquality().hash(products));
+      const DeepCollectionEquality().hash(products),
+      const DeepCollectionEquality().hash(endingDate));
 
   @JsonKey(ignore: true)
   @override
@@ -293,7 +315,8 @@ abstract class _PanierProduct implements Panier {
       String description,
       int quantity,
       double price,
-      List<PanierProduct> products}) = _$_PanierProduct;
+      List<PanierProduct> products,
+      DateTime? endingDate}) = _$_PanierProduct;
 
   factory _PanierProduct.fromJson(Map<String, dynamic> json) =
       _$_PanierProduct.fromJson;
@@ -312,6 +335,8 @@ abstract class _PanierProduct implements Panier {
   double get price;
   @override
   List<PanierProduct> get products;
+  @override
+  DateTime? get endingDate;
   @override
   @JsonKey(ignore: true)
   _$PanierProductCopyWith<_PanierProduct> get copyWith =>

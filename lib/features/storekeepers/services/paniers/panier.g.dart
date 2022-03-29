@@ -18,6 +18,9 @@ _$_PanierProduct _$$_PanierProductFromJson(Map<String, dynamic> json) =>
               ?.map((e) => PanierProduct.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <PanierProduct>[],
+      endingDate: json['endingDate'] == null
+          ? null
+          : DateTime.parse(json['endingDate'] as String),
     );
 
 Map<String, dynamic> _$$_PanierProductToJson(_$_PanierProduct instance) =>
@@ -29,4 +32,5 @@ Map<String, dynamic> _$$_PanierProductToJson(_$_PanierProduct instance) =>
       'quantity': instance.quantity,
       'price': instance.price,
       'products': instance.products,
+      'endingDate': instance.endingDate?.toIso8601String(),
     };

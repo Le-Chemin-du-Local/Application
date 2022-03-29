@@ -3,11 +3,13 @@ import 'dart:convert';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/cl_file.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
+import 'package:chemin_du_local/core/widgets/inputs/cl_dateime_picker.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker_big.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/widgets/panier_products_pciker.dart';
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart';
@@ -37,6 +39,7 @@ class PanierEditFormState extends State<PanierEditForm> {
   final List<String> _selectedProductsIDs = [];
 
   String _category = PanierCategory.permanent;
+  DateTime? _endingDate;
   ClFile? _image;
 
   void _initialize() {
@@ -54,6 +57,7 @@ class PanierEditFormState extends State<PanierEditForm> {
         _selectedProductsIDs.add(product.product.id!);
       }
 
+      _endingDate = widget.panier!.endingDate;
       _category = widget.panier!.category;
     }
   }
@@ -203,60 +207,104 @@ class PanierEditFormState extends State<PanierEditForm> {
         ),
         const SizedBox(height: 12,),
 
+        // Quantité et prix
         Flexible(
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            alignment: WrapAlignment.spaceBetween,
+          child: GridView(
+            shrinkWrap: true,
+            primary: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisExtent: 90,
+              mainAxisSpacing: 16,
+            ),
             children: [
-              // Catégorie
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 200),
-                child: ClDropdown<String>(
-                  currentValue: _category,
-                  items: PanierCategory.detailled,
-                  label: "Catégorie du panier",
-                  onChanged: (value) {
-                    setState(() {
-                      _category = value ?? PanierCategory.permanent;
-                    });
-                  },
-                  validator: null,
-                ),
-              ),
-
               // Quantité
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 200),
-                child: ClTextInput(
-                  controller: _quantityTextController,
-                  labelText: "Quantité",
-                  hintText: "10",
-                  inputType: TextInputType.number,
-                  validator: (value) {
-                    if (value.isEmpty) return "Vous devez rentrer une cantité";
-                    if (int.tryParse(value) == null) return "Le nombre n'est pas valide";
-                    return null;
-                  },
-                ),
+              ClTextInput(
+                controller: _quantityTextController,
+                labelText: "Quantité",
+                hintText: "10",
+                inputType: TextInputType.number,
+                validator: (value) {
+                  if (value.isEmpty) return "Vous devez rentrer une cantité";
+
+                  final int? quantity = int.tryParse(value);
+                  if (quantity == null) return "Le nombre n'est pas valide";
+                  if (quantity < 1) return "Vous devez avoir au moins 1 panier";
+                  return null;
+                },
               ),
 
               // Le prix
-              ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 200),
-                child: ClTextInput(
-                  controller: _priceTextController,
-                  labelText: "Prix du panier",
-                  hintText: "5,00€",
-                  inputType: const TextInputType.numberWithOptions(decimal: true),
-                  validator: (value) {
-                    if (value.isEmpty) return "Vous devez rentrer un prix";
-                    if (double.tryParse(value) == null) return "Le nombre n'est pas valide";
-                    return null;
-                  },
-                ),
+              ClTextInput(
+                controller: _priceTextController,
+                labelText: "Prix du panier",
+                hintText: "5,00€",
+                inputType: const TextInputType.numberWithOptions(decimal: true),
+                validator: (value) {
+                  if (value.isEmpty) return "Vous devez rentrer un prix";
+
+                  final double? price = double.tryParse(value);
+                  if (price == null) return "Le nombre n'est pas valide";
+                  if (price < 0.01) return "Vous ne pouvez pas avoir un prix aussi faible";
+                  return null;
+                },
               )
             ],
+          ),
+        ),
+
+        Flexible(
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return GridView(
+                shrinkWrap: true,
+                primary: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: constraints.maxWidth >= 400 ? 2 : 1,
+                  crossAxisSpacing: 16,
+                  mainAxisExtent: 90,
+                  mainAxisSpacing: 16,
+                ),
+                children: [
+                  // Catégorie
+                  ClDropdown<String>(
+                    currentValue: _category,
+                    items: PanierCategory.detailled,
+                    label: "Catégorie du panier",
+                    onChanged: (value) {
+                      setState(() {
+                        _category = value ?? PanierCategory.permanent;
+                      });
+                    },
+                    validator: null,
+                  ),
+
+                  if (_category == PanierCategory.temporary)
+                    ClDateTimePicker(
+                      type: DateTimePickerType.dateTime,
+                      initialDate: _endingDate,
+                      firstDate: DateTime.now(),
+                      lastDate: DateTime(2100),
+                      label: "Date de fin du panier",
+                      onChanged: (value) {
+                        if (value == null) return;
+
+                        setState(() {
+                          _endingDate = DateTime.tryParse(value);
+                        });
+                      },
+                      validator: (value) {
+                        if (_category != PanierCategory.temporary) return null; 
+                        if (value?.isEmpty ?? true) return "Vous devez choisir une date";
+                        if (DateTime.parse(value!).isBefore(DateTime.now())) return "La date doit être supérieur à maintenant";
+
+                        return null;
+                      },
+                    )
+                ],
+              );
+            }
           ),
         )
       ],
@@ -291,6 +339,7 @@ class PanierEditFormState extends State<PanierEditForm> {
             base64Decode(_image!.base64content!),
             filename: _image!.filename
           ),
+        "endingDate": _endingDate?.toUtc().toIso8601String(),
         "products": [
           for (final id in _selectedProductsIDs) {
             "quantity": 1,

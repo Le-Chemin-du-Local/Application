@@ -25,6 +25,7 @@ class Panier with _$Panier {
     @Default(0) int quantity,
     @Default(0) double price,
     @Default(<PanierProduct>[]) List<PanierProduct> products,
+    DateTime? endingDate,
   }) = _PanierProduct;
 
   factory Panier.fromJson(Map<String, dynamic> json) => _$PanierFromJson(json);

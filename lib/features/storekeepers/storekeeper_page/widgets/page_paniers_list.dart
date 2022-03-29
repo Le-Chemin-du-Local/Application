@@ -66,7 +66,7 @@ class PagePaniersList extends StatelessWidget {
                 children: [
                   for (final panier in paniers) 
                     ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 600),
+                      constraints: const BoxConstraints(maxWidth: 720),
                       child: Padding(
                         padding: const EdgeInsets.only(right: 12),
                         child: PagePanierCard(

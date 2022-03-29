@@ -15,6 +15,7 @@ query getPaniers(
           name
           category
           description
+          endingDate
         }
       }
     }
@@ -35,8 +36,10 @@ query getPaniers(
           id
           name
           category
+          quantity
           price
           description
+          endingDate
         }
       }
     }
@@ -53,6 +56,7 @@ query getDetailledPanier($id: ID!) {
     category
     quantity
     price
+    endingDate
     products {
       quantity
       product {
@@ -73,6 +77,7 @@ mutation createPanier(
   $quantity: Int!,
   $price: Float!,
   $image: Upload,
+  $endingDate: Time,
   $products: [NewPanierProduct!]!
 ) {
   createPanier(commerceID: $commerce, input: {
@@ -82,6 +87,7 @@ mutation createPanier(
     quantity: $quantity,
     price: $price,
     image: $image,
+    endingDate: $endingDate
     products: $products
   }) {
     id,
@@ -99,6 +105,7 @@ mutation createPanier(
   $quantity: Int!,
   $price: Float!,
   $image: Upload,
+  $endingDate: Time,
   $products: [NewPanierProduct!]!
 ) {
   updatePanier(id: $id, changes: {
@@ -108,6 +115,7 @@ mutation createPanier(
     quantity: $quantity,
     price: $price,
     image: $image,
+    endingDate: $endingDate,
     products: $products
   }) {
     id,

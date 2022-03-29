@@ -104,7 +104,7 @@ class _PaniersPageState extends State<PaniersPage> {
               children: [
                 for (final panier in paniers) 
                   ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 600),
+                    constraints: const BoxConstraints(maxWidth: 600, maxHeight: 240),
                     child: PanierCard(
                       panier: panier, 
                       onOpen: () => _onOpenPanier(context, panier)

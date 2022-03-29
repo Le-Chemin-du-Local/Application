@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/utils/constants.dart';
+import 'package:chemin_du_local/core/widgets/badge.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier.dart';
@@ -49,16 +50,42 @@ class PagePanierCard extends StatelessWidget {
 
             Flexible(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Le titre
                   Text(panier.name, style: const TextStyle(fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 8,),
+                  const SizedBox(height: 12,),
+
+                  // Les petits badges
+                  Flexible(
+                    child: Wrap(
+                      spacing: 4,
+                      runSpacing: 4,
+                      children: [
+                        Badge(
+                          child: Text("${panier.quantity} restants"),
+                        ),
+                        Badge(
+                          child: Text("${panier.price}€"),
+                        )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12,),
 
                   // La description
-                  Text(panier.description),
-                  const SizedBox(height: 30,),
+                  Expanded(
+                    child: Text(panier.description),
+                  ),
+                  const SizedBox(height: 12,),
+
+                  // Le temps restant
+                  if (panier.category == PanierCategory.temporary && panier.endingDate!= null) ...{
+                    _buildTimeLeft(),
+                    const SizedBox(height: 20,),
+                  },
 
                   ClElevatedButton(
                     onPressed: onOpen,
@@ -85,5 +112,17 @@ class PagePanierCard extends StatelessWidget {
         }
       ),
     );
+  }
+
+  Widget _buildTimeLeft() {
+    final remaining = panier.endingDate?.difference(DateTime.now()) ?? const Duration();
+
+    final days = remaining.inDays;
+    final hours = remaining.inHours - remaining.inDays * 24;
+    final minutes = remaining.inMinutes - remaining.inHours * 60;
+
+    final formattedRemaining = '$days jours ${hours}h$minutes restants';
+
+    return Text(formattedRemaining, style: const TextStyle(fontWeight: FontWeight.bold),);
   }
 }

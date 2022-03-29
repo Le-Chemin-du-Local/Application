@@ -49,16 +49,25 @@ class PanierCard extends StatelessWidget {
 
             Flexible(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Le titre
                   Text(panier.name, style: const TextStyle(fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 8,),
+                  const SizedBox(height: 12,),
 
                   // La description
-                  Text(panier.description),
-                  const SizedBox(height: 30,),
+                  Expanded(
+                    child: Text(panier.description),
+                  ),
+                  const SizedBox(height: 12,),
+
+                  // Le temps restant
+                  if (panier.category == PanierCategory.temporary && panier.endingDate!= null) ...{
+                    _buildTimeLeft(),
+                    const SizedBox(height: 20,),
+                  },
 
                   ClElevatedButton(
                     onPressed: onOpen,
@@ -85,5 +94,17 @@ class PanierCard extends StatelessWidget {
         }
       ),
     );
+  }
+
+  Widget _buildTimeLeft() {
+    final remaining = panier.endingDate?.difference(DateTime.now()) ?? const Duration();
+
+    final days = remaining.inDays;
+    final hours = remaining.inHours - remaining.inDays * 24;
+    final minutes = remaining.inMinutes - remaining.inHours * 60;
+
+    final formattedRemaining = '$days jours ${hours}h$minutes restants';
+
+    return Text(formattedRemaining, style: const TextStyle(fontWeight: FontWeight.bold),);
   }
 }

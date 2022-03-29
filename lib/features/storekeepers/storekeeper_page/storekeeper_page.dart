@@ -288,7 +288,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                 left: ScreenHelper.horizontalPadding
               ),
               child: ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 540),
+                constraints: const BoxConstraints(maxHeight: 550),
                 child: PagePaniersList(commerceID: commerceID,)
               ),
             ),
