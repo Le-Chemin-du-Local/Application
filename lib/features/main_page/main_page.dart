@@ -46,7 +46,7 @@ class MainPageState extends State<MainPage> {
                     if (useBigLayout) 
                       AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
-                        width: _isMenuBarMinimified ? 68 : 300,
+                        width: _isMenuBarMinimified ? 68 : 312,
                         child: MenuDrawer(
                           pageItems: widget.pageItems,
                           currentPageIndex: _currentIndex,
