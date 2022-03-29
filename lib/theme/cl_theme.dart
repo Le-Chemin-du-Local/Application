@@ -1,6 +1,7 @@
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ClTheme {
   static ThemeData theme(BuildContext context) {
@@ -22,10 +23,10 @@ class ClTheme {
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
 
-      textTheme: const TextTheme(
-        headline2: TextStyle(fontSize: 24, color: Palette.colorDark),
-        bodyText1: TextStyle(fontSize: 12, color: Palette.colorDark),
-        bodyText2: TextStyle(fontSize: 18, color: Palette.colorDark)
+      textTheme: GoogleFonts.rubikTextTheme().copyWith(
+        headline2: const TextStyle(fontSize: 24, color: Palette.colorDark),
+        bodyText1: const TextStyle(fontSize: 12, color: Palette.colorDark),
+        bodyText2: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Palette.colorDark)
       ),
 
       visualDensity: VisualDensity.standard
