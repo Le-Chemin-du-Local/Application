@@ -4,6 +4,7 @@ import 'package:chemin_du_local/core/widgets/gradient_icon.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_address_input.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_address_map.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -40,11 +41,9 @@ class PageAddressCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // The map
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: Container(
-              color: Palette.colorDarkGrey,
-              height: 145,
+          Flexible(
+            child: PageAddressMap(
+              address: addressTextController.text,
             ),
           ),
           const SizedBox(height: 12,),

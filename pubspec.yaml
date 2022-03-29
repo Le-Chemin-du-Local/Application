@@ -40,6 +40,8 @@ dependencies:
   http: ^0.13.4
   intl: ^0.17.0
   json_annotation: ^4.4.0
+  latlng: ^0.1.0
+  map: ^1.0.0
   sliver_tools: ^0.2.5
   uuid: ^3.0.6
 
