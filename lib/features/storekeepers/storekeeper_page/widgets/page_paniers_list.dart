@@ -11,7 +11,7 @@ class PagePaniersList extends StatelessWidget {
     required this.commerceID,
   }) : super(key: key);
 
-  final String commerceID;
+  final String? commerceID;
 
   QueryOptions _paniersQueryOptions() {
     return QueryOptions<dynamic>(
@@ -38,48 +38,54 @@ class PagePaniersList extends StatelessWidget {
         const SizedBox(height: 20,),
 
         // La liste des paniers
-        Flexible(
-          child: Query<dynamic>(
-            options: _paniersQueryOptions(),
-            builder: (result, {fetchMore, refetch}) {
-              if (result.isLoading) {
-                return const Center(child: CircularProgressIndicator(),);
-              }
-        
-              if (result.hasException) {
-                return const ClStatusMessage(
-                  message: "Nous ne parvenons pas à charger les paniers",
-                );
-              }
-        
-              final List mapPaniers = result.data!["commerce"]["paniers"]["edges"] as List;
-              final List<Panier> paniers = [];
-        
-              for (final mapPanier in mapPaniers) {
-                paniers.add(Panier.fromJson(mapPanier["node"] as Map<String, dynamic>));
-              }
-        
-              return ListView(
-                controller: ScrollController(),
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                children: [
-                  for (final panier in paniers) 
-                    ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 720),
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 12),
-                        child: PagePanierCard(
-                          panier: panier,
-                          onOpen: () {},
+        if (commerceID == null) 
+          const ClStatusMessage(
+            type: ClStatusMessageType.info,
+            message: "Ce commerce ne propose pas encore de panier",
+          )
+        else 
+          Flexible(
+            child: Query<dynamic>(
+              options: _paniersQueryOptions(),
+              builder: (result, {fetchMore, refetch}) {
+                if (result.isLoading) {
+                  return const Center(child: CircularProgressIndicator(),);
+                }
+          
+                if (result.hasException) {
+                  return const ClStatusMessage(
+                    message: "Nous ne parvenons pas à charger les paniers",
+                  );
+                }
+          
+                final List mapPaniers = result.data!["commerce"]["paniers"]["edges"] as List;
+                final List<Panier> paniers = [];
+          
+                for (final mapPanier in mapPaniers) {
+                  paniers.add(Panier.fromJson(mapPanier["node"] as Map<String, dynamic>));
+                }
+          
+                return ListView(
+                  controller: ScrollController(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    for (final panier in paniers) 
+                      ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 720),
+                        child: Padding(
+                          padding: const EdgeInsets.only(right: 12),
+                          child: PagePanierCard(
+                            panier: panier,
+                            onOpen: () {},
+                          ),
                         ),
-                      ),
-                    )
-                ],
-              );
-            },
-          ),
-        )
+                      )
+                  ],
+                );
+              },
+            ),
+          )
       ],
     );
   }

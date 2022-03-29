@@ -15,10 +15,14 @@ class Commerce with _$Commerce {
     required String name,
     @Default(<String>[]) List<String> categories,
     @Default(<String>[]) List<String> services,
+    String? storekeeperWord,
     String? description,
     String? address,
     String? phone,
-    String? email
+    String? email,
+    String? facebook,
+    String? twitter,
+    String? instagram,
   }) = _Commerce;
 
   factory Commerce.fromJson(Map<String, dynamic> json) => _$CommerceFromJson(json);

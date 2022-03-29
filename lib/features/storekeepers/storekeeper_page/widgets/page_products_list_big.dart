@@ -28,9 +28,15 @@ class PageProductsListBig extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Wrap(
-          spacing: 16,
-          runSpacing: 16,
+        GridView(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 270,
+            mainAxisExtent: 273,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16
+          ),
+          shrinkWrap: true,
+          primary: false,
           children: content,
         ),
         const SizedBox(height: 12,),
