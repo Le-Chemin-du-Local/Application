@@ -124,7 +124,7 @@ class _PageAddressMapState extends State<PageAddressMap> {
                       },
                     ),
                     if (markerPosition != null)
-                      _buildMarkerWidget(markerPosition, Theme.of(context).primaryColor)
+                      _buildMarkerWidget(markerPosition)
                   ],
                 );
               },
@@ -135,16 +135,15 @@ class _PageAddressMapState extends State<PageAddressMap> {
     );
   }
 
-  Widget _buildMarkerWidget(Offset pos, Color color, [IconData icon = Icons.location_on]) {
+  Widget _buildMarkerWidget(Offset pos) {
     return Positioned(
       left: pos.dx - 24,
       top: pos.dy - 24,
       width: 48,
       height: 48,
-      child: Icon(
-        icon,
-        color: color,
-        size: 48,
+      child: Image.asset(
+        "assets/images/map_pointer.png",
+        width: 48, height: 48,
       ),
     );
   }
