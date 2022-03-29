@@ -2,9 +2,12 @@ import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/gradient_icon.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_address_input.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:uuid/uuid.dart';
 
 class PageAddressCard extends StatelessWidget {
   const PageAddressCard({
@@ -109,17 +112,10 @@ class PageAddressCard extends StatelessWidget {
         const SizedBox(height: 8.0,),
 
         // Address text field
-        ClTextInput(
-          controller: addressTextController,
-          labelText: "Adresse de votre commerce",
-          hintText: "Rentrer une adresse",
-          validator: (value) {
-            if (value.isEmpty) return "Vous devez rentrer une adresse";
-
-            return null;
-          },
+        Flexible(
+          child: PageAddressInput(addressTextController: addressTextController),
         ),
-        const SizedBox(height: 8.0,),
+        const SizedBox(height: 8.0,),  
 
         // Facebook
         ClTextInput(

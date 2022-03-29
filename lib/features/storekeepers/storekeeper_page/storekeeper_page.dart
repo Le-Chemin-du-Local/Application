@@ -335,8 +335,8 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children:[
                     // Les horraires
-                    const Flexible(
-                      child: PageSchedulesCard(schedules: {}),
+                    Flexible(
+                      child: PageSchedulesCard(schedules: _schedules),
                     ),
                     const SizedBox(height: 10,),
         

@@ -11,11 +11,13 @@ class ClTextInput extends StatefulWidget {
     required this.controller,
     required this.validator,
     required this.labelText,
+    this.focusNode,
     this.suffixIcon,
     this.hintText,
     this.maxLines = 1,
     this.onSaved,
     this.onChanged,
+    this.onTap,
     this.readOnly = false,
     this.invisibleReadOnly = false,
   }) : super(key: key);
@@ -27,6 +29,9 @@ class ClTextInput extends StatefulWidget {
   final String? Function(String)? validator;
   final Function(String)? onSaved;
   final Function(String?)? onChanged;
+  final Function()? onTap;
+
+  final FocusNode? focusNode;
 
   final IconData? suffixIcon;
   final String? hintText;
@@ -70,9 +75,11 @@ class _ClTextInput extends State<ClTextInput> {
         ClCard(
           padding: EdgeInsets.zero,
           child: TextFormField(
+            focusNode: widget.focusNode,
             readOnly: widget.readOnly,
             enabled: !widget.readOnly,
             key: widget.formKey,
+            onTap: widget.onTap,
             obscureText: _obscureText,
             controller: widget.controller,
             keyboardType: widget.inputType,
