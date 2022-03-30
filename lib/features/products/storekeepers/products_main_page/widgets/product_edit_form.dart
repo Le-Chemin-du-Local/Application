@@ -296,6 +296,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
         final int crossAxisCount = constraints.maxWidth >= ScreenHelper.breakpointTablet ? 2 : 1;
 
         return GridView(
+          physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: crossAxisCount,
             crossAxisSpacing: 12,
@@ -354,6 +355,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
                         flex: 3,
                         child: ClTextInput(
                           controller: _priceTextController,
+                          inputType: const TextInputType.numberWithOptions(decimal: true),
                           labelText: "Prix",
                           hintText: "Ex : 5,00",
                           validator: (price) {

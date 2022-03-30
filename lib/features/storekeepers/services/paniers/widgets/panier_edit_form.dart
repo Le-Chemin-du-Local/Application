@@ -210,6 +210,7 @@ class PanierEditFormState extends State<PanierEditForm> {
         // Quantité et prix
         Flexible(
           child: GridView(
+            physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
             primary: true,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -258,6 +259,7 @@ class PanierEditFormState extends State<PanierEditForm> {
           child: LayoutBuilder(
             builder: (context, constraints) {
               return GridView(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 primary: true,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
