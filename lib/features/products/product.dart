@@ -22,6 +22,7 @@ class Product with _$Product {
     String? description,
     double? price,
     String? unit,
+    double? tva,
     bool? isBreton,
   }) = _Product;
 

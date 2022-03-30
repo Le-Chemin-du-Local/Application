@@ -19,6 +19,7 @@ _$_Product _$$_ProductFromJson(Map<String, dynamic> json) => _$_Product(
       description: json['description'] as String?,
       price: (json['price'] as num?)?.toDouble(),
       unit: json['unit'] as String?,
+      tva: (json['tva'] as num?)?.toDouble(),
       isBreton: json['isBreton'] as bool?,
     );
 
@@ -31,5 +32,6 @@ Map<String, dynamic> _$$_ProductToJson(_$_Product instance) =>
       'description': instance.description,
       'price': instance.price,
       'unit': instance.unit,
+      'tva': instance.tva,
       'isBreton': instance.isBreton,
     };

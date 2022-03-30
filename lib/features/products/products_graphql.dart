@@ -53,7 +53,8 @@ query getDetailledProduct(
     description,
     isBreton,
     price,
-    unit
+    unit,
+    tva,
   }
 }
 '''; 
@@ -64,6 +65,7 @@ mutation createProduct(
   $description: String!,
   $price: Float!,
   $unit: String!,
+  $tva: Float!,
   $isBreton: Boolean!,
   $categories: [String!]!
   $image: Upload
@@ -73,6 +75,7 @@ mutation createProduct(
     description: $description,
     price: $price,
     unit: $unit,
+    tva: $tva,
     isBreton: $isBreton,
     categories: $categories,
     image: $image,
@@ -90,6 +93,7 @@ mutation updateProduct(
   $description: String,
   $price: Float,
   $unit: String,
+  $tva: Float,
   $isBreton: Boolean,
   $categories: [String!],
   $image: Upload
@@ -99,6 +103,7 @@ mutation updateProduct(
     description: $description,
     price: $price,
     unit: $unit,
+    tva: $tva,
     isBreton: $isBreton,
     categories: $categories,
     image: $image,

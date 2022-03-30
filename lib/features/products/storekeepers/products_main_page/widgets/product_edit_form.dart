@@ -39,6 +39,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
   List<String> _productCategories = [];
 
   String _currentUnit = '';
+  double _currentTVA = 20;
   bool _isBreton = false;
   ClFile? _currentImage;
 
@@ -70,6 +71,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
       _priceTextController.text = widget.product!.price.toString();
       _descriptionTextController.text = widget.product!.description ?? "";
 
+      _currentTVA = widget.product!.tva ?? 20;
       _productCategories = widget.product!.categories;
       
       _isBreton = widget.product!.isBreton ?? false;
@@ -142,52 +144,25 @@ class _ProductEditFormState extends State<ProductEditForm> {
               },
 
               // The detail row (with image, name, price, ...)
-              Flexible(
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // The image
-                    Flexible(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 162),
-                        child: ClCard(
-                          padding: EdgeInsets.zero,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: ClImagePickerBig(
-                              imageURL: "$kImagesBaseUrl/products/${widget.product?.id ?? ""}.jpg",
-                              onImageSelected: (image) {
-                                setState(() {
-                                  _currentImage = image;
-                                });
-                              },
-                              imageData: _currentImage,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(width: 12,),
-                    Expanded(child: _buildBasicInfoColumn())
-                  ]
-                ),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final bool useBigLayout = constraints.maxWidth > ScreenHelper.breakpointPC;
+
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (useBigLayout) 
+                        Flexible(child: _buildBigLayout())
+                      else 
+                        Flexible(child: _buildSmallLayout())
+                        
+                    ],
+                  );
+                } 
               ),
               const SizedBox(height: 12,),
-              Flexible(
-                child: ClTextInput(
-                  controller: _descriptionTextController,
-                  labelText: "Description",
-                  hintText: "Description du produit",
-                  inputType: TextInputType.multiline,
-                  maxLines: 5,
-                  validator: (value) {
-                    if (value.isEmpty) return "Vous devez rentrer une description";
-        
-                    return null;
-                  },
-                ),
-              ),
-              const SizedBox(height: 12,),
+
               Flexible(
                 child: ProductCategoriesPicker(
                   initialCategories: _productCategories,
@@ -245,82 +220,220 @@ class _ProductEditFormState extends State<ProductEditForm> {
     );
   }
 
-  Widget _buildBasicInfoColumn() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+  Widget _buildBigLayout() {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Product name
+        // L'image
         Flexible(
-          child: ClTextInput(
-            controller: _nameTextController,
-            labelText: "Nom du produit",
-            hintText: "Nom de votre produit",
-            validator: (value) {
-              if (value.isEmpty) return "Vous devez renseigner un nom";
-        
-              return null;
-            },
-          ),
+          flex: 25,
+          child: _buildImagePicker()
         ),
-        const SizedBox(height: 16,),
+        const SizedBox(width: 12,),
 
-        // Product price with dropdown
-        Flexible(
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+        Expanded(
+          flex: 75,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Flexible(child: _buildBasicInfoRow()),
+              const SizedBox(height: 20,),
+
               Flexible(
-                flex: 3,
                 child: ClTextInput(
-                  controller: _priceTextController,
-                  labelText: "Prix",
-                  hintText: "Ex : 5,00",
-                  validator: (price) {
-                    if (double.tryParse(price) == null) return "Vous devez rentrer un nombre valide";
-
-                    return null;
-                  },
-                ),
-              ),
-              const SizedBox(width: 12,),
-              Flexible(
-                flex: 7,
-                child: ClDropdown<String>(
-                  currentValue: _currentUnit,
-                  items: const {
-                    "": "Choisir une unitée",
-                    "unit": "Unité",
-                    "gramme": "Gramme"
-                  },
+                  controller: _descriptionTextController,
+                  labelText: "Description",
+                  hintText: "Description du produit",
+                  inputType: TextInputType.multiline,
+                  maxLines: 5,
                   validator: (value) {
-                    if ((value ?? '').isEmpty) return "Vous devez choisir une unité.";
-
+                    if (value.isEmpty) return "Vous devez rentrer une description";
+        
                     return null;
-                  },
-                  onChanged: (newValue) {
-                    setState(() {
-                      _currentUnit = newValue ?? '';
-                    });
                   },
                 ),
               )
             ],
-          )
-        ),
-        const SizedBox(height: 16,),
-
-        // The produit beton checkbox
-        ClCheckBox(
-          value: _isBreton, 
-          text: "Ce produit est Breton",
-          onChanged: (value) {
-            setState(() {
-              _isBreton = value ?? false;
-            });
-          },
+          ),
         )
       ],
+    );
+  }
+
+  Widget _buildSmallLayout() {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Flexible(child: _buildImagePicker()),
+        const SizedBox(height: 20,),
+
+        Flexible(child: _buildBasicInfoRow()),
+        const SizedBox(height: 20,),
+
+        Flexible(
+          child: ClTextInput(
+            controller: _descriptionTextController,
+            labelText: "Description",
+            hintText: "Description du produit",
+            inputType: TextInputType.multiline,
+            maxLines: 5,
+            validator: (value) {
+              if (value.isEmpty) return "Vous devez rentrer une description";
+  
+              return null;
+            },
+          ),
+        )
+      ],
+    );
+  }
+
+  Widget _buildBasicInfoRow() {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final int crossAxisCount = constraints.maxWidth >= ScreenHelper.breakpointTablet ? 2 : 1;
+
+        return GridView(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: 12,
+            mainAxisExtent: 170
+          ),
+          primary: true,
+          shrinkWrap: true,
+          children: [
+            // Premiere section
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Nom du produit
+                Flexible(
+                  child: ClTextInput(
+                    controller: _nameTextController,
+                    labelText: "Nom du produit",
+                    hintText: "Nom de votre produit",
+                    validator: (value) {
+                      if (value.isEmpty) return "Vous devez renseigner un nom";
+                
+                      return null;
+                    },
+                  ),
+                ),
+                const SizedBox(height: 16,),
+
+                // La Checkbox produit breton
+                Flexible(
+                  child: ClCheckBox(
+                    value: _isBreton, 
+                    text: "Ce produit est Breton",
+                    onChanged: (value) {
+                      setState(() {
+                        _isBreton = value ?? false;
+                      });
+                    },
+                  ),
+                )
+              ],
+            ),
+
+            // Second section
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Le prix
+                Flexible(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      // Prix
+                      Flexible(
+                        flex: 3,
+                        child: ClTextInput(
+                          controller: _priceTextController,
+                          labelText: "Prix",
+                          hintText: "Ex : 5,00",
+                          validator: (price) {
+                            if (double.tryParse(price) == null) return "Vous devez rentrer un nombre valide";
+
+                            return null;
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 12,),
+
+                      // Unitée
+                      Flexible(
+                        flex: 7,
+                        child: ClDropdown<String>(
+                          currentValue: _currentUnit,
+                          items: const {
+                            "": "Choisir une unitée",
+                            "unit": "Unité",
+                            "gramme": "Gramme"
+                          },
+                          validator: (value) {
+                            if ((value ?? '').isEmpty) return "Vous devez choisir une unité.";
+
+                            return null;
+                          },
+                          onChanged: (newValue) {
+                            setState(() {
+                              _currentUnit = newValue ?? '';
+                            });
+                          },
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10,),
+
+                // La TVA
+                Flexible(
+                  child: ClDropdown<double>(
+                    items: {
+                      0: "0%",
+                      5.5: "5,5%",
+                      10: "10%",
+                      20: "20%",
+                    },
+                    currentValue: _currentTVA,
+                    label: "Taux de TVA",
+                    onChanged: (value) {
+                      setState(() {
+                        _currentTVA = value ?? 20;
+                      });
+                    },
+                    validator: null,
+                  ),
+                )
+              ],
+            )
+          ],
+        );
+      }
+    );
+  }
+
+  Widget _buildImagePicker() {
+    return ClCard(
+      padding: EdgeInsets.zero,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8.0),
+        child: ClImagePickerBig(
+          imageURL: "$kImagesBaseUrl/products/${widget.product?.id ?? ""}.jpg",
+          onImageSelected: (image) {
+            setState(() {
+              _currentImage = image;
+            });
+          },
+          imageData: _currentImage,
+        ),
+      ),
     );
   }
 
@@ -337,6 +450,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
         "description": _descriptionTextController.text,
         "price": double.parse(_priceTextController.text),
         "unit": _currentUnit,
+        "tva": _currentTVA,
         "isBreton": _isBreton,
         "categories": _productCategories,
         if (_currentImage != null) 
@@ -353,6 +467,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
         "description": _descriptionTextController.text,
         "price": double.parse(_priceTextController.text),
         "unit": _currentUnit,
+        "tva": _currentTVA,
         "isBreton": _isBreton,
         "categories": _productCategories,
         if (_currentImage != null) 

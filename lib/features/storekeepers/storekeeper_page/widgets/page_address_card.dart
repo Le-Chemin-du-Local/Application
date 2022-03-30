@@ -55,21 +55,12 @@ class PageAddressCard extends StatelessWidget {
             _buildCoordinateText(context),
           const SizedBox(height: 12,),
 
-          // The copy button
+          // Le bouton d'itinéraire
           Align(
             alignment: Alignment.center,
             child: ClElevatedButton(
               onPressed: () {},
-              borderRadius: BorderRadius.circular(6),
-              gradient: Palette.colorToGradient(Palette.colorYellow),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: const [
-                  Icon(Icons.copy, color: Palette.colorDark,),
-                  SizedBox(width: 4,),
-                  Text("Copier l'adresse", style: TextStyle(color: Palette.colorDark),),
-                ],
-              )
+              child: const Text("Voir l'itinéraire")
             ),
           )
         ],

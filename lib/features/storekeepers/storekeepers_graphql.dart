@@ -23,6 +23,7 @@ query GetStoreKeeperCommerce(
             name,
             price,
             unit,
+            tva,
             isBreton
           }
         },
