@@ -1,16 +1,23 @@
+import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_page.dart';
+import 'package:chemin_du_local/features/storekeepers/services/services.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_home/widgets/dashboard_card.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_home/widgets/dashboard_services_card.dart';
 import 'package:flutter/material.dart';
 
 class StoreKeeperHomePage extends StatelessWidget {
   const StoreKeeperHomePage({
     Key? key,
     required this.onPageChanged,
-    this.servicesOffset = 0
+    this.servicesOffset = 0,
+    this.services = const [],
   }) : super(key: key);
 
   final Function(int) onPageChanged;
   final int servicesOffset;
+
+  final List<String> services;
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +45,21 @@ class StoreKeeperHomePage extends StatelessWidget {
         // Carte des produits
         DashboardCard(
           onClick: () => onPageChanged(2), 
-          backgroundName: "illustration_1.png", 
+          backgroundName: "illustration_2.png", 
           title: "Lister mes produits"
         ),
 
         // Carte Gérer ma page
         DashboardCard(
           onClick: () => onPageChanged(0), 
-          backgroundName: "illustration_1.png", 
+          backgroundName: "illustration_3.png", 
           title: "Gérer ma page"
         ),
 
         // Carte Gérer mes services
         DashboardCard(
           onClick: () => onPageChanged(3 + servicesOffset),
-          backgroundName: "illustration_1.png", 
+          backgroundName: "illustration_4.png", 
           title: "Gérer mes services"
         ),
       ]),
@@ -74,17 +81,32 @@ class StoreKeeperHomePage extends StatelessWidget {
         ),
         delegate: SliverChildListDelegate([
           // Carte Click & Collect
-          DashboardCard(
-            onClick: () {}, 
-            backgroundName: "illustration_1.png", 
-            title: "Click & collect"
-          ),
+          if (services.contains(Services.clickAndCollect))
+            DashboardCard(
+              onClick: () => onPageChanged(3 + servicesOffset), 
+              backgroundName: "illustration_click_and_collect.png", 
+              title: "Click & collect"
+            ),
+
+          // Carte paniers
+          if (services.contains(Services.paniers))
+            DashboardCard(
+              onClick: () async {
+                onPageChanged(3 + servicesOffset);
+                await Future<dynamic>.delayed(const Duration(milliseconds: 200));
+                Navigator.of(AppManager.instance.serviesPageKey.currentContext ?? context).push<dynamic>(
+                  MaterialPageRoute<dynamic>(
+                    builder: (context) => const PaniersPage()
+                  )
+                );
+              }, 
+              backgroundName: "illustration_click_and_collect.png", 
+              title: "Paniers"
+            ),
 
           // Carte Voir plus de services
-          DashboardCard(
-            onClick: () {}, 
-            backgroundName: "illustration_1.png", 
-            title: "Voir plus de services"
+          DashboardServicesCard(
+            onClick: () => onPageChanged(3 + servicesOffset),
           ),
         ]),
       ),

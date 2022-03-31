@@ -47,7 +47,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
         index: 1, 
         title: "Accueil",
         appBarTitle: "Bienvenue",
-        icon: CLIcons.accueil
+        icon: CLIcons.accueil,
       ),
 
       // Fidelity
@@ -90,6 +90,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
       StoreKeeperHomePage(
         onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),
         servicesOffset: clickAndCollectOffset,
+        services: widget.storekeeper.commerce?.services ?? [],
       ),
       ClipRect(
         child: Navigator(
