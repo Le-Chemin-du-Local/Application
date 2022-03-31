@@ -24,9 +24,16 @@ class ProductCategoriesPicker extends StatelessWidget {
         const Text("Catégories", style: TextStyle(fontSize: 14)),  
         const SizedBox(height: 12,),
         Flexible(
-          child: Wrap(
-            spacing: 10,
-            runSpacing: 10,
+          child: GridView(
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 178,
+              mainAxisExtent: 220,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16
+            ),
+            shrinkWrap: true,
+            primary: false,
             children: [
               for (final category in kCategorieLogo.keys)
                 PickerCategoryButton(
