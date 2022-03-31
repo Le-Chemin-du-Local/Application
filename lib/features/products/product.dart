@@ -6,10 +6,38 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'product.freezed.dart';
 part 'product.g.dart';
 
+const List<String> kCategories = [
+  "Bio",
+  "Bières & cidres",
+  "Boissons sans alcool",
+  "Vins & spiritueux",
+  "Pains & boulangerie",
+  "Produits laitiers",
+  "Epicerie",
+  "Fruits",
+  "Légumes",
+  "Horticulture",
+  "Produits de la mer",
+  "Viandes",
+  "Spécialitées salées",
+  "Spécialitées sucrées",
+];
+
 const Map<String, IconData> kCategorieLogo = {
+  "Bio": CLIcons.bio,
   "Bières & cidres": CLIcons.bierescidres,
-  "Spécialitées sucrées": CLIcons.specialitessucrees,
+  "Boissons sans alcool": CLIcons.boissonssansalcool,
+  "Vins & spiritueux": CLIcons.vinsspiritueux,
+  "Pains & boulangerie": CLIcons.boulangeriepain,
+  "Produits laitiers": CLIcons.produitslaitiers,
+  "Epicerie": CLIcons.epicescondiments,
+  "Fruits": CLIcons.fruits,
+  "Légumes": CLIcons.legumes,
+  "Horticulture": CLIcons.horticulture,
+  "Produits de la mer": CLIcons.produitsmer,
+  "Viandes": CLIcons.viandes,
   "Spécialitées salées": CLIcons.specialitessalees,
+  "Spécialitées sucrées": CLIcons.specialitessucrees,
 };
 
 @freezed

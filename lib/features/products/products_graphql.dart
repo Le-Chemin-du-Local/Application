@@ -86,6 +86,17 @@ mutation createProduct(
 }
 ''';
 
+const String mutCreateProducts = r'''
+mutation createProducts(
+  $input: [NewProduct!]!
+) {
+  createProducts(input: $input) {
+    id
+    name
+  }
+}
+''';
+
 const String mutUpdateProduct = r'''
 mutation updateProduct(
   $id: ID!,

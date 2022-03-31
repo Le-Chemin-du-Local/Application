@@ -2,6 +2,7 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/commerce.dart';
+import 'package:chemin_du_local/features/products/storekeepers/products_main_page/empty_products_page.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/product_categories_page.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/product_edit_page.dart';
@@ -67,6 +68,12 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
     required Commerce commerce,
     required Refetch? refetch,
   }) {
+    if (commerce.categories.isEmpty) {
+       return EmptyProductsPage(
+          onProductsAdded: () => _onProductAdded(refetch), 
+          onAddProduct: () => _openProductCreationPage(refetch)
+        );
+    }
     if (commerce.categories.length == 1) {
       return ProductsPage(
         category: commerce.categories.first, 
