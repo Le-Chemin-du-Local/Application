@@ -1,19 +1,19 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/commerce.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
-import 'package:chemin_du_local/features/storekeepers/services/paniers/widgets/panier_product_picker_row.dart';
+import 'package:chemin_du_local/features/storekeepers/services/widgets/services_product_picker_row.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class PanierProductsPicker extends StatelessWidget {
-  const PanierProductsPicker({
+class ServicesProductsPicker extends StatelessWidget {
+  const ServicesProductsPicker({
     Key? key,
-    required this.initialProductsID,
+    required this.initialProductsIDs,
     required this.onProductTapped,
     this.commerceID
   }) : super(key: key);
 
-  final List<String> initialProductsID;
+  final List<String> initialProductsIDs;
   final Function(String) onProductTapped;
 
   final String? commerceID;
@@ -71,9 +71,9 @@ class PanierProductsPicker extends StatelessWidget {
       children: [
         for (final category in commerce.categories) 
           Flexible(
-            child: PanierProductPickerRow(
+            child: ServicesProductPickerRow(
               category: category,
-              initialProductsID: initialProductsID,
+              initialProductsIDs: initialProductsIDs,
               commerceID: commerceID,
               onProductTapped: onProductTapped,
             ),

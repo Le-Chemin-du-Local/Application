@@ -1,20 +1,20 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
-import 'package:chemin_du_local/features/storekeepers/services/paniers/widgets/panier_product_picker_card.dart';
+import 'package:chemin_du_local/features/storekeepers/services/widgets/services_product_picker_card.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class PanierProductPickerRow extends StatelessWidget {
-  const PanierProductPickerRow({
+class ServicesProductPickerRow extends StatelessWidget {
+  const ServicesProductPickerRow({
     Key? key, 
-    required this.initialProductsID, 
+    required this.initialProductsIDs, 
     required this.onProductTapped,
     required this.category,
     this.commerceID,
   }) : super(key: key);
 
-  final List<String> initialProductsID;
+  final List<String> initialProductsIDs;
   final Function(String) onProductTapped;
 
   final String category;
@@ -100,9 +100,9 @@ class PanierProductPickerRow extends StatelessWidget {
               for (final product in products) 
                 InkWell(
                   onTap: () => onProductTapped(product.id!),
-                  child: PanierProductCard(
+                  child: ServicesProductCard(
                     product: product,
-                    isSelected: initialProductsID.contains(product.id),
+                    isSelected: initialProductsIDs.contains(product.id),
                   )
                 )
             ]

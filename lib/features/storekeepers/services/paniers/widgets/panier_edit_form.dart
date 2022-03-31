@@ -8,7 +8,7 @@ import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker_big.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier.dart';
-import 'package:chemin_du_local/features/storekeepers/services/paniers/widgets/panier_products_pciker.dart';
+import 'package:chemin_du_local/features/storekeepers/services/widgets/services_products_picker.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -159,8 +159,8 @@ class PanierEditFormState extends State<PanierEditForm> {
           
                 // The products picker
                 Flexible(
-                  child: PanierProductsPicker(
-                    initialProductsID: _selectedProductsIDs,
+                  child: ServicesProductsPicker(
+                    initialProductsIDs: _selectedProductsIDs,
                     onProductTapped: _onProuctSelected,
                   ),
                 )         

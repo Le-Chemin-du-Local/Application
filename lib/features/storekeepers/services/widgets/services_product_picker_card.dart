@@ -3,8 +3,8 @@ import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:flutter/material.dart';
 
-class PanierProductCard extends StatelessWidget {
-  const PanierProductCard({
+class ServicesProductCard extends StatelessWidget {
+  const ServicesProductCard({
     Key? key,
     required this.product,
     required this.isSelected,
