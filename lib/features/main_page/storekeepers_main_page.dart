@@ -86,7 +86,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
 
     // The pages
     final List<Widget> pages = [
-      const StoreKeeperPage(),
+      const StoreKeeperPage(canEdit: true),
       StoreKeeperHomePage(
         onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),
         servicesOffset: clickAndCollectOffset,

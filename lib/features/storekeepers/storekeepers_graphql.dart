@@ -11,8 +11,8 @@ query GetStoreKeeperCommerce(
       description
       storekeeperWord
       address
-      latitude,
-      longitude,
+      latitude
+      longitude
       phone
       email
       facebook
