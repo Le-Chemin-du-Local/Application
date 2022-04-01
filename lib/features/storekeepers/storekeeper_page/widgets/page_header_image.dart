@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/cl_file.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
+import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/theme/palette.dart';
@@ -18,11 +19,14 @@ class PageHeaderImage extends StatelessWidget {
     required this.onImageSelected,
     required this.onProfilePictureSelected,
     required this.isEditing,
+    this.errorMessage = "",
     this.imageData,
     this.profilePictureData,
   }) : super(key: key);
 
   final TextEditingController storekeeperWordTextController;
+
+  final String errorMessage;
 
   final String? commerceID;
   final ClFile? imageData;
@@ -129,6 +133,18 @@ class PageHeaderImage extends StatelessWidget {
                       ),
                       onPressed: _pickImage
                     ),
+                  ),
+                ),
+
+              // Le message d'erreur si besoin
+              if (errorMessage.isNotEmpty) 
+                Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+                    child: ClStatusMessage(message: errorMessage),
                   ),
                 )
             ],

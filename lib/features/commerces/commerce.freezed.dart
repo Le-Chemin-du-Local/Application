@@ -33,7 +33,9 @@ class _$CommerceTearOff {
       String? email,
       String? facebook,
       String? twitter,
-      String? instagram}) {
+      String? instagram,
+      double? latitude,
+      double? longitude}) {
     return _Commerce(
       id,
       name: name,
@@ -47,6 +49,8 @@ class _$CommerceTearOff {
       facebook: facebook,
       twitter: twitter,
       instagram: instagram,
+      latitude: latitude,
+      longitude: longitude,
     );
   }
 
@@ -72,6 +76,8 @@ mixin _$Commerce {
   String? get facebook => throw _privateConstructorUsedError;
   String? get twitter => throw _privateConstructorUsedError;
   String? get instagram => throw _privateConstructorUsedError;
+  double? get latitude => throw _privateConstructorUsedError;
+  double? get longitude => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -95,7 +101,9 @@ abstract class $CommerceCopyWith<$Res> {
       String? email,
       String? facebook,
       String? twitter,
-      String? instagram});
+      String? instagram,
+      double? latitude,
+      double? longitude});
 }
 
 /// @nodoc
@@ -120,6 +128,8 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? facebook = freezed,
     Object? twitter = freezed,
     Object? instagram = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -170,6 +180,14 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
           ? _value.instagram
           : instagram // ignore: cast_nullable_to_non_nullable
               as String?,
+      latitude: latitude == freezed
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      longitude: longitude == freezed
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -191,7 +209,9 @@ abstract class _$CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       String? email,
       String? facebook,
       String? twitter,
-      String? instagram});
+      String? instagram,
+      double? latitude,
+      double? longitude});
 }
 
 /// @nodoc
@@ -217,6 +237,8 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? facebook = freezed,
     Object? twitter = freezed,
     Object? instagram = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
   }) {
     return _then(_Commerce(
       id == freezed
@@ -267,6 +289,14 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value.instagram
           : instagram // ignore: cast_nullable_to_non_nullable
               as String?,
+      latitude: latitude == freezed
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      longitude: longitude == freezed
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -285,7 +315,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       this.email,
       this.facebook,
       this.twitter,
-      this.instagram});
+      this.instagram,
+      this.latitude,
+      this.longitude});
 
   factory _$_Commerce.fromJson(Map<String, dynamic> json) =>
       _$$_CommerceFromJson(json);
@@ -316,10 +348,14 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   final String? twitter;
   @override
   final String? instagram;
+  @override
+  final double? latitude;
+  @override
+  final double? longitude;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, categories: $categories, services: $services, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram)';
+    return 'Commerce(id: $id, name: $name, categories: $categories, services: $services, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -338,7 +374,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('email', email))
       ..add(DiagnosticsProperty('facebook', facebook))
       ..add(DiagnosticsProperty('twitter', twitter))
-      ..add(DiagnosticsProperty('instagram', instagram));
+      ..add(DiagnosticsProperty('instagram', instagram))
+      ..add(DiagnosticsProperty('latitude', latitude))
+      ..add(DiagnosticsProperty('longitude', longitude));
   }
 
   @override
@@ -360,7 +398,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality().equals(other.email, email) &&
             const DeepCollectionEquality().equals(other.facebook, facebook) &&
             const DeepCollectionEquality().equals(other.twitter, twitter) &&
-            const DeepCollectionEquality().equals(other.instagram, instagram));
+            const DeepCollectionEquality().equals(other.instagram, instagram) &&
+            const DeepCollectionEquality().equals(other.latitude, latitude) &&
+            const DeepCollectionEquality().equals(other.longitude, longitude));
   }
 
   @override
@@ -377,7 +417,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       const DeepCollectionEquality().hash(email),
       const DeepCollectionEquality().hash(facebook),
       const DeepCollectionEquality().hash(twitter),
-      const DeepCollectionEquality().hash(instagram));
+      const DeepCollectionEquality().hash(instagram),
+      const DeepCollectionEquality().hash(latitude),
+      const DeepCollectionEquality().hash(longitude));
 
   @JsonKey(ignore: true)
   @override
@@ -402,7 +444,9 @@ abstract class _Commerce implements Commerce {
       String? email,
       String? facebook,
       String? twitter,
-      String? instagram}) = _$_Commerce;
+      String? instagram,
+      double? latitude,
+      double? longitude}) = _$_Commerce;
 
   factory _Commerce.fromJson(Map<String, dynamic> json) = _$_Commerce.fromJson;
 
@@ -430,6 +474,10 @@ abstract class _Commerce implements Commerce {
   String? get twitter;
   @override
   String? get instagram;
+  @override
+  double? get latitude;
+  @override
+  double? get longitude;
   @override
   @JsonKey(ignore: true)
   _$CommerceCopyWith<_Commerce> get copyWith =>

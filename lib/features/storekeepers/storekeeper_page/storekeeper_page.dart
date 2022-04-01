@@ -6,6 +6,7 @@ import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/commerce.dart';
 import 'package:chemin_du_local/features/products/product.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_address_card.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_description_card.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_header_image.dart';
@@ -19,6 +20,7 @@ import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart';
+import 'package:latlng/latlng.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 class StoreKeeperPage extends StatefulWidget {
@@ -52,8 +54,12 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
   ClFile? _image;
   ClFile? _profilePicture;
 
+  LatLng? _commerceLatLgn;
+
   bool _isEditing = false;
   bool _initialized = false;
+
+  String _errorMessage = "";
 
   QueryOptions _commerceQueryOptions() {
     return QueryOptions<dynamic>(
@@ -67,7 +73,15 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
 
   MutationOptions _commerceMutationOption(bool commerceExists) {
     return MutationOptions<dynamic>(
-      document: gql(commerceExists ? mutUpdateStorekeerCommercePage : "")
+      document: gql(commerceExists ? mutUpdateStorekeerCommercePage : ""),
+      onError: (error) {
+        _errorMessage = "Le commerce n'a pas pu être mise à jour...";
+      },
+      onCompleted: (dynamic data) {
+        if (data == null) return;
+
+        _errorMessage = "";
+      }
     );
   }
 
@@ -84,6 +98,10 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
     _facebookTextController.text = commerce?.facebook ?? "";
     _twitterTextController.text = commerce?.twitter ?? "";
     _instagramTextController.text = commerce?.instagram ?? "";
+
+    if (commerce != null && commerce.latitude != null && commerce.longitude != null) {
+      _commerceLatLgn = LatLng(commerce.latitude!, commerce.longitude!);      
+    }
 
     _schedules.addAll({
       "Monday": "Fermé",
@@ -168,6 +186,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                       imageData: _image,
                       profilePictureData: _profilePicture,
                       isEditing: _isEditing,
+                      errorMessage: _errorMessage,
                       onImageSelected: (image) {
                         setState(() {
                           _image = image;
@@ -246,6 +265,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                     facebookTextController: _facebookTextController,
                     twitterTextController: _twitterTextController,
                     instagramTextController: _instagramTextController,
+                    initialLatLgn: _commerceLatLgn,
                     isEditing: _isEditing,
                   ),
                 ),
@@ -349,6 +369,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                         facebookTextController: _facebookTextController,
                         twitterTextController: _twitterTextController,
                         instagramTextController: _instagramTextController,
+                        initialLatLgn: _commerceLatLgn,
                         isEditing: _isEditing,
                       ),
                     ),
@@ -382,15 +403,25 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
     );
   }
 
-  void _onEditSavePressed(String? commerceID, RunMutation? runMutation) {
+  Future _onEditSavePressed(String? commerceID, RunMutation? runMutation) async {
     if (_isEditing && !_formKey.currentState!.validate()) return;
 
     if (_isEditing && runMutation != null) {
+      _commerceLatLgn = await PlaceAPIProvider.instance.latLgnForAddress(_addressTextController.text);
+
+      if (_commerceLatLgn == null) {
+        setState(() {
+          _errorMessage = "Nous n'arrivons pas à récupérer les coordonnées du commerce. Verifiez l'adresse.";
+        });
+      }
+
       runMutation(<String, dynamic>{
         "id": commerceID,
         "storekeeperWord": _storekeeperWordTextController.text,
         "description": _descriptionTextController.text,
         "address": _addressTextController.text,
+        "latitude": _commerceLatLgn!.latitude,
+        "longitude": _commerceLatLgn!.longitude,
         "phone": _phoneTextController.text,
         "email": _emailTextController.text,
         "facebook": _facebookTextController.text,

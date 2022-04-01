@@ -23,6 +23,8 @@ class Commerce with _$Commerce {
     String? facebook,
     String? twitter,
     String? instagram,
+    double? latitude,
+    double? longitude,
   }) = _Commerce;
 
   factory Commerce.fromJson(Map<String, dynamic> json) => _$CommerceFromJson(json);

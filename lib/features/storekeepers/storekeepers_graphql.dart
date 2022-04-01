@@ -11,6 +11,8 @@ query GetStoreKeeperCommerce(
       description
       storekeeperWord
       address
+      latitude,
+      longitude,
       phone
       email
       facebook
@@ -44,6 +46,8 @@ mutation updateCommerce(
   $storekeeperWord: String,
   $description: String,
   $address: String,
+  $latitude: Float,
+  $longitude: Float,
   $phone: String,
   $email: String,
   $facebook: String,
@@ -58,6 +62,8 @@ mutation updateCommerce(
       storekeeperWord: $storekeeperWord,
       description: $description,
       address: $address,
+      latitude: $latitude,
+      longitude: $longitude,
       phone: $phone,
       email: $email,
       facebook: $facebook,

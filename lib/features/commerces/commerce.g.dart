@@ -25,6 +25,8 @@ _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
       facebook: json['facebook'] as String?,
       twitter: json['twitter'] as String?,
       instagram: json['instagram'] as String?,
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      longitude: (json['longitude'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
@@ -41,4 +43,6 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
       'facebook': instance.facebook,
       'twitter': instance.twitter,
       'instagram': instance.instagram,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
     };
