@@ -89,47 +89,52 @@ class CommercesList extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Flexible(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,    
-                  children: [
-                    // Le titre
-                    Text("10 commerces", style: Theme.of(context).textTheme.headline2,),
-                    const SizedBox(height: 12,),
-            
-                    // La carte (affiché uniquement sur petit écran)
-                    if (!isBig) ...{
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(12.0),
-                        child: _buildMap(commerces: commerces)
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,    
+                    children: [
+                      // Le titre
+                      Text("10 commerces", style: Theme.of(context).textTheme.headline2,),
+                      const SizedBox(height: 12,),
+                            
+                      // La carte (affiché uniquement sur petit écran)
+                      if (!isBig) ...{
+                        Flexible(
+                          child: ClipRRect(  
+                            borderRadius: BorderRadius.circular(12.0),
+                            child: _buildMap(commerces: commerces)
+                          ),
+                        ),
+                        const SizedBox(height: 12,),
+                      },
+                      
+                      // Le titre commerce de proximité
+                      Flexible(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            GradientIcon(CLIcons.mapage, gradient: Palette.gradientPrimary),
+                            SizedBox(width: 4,),
+                            Text("Découvrez nos commerces de proximité")
+                          ],
+                        ),
                       ),
                       const SizedBox(height: 12,),
-                    },
-
-                    // Le titre commerce de proximité
-                    Flexible(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
-                          GradientIcon(CLIcons.mapage, gradient: Palette.gradientPrimary),
-                          SizedBox(width: 4,),
-                          Text("Découvrez nos commerces de proximité")
-                        ],
+                      
+                      Flexible(
+                        // flex: 100,
+                        child: _buildList(commerces: commerces),
                       ),
-                    ),
-                    const SizedBox(height: 12,),
-
-                    Expanded(
-                      child: _buildList(commerces: commerces),
-                    ),
-                    // La liste des commerces
-                  ],
+                      // La liste des commerces
+                    ],
+                  ),
                 ),
               ),
             ),
-
+        
             // La carte (affiché uniquement sur grand écran)
             if (isBig)
               Expanded(
@@ -151,7 +156,7 @@ class CommercesList extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 500,
-        mainAxisExtent: 200,
+        mainAxisExtent: 348,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
