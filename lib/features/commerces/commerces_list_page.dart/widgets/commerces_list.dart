@@ -97,10 +97,16 @@ class CommercesList extends StatelessWidget {
                   children: [
                     // Le titre
                     Text("10 commerces", style: Theme.of(context).textTheme.headline2,),
+                    const SizedBox(height: 12,),
             
                     // La carte (affiché uniquement sur petit écran)
-                    if (!isBig)
-                      _buildMap(commerces: commerces),
+                    if (!isBig) ...{
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: _buildMap(commerces: commerces)
+                      ),
+                      const SizedBox(height: 12,),
+                    },
 
                     // Le titre commerce de proximité
                     Flexible(
@@ -113,7 +119,7 @@ class CommercesList extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 8,),
+                    const SizedBox(height: 12,),
 
                     Expanded(
                       child: _buildList(commerces: commerces),
@@ -127,7 +133,10 @@ class CommercesList extends StatelessWidget {
             // La carte (affiché uniquement sur grand écran)
             if (isBig)
               Expanded(
-                child: _buildMap(commerces: commerces)
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(12.0)),
+                  child: _buildMap(commerces: commerces)
+                )
               )
           ],
         );
@@ -160,7 +169,6 @@ class CommercesList extends StatelessWidget {
   }) {
     return ClMap(
       initialLatLgn: userCoordinated,
-      borderRadius: 0,
       initialZoom: 12,
       markers: [
         for (final commerce in commerces) 

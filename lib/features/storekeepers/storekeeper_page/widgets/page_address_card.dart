@@ -45,9 +45,12 @@ class PageAddressCard extends StatelessWidget {
         children: [
           // The map
           Flexible(
-            child: ClMap(
-              initialLatLgn: initialLatLgn,
-              showInitialLatLgnMarker: true,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12.0),
+              child: ClMap(
+                initialLatLgn: initialLatLgn,
+                showInitialLatLgnMarker: true,
+              ),
             ),
           ),
           const SizedBox(height: 12,),

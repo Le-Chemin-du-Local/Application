@@ -10,8 +10,6 @@ class ClMap extends StatefulWidget {
     this.showInitialLatLgnMarker = false,
     this.markers = const [],
     this.initialZoom = 16,
-    this.maxHeight = 280,
-    this.borderRadius = 12.0,
   }) : super(key: key);
 
   final LatLng? initialLatLgn;
@@ -19,9 +17,7 @@ class ClMap extends StatefulWidget {
 
   final List<LatLng> markers;
 
-  final double maxHeight;
   final double initialZoom;
-  final double borderRadius;
 
   @override
   State<ClMap> createState() => _ClMapState();
@@ -83,62 +79,59 @@ class _ClMapState extends State<ClMap> {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(widget.borderRadius),
-      child: ConstrainedBox(
-        constraints: BoxConstraints(maxHeight: widget.maxHeight),
-        child: GestureDetector(
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: 280),
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onDoubleTap: _onDoubleTap,
+        onScaleStart: _onScaleStart,
+        onScaleUpdate: _onScaleUpdate,
+        child: Listener(
           behavior: HitTestBehavior.opaque,
-          onDoubleTap: _onDoubleTap,
-          onScaleStart: _onScaleStart,
-          onScaleUpdate: _onScaleUpdate,
-          child: Listener(
-            behavior: HitTestBehavior.opaque,
-            onPointerSignal: (event) {
-              if (event is PointerScrollEvent) {
-                final delta = event.scrollDelta;
-    
-                _controller.zoom -= delta.dy / 1000.0;
-                setState(() {});
+          onPointerSignal: (event) {
+            if (event is PointerScrollEvent) {
+              final delta = event.scrollDelta;
+      
+              _controller.zoom -= delta.dy / 1000.0;
+              setState(() {});
+            }
+          },
+          child: MapLayoutBuilder(
+            controller: _controller,
+            builder: (context, transformer) {
+              final Offset? initilalMarkerPosition = !widget.showInitialLatLgnMarker || widget.initialLatLgn == null ? null : transformer.fromLatLngToXYCoords(widget.initialLatLgn!);
+
+              final List<Offset> markersPositions = [];
+
+              for (final marker in widget.markers) {
+                markersPositions.add(transformer.fromLatLngToXYCoords(marker));
               }
+
+              return Stack(
+                children: [
+                  Map(
+                    controller: _controller,
+                    builder: (context, x, y, z) {
+                      //Legal notice: This url is only used for demo and educational purposes. You need a license key for production use.
+                      //Google Maps
+                      final url = 'https://www.google.com/maps/vt/pb=!1m4!1m3!1i$z!2i$x!3i$y!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425';
+            
+                      return Image.network(
+                        url,
+                        fit: BoxFit.cover,
+                      );
+                    },
+                  ),
+                  // On affiche le centre si besoin
+                  if (initilalMarkerPosition != null)
+                    _buildMarkerWidget(initilalMarkerPosition),
+
+                  // Les autres markers
+                  for (final offset in markersPositions) 
+                    _buildMarkerWidget(offset),
+                ],
+              );
             },
-            child: MapLayoutBuilder(
-              controller: _controller,
-              builder: (context, transformer) {
-                final Offset? initilalMarkerPosition = !widget.showInitialLatLgnMarker || widget.initialLatLgn == null ? null : transformer.fromLatLngToXYCoords(widget.initialLatLgn!);
-
-                final List<Offset> markersPositions = [];
-
-                for (final marker in widget.markers) {
-                  markersPositions.add(transformer.fromLatLngToXYCoords(marker));
-                }
-
-                return Stack(
-                  children: [
-                    Map(
-                      controller: _controller,
-                      builder: (context, x, y, z) {
-                        //Legal notice: This url is only used for demo and educational purposes. You need a license key for production use.
-                        //Google Maps
-                        final url = 'https://www.google.com/maps/vt/pb=!1m4!1m3!1i$z!2i$x!3i$y!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425';
-              
-                        return Image.network(
-                          url,
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    ),
-                    // On affiche le centre si besoin
-                    if (initilalMarkerPosition != null)
-                      _buildMarkerWidget(initilalMarkerPosition),
-
-                    // Les autres markers
-                    for (final offset in markersPositions) 
-                      _buildMarkerWidget(offset),
-                  ],
-                );
-              },
-            ),
           ),
         ),
       ),
