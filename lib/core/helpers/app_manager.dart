@@ -7,6 +7,9 @@ class AppManager {
 
   final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
+  // CLIENTS KEYS
+  final GlobalKey<NavigatorState> commercesListPageKey = GlobalKey<NavigatorState>();
+
   // STOREKEEPERS KEYS
   final GlobalKey<NavigatorState> productsPageKey = GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> clickAndCollectPageKey = GlobalKey<NavigatorState>();

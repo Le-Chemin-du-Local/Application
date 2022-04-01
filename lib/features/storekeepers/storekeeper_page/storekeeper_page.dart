@@ -27,9 +27,11 @@ class StoreKeeperPage extends StatefulWidget {
   const StoreKeeperPage({
     Key? key,
     this.storekeeperID,
+    this.canEdit = false,
   }) : super(key: key);
 
   final String? storekeeperID;
+  final bool canEdit;
 
   @override
   State<StoreKeeperPage> createState() => _StoreKeeperPageState();
@@ -209,24 +211,15 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                         },
                       ),
                     ),
-                    if (mutationResult?.hasException ?? false)
-                      SliverPositioned(
-                        top: 16,
-                        left: 16,
-                        right: 16,
-                        child: ClStatusMessage(
-                          message: "Nous ne parvenons pas à mettre à jour la page... ${mutationResult?.exception}",
-                        ),
-                    )
                   ],
                 ),
               ],
             ),
           ),
-          floatingActionButton: ClFloatingButton(
+          floatingActionButton: widget.canEdit ? ClFloatingButton(
             onPressed: () => _onEditSavePressed(commerceID, runMutation),
             icon: _isEditing ? Icons.save : Icons.edit,
-          ),
+          ) : null,
         );
       }
     );

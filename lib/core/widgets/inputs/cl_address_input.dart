@@ -3,19 +3,21 @@ import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_ser
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-class PageAddressInput extends StatefulWidget {
-  const PageAddressInput({
+class ClAddressInput extends StatefulWidget {
+  const ClAddressInput({
     Key? key,
     required this.addressTextController,
+    this.onSelected
   }) : super(key: key);
 
   final TextEditingController addressTextController;
+  final Function(String)? onSelected;
 
   @override
-  State<PageAddressInput> createState() => _PageAddressInputState();
+  State<ClAddressInput> createState() => _ClAddressInputState();
 }
 
-class _PageAddressInputState extends State<PageAddressInput> {
+class _ClAddressInputState extends State<ClAddressInput> {
   final FocusNode _focusNode = FocusNode();
 
   String _sessionToken = "";
@@ -25,6 +27,7 @@ class _PageAddressInputState extends State<PageAddressInput> {
     return RawAutocomplete<String>(
       textEditingController: widget.addressTextController,
       focusNode: _focusNode,
+      onSelected: widget.onSelected,
       optionsBuilder: (textEditingValue) async {
         final List<Suggestion> suggestions = await PlaceAPIProvider.instance.fetchSuggestions(textEditingValue.text, "fr", _sessionToken);
 

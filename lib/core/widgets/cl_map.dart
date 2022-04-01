@@ -8,10 +8,20 @@ class ClMap extends StatefulWidget {
     Key? key,
     this.initialLatLgn,
     this.showInitialLatLgnMarker = false,
+    this.markers = const [],
+    this.initialZoom = 16,
+    this.maxHeight = 280,
+    this.borderRadius = 12.0,
   }) : super(key: key);
 
   final LatLng? initialLatLgn;
   final bool showInitialLatLgnMarker;
+
+  final List<LatLng> markers;
+
+  final double maxHeight;
+  final double initialZoom;
+  final double borderRadius;
 
   @override
   State<ClMap> createState() => _ClMapState();
@@ -27,7 +37,7 @@ class _ClMapState extends State<ClMap> {
   void initState() {
     _controller = MapController(
       location: widget.initialLatLgn ?? LatLng(47.6785, -3.2130),
-      zoom: 16
+      zoom: widget.initialZoom
     );
 
     super.initState();
@@ -74,9 +84,9 @@ class _ClMapState extends State<ClMap> {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(12.0),
+      borderRadius: BorderRadius.circular(widget.borderRadius),
       child: ConstrainedBox(
-        constraints: const BoxConstraints(maxHeight: 280),
+        constraints: BoxConstraints(maxHeight: widget.maxHeight),
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
           onDoubleTap: _onDoubleTap,
@@ -97,6 +107,12 @@ class _ClMapState extends State<ClMap> {
               builder: (context, transformer) {
                 final Offset? initilalMarkerPosition = !widget.showInitialLatLgnMarker || widget.initialLatLgn == null ? null : transformer.fromLatLngToXYCoords(widget.initialLatLgn!);
 
+                final List<Offset> markersPositions = [];
+
+                for (final marker in widget.markers) {
+                  markersPositions.add(transformer.fromLatLngToXYCoords(marker));
+                }
+
                 return Stack(
                   children: [
                     Map(
@@ -112,8 +128,13 @@ class _ClMapState extends State<ClMap> {
                         );
                       },
                     ),
+                    // On affiche le centre si besoin
                     if (initilalMarkerPosition != null)
-                      _buildMarkerWidget(initilalMarkerPosition)
+                      _buildMarkerWidget(initilalMarkerPosition),
+
+                    // Les autres markers
+                    for (final offset in markersPositions) 
+                      _buildMarkerWidget(offset),
                   ],
                 );
               },

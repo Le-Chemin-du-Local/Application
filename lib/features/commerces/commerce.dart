@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/features/user/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,6 +14,7 @@ mixin CommerceServices {
 class Commerce with _$Commerce {
   const factory Commerce(String? id, {
     required String name,
+    User? storekeeper,
     @Default(<String>[]) List<String> categories,
     @Default(<String>[]) List<String> services,
     String? storekeeperWord,

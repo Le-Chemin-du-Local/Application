@@ -24,6 +24,7 @@ class _$CommerceTearOff {
 
   _Commerce call(String? id,
       {required String name,
+      User? storekeeper,
       List<String> categories = const <String>[],
       List<String> services = const <String>[],
       String? storekeeperWord,
@@ -39,6 +40,7 @@ class _$CommerceTearOff {
     return _Commerce(
       id,
       name: name,
+      storekeeper: storekeeper,
       categories: categories,
       services: services,
       storekeeperWord: storekeeperWord,
@@ -66,6 +68,7 @@ const $Commerce = _$CommerceTearOff();
 mixin _$Commerce {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  User? get storekeeper => throw _privateConstructorUsedError;
   List<String> get categories => throw _privateConstructorUsedError;
   List<String> get services => throw _privateConstructorUsedError;
   String? get storekeeperWord => throw _privateConstructorUsedError;
@@ -92,6 +95,7 @@ abstract class $CommerceCopyWith<$Res> {
   $Res call(
       {String? id,
       String name,
+      User? storekeeper,
       List<String> categories,
       List<String> services,
       String? storekeeperWord,
@@ -104,6 +108,8 @@ abstract class $CommerceCopyWith<$Res> {
       String? instagram,
       double? latitude,
       double? longitude});
+
+  $UserCopyWith<$Res>? get storekeeper;
 }
 
 /// @nodoc
@@ -118,6 +124,7 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? storekeeper = freezed,
     Object? categories = freezed,
     Object? services = freezed,
     Object? storekeeperWord = freezed,
@@ -140,6 +147,10 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      storekeeper: storekeeper == freezed
+          ? _value.storekeeper
+          : storekeeper // ignore: cast_nullable_to_non_nullable
+              as User?,
       categories: categories == freezed
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
@@ -190,6 +201,17 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
               as double?,
     ));
   }
+
+  @override
+  $UserCopyWith<$Res>? get storekeeper {
+    if (_value.storekeeper == null) {
+      return null;
+    }
+
+    return $UserCopyWith<$Res>(_value.storekeeper!, (value) {
+      return _then(_value.copyWith(storekeeper: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -200,6 +222,7 @@ abstract class _$CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
   $Res call(
       {String? id,
       String name,
+      User? storekeeper,
       List<String> categories,
       List<String> services,
       String? storekeeperWord,
@@ -212,6 +235,9 @@ abstract class _$CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       String? instagram,
       double? latitude,
       double? longitude});
+
+  @override
+  $UserCopyWith<$Res>? get storekeeper;
 }
 
 /// @nodoc
@@ -227,6 +253,7 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? storekeeper = freezed,
     Object? categories = freezed,
     Object? services = freezed,
     Object? storekeeperWord = freezed,
@@ -249,6 +276,10 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      storekeeper: storekeeper == freezed
+          ? _value.storekeeper
+          : storekeeper // ignore: cast_nullable_to_non_nullable
+              as User?,
       categories: categories == freezed
           ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
@@ -306,6 +337,7 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
 class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   const _$_Commerce(this.id,
       {required this.name,
+      this.storekeeper,
       this.categories = const <String>[],
       this.services = const <String>[],
       this.storekeeperWord,
@@ -326,6 +358,8 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   final String? id;
   @override
   final String name;
+  @override
+  final User? storekeeper;
   @JsonKey()
   @override
   final List<String> categories;
@@ -355,7 +389,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, categories: $categories, services: $services, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, latitude: $latitude, longitude: $longitude)';
+    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -365,6 +399,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('type', 'Commerce'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('storekeeper', storekeeper))
       ..add(DiagnosticsProperty('categories', categories))
       ..add(DiagnosticsProperty('services', services))
       ..add(DiagnosticsProperty('storekeeperWord', storekeeperWord))
@@ -387,6 +422,8 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
+                .equals(other.storekeeper, storekeeper) &&
+            const DeepCollectionEquality()
                 .equals(other.categories, categories) &&
             const DeepCollectionEquality().equals(other.services, services) &&
             const DeepCollectionEquality()
@@ -408,6 +445,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(storekeeper),
       const DeepCollectionEquality().hash(categories),
       const DeepCollectionEquality().hash(services),
       const DeepCollectionEquality().hash(storekeeperWord),
@@ -435,6 +473,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
 abstract class _Commerce implements Commerce {
   const factory _Commerce(String? id,
       {required String name,
+      User? storekeeper,
       List<String> categories,
       List<String> services,
       String? storekeeperWord,
@@ -454,6 +493,8 @@ abstract class _Commerce implements Commerce {
   String? get id;
   @override
   String get name;
+  @override
+  User? get storekeeper;
   @override
   List<String> get categories;
   @override

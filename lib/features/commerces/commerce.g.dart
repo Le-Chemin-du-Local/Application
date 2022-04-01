@@ -9,6 +9,9 @@ part of 'commerce.dart';
 _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
       json['id'] as String?,
       name: json['name'] as String,
+      storekeeper: json['storekeeper'] == null
+          ? null
+          : User.fromJson(json['storekeeper'] as Map<String, dynamic>),
       categories: (json['categories'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -33,6 +36,7 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'storekeeper': instance.storekeeper,
       'categories': instance.categories,
       'services': instance.services,
       'storekeeperWord': instance.storekeeperWord,

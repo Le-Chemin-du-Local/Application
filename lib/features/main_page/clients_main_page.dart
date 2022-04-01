@@ -1,8 +1,9 @@
+import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/features/clients/client_account/client_account_page.dart';
 import 'package:chemin_du_local/features/clients/client_basket/client_basket_page.dart';
 import 'package:chemin_du_local/features/clients/client_home/client_home_page.dart';
 import 'package:chemin_du_local/features/clients/fidelity/fidelity_page.dart';
-import 'package:chemin_du_local/features/commerces/commerces_page.dart';
+import 'package:chemin_du_local/features/commerces/commerces_list_page.dart/commerces_list_page.dart';
 import 'package:chemin_du_local/features/main_page/main_page.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
@@ -15,7 +16,15 @@ class ClientsMainPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // The pages
     final List<Widget> pages = [
-      const CommercesPage(),
+      ClipRect(
+        child: Navigator(
+          key: AppManager.instance.commercesListPageKey,
+          onGenerateRoute: (route) => MaterialPageRoute<void>(
+            settings: route,
+            builder: (context) => const CommercesListPage()
+          ),
+        )
+      ),
       const ClientHomePage(),
       const FidelityPage(),
       const ClientBasketPage(),

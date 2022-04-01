@@ -1,14 +1,13 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/gradient_icon.dart';
+import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_address_input.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_address_map.dart';
+import 'package:chemin_du_local/core/widgets/cl_map.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
-import 'package:uuid/uuid.dart';
+import 'package:latlng/latlng.dart';
 
 class PageAddressCard extends StatelessWidget {
   const PageAddressCard({
@@ -19,6 +18,7 @@ class PageAddressCard extends StatelessWidget {
     required this.facebookTextController,
     required this.twitterTextController,
     required this.instagramTextController,
+    required this.initialLatLgn,
     required this.isEditing,
   }) : super(key: key);
 
@@ -30,7 +30,10 @@ class PageAddressCard extends StatelessWidget {
   final TextEditingController twitterTextController;
   final TextEditingController instagramTextController;
 
+  final LatLng? initialLatLgn;
+
   final bool isEditing;
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +45,9 @@ class PageAddressCard extends StatelessWidget {
         children: [
           // The map
           Flexible(
-            child: PageAddressMap(
-              address: addressTextController.text,
+            child: ClMap(
+              initialLatLgn: initialLatLgn,
+              showInitialLatLgnMarker: true,
             ),
           ),
           const SizedBox(height: 12,),
@@ -103,7 +107,7 @@ class PageAddressCard extends StatelessWidget {
 
         // Address text field
         Flexible(
-          child: PageAddressInput(addressTextController: addressTextController),
+          child: ClAddressInput(addressTextController: addressTextController),
         ),
         const SizedBox(height: 8.0,),  
 
