@@ -4,6 +4,7 @@ import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/features/commerces/commerces_list_page.dart/widgets/commerces_list.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:latlng/latlng.dart';
 
 class CommercesListPage extends StatefulWidget {
@@ -75,6 +76,19 @@ class _CommercesListPageState extends State<CommercesListPage> {
       return PlaceAPIProvider.instance.latLgnForAddress(_address!);
     }
 
-    return null;
+    final locationServiceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!locationServiceEnabled) return null;
+
+    // On a besoin de demander l'autorisation sur beaucoup d'appareil
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) return null;
+    }
+
+    if (permission == LocationPermission.deniedForever) return null;
+
+    final position = await Geolocator.getCurrentPosition();
+    return LatLng(position.latitude, position.longitude);
   }
 }
