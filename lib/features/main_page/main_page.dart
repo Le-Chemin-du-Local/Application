@@ -81,9 +81,8 @@ class MainPageState extends State<MainPage> {
                 ),
               ),
               if (!useBigLayout)
-                Positioned(
-                  bottom: 0,
-                  left: 0,
+                Align(
+                  alignment: Alignment.bottomCenter,
                   child: Container(
                     color: Theme.of(context).scaffoldBackgroundColor,
                     child: custom.BottomAppBar(
