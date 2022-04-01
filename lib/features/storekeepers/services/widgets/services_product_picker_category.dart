@@ -2,11 +2,12 @@ import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/services_product_picker_card.dart';
+import 'package:chemin_du_local/features/storekeepers/services/widgets/services_products_picker_row.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class ServicesProductPickerRow extends StatelessWidget {
-  const ServicesProductPickerRow({
+class ServicesProductPickerCategory extends StatelessWidget {
+  const ServicesProductPickerCategory({
     Key? key, 
     required this.initialProductsIDs, 
     required this.onProductTapped,
@@ -68,47 +69,13 @@ class ServicesProductPickerRow extends StatelessWidget {
           products.add(Product.fromJson(mapProduct["node"] as Map<String, dynamic>));
         }
 
-        return _buildContent(context, products: products);
+        return ServicesProductsPickerRow(
+          category: category, 
+          initialProductsIDs: initialProductsIDs, 
+          products: products, 
+          onProductTapped: onProductTapped
+        );
       }
     );
   }
-
-   Widget _buildContent(BuildContext context, {
-    required List<Product> products,
-   }) {
-     return Column(
-       mainAxisSize: MainAxisSize.min,
-       crossAxisAlignment: CrossAxisAlignment.stretch,
-       children: [
-         // The header
-         Flexible(
-           child: Text(category),
-         ),
-
-         // The products list
-         Flexible(
-          child: GridView(
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 270,
-              mainAxisExtent: 273,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16
-            ),
-            padding: const EdgeInsets.all(18),
-            children: [
-              for (final product in products) 
-                InkWell(
-                  onTap: () => onProductTapped(product.id!),
-                  child: ServicesProductCard(
-                    product: product,
-                    isSelected: initialProductsIDs.contains(product.id),
-                  )
-                )
-            ]
-                 ),
-         ),
-       ],
-     );
-   }
 }

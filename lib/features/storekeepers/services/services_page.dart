@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/ccproducts_page/ccproducts_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_graphql.dart';
@@ -85,7 +86,7 @@ class ServicesPage extends StatelessWidget {
         // Click & Collect
         if (services.contains(Services.clickAndCollect))
           ServiceCard(
-            onClick: () => onPageChanged(3), 
+            onClick: () => _openClickAndCollectProductsPage(context), 
             backgroundName: "illustration_click_and_collect.png", 
             title: "Click and collect"
           ),
@@ -98,6 +99,14 @@ class ServicesPage extends StatelessWidget {
             title: "Paniers",
           ),
       ]),
+    );
+  }
+
+  Future _openClickAndCollectProductsPage(BuildContext context) async {
+    await Navigator.of(context).push<dynamic>(
+      MaterialPageRoute<dynamic>(
+        builder: (context) => const CCProductsPage()
+      )
     );
   }
 
