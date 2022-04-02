@@ -1,7 +1,6 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
-import 'package:chemin_du_local/features/storekeepers/services/widgets/services_product_picker_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/services_products_picker_row.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -12,11 +11,15 @@ class ServicesProductPickerCategory extends StatelessWidget {
     required this.initialProductsIDs, 
     required this.onProductTapped,
     required this.category,
+    this.initialQuantities,
+    this.onQuantityChanged,
     this.commerceID,
   }) : super(key: key);
 
   final List<String> initialProductsIDs;
   final Function(String) onProductTapped;
+  final Map<String, int>? initialQuantities;
+  final Function(String,int)? onQuantityChanged;
 
   final String category;
   final String? commerceID;
@@ -73,7 +76,9 @@ class ServicesProductPickerCategory extends StatelessWidget {
           category: category, 
           initialProductsIDs: initialProductsIDs, 
           products: products, 
-          onProductTapped: onProductTapped
+          onProductTapped: onProductTapped,
+          onQuantityChanged: onQuantityChanged,
+          initialQuantities: initialQuantities,
         );
       }
     );

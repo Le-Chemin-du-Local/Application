@@ -37,6 +37,7 @@ class PanierEditFormState extends State<PanierEditForm> {
   final TextEditingController _priceTextController = TextEditingController();
 
   final List<String> _selectedProductsIDs = [];
+  final Map<String, int> _quantities = {};
 
   String _category = PanierCategory.permanent;
   DateTime? _endingDate;
@@ -54,6 +55,7 @@ class PanierEditFormState extends State<PanierEditForm> {
       }
 
       for (final product in widget.panier!.products) {
+        _quantities[product.product.id!] = product.quantity;
         _selectedProductsIDs.add(product.product.id!);
       }
 
@@ -162,6 +164,8 @@ class PanierEditFormState extends State<PanierEditForm> {
                   child: ServicesProductsPicker(
                     initialProductsIDs: _selectedProductsIDs,
                     onProductTapped: _onProuctSelected,
+                    initialQuantities: _quantities,
+                    onQuantityChanged: _onQuantityUpdated,
                   ),
                 )         
               ],
@@ -324,6 +328,11 @@ class PanierEditFormState extends State<PanierEditForm> {
     });
   } 
 
+  void _onQuantityUpdated(String productID, int newQuantity) {
+    setState(() {
+      _quantities[productID] = newQuantity;
+    });
+  }
   void save() {
     if (!_formKey.currentState!.validate()) return;
 
@@ -344,7 +353,7 @@ class PanierEditFormState extends State<PanierEditForm> {
         "endingDate": _endingDate?.toUtc().toIso8601String(),
         "products": [
           for (final id in _selectedProductsIDs) {
-            "quantity": 1,
+            "quantity": _quantities[id],
             "productID": id
           }
         ]

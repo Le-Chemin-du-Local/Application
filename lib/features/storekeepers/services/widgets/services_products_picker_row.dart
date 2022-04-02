@@ -9,14 +9,18 @@ class ServicesProductsPickerRow extends StatefulWidget {
     required this.initialProductsIDs,
     required this.products,
     required this.onProductTapped,
+    this.initialQuantities,
+    this.onQuantityChanged,
   }) : super(key: key);
 
   final String category;
 
   final List<String> initialProductsIDs;
+  final Map<String, int>? initialQuantities;
   final List<Product> products;
 
   final Function(String) onProductTapped;
+  final Function(String,int)? onQuantityChanged;
 
   @override
   State<ServicesProductsPickerRow> createState() => _ServicesProductsPickerRowState();
@@ -72,9 +76,14 @@ class _ServicesProductsPickerRowState extends State<ServicesProductsPickerRow> {
                 for (final product in widget.products) 
                   InkWell(
                     onTap: () => widget.onProductTapped(product.id!),
-                    child: ServicesProductCard(
-                      product: product,
-                      isSelected: widget.initialProductsIDs.contains(product.id),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: ServicesProductCard(
+                        product: product,
+                        isSelected: widget.initialProductsIDs.contains(product.id),
+                        onQuantityChanged: widget.onQuantityChanged,
+                        quantity: widget.initialQuantities?[product.id]
+                      ),
                     )
                   )
               ]

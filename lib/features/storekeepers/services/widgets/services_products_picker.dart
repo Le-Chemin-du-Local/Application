@@ -10,11 +10,15 @@ class ServicesProductsPicker extends StatelessWidget {
     Key? key,
     required this.initialProductsIDs,
     required this.onProductTapped,
+    this.initialQuantities,
+    this.onQuantityChanged,
     this.commerceID
   }) : super(key: key);
 
   final List<String> initialProductsIDs;
   final Function(String) onProductTapped;
+  final Map<String, int>? initialQuantities;
+  final Function(String,int)? onQuantityChanged;
 
   final String? commerceID;
 
@@ -74,8 +78,10 @@ class ServicesProductsPicker extends StatelessWidget {
             child: ServicesProductPickerCategory(
               category: category,
               initialProductsIDs: initialProductsIDs,
+              initialQuantities: initialQuantities,
               commerceID: commerceID,
               onProductTapped: onProductTapped,
+              onQuantityChanged: onQuantityChanged,
             ),
           )
       ],

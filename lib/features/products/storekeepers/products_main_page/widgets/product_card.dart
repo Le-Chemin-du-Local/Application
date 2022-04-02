@@ -1,20 +1,32 @@
 import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
+import 'package:chemin_du_local/core/widgets/inputs/cl_quantity_picker.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
     Key? key,
-    required this.product
+    required this.product,
+    this.quantity = 0,
+    this.borderColor,
+    this.showQuantityPicker = false,
+    this.onQuantityUpdated,
   }) : super(key: key);
 
   final Product product;
+
+  final Color? borderColor;
+  final bool showQuantityPicker;
+
+  final int quantity;
+  final Function(int)? onQuantityUpdated;
 
   @override
   Widget build(BuildContext context) {
     return ClCard(
       padding: const EdgeInsets.all(10),
+      borderColor: borderColor,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -31,14 +43,37 @@ class ProductCard extends StatelessWidget {
           // The name of the product
           Flexible(child: Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold),)),
           const SizedBox(height: 8.0,),
+
+
           // The flag if it's a breton product
-          if (product.isBreton ?? false)
-            Flexible(
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Image.asset("assets/images/drapeau_breton.png")
-              )
+          Flexible(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                if (product.isBreton ?? false)
+                  Flexible(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Image.asset("assets/images/drapeau_breton.png")
+                    )
+                  )
+                else 
+                  Container(),
+                
+                if (showQuantityPicker)
+                  Flexible(
+                    child: ClQuantityPicker(
+                      minValue: 0,
+                      currentValue: quantity,
+                      onChanged: onQuantityUpdated,
+                    ),
+                  )
+                else  
+                  Container()
+              ],
             )
+          )
         ],
       ),
     );
