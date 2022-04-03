@@ -1,6 +1,7 @@
 import 'package:chemin_du_local/core/graphql/graphql_client.dart';
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/init.dart';
+import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/splash_screen.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/authentication/authentication_graphql.dart';
@@ -10,10 +11,17 @@ import 'package:chemin_du_local/features/user/user.dart';
 import 'package:chemin_du_local/theme/cl_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Strip initialisation
+  Stripe.publishableKey = kStripPublishableKey;
+  Stripe.merchantIdentifier = "chemin.du.local.bzh";
+  Stripe.urlScheme = "clstrip";
+  await Stripe.instance.applySettings();
 
   await initHiveForFlutter(); // For GraphQL cache
   await HiveStore.openBox<dynamic>(HiveStore.defaultBoxName);

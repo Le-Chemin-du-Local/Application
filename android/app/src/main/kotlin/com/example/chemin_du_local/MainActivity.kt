@@ -1,6 +1,6 @@
 package com.example.chemin_du_local
 
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
 
-class MainActivity: FlutterActivity() {
+class MainActivity: FlutterFragmentActivity() {
 }

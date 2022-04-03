@@ -53,13 +53,15 @@ class ServicesPage extends StatelessWidget {
             );
           }
 
-          return _buildContent(context, user.commerce!.services);
+          return _buildContent(context, user.commerce!.services, commerceID: user.commerce!.id!);
         },
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context, List<String> services) {
+  Widget _buildContent(BuildContext context, List<String> services, {
+    required String commerceID,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(
         top: 20,
@@ -68,13 +70,15 @@ class ServicesPage extends StatelessWidget {
       ),
       child: CustomScrollView(
         slivers: [
-          _buildActiveServices(context, services)
+          _buildActiveServices(context, services, commerceID: commerceID)
         ],
       ),
     );
   }
 
-  Widget _buildActiveServices(BuildContext context, List<String> services) {
+  Widget _buildActiveServices(BuildContext context, List<String> services, {
+    required String commerceID,
+  }) {
     return SliverGrid(
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 400,
@@ -86,7 +90,7 @@ class ServicesPage extends StatelessWidget {
         // Click & Collect
         if (services.contains(Services.clickAndCollect))
           ServiceCard(
-            onClick: () => _openClickAndCollectProductsPage(context), 
+            onClick: () => _openClickAndCollectProductsPage(context, commerceID: commerceID), 
             backgroundName: "illustration_click_and_collect.png", 
             title: "Click and collect"
           ),
@@ -102,10 +106,12 @@ class ServicesPage extends StatelessWidget {
     );
   }
 
-  Future _openClickAndCollectProductsPage(BuildContext context) async {
+  Future _openClickAndCollectProductsPage(BuildContext context, {
+    required String commerceID,
+  }) async {
     await Navigator.of(context).push<dynamic>(
       MaterialPageRoute<dynamic>(
-        builder: (context) => const CCProductsPage()
+        builder: (context) => CCProductsPage(commerceID: commerceID,)
       )
     );
   }

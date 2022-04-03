@@ -54,6 +54,23 @@ query cccommandDetails($id: ID!) {
 }
 ''';
 
+const String mutUpdateCCProductsAvailability = r'''
+mutation updateProductsAvailableForClickAndCollect(
+  $id: ID!
+  $productsIDs: [ID!]!
+) {
+  updateCommerce(
+    id: $id,
+    changes: {
+      productsAvailableForClickAndCollect: $productsIDs
+    }
+  ) {
+    id
+    name
+  }
+}
+''';
+
 const String mutUpdateCCCommand = r'''
 mutation updateCCCommand($id: ID!, $status: String!) {
   updateCCCommand(
