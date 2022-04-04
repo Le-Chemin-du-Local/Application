@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/main_page/widgets/menu_drawer.dart';
@@ -29,10 +30,8 @@ class MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        // TODO: do
-        // show confirmation
-        // return (await AppManager.instance.showCloseAppConfirmation(context)) ?? false;
-        return true;
+        // On affiche la confirmation
+        return (await AppManager.instance.showCloseAppConfirmation(context)) ?? false;
       },
       child: LayoutBuilder(
         builder: (context, constraints) {
