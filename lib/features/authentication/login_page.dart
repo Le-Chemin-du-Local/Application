@@ -23,7 +23,10 @@ class LoginPage extends ConsumerWidget {
         
         if (token.isNotEmpty) {
           // Then we can actually login the user
-          ref.read(appUserControllerProvider.notifier).loginUser(token);
+          ref.read(appUserControllerProvider.notifier).loginUser(
+            token,
+            goBackToBasketPayment: false
+          );
         }
       }
     );

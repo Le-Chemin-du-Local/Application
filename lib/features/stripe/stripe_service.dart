@@ -11,12 +11,14 @@ class StripeService {
   static final StripeService instance = StripeService._();
 
   Future<Map<String, dynamic>> handlePaymentIntent({
+    required String authorizationHeader,
     String? paymentMethodId,
     String? paymentIntentId,
   }) async {
     final response = await http.post(
       Uri.parse("$kRESTApiBaseUrl/create-payment-intent"),
       headers: {
+        HttpHeaders.authorizationHeader: authorizationHeader,
         HttpHeaders.contentTypeHeader: "application/json",
       },
       body: json.encode({

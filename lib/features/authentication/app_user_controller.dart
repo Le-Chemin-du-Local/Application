@@ -45,9 +45,12 @@ class AppUserController extends StateController<AppUserState> {
     );
   }
 
-  void loginUser(String token) {
+  void loginUser(String token, {
+    required bool goBackToBasketPayment,
+  }) {
     state = state.copyWith(
-      token: token
+      token: token,
+      goBackToBasketPayment: goBackToBasketPayment
     );
   }
 }

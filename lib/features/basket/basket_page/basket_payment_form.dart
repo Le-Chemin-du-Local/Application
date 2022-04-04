@@ -1,19 +1,21 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/stripe/stripe_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
-class BasketPaymentForm extends StatefulWidget {
+class BasketPaymentForm extends ConsumerStatefulWidget {
   const BasketPaymentForm({Key? key}) : super(key: key);
 
   @override
-  State<BasketPaymentForm> createState() => _BasketPaymentFormState();
+  ConsumerState<BasketPaymentForm> createState() => _BasketPaymentFormState();
 }
 
-class _BasketPaymentFormState extends State<BasketPaymentForm> {
+class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _cardNumber = "";
@@ -114,6 +116,16 @@ class _BasketPaymentFormState extends State<BasketPaymentForm> {
   Future _handlePayPress() async {
     if (!_formKey.currentState!.validate()) return;
 
+    final String? userToken = ref.read(appUserControllerProvider).token;
+
+    if (userToken == null) {
+      setState(() {
+        _errorMessage = "Vous n'auriez jamais du vous retrouver ici... Vous devez vous connecter avant de finaliser votre achat.";
+      });
+    }
+
+    final String authHeader = "Bearer $userToken";
+
     // On doit d'abord mettre à jour les infos de cartes
     final CardDetails cardDetails = CardDetails(
       number: _cardNumber,
@@ -129,6 +141,7 @@ class _BasketPaymentFormState extends State<BasketPaymentForm> {
       );
 
       final paymentIntentResult = await StripeService.instance.handlePaymentIntent(
+        authorizationHeader: authHeader,
         paymentMethodId: paymentMethod.id
       );
 
@@ -145,6 +158,7 @@ class _BasketPaymentFormState extends State<BasketPaymentForm> {
          final paymentIntent = await Stripe.instance.handleCardAction(clientSecret);
 
          final result = await StripeService.instance.handlePaymentIntent(
+           authorizationHeader: authHeader,
            paymentMethodId: paymentMethod.id,
            paymentIntentId: paymentIntent.id
           );
@@ -158,7 +172,7 @@ class _BasketPaymentFormState extends State<BasketPaymentForm> {
 
 
     }
-    on Error {
+    on Exception {
       setState(() {
         _errorMessage = "Le paiement n'a pas put se faire...";
       });

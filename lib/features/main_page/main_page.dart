@@ -11,11 +11,14 @@ class MainPage extends StatefulWidget {
   const MainPage({
     Key? key,
     required this.pageItems,
-    required this.pages
+    required this.pages,
+    this.overrideStartIndex = -1
   }) : assert(pageItems.length == pages.length, "you don't have the same pageItems number than the pages number"), super(key: key);
 
   final List<PageItem> pageItems;
   final List<Widget> pages;
+
+  final int overrideStartIndex;
 
   @override
   MainPageState createState() => MainPageState();
@@ -25,6 +28,20 @@ class MainPageState extends State<MainPage> {
   int _currentIndex = 1;
 
   bool _isMenuBarMinimified = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _currentIndex = widget.overrideStartIndex;
+  }
+
+  @override
+  void didUpdateWidget(covariant MainPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    _currentIndex = widget.overrideStartIndex;
+  }
 
   @override
   Widget build(BuildContext context) {

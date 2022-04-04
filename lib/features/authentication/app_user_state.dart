@@ -7,6 +7,7 @@ part 'app_user_state.freezed.dart';
 @immutable
 class AppUserState with _$AppUserState {
   const factory AppUserState({
-    String? token
+    String? token,
+    @Default(false) bool goBackToBasketPayment,
   }) = _AppUserState;
 }

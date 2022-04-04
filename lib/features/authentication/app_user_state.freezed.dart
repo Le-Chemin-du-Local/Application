@@ -18,9 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$AppUserStateTearOff {
   const _$AppUserStateTearOff();
 
-  _AppUserState call({String? token}) {
+  _AppUserState call({String? token, bool goBackToBasketPayment = false}) {
     return _AppUserState(
       token: token,
+      goBackToBasketPayment: goBackToBasketPayment,
     );
   }
 }
@@ -31,6 +32,7 @@ const $AppUserState = _$AppUserStateTearOff();
 /// @nodoc
 mixin _$AppUserState {
   String? get token => throw _privateConstructorUsedError;
+  bool get goBackToBasketPayment => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AppUserStateCopyWith<AppUserState> get copyWith =>
@@ -42,7 +44,7 @@ abstract class $AppUserStateCopyWith<$Res> {
   factory $AppUserStateCopyWith(
           AppUserState value, $Res Function(AppUserState) then) =
       _$AppUserStateCopyWithImpl<$Res>;
-  $Res call({String? token});
+  $Res call({String? token, bool goBackToBasketPayment});
 }
 
 /// @nodoc
@@ -56,12 +58,17 @@ class _$AppUserStateCopyWithImpl<$Res> implements $AppUserStateCopyWith<$Res> {
   @override
   $Res call({
     Object? token = freezed,
+    Object? goBackToBasketPayment = freezed,
   }) {
     return _then(_value.copyWith(
       token: token == freezed
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
+      goBackToBasketPayment: goBackToBasketPayment == freezed
+          ? _value.goBackToBasketPayment
+          : goBackToBasketPayment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -73,7 +80,7 @@ abstract class _$AppUserStateCopyWith<$Res>
           _AppUserState value, $Res Function(_AppUserState) then) =
       __$AppUserStateCopyWithImpl<$Res>;
   @override
-  $Res call({String? token});
+  $Res call({String? token, bool goBackToBasketPayment});
 }
 
 /// @nodoc
@@ -89,12 +96,17 @@ class __$AppUserStateCopyWithImpl<$Res> extends _$AppUserStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? token = freezed,
+    Object? goBackToBasketPayment = freezed,
   }) {
     return _then(_AppUserState(
       token: token == freezed
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
+      goBackToBasketPayment: goBackToBasketPayment == freezed
+          ? _value.goBackToBasketPayment
+          : goBackToBasketPayment // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -102,14 +114,17 @@ class __$AppUserStateCopyWithImpl<$Res> extends _$AppUserStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_AppUserState with DiagnosticableTreeMixin implements _AppUserState {
-  const _$_AppUserState({this.token});
+  const _$_AppUserState({this.token, this.goBackToBasketPayment = false});
 
   @override
   final String? token;
+  @JsonKey()
+  @override
+  final bool goBackToBasketPayment;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'AppUserState(token: $token)';
+    return 'AppUserState(token: $token, goBackToBasketPayment: $goBackToBasketPayment)';
   }
 
   @override
@@ -117,7 +132,9 @@ class _$_AppUserState with DiagnosticableTreeMixin implements _AppUserState {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'AppUserState'))
-      ..add(DiagnosticsProperty('token', token));
+      ..add(DiagnosticsProperty('token', token))
+      ..add(
+          DiagnosticsProperty('goBackToBasketPayment', goBackToBasketPayment));
   }
 
   @override
@@ -125,12 +142,16 @@ class _$_AppUserState with DiagnosticableTreeMixin implements _AppUserState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _AppUserState &&
-            const DeepCollectionEquality().equals(other.token, token));
+            const DeepCollectionEquality().equals(other.token, token) &&
+            const DeepCollectionEquality()
+                .equals(other.goBackToBasketPayment, goBackToBasketPayment));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(token));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(token),
+      const DeepCollectionEquality().hash(goBackToBasketPayment));
 
   @JsonKey(ignore: true)
   @override
@@ -139,10 +160,13 @@ class _$_AppUserState with DiagnosticableTreeMixin implements _AppUserState {
 }
 
 abstract class _AppUserState implements AppUserState {
-  const factory _AppUserState({String? token}) = _$_AppUserState;
+  const factory _AppUserState({String? token, bool goBackToBasketPayment}) =
+      _$_AppUserState;
 
   @override
   String? get token;
+  @override
+  bool get goBackToBasketPayment;
   @override
   @JsonKey(ignore: true)
   _$AppUserStateCopyWith<_AppUserState> get copyWith =>

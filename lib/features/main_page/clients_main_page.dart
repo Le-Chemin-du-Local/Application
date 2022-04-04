@@ -10,7 +10,12 @@ import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
 import 'package:flutter/material.dart';
 
 class ClientsMainPage extends StatelessWidget {
-  const ClientsMainPage({Key? key}) : super(key: key);
+  const ClientsMainPage({
+    Key? key,
+    this.returnToBasketPayment = false,
+  }) : super(key: key);
+
+  final bool returnToBasketPayment;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +89,8 @@ class ClientsMainPage extends StatelessWidget {
 
     return MainPage(
       pageItems: pageItems, 
-      pages: pages
+      pages: pages,
+      overrideStartIndex: returnToBasketPayment ? 3 : 1,
     );
   }
 }

@@ -72,7 +72,9 @@ class MyApp extends ConsumerWidget {
                       );
                     }
 
-                    return const ClientsMainPage();
+                    return ClientsMainPage(
+                      returnToBasketPayment: ref.watch(appUserControllerProvider).goBackToBasketPayment,
+                    );
                   },
                 );
               }
