@@ -18,11 +18,8 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$BasketTearOff {
   const _$BasketTearOff();
 
-  _Basket call(
-      {required Map<String, List<BasketProduct>> products,
-      required List<Commerce> commerces}) {
+  _Basket call({List<BasketCommerce> commerces = const <BasketCommerce>[]}) {
     return _Basket(
-      products: products,
       commerces: commerces,
     );
   }
@@ -33,9 +30,7 @@ const $Basket = _$BasketTearOff();
 
 /// @nodoc
 mixin _$Basket {
-  Map<String, List<BasketProduct>> get products =>
-      throw _privateConstructorUsedError;
-  List<Commerce> get commerces => throw _privateConstructorUsedError;
+  List<BasketCommerce> get commerces => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BasketCopyWith<Basket> get copyWith => throw _privateConstructorUsedError;
@@ -45,8 +40,7 @@ mixin _$Basket {
 abstract class $BasketCopyWith<$Res> {
   factory $BasketCopyWith(Basket value, $Res Function(Basket) then) =
       _$BasketCopyWithImpl<$Res>;
-  $Res call(
-      {Map<String, List<BasketProduct>> products, List<Commerce> commerces});
+  $Res call({List<BasketCommerce> commerces});
 }
 
 /// @nodoc
@@ -59,18 +53,13 @@ class _$BasketCopyWithImpl<$Res> implements $BasketCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? products = freezed,
     Object? commerces = freezed,
   }) {
     return _then(_value.copyWith(
-      products: products == freezed
-          ? _value.products
-          : products // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<BasketProduct>>,
       commerces: commerces == freezed
           ? _value.commerces
           : commerces // ignore: cast_nullable_to_non_nullable
-              as List<Commerce>,
+              as List<BasketCommerce>,
     ));
   }
 }
@@ -80,8 +69,7 @@ abstract class _$BasketCopyWith<$Res> implements $BasketCopyWith<$Res> {
   factory _$BasketCopyWith(_Basket value, $Res Function(_Basket) then) =
       __$BasketCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {Map<String, List<BasketProduct>> products, List<Commerce> commerces});
+  $Res call({List<BasketCommerce> commerces});
 }
 
 /// @nodoc
@@ -95,18 +83,13 @@ class __$BasketCopyWithImpl<$Res> extends _$BasketCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? products = freezed,
     Object? commerces = freezed,
   }) {
     return _then(_Basket(
-      products: products == freezed
-          ? _value.products
-          : products // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<BasketProduct>>,
       commerces: commerces == freezed
           ? _value.commerces
           : commerces // ignore: cast_nullable_to_non_nullable
-              as List<Commerce>,
+              as List<BasketCommerce>,
     ));
   }
 }
@@ -114,16 +97,15 @@ class __$BasketCopyWithImpl<$Res> extends _$BasketCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Basket with DiagnosticableTreeMixin implements _Basket {
-  const _$_Basket({required this.products, required this.commerces});
+  const _$_Basket({this.commerces = const <BasketCommerce>[]});
 
+  @JsonKey()
   @override
-  final Map<String, List<BasketProduct>> products;
-  @override
-  final List<Commerce> commerces;
+  final List<BasketCommerce> commerces;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Basket(products: $products, commerces: $commerces)';
+    return 'Basket(commerces: $commerces)';
   }
 
   @override
@@ -131,7 +113,6 @@ class _$_Basket with DiagnosticableTreeMixin implements _Basket {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'Basket'))
-      ..add(DiagnosticsProperty('products', products))
       ..add(DiagnosticsProperty('commerces', commerces));
   }
 
@@ -140,15 +121,12 @@ class _$_Basket with DiagnosticableTreeMixin implements _Basket {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _Basket &&
-            const DeepCollectionEquality().equals(other.products, products) &&
             const DeepCollectionEquality().equals(other.commerces, commerces));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(products),
-      const DeepCollectionEquality().hash(commerces));
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(commerces));
 
   @JsonKey(ignore: true)
   @override
@@ -157,14 +135,10 @@ class _$_Basket with DiagnosticableTreeMixin implements _Basket {
 }
 
 abstract class _Basket implements Basket {
-  const factory _Basket(
-      {required Map<String, List<BasketProduct>> products,
-      required List<Commerce> commerces}) = _$_Basket;
+  const factory _Basket({List<BasketCommerce> commerces}) = _$_Basket;
 
   @override
-  Map<String, List<BasketProduct>> get products;
-  @override
-  List<Commerce> get commerces;
+  List<BasketCommerce> get commerces;
   @override
   @JsonKey(ignore: true)
   _$BasketCopyWith<_Basket> get copyWith => throw _privateConstructorUsedError;

@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/user/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -17,6 +18,7 @@ class Commerce with _$Commerce {
     User? storekeeper,
     @Default(<String>[]) List<String> categories,
     @Default(<String>[]) List<String> services,
+    @Default(<Product>[]) List<Product> productsAvailableForClickAndCollect,
     String? storekeeperWord,
     String? description,
     String? address,

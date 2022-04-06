@@ -18,6 +18,10 @@ query GetStoreKeeperCommerce(
       facebook
       twitter
       instagram
+      productsAvailableForClickAndCollect {
+        id
+        name
+      }
       products(first: 6) {
         edges {
           node {

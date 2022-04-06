@@ -27,6 +27,7 @@ class _$CommerceTearOff {
       User? storekeeper,
       List<String> categories = const <String>[],
       List<String> services = const <String>[],
+      List<Product> productsAvailableForClickAndCollect = const <Product>[],
       String? storekeeperWord,
       String? description,
       String? address,
@@ -43,6 +44,7 @@ class _$CommerceTearOff {
       storekeeper: storekeeper,
       categories: categories,
       services: services,
+      productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
       storekeeperWord: storekeeperWord,
       description: description,
       address: address,
@@ -71,6 +73,8 @@ mixin _$Commerce {
   User? get storekeeper => throw _privateConstructorUsedError;
   List<String> get categories => throw _privateConstructorUsedError;
   List<String> get services => throw _privateConstructorUsedError;
+  List<Product> get productsAvailableForClickAndCollect =>
+      throw _privateConstructorUsedError;
   String? get storekeeperWord => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get address => throw _privateConstructorUsedError;
@@ -98,6 +102,7 @@ abstract class $CommerceCopyWith<$Res> {
       User? storekeeper,
       List<String> categories,
       List<String> services,
+      List<Product> productsAvailableForClickAndCollect,
       String? storekeeperWord,
       String? description,
       String? address,
@@ -127,6 +132,7 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? storekeeper = freezed,
     Object? categories = freezed,
     Object? services = freezed,
+    Object? productsAvailableForClickAndCollect = freezed,
     Object? storekeeperWord = freezed,
     Object? description = freezed,
     Object? address = freezed,
@@ -159,6 +165,11 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
           ? _value.services
           : services // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      productsAvailableForClickAndCollect: productsAvailableForClickAndCollect ==
+              freezed
+          ? _value.productsAvailableForClickAndCollect
+          : productsAvailableForClickAndCollect // ignore: cast_nullable_to_non_nullable
+              as List<Product>,
       storekeeperWord: storekeeperWord == freezed
           ? _value.storekeeperWord
           : storekeeperWord // ignore: cast_nullable_to_non_nullable
@@ -225,6 +236,7 @@ abstract class _$CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       User? storekeeper,
       List<String> categories,
       List<String> services,
+      List<Product> productsAvailableForClickAndCollect,
       String? storekeeperWord,
       String? description,
       String? address,
@@ -256,6 +268,7 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? storekeeper = freezed,
     Object? categories = freezed,
     Object? services = freezed,
+    Object? productsAvailableForClickAndCollect = freezed,
     Object? storekeeperWord = freezed,
     Object? description = freezed,
     Object? address = freezed,
@@ -288,6 +301,11 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value.services
           : services // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      productsAvailableForClickAndCollect: productsAvailableForClickAndCollect ==
+              freezed
+          ? _value.productsAvailableForClickAndCollect
+          : productsAvailableForClickAndCollect // ignore: cast_nullable_to_non_nullable
+              as List<Product>,
       storekeeperWord: storekeeperWord == freezed
           ? _value.storekeeperWord
           : storekeeperWord // ignore: cast_nullable_to_non_nullable
@@ -340,6 +358,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       this.storekeeper,
       this.categories = const <String>[],
       this.services = const <String>[],
+      this.productsAvailableForClickAndCollect = const <Product>[],
       this.storekeeperWord,
       this.description,
       this.address,
@@ -366,6 +385,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   @JsonKey()
   @override
   final List<String> services;
+  @JsonKey()
+  @override
+  final List<Product> productsAvailableForClickAndCollect;
   @override
   final String? storekeeperWord;
   @override
@@ -389,7 +411,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, latitude: $latitude, longitude: $longitude)';
+    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -402,6 +424,8 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('storekeeper', storekeeper))
       ..add(DiagnosticsProperty('categories', categories))
       ..add(DiagnosticsProperty('services', services))
+      ..add(DiagnosticsProperty('productsAvailableForClickAndCollect',
+          productsAvailableForClickAndCollect))
       ..add(DiagnosticsProperty('storekeeperWord', storekeeperWord))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('address', address))
@@ -426,6 +450,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality()
                 .equals(other.categories, categories) &&
             const DeepCollectionEquality().equals(other.services, services) &&
+            const DeepCollectionEquality().equals(
+                other.productsAvailableForClickAndCollect,
+                productsAvailableForClickAndCollect) &&
             const DeepCollectionEquality()
                 .equals(other.storekeeperWord, storekeeperWord) &&
             const DeepCollectionEquality()
@@ -448,6 +475,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       const DeepCollectionEquality().hash(storekeeper),
       const DeepCollectionEquality().hash(categories),
       const DeepCollectionEquality().hash(services),
+      const DeepCollectionEquality().hash(productsAvailableForClickAndCollect),
       const DeepCollectionEquality().hash(storekeeperWord),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(address),
@@ -476,6 +504,7 @@ abstract class _Commerce implements Commerce {
       User? storekeeper,
       List<String> categories,
       List<String> services,
+      List<Product> productsAvailableForClickAndCollect,
       String? storekeeperWord,
       String? description,
       String? address,
@@ -499,6 +528,8 @@ abstract class _Commerce implements Commerce {
   List<String> get categories;
   @override
   List<String> get services;
+  @override
+  List<Product> get productsAvailableForClickAndCollect;
   @override
   String? get storekeeperWord;
   @override

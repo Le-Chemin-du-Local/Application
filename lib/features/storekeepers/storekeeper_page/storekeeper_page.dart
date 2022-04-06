@@ -155,17 +155,22 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
           products.add(Product.fromJson(mapProduct["node"] as Map<String, dynamic>));
         }
 
-        return _buildContent(products: products, commerceID: commerce?.id);
+        return _buildContent(
+          products: products, 
+          productsAvailableForClickAndCollect: commerce?.productsAvailableForClickAndCollect ?? [],
+          commerce: commerce
+        );
       }
     );
   }
 
   Widget _buildContent({
     required List<Product> products,
-    required String? commerceID,
+    required List<Product> productsAvailableForClickAndCollect,
+    required Commerce? commerce,
   }) {
     return Mutation<dynamic>(
-      options: _commerceMutationOption(commerceID != null),
+      options: _commerceMutationOption(commerce != null),
       builder: (runMutation, mutationResult) {
         if (mutationResult?.isLoading ?? false) {
           return Scaffold(
@@ -184,7 +189,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                   children: [
                     PageHeaderImage(
                       storekeeperWordTextController: _storekeeperWordTextController,
-                      commerceID: commerceID,
+                      commerceID: commerce?.id,
                       imageData: _image,
                       profilePictureData: _profilePicture,
                       isEditing: _isEditing,
@@ -204,10 +209,14 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                       child: LayoutBuilder(
                         builder: (context, constraints) {
                           if (constraints.maxWidth >= ScreenHelper.breakpointPC) {
-                            return _buildBigLayout(commerceID: commerceID, products: products);
+                            return _buildBigLayout(commerceID: commerce?.id, products: products);
                           }
             
-                          return _buildSmallLayout(commerceID: commerceID, products: products);
+                          return _buildSmallLayout(
+                            commerce: commerce, 
+                            products: products,
+                            productsAvailableForClickAndCollect: productsAvailableForClickAndCollect
+                          );
                         },
                       ),
                     ),
@@ -217,7 +226,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
             ),
           ),
           floatingActionButton: widget.canEdit ? ClFloatingButton(
-            onPressed: () => _onEditSavePressed(commerceID, runMutation),
+            onPressed: () => _onEditSavePressed(commerce?.id, runMutation),
             icon: _isEditing ? Icons.save : Icons.edit,
           ) : null,
         );
@@ -226,8 +235,9 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
   }
 
   Widget _buildSmallLayout({
-    required String? commerceID,
+    required Commerce? commerce,
     required List<Product> products,
+    required List<Product> productsAvailableForClickAndCollect,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -273,7 +283,12 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
             padding: const EdgeInsets.only(left: ScreenHelper.horizontalPadding),
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxHeight: 300),
-              child: PageProductsList(products: products, enableButton: false,),
+              child: PageProductsList(
+                commerce: commerce,
+                products: products, 
+                availableForClickAndCollect: productsAvailableForClickAndCollect,
+                enableButton: false,
+              ),
             ),
           ),
         ),
@@ -287,7 +302,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                 left: ScreenHelper.horizontalPadding
               ),
               child: PagePaniersList(
-                commerceID: commerceID,
+                commerceID: commerce?.id,
               ),
             ),
           ),
