@@ -209,7 +209,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                       child: LayoutBuilder(
                         builder: (context, constraints) {
                           if (constraints.maxWidth >= ScreenHelper.breakpointPC) {
-                            return _buildBigLayout(commerceID: commerce?.id, products: products);
+                            return _buildBigLayout(commerce: commerce, products: products);
                           }
             
                           return _buildSmallLayout(
@@ -305,7 +305,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                 left: ScreenHelper.horizontalPadding
               ),
               child: PagePaniersList(
-                commerceID: commerce?.id,
+                commerce: commerce,
               ),
             ),
           ),
@@ -317,7 +317,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
   }
 
   Widget _buildBigLayout({
-    required String? commerceID,
+    required Commerce? commerce,
     required List<Product> products
   }) {
     return Column(
@@ -404,7 +404,7 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                 left: ScreenHelper.horizontalPadding
               ),
               child: PagePaniersList(
-                commerceID: commerceID,
+                commerce: commerce,
               ),
             ),
           ),

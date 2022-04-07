@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:chemin_du_local/core/utils/constants.dart';
+import 'package:chemin_du_local/features/basket/basket.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,6 +13,7 @@ class StripeService {
 
   Future<Map<String, dynamic>> handlePaymentIntent({
     required String authorizationHeader,
+    required Basket basket,
     String? paymentMethodId,
     String? paymentIntentId,
   }) async {
@@ -27,7 +29,24 @@ class StripeService {
           "paymentMethodId": paymentMethodId, 
         if (paymentIntentId != null) 
           "paymentIntentId": paymentIntentId,
-        "items": <String>[]
+        "basket": <String, dynamic>{
+          "commerces": <Map<String, dynamic>>[
+            for (final commerce in basket.commerces) <String, dynamic>{
+              "commerceID": commerce.commerce.id,
+              "pickupDate": commerce.pickupDate?.toUtc().toIso8601String(),
+              "products": <Map<String, dynamic>>[
+                for (final product in commerce.products) <String, dynamic>{
+                  "quantity": product.quantity,
+                  "productID": product.product.id
+                }
+              ],
+              "paniers": <String?>[
+                for (final panier in commerce.paniers)
+                  panier.id
+              ]
+            }
+          ]
+        }
       })
     );
 

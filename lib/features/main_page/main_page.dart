@@ -12,7 +12,7 @@ class MainPage extends StatefulWidget {
     Key? key,
     required this.pageItems,
     required this.pages,
-    this.overrideStartIndex = -1
+    this.overrideStartIndex = 1
   }) : assert(pageItems.length == pages.length, "you don't have the same pageItems number than the pages number"), super(key: key);
 
   final List<PageItem> pageItems;

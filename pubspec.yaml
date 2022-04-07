@@ -48,6 +48,7 @@ dependencies:
   json_annotation: ^4.4.0
   latlng: ^0.1.0
   map: ^1.0.0
+  shared_preferences: ^2.0.13
   sliver_tools: ^0.2.5
   uuid: ^3.0.6
 

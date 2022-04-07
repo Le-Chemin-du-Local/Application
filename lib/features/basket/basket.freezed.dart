@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Basket _$BasketFromJson(Map<String, dynamic> json) {
+  return _Basket.fromJson(json);
+}
+
 /// @nodoc
 class _$BasketTearOff {
   const _$BasketTearOff();
@@ -22,6 +26,10 @@ class _$BasketTearOff {
     return _Basket(
       commerces: commerces,
     );
+  }
+
+  Basket fromJson(Map<String, Object?> json) {
+    return Basket.fromJson(json);
   }
 }
 
@@ -32,6 +40,7 @@ const $Basket = _$BasketTearOff();
 mixin _$Basket {
   List<BasketCommerce> get commerces => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $BasketCopyWith<Basket> get copyWith => throw _privateConstructorUsedError;
 }
@@ -95,9 +104,12 @@ class __$BasketCopyWithImpl<$Res> extends _$BasketCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Basket with DiagnosticableTreeMixin implements _Basket {
   const _$_Basket({this.commerces = const <BasketCommerce>[]});
+
+  factory _$_Basket.fromJson(Map<String, dynamic> json) =>
+      _$$_BasketFromJson(json);
 
   @JsonKey()
   @override
@@ -132,10 +144,17 @@ class _$_Basket with DiagnosticableTreeMixin implements _Basket {
   @override
   _$BasketCopyWith<_Basket> get copyWith =>
       __$BasketCopyWithImpl<_Basket>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BasketToJson(this);
+  }
 }
 
 abstract class _Basket implements Basket {
   const factory _Basket({List<BasketCommerce> commerces}) = _$_Basket;
+
+  factory _Basket.fromJson(Map<String, dynamic> json) = _$_Basket.fromJson;
 
   @override
   List<BasketCommerce> get commerces;

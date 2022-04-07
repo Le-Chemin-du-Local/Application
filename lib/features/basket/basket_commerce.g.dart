@@ -13,10 +13,19 @@ _$_BasketCommerce _$$_BasketCommerceFromJson(Map<String, dynamic> json) =>
               ?.map((e) => BasketProduct.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <BasketProduct>[],
+      paniers: (json['paniers'] as List<dynamic>?)
+              ?.map((e) => Panier.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Panier>[],
+      pickupDate: json['pickupDate'] == null
+          ? null
+          : DateTime.parse(json['pickupDate'] as String),
     );
 
 Map<String, dynamic> _$$_BasketCommerceToJson(_$_BasketCommerce instance) =>
     <String, dynamic>{
       'commerce': instance.commerce,
       'products': instance.products,
+      'paniers': instance.paniers,
+      'pickupDate': instance.pickupDate?.toIso8601String(),
     };

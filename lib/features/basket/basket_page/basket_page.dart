@@ -1,7 +1,13 @@
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/authentication/login_dialog.dart';
+import 'package:chemin_du_local/features/basket/basket.dart';
+import 'package:chemin_du_local/features/basket/basket_controller.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_payment_form.dart';
+import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_commerce_schedules.dart';
+import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_success.dart';
 import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,21 +23,36 @@ class _BasketPageState extends ConsumerState<BasketPage> {
   final PageController _pageController = PageController(initialPage: 0);
 
   int _currentIndex = 0;
-
-  // Future _initialize() async {
-  //   bool goToPayment = ref.read(appUserControllerProvider).goBackToBasketPayment;
-
-  //   if (goToPayment) {
-  //     await Future<void>.delayed(const Duration(milliseconds: 100));
-  //     AppManager.instance.basketPageIndex = 1;
-  //     _pageController.jumpToPage(1);
-  //   }
-  // }
+  Basket? _successBasket = null;
 
   @override
   Widget build(BuildContext context) {
+    return ref.watch(basketControllerProvider).basket.when(
+      data: (data) => _buildContent(data),
+      loading: () => const Center(child: CircularProgressIndicator(),),
+      error: (error, stackTrace) => const Align(
+        alignment: Alignment.topCenter,
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+          child: ClStatusMessage(
+            message: "Nous n'arrivons pas à charger votre panier...",
+          ),
+        ),
+      )
+    );
+  }
+
+  Widget _buildContent(Basket basket) {
     return WillPopScope(
       onWillPop: () async {
+        if (_successBasket != null) {
+          setState(() {
+            _successBasket = null;
+            _currentIndex = 0;
+          });
+
+          return false;
+        }
         if (_currentIndex != 0) {
           setState(() {
             _currentIndex--; 
@@ -44,15 +65,28 @@ class _BasketPageState extends ConsumerState<BasketPage> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(),
-        body: PageView(
+        body: _successBasket != null ? BasketSuccess(basket: _successBasket!) : PageView(
           controller: _pageController,
           physics: const NeverScrollableScrollPhysics(),
           children: [
             BasketSummary(
+              basket: basket,
               onPay: _onProceedToPayment,
             ),
-            const BasketPaymentForm()
+            for (final commerce in basket.commerces) 
+              BasketCommerceSchedule(
+                commerce: commerce.commerce,
+                onDateChoosed: (date) => _onScheduleChoosed(commerce.commerce.id!, date),
+              ),
+            BasketPaymentForm(
+              basket: basket,
+              onSuccess: () {
+                setState(() {
+                  _successBasket = basket;
+                });
+                ref.watch(basketControllerProvider.notifier).reset();
+              },
+            )
           ],
         ),
       ), 
@@ -78,6 +112,14 @@ class _BasketPageState extends ConsumerState<BasketPage> {
         )
       );
     }
+  }
+
+  void _onScheduleChoosed(String commerceID, DateTime time) async {
+    ref.read(basketControllerProvider.notifier).updateSchedule(commerceID, time);
+    setState(() {
+        _currentIndex++;
+        _animateScroll(_currentIndex);
+      });
   }
 
   Future _animateScroll(int page) async {

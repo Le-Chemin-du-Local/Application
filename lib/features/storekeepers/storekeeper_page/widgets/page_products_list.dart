@@ -97,7 +97,7 @@ class PageProductsList extends ConsumerWidget {
 
     // Premier cas, on ajoute le produit
     if (quantity >= 1) {
-      ref.read(basketControllerProvider.notifier).updateBasketCommerce(
+      await ref.read(basketControllerProvider.notifier).updateBasketCommerce(
         basketCommerce.copyWith(
           products: [
             for (final product in basketProducts)
@@ -110,8 +110,18 @@ class PageProductsList extends ConsumerWidget {
       );
     }
     
-    if (quantity == 1 && (_productForID(basketCommerce, updated.id ?? "") == null)) { // Second cas, on ajoute le produit 
-      ref.read(basketControllerProvider.notifier).updateBasketCommerce(
+    if (quantity == 1 && _commerceForID(ref.read(basketControllerProvider).basket.value, commerce!.id!) == null) {
+      await ref.read(basketControllerProvider.notifier).addBasketCommerce(
+        BasketCommerce(
+          commerce: commerce!,
+          products: [
+            BasketProduct(product: updated, quantity: quantity)
+          ]
+        )
+      );
+    }
+    else if (quantity == 1 && (_productForID(basketCommerce, updated.id ?? "") == null)) { // Second cas, on ajoute le produit 
+      await ref.read(basketControllerProvider.notifier).updateBasketCommerce(
         basketCommerce.copyWith(
           products: [
             ...basketProducts,
@@ -121,7 +131,7 @@ class PageProductsList extends ConsumerWidget {
       );
     }
     else if (quantity == 0) {
-      ref.read(basketControllerProvider.notifier).updateBasketCommerce(
+      await ref.read(basketControllerProvider.notifier).updateBasketCommerce(
         basketCommerce.copyWith(
           products: [
             for (final product in basketProducts)

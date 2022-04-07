@@ -1,29 +1,34 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/features/basket/basket.dart';
+import 'package:chemin_du_local/features/basket/basket_commerce.dart';
+import 'package:chemin_du_local/features/basket/basket_controller.dart';
+import 'package:chemin_du_local/features/commerces/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_panier_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class PagePaniersList extends StatelessWidget {
+class PagePaniersList extends ConsumerWidget {
   const PagePaniersList({
     Key? key,
-    required this.commerceID,
+    required this.commerce,
   }) : super(key: key);
 
-  final String? commerceID;
+  final Commerce? commerce;
 
   QueryOptions _paniersQueryOptions() {
     return QueryOptions<dynamic>(
       document: gql(qAllPaniers),
       variables: <String, dynamic>{
-        "commerceID": commerceID
+        "commerceID": commerce?.id
       }
     );
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -38,7 +43,7 @@ class PagePaniersList extends StatelessWidget {
         const SizedBox(height: 20,),
 
         // La liste des paniers
-        if (commerceID == null) 
+        if (commerce == null) 
           const ClStatusMessage(
             type: ClStatusMessageType.info,
             message: "Ce commerce ne propose pas encore de panier",
@@ -64,24 +69,16 @@ class PagePaniersList extends StatelessWidget {
                 for (final mapPanier in mapPaniers) {
                   paniers.add(Panier.fromJson(mapPanier["node"] as Map<String, dynamic>));
                 }
-          
-                return ListView(
-                  controller: ScrollController(),
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    for (final panier in paniers) 
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 720),
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 12),
-                          child: PagePanierCard(
-                            panier: panier,
-                            onOpen: () {},
-                          ),
-                        ),
-                      )
-                  ],
+
+                return ref.watch(basketControllerProvider).basket.when(
+                  data: (data) => _buildContent(ref, data, paniers: paniers),
+                  loading: () => const Center(child: CircularProgressIndicator(),),
+                  error: (error, stackTrace) => const Align(
+                    alignment: Alignment.topCenter,
+                    child: ClStatusMessage(
+                      message: "Quelque chose c'est mal passé...",
+                    ),
+                  )
                 );
               },
             ),
@@ -89,4 +86,82 @@ class PagePaniersList extends StatelessWidget {
       ],
     );
   }
+
+  Widget _buildContent(WidgetRef ref, Basket basket, {
+    required List<Panier> paniers,
+  }) {
+    return ListView(
+      controller: ScrollController(),
+      shrinkWrap: true,
+      scrollDirection: Axis.horizontal,
+      children: [
+        for (final panier in paniers) 
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 720),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: PagePanierCard(
+                panier: panier.copyWith(
+                  quantity: panier.quantity - _deductibleQuantity(basket, panier)
+                ),
+                onOpen: () => _addPanierOnBasket(ref, basket, panier),
+              ),
+            ),
+          )
+      ],
+    );
+  }
+
+  int _deductibleQuantity(Basket basket, Panier panierToUpdate) {
+    final BasketCommerce? basketCommerce = _commerceForID(basket, commerce?.id ?? "");
+    int result = 0;
+
+    if (basketCommerce == null) return 0;
+
+    for (final panier in basketCommerce.paniers) {
+      if (panier.id == panierToUpdate.id) {
+        ++result;
+      }
+    }
+
+    return result;
+  }
+
+  Future _addPanierOnBasket(WidgetRef ref, Basket basket, Panier toAdd) async {
+    if (commerce == null) return;
+
+    final BasketCommerce? basketCommerce = _commerceForID(basket, commerce?.id ?? "");
+
+    if (basketCommerce == null) {
+      await ref.read(basketControllerProvider.notifier).addBasketCommerce(
+        BasketCommerce(
+          commerce: commerce!,
+          paniers: [
+            toAdd
+          ]
+        )
+      );
+    }
+    else {
+      await ref.read(basketControllerProvider.notifier).updateBasketCommerce(
+        basketCommerce.copyWith(
+          paniers: [
+            ...basketCommerce.paniers,
+            toAdd,
+          ]
+        )
+      );
+    }
+  }
+
+  BasketCommerce? _commerceForID(Basket? basket, String id) {
+    if (basket == null) return null;
+
+    for (final commerce in basket.commerces) {
+      if (commerce.commerce.id == id) return commerce;
+    }
+
+    return null;
+  }
+
 }

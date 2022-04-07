@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/features/basket/basket_product.dart';
 import 'package:chemin_du_local/features/commerces/commerce.dart';
+import 'package:chemin_du_local/features/storekeepers/services/paniers/panier.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -12,6 +13,8 @@ class BasketCommerce with _$BasketCommerce {
   const factory BasketCommerce({
     required Commerce commerce,
     @Default(<BasketProduct>[]) List<BasketProduct> products,
+    @Default(<Panier>[]) List<Panier> paniers,
+    DateTime? pickupDate,
   }) = _BasketCommerce;
 
   factory BasketCommerce.fromJson(Map<String, dynamic> json) => _$BasketCommerceFromJson(json);

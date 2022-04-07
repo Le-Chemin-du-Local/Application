@@ -26,6 +26,7 @@ class BasketCommerceCard extends StatelessWidget {
               Flexible(
                 child: Text(
                   commerce.commerce.name,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
 
@@ -35,20 +36,35 @@ class BasketCommerceCard extends StatelessWidget {
                   color: Theme.of(context).scaffoldBackgroundColor,
                   borderRadius: BorderRadius.circular(12.0)
                 ),
-                child: Center(child: Text(commerce.products.length.toString())),
+                child: Center(
+                  child: Text(
+                    commerce.products.length.toString(),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  )
+                ),
               )
             ],
           ),
         ),
         Flexible(
-          child: ListView(
-            primary: false,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              for (final product in commerce.products)
-                Text("${product.product.name} (x${product.quantity})")
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: ScreenHelper.horizontalPadding,
+              vertical: 10
+            ),
+            child: ListView(
+              primary: false,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                for (final product in commerce.products)
+                  Text("${product.product.name} (x${product.quantity})"),
+                const Divider(),
+
+                for (final panier in commerce.paniers) 
+                  Text("Panier : ${panier.name}")
+              ],
+            ),
           ),
         )
       ],

@@ -24,10 +24,14 @@ class _$BasketCommerceTearOff {
 
   _BasketCommerce call(
       {required Commerce commerce,
-      List<BasketProduct> products = const <BasketProduct>[]}) {
+      List<BasketProduct> products = const <BasketProduct>[],
+      List<Panier> paniers = const <Panier>[],
+      DateTime? pickupDate}) {
     return _BasketCommerce(
       commerce: commerce,
       products: products,
+      paniers: paniers,
+      pickupDate: pickupDate,
     );
   }
 
@@ -43,6 +47,8 @@ const $BasketCommerce = _$BasketCommerceTearOff();
 mixin _$BasketCommerce {
   Commerce get commerce => throw _privateConstructorUsedError;
   List<BasketProduct> get products => throw _privateConstructorUsedError;
+  List<Panier> get paniers => throw _privateConstructorUsedError;
+  DateTime? get pickupDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +61,11 @@ abstract class $BasketCommerceCopyWith<$Res> {
   factory $BasketCommerceCopyWith(
           BasketCommerce value, $Res Function(BasketCommerce) then) =
       _$BasketCommerceCopyWithImpl<$Res>;
-  $Res call({Commerce commerce, List<BasketProduct> products});
+  $Res call(
+      {Commerce commerce,
+      List<BasketProduct> products,
+      List<Panier> paniers,
+      DateTime? pickupDate});
 
   $CommerceCopyWith<$Res> get commerce;
 }
@@ -73,6 +83,8 @@ class _$BasketCommerceCopyWithImpl<$Res>
   $Res call({
     Object? commerce = freezed,
     Object? products = freezed,
+    Object? paniers = freezed,
+    Object? pickupDate = freezed,
   }) {
     return _then(_value.copyWith(
       commerce: commerce == freezed
@@ -83,6 +95,14 @@ class _$BasketCommerceCopyWithImpl<$Res>
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<BasketProduct>,
+      paniers: paniers == freezed
+          ? _value.paniers
+          : paniers // ignore: cast_nullable_to_non_nullable
+              as List<Panier>,
+      pickupDate: pickupDate == freezed
+          ? _value.pickupDate
+          : pickupDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 
@@ -101,7 +121,11 @@ abstract class _$BasketCommerceCopyWith<$Res>
           _BasketCommerce value, $Res Function(_BasketCommerce) then) =
       __$BasketCommerceCopyWithImpl<$Res>;
   @override
-  $Res call({Commerce commerce, List<BasketProduct> products});
+  $Res call(
+      {Commerce commerce,
+      List<BasketProduct> products,
+      List<Panier> paniers,
+      DateTime? pickupDate});
 
   @override
   $CommerceCopyWith<$Res> get commerce;
@@ -122,6 +146,8 @@ class __$BasketCommerceCopyWithImpl<$Res>
   $Res call({
     Object? commerce = freezed,
     Object? products = freezed,
+    Object? paniers = freezed,
+    Object? pickupDate = freezed,
   }) {
     return _then(_BasketCommerce(
       commerce: commerce == freezed
@@ -132,6 +158,14 @@ class __$BasketCommerceCopyWithImpl<$Res>
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
               as List<BasketProduct>,
+      paniers: paniers == freezed
+          ? _value.paniers
+          : paniers // ignore: cast_nullable_to_non_nullable
+              as List<Panier>,
+      pickupDate: pickupDate == freezed
+          ? _value.pickupDate
+          : pickupDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -142,7 +176,10 @@ class _$_BasketCommerce
     with DiagnosticableTreeMixin
     implements _BasketCommerce {
   const _$_BasketCommerce(
-      {required this.commerce, this.products = const <BasketProduct>[]});
+      {required this.commerce,
+      this.products = const <BasketProduct>[],
+      this.paniers = const <Panier>[],
+      this.pickupDate});
 
   factory _$_BasketCommerce.fromJson(Map<String, dynamic> json) =>
       _$$_BasketCommerceFromJson(json);
@@ -152,10 +189,15 @@ class _$_BasketCommerce
   @JsonKey()
   @override
   final List<BasketProduct> products;
+  @JsonKey()
+  @override
+  final List<Panier> paniers;
+  @override
+  final DateTime? pickupDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BasketCommerce(commerce: $commerce, products: $products)';
+    return 'BasketCommerce(commerce: $commerce, products: $products, paniers: $paniers, pickupDate: $pickupDate)';
   }
 
   @override
@@ -164,7 +206,9 @@ class _$_BasketCommerce
     properties
       ..add(DiagnosticsProperty('type', 'BasketCommerce'))
       ..add(DiagnosticsProperty('commerce', commerce))
-      ..add(DiagnosticsProperty('products', products));
+      ..add(DiagnosticsProperty('products', products))
+      ..add(DiagnosticsProperty('paniers', paniers))
+      ..add(DiagnosticsProperty('pickupDate', pickupDate));
   }
 
   @override
@@ -173,14 +217,19 @@ class _$_BasketCommerce
         (other.runtimeType == runtimeType &&
             other is _BasketCommerce &&
             const DeepCollectionEquality().equals(other.commerce, commerce) &&
-            const DeepCollectionEquality().equals(other.products, products));
+            const DeepCollectionEquality().equals(other.products, products) &&
+            const DeepCollectionEquality().equals(other.paniers, paniers) &&
+            const DeepCollectionEquality()
+                .equals(other.pickupDate, pickupDate));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(commerce),
-      const DeepCollectionEquality().hash(products));
+      const DeepCollectionEquality().hash(products),
+      const DeepCollectionEquality().hash(paniers),
+      const DeepCollectionEquality().hash(pickupDate));
 
   @JsonKey(ignore: true)
   @override
@@ -196,7 +245,9 @@ class _$_BasketCommerce
 abstract class _BasketCommerce implements BasketCommerce {
   const factory _BasketCommerce(
       {required Commerce commerce,
-      List<BasketProduct> products}) = _$_BasketCommerce;
+      List<BasketProduct> products,
+      List<Panier> paniers,
+      DateTime? pickupDate}) = _$_BasketCommerce;
 
   factory _BasketCommerce.fromJson(Map<String, dynamic> json) =
       _$_BasketCommerce.fromJson;
@@ -205,6 +256,10 @@ abstract class _BasketCommerce implements BasketCommerce {
   Commerce get commerce;
   @override
   List<BasketProduct> get products;
+  @override
+  List<Panier> get paniers;
+  @override
+  DateTime? get pickupDate;
   @override
   @JsonKey(ignore: true)
   _$BasketCommerceCopyWith<_BasketCommerce> get copyWith =>

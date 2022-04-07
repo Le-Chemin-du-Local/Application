@@ -14,29 +14,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class BasketSummary extends ConsumerWidget {
   const BasketSummary({
     Key? key,
+    required this.basket,
     required this.onPay,
   }) : super(key: key);
 
+  final Basket basket;
   final Function() onPay;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
-      child: ref.watch(basketControllerProvider).basket.when(
-        data: (data) => _buildContent(data),
-        loading: () => const Center(child: CircularProgressIndicator(),),
-        error: (error, stackTrace) => const Align(
-          alignment: Alignment.topCenter,
-          child: ClStatusMessage(
-            message: "Nous n'arrivons pas à charger votre panier...",
-          ),
-        )
-      ),
-    );
-  }
-
-  Widget _buildContent(Basket basket) {
     return Column(
       children: [
         // La liste des produits
@@ -47,23 +33,30 @@ class BasketSummary extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 for (final commerce in basket.commerces)
-                  BasketCommerceCard(commerce: commerce)
+                  BasketCommerceCard(commerce: commerce),
               ],
             ),
           ),
         ),
 
         // Le bouton
-        ClElevatedButton(
-          onPressed: onPay, 
-          child: Row(
-            children: const [
-              Icon(Icons.shopping_basket_sharp),
-              SizedBox(width: 12,),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: ScreenHelper.horizontalPadding,
+            vertical: 10
+          ),
+          child: ClElevatedButton(
+            onPressed: basket.commerces.isNotEmpty ? onPay : null, 
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Icon(Icons.shopping_basket_sharp),
+                SizedBox(width: 12,),
 
-              Text("Valider mon panier")
-            ],
-          )
+                Text("Valider mon panier")
+              ],
+            )
+          ),
         ),
         const SizedBox(height: 12,)
       ],
