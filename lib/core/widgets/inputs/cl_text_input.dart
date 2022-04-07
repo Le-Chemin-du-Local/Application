@@ -90,11 +90,15 @@ class _ClTextInput extends State<ClTextInput> {
               fillColor: (widget.readOnly && !widget.invisibleReadOnly) ? Theme.of(context).disabledColor : Theme.of(context).cardColor,
               filled: true,
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.transparent),
+                borderSide: BorderSide(
+                  color: Theme.of(context).dividerColor
+                ),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               border: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.transparent),
+                borderSide: BorderSide(
+                  color: Theme.of(context).dividerColor
+                ),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               suffixIcon: widget.suffixIcon != null ? Icon(widget.suffixIcon) : !widget.obscureText ? null : InkWell(
