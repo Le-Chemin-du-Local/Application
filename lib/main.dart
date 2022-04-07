@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chemin_du_local/core/graphql/graphql_client.dart';
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/init.dart';
@@ -14,7 +16,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
+class DebugHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+      // ..badCertificateCallback = (X509Certificate cert, String host, int port) {
+      //   if (host == "localhost" && port == 8082) return true;
+
+      //   return false;
+      // };
+  }
+}
+
 void main() async {
+  HttpOverrides.global = DebugHttpOverrides();
+  
   WidgetsFlutterBinding.ensureInitialized();
 
   // Strip initialisation

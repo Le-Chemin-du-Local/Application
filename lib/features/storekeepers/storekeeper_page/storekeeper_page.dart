@@ -286,7 +286,10 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
               child: PageProductsList(
                 commerce: commerce,
                 products: products, 
-                availableForClickAndCollect: productsAvailableForClickAndCollect,
+                availableForClickAndCollect: [
+                  for (final product in productsAvailableForClickAndCollect)
+                    product.id!
+                ],
                 enableButton: false,
               ),
             ),

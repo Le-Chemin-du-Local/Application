@@ -24,7 +24,7 @@ class PageProductsList extends ConsumerWidget {
   final Commerce? commerce;
 
   final List<Product> products;
-  final List<Product> availableForClickAndCollect;
+  final List<String> availableForClickAndCollect;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -61,7 +61,7 @@ class PageProductsList extends ConsumerWidget {
                     padding: const EdgeInsets.only(right: 12),
                     child: ProductCard(
                       product: product,
-                      showQuantityPicker: true,
+                      showQuantityPicker: availableForClickAndCollect.contains(product.id),
                       quantity: _productForID(basketCommerce, product.id ?? "")?.quantity ?? 0,
                       onQuantityUpdated: (value) => _updateProductOnBasket(ref, product, value),
                     ),
