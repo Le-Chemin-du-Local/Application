@@ -1,25 +1,25 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
-import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand.dart';
-import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand_page/widgets/cccommand_category.dart';
-import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/ccproduct.dart';
+import 'package:chemin_du_local/features/commands/panier_page/widgets/panier_command_category.dart';
+import 'package:chemin_du_local/features/storekeepers/services/paniers/panier_command.dart';
+import 'package:chemin_du_local/features/storekeepers/services/paniers/panier_product.dart';
 import 'package:flutter/material.dart';
 
-class CCCommandProductsCard extends StatelessWidget {
-  const CCCommandProductsCard({
+class PanierCommandProductsCard extends StatelessWidget {
+  const PanierCommandProductsCard({
     Key? key,
     required this.command,
     required this.onMarkReady
   }) : super(key: key);
 
-  final CCCommand command;
+  final PanierCommand command;
 
   final Function() onMarkReady;
 
-  Map<String, List<CCProduct>> _orderedProducts() {
-    Map<String, List<CCProduct>> result = {};
+  Map<String, List<PanierProduct>> _orderedProducts() {
+    Map<String, List<PanierProduct>> result = {};
 
-    for (final product in command.products) {
+    for (final product in command.panier.products) {
       final String categorie = product.product.categories.isNotEmpty ? product.product.categories.first : "Autre";
 
       if (result[categorie] == null) {
@@ -44,7 +44,7 @@ class CCCommandProductsCard extends StatelessWidget {
         children: [
           for (final category in products.keys) ...{
             Flexible(
-              child: CCCommandCategory(
+              child: PanierCommandCategory(
                 category: category,
                 products: products[category]!,
               ),
@@ -53,7 +53,7 @@ class CCCommandProductsCard extends StatelessWidget {
           },
           
           ClElevatedButton(
-            onPressed: command.status == CCCommandStatus.inProgress
+            onPressed: command.status == PanierCommandStatus.inProgress
               ? onMarkReady
               : null,
             child: const Text("Commande prête"),

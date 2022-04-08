@@ -3,7 +3,7 @@ import 'package:chemin_du_local/features/commerces/commerce.dart';
 import 'package:chemin_du_local/features/main_page/main_page.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/products_main_page.dart';
-import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/click_and_collect_page.dart';
+import 'package:chemin_du_local/features/commands/commands_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_home/storekeeper_home_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/storekeeper_page.dart';
@@ -62,7 +62,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
       if (hasClickAndCollect) 
         const PageItem(
           index: 3, 
-          title: "Click and Collect", 
+          title: "Mes commandes", 
           appBarTitle: "Mes commandes",
           icon: CLIcons.clickandcollect,
         ),
@@ -107,7 +107,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
             key: AppManager.instance.clickAndCollectPageKey,
             onGenerateRoute: (route) => MaterialPageRoute<void>(
               settings: route,
-              builder: (context) => const ClickAndCollectPage()
+              builder: (context) => const CommandsPage()
             ),
           )
         ),

@@ -1,15 +1,17 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand.dart';
+import 'package:chemin_du_local/features/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class CCCommandUserCard extends StatelessWidget {
-  const CCCommandUserCard({
+class CommandUserCard extends StatelessWidget {
+  const CommandUserCard({
     Key? key,
-    required this.command
+    required this.user,
+    required this.pickupDate,
   }) : super(key: key);
 
-  final CCCommand command;
+  final User? user;
+  final DateTime pickupDate;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class CCCommandUserCard extends StatelessWidget {
         children: [
           // Le nom
           Text(
-            "${command.user?.firstName ?? ""} ${command.user?.lastName ?? ""}",
+            "${user?.firstName ?? ""} ${user?.lastName ?? ""}",
             style: Theme.of(context).textTheme.headline2,
             textAlign: TextAlign.center,
           ),
@@ -29,15 +31,15 @@ class CCCommandUserCard extends StatelessWidget {
           // // Date & heure
           const Text("Commande à préparer pour le", style: TextStyle(fontWeight: FontWeight.bold),),
           const SizedBox(height: 18,),
-          Flexible(child: _buildIconedInfo(Icons.calendar_today, DateFormat("dd/MM/yyyy").format(command.pickupDate))),
+          Flexible(child: _buildIconedInfo(Icons.calendar_today, DateFormat("dd/MM/yyyy").format(pickupDate))),
           const SizedBox(height: 12,),
-          Flexible(child: _buildIconedInfo(Icons.access_time, DateFormat.Hm().format(command.pickupDate))),
+          Flexible(child: _buildIconedInfo(Icons.access_time, DateFormat.Hm().format(pickupDate))),
           const SizedBox(height: 20,),
 
           // Contact
           const Text("Contact", style: TextStyle(fontWeight: FontWeight.bold),),
           const SizedBox(height: 12,),
-          Text(command.user?.email ?? "email inconnue")
+          Text(user?.email ?? "email inconnue")
 
         ],
       ),

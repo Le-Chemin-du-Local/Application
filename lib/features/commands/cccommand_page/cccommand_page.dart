@@ -1,8 +1,8 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/features/commands/cccommand_page/widgets/cccommand_products_card.dart';
+import 'package:chemin_du_local/features/commands/widgets/command_user_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand.dart';
-import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand_page/widgets/cccommand_products_card.dart';
-import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand_page/widgets/cccommand_user_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/click_and_collect_grahpql.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -73,7 +73,10 @@ class CCCommandPage extends StatelessWidget {
                 Expanded(
                   flex: 35,
                   child: SingleChildScrollView(
-                    child: CCCommandUserCard(command: command,),
+                    child: CommandUserCard(
+                      user: command.user,
+                      pickupDate: command.pickupDate,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 25,),
@@ -99,7 +102,10 @@ class CCCommandPage extends StatelessWidget {
               children: [
                 // The user info card
                 Flexible(
-                  child: CCCommandUserCard(command: command,),
+                  child: CommandUserCard(
+                    user: command.user,
+                    pickupDate: command.pickupDate,
+                  ),
                 ),
                 const SizedBox(height: 18,),
 

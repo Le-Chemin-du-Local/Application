@@ -19,6 +19,7 @@ commerce {
           }
         }
         user {
+          id
           role
           email
           firstName

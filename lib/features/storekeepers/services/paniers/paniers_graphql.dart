@@ -68,6 +68,68 @@ query getDetailledPanier($id: ID!) {
 }
 '''; 
 
+const String qPanierCommandsMini = r'''
+query commerce($status: String!) {
+commerce {
+  panierCommands(
+    filters: {
+      status: $status 
+    }
+  ) {
+    edges {
+      node {
+        id
+        status
+        pickupDate
+        panier {
+          id
+          name
+          category
+          price
+        }
+        user {
+          id
+          role
+          email
+          firstName
+          lastName
+        }
+      }
+    }
+  }
+  }
+}
+''';
+
+const String qPanierCommandDetails = r'''
+query paniercommandDetails($id: ID!) {
+  paniercommand(id: $id) {
+    status
+    pickupDate
+    panier {
+      id
+      name
+      category
+      price
+      products {
+        quantity
+        product {
+          name
+          price
+          categories
+        }
+      }   
+    }
+    user {
+      role
+      email
+      firstName
+      lastName
+    }
+  }
+}
+''';
+
 const String mutCreatePanier = r'''
 mutation createPanier(
   $commerce: ID,
@@ -120,6 +182,21 @@ mutation createPanier(
   }) {
     id,
     name
+  }
+}
+''';
+
+
+const String mutUpdatePanierCommand = r'''
+mutation updatePanierCommand($id: ID!, $status: String!) {
+  updatePanierCommand(
+    id: $id,
+    changes: {
+      status: $status
+    }
+  ) {
+    id
+    status
   }
 }
 ''';

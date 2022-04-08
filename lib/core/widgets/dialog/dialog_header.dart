@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:flutter/material.dart';
 
 class DialogHeader extends StatelessWidget {
