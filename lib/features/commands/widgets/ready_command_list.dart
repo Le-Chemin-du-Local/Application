@@ -14,6 +14,7 @@ class ReadyCommandList extends StatelessWidget {
     required this.panierQueryResult,
     required this.runMutation,
     required this.runPanierMutation,
+    required this.filter,
   }) : super(key: key);
 
   final QueryResult<dynamic> queryResult;
@@ -21,6 +22,8 @@ class ReadyCommandList extends StatelessWidget {
 
   final RunMutation? runMutation;
   final RunMutation? runPanierMutation;
+
+  final String filter;
 
   @override
   Widget build(BuildContext context) {
@@ -76,16 +79,16 @@ class ReadyCommandList extends StatelessWidget {
       children: [
         for (final user in commands.keys)
           for (final command in commands[user]!)
-            if (command is CCCommand)
+            if (command is CCCommand && (filter.isEmpty || filter == "clickandcollect"))
               CCCommandCard(
                 command: command, 
                 index: 0,
                 onMarkAsDone: () => _markCommandAsDone(command.id!),
                 runMutation: runMutation,
               )
-            else
+            else if (command is PanierCommand && (filter.isEmpty || filter == "paniers"))
               PanierCommandCard(
-                command: command as PanierCommand, 
+                command: command, 
                 index: 0, 
                 onMarkAsDone: () => _markPanierCommandAsDone(command.id!),
                 runMutation: runPanierMutation

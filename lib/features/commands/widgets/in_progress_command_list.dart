@@ -13,12 +13,15 @@ class InProgressCommandList extends StatelessWidget {
     required this.panierQueryResult,
     required this.runMutation,
     required this.runPanierMutation,
+    required this.filter,
   }) : super(key: key);
 
   final QueryResult queryResult;
   final QueryResult panierQueryResult;
   final RunMutation? runMutation;
   final RunMutation? runPanierMutation;
+
+  final String filter;
 
   @override
   Widget build(BuildContext context) {
@@ -74,16 +77,16 @@ class InProgressCommandList extends StatelessWidget {
       children: [
         for (final user in commands.keys)
           for (final command in commands[user]!)
-            if (command is CCCommand)
+            if (command is CCCommand && (filter.isEmpty || filter == "clickandcollect"))
               CCCommandCard(
                 command: command, 
                 index: 0,
                 onMarkAsDone: null,
                 runMutation: runMutation,
               )
-            else
+            else if (command is PanierCommand && (filter.isEmpty || filter == "paniers"))
               PanierCommandCard(
-                command: command as PanierCommand, 
+                command: command, 
                 index: 0, 
                 onMarkAsDone: null,
                 runMutation: runPanierMutation

@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/badge.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/cccommand.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/click_and_collect_grahpql.dart';
@@ -20,6 +21,8 @@ class _CommandsPageState extends State<CommandsPage> {
   String _errorMessage = "";
 
   bool _shouldRefetch = false;
+
+  String _filter = "";
 
   QueryOptions _cccommandOptions(String status) {
     return QueryOptions<dynamic>(
@@ -130,6 +133,11 @@ class _CommandsPageState extends State<CommandsPage> {
                                       const SizedBox(height: 12,),
                                     },
                                     Flexible(
+                                      child: _buildHeader(),
+                                    ),
+                                    const SizedBox(height: 12,),
+
+                                    Flexible(
                                       child: LayoutBuilder(
                                         builder: (context, constraints) {
                                           final bool useBigLayout = constraints.maxWidth > ScreenHelper.breakpointPC;
@@ -190,6 +198,7 @@ class _CommandsPageState extends State<CommandsPage> {
             panierQueryResult: inProgressPanierCommandResult,
             runMutation: runMutation,
             runPanierMutation: runPanierMutation,
+            filter: _filter,
           ),
         ),
         const SizedBox(width: 18,),
@@ -201,6 +210,7 @@ class _CommandsPageState extends State<CommandsPage> {
             panierQueryResult: readyPanierCommandResult,
             runMutation: runMutation,
             runPanierMutation: runPanierMutation,
+            filter: _filter,
           ),
         )
       ],
@@ -225,6 +235,7 @@ class _CommandsPageState extends State<CommandsPage> {
             panierQueryResult: inProgressPanierCommandResult,
             runMutation: runMutation,
             runPanierMutation: runPanierMutation,
+            filter: _filter,
           ),
         ),
         const SizedBox(width: 18,),
@@ -236,8 +247,57 @@ class _CommandsPageState extends State<CommandsPage> {
             panierQueryResult: readyPanierCommandResult,
             runMutation: runMutation,
             runPanierMutation: runPanierMutation,
+            filter: _filter,
           ),
         )
+      ],
+    );
+  }
+
+  Widget _buildHeader() {
+    return Wrap(
+      spacing: 16,
+      runSpacing: 16,
+      children: [
+        InkWell(
+          onTap: () {
+            setState(() {
+              _filter = "";
+            });
+          },
+          child: Opacity(
+            opacity: _filter.isEmpty ? 1.0 : 0.4,
+            child: const Badge(
+              child: Text("Afficher tout")
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              _filter = "clickandcollect";
+            });
+          },
+          child: Opacity(
+            opacity: _filter == "clickandcollect" ? 1.0 : 0.4,
+            child: const Badge(
+              child: Text("Click and collect")
+            ),
+          ),
+        ),
+        InkWell(
+          onTap: () {
+            setState(() {
+              _filter = "paniers";
+            });
+          },
+          child: Opacity(
+            opacity: _filter == "paniers" ? 1.0 : 0.4,
+            child: const Badge(
+              child: Text("Paniers")
+            ),
+          ),
+        ),
       ],
     );
   }
