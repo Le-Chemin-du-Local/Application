@@ -59,6 +59,12 @@ class _LoginFormState extends State<LoginForm> {
           ClElevatedButton(
             onPressed: _onConnect,
             child: const Text("Me connecter"),
+          ),
+          const SizedBox(height: 12,),
+
+          ClElevatedButton(
+            onPressed: widget.onRegister, 
+            child: const Text("Créer mon compte")
           )
         ],
       ),

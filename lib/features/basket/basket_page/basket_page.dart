@@ -23,7 +23,7 @@ class _BasketPageState extends ConsumerState<BasketPage> {
   final PageController _pageController = PageController(initialPage: 0);
 
   int _currentIndex = 0;
-  Basket? _successBasket = null;
+  Basket? _successBasket;
 
   @override
   Widget build(BuildContext context) {

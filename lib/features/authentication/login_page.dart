@@ -3,15 +3,23 @@ import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/authentication/authentication_graphql.dart';
 import 'package:chemin_du_local/features/authentication/widgets/login_form.dart';
+import 'package:chemin_du_local/features/authentication/widgets/registration_form.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class LoginPage extends ConsumerWidget {
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({
     Key? key,
   }) : super(key: key);
+
+  @override
+  ConsumerState<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends ConsumerState<LoginPage> {
+  bool _isRegistering = false;
 
   MutationOptions<dynamic> _loginMutationOptions(WidgetRef ref) {
     return MutationOptions<dynamic>(
@@ -33,7 +41,7 @@ class LoginPage extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     const double maxFormWidth = 500;
 
     return Scaffold(
@@ -93,10 +101,24 @@ class LoginPage extends ConsumerWidget {
                                   const SizedBox(height: 20,)
                                 },
 
-                                LoginForm(
-                                  onLogin: (info) => _onConnect(info, loginRunMutation),
-                                  onRegister: () {},
-                                ),
+                                if (_isRegistering) 
+                                  Flexible( 
+                                    child: ConstrainedBox(
+                                      constraints: BoxConstraints(maxHeight: constraints.maxHeight - 230),
+                                      child: const RegistrationForm()
+                                    )
+                                  )
+                                else 
+                                  Flexible(
+                                    child: LoginForm(
+                                      onLogin: (info) => _onConnect(info, loginRunMutation),
+                                      onRegister: () {
+                                        setState(() {
+                                          _isRegistering= true;
+                                        });
+                                      },
+                                                                  ),
+                                  ),
                               ],
                             );
                           }
