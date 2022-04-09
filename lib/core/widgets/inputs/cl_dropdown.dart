@@ -37,8 +37,19 @@ class ClDropdown<T> extends StatelessWidget {
             icon: const Icon(Icons.arrow_drop_down),
             iconSize: 32,
             // underline: Container(),
-            decoration: const InputDecoration(
-              enabledBorder: InputBorder.none,
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).dividerColor
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).dividerColor
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
               contentPadding: EdgeInsets.zero
             ),
             isExpanded: true,

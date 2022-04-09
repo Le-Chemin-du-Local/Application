@@ -46,11 +46,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: const Text("Mon Compte"),
-      ),
       body: Container(
         decoration: const BoxDecoration(
           gradient: Palette.gradientPrimary
@@ -104,8 +99,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 if (_isRegistering) 
                                   Flexible( 
                                     child: ConstrainedBox(
-                                      constraints: BoxConstraints(maxHeight: constraints.maxHeight - 230),
-                                      child: const RegistrationForm()
+                                      constraints: BoxConstraints(maxHeight: constraints.maxHeight - (230 + ScreenHelper.horizontalPadding)),
+                                      child: RegistrationForm(
+                                        onRegistred: () {
+                                          setState(() {
+                                            _isRegistering = false;
+                                          });
+                                        },
+                                      )
                                     )
                                   )
                                 else 

@@ -17,12 +17,14 @@ class RegistrationStep1 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text("Je suis"),
+        const Text("Je suis", textAlign: TextAlign.center,),
+        const SizedBox(height: 10,),
 
         ClElevatedButton(
-          onPressed: () => onTypeChoosed(RegistrationType.client), 
+          onPressed: () => onTypeChoosed(RegistrationType.storekeeper), 
           child: const Text("un commerçant")
         ),
+        const SizedBox(height: 10,),
 
         ClElevatedButton(
           onPressed: () => onTypeChoosed(RegistrationType.client), 

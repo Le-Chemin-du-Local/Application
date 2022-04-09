@@ -51,11 +51,11 @@ class ClDateTimePicker extends StatelessWidget {
               fillColor: Theme.of(context).cardColor,
               filled: true,
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.transparent),
+                borderSide: BorderSide(color: Theme.of(context).dividerColor),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               border: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.transparent),
+                borderSide: BorderSide(color: Theme.of(context).dividerColor),
                 borderRadius: BorderRadius.circular(12.0),
               ),
             ),

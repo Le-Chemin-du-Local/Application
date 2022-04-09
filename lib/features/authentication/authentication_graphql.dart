@@ -10,6 +10,25 @@ mutation login(
 }
 ''';
 
+const String mutRegisterUser = r'''
+mutation register(
+  $email: String!
+  $password: String!
+  $firstName: String!
+  $lastName: String!
+) {
+  createUser(input: {
+    email: $email
+    password: $password
+    firstName: $firstName
+    lastName: $lastName
+  }) {
+    id
+    firstName
+  }
+}
+''';
+
 const String qGetLoggedUser = r'''
 query GetLoggedUser {
   user {

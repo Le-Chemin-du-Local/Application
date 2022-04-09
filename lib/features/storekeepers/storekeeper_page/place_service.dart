@@ -19,6 +19,7 @@ class PlaceAPIProvider {
   static final PlaceAPIProvider instance = PlaceAPIProvider._();
 
   final String apiKey = const String.fromEnvironment("MAP_PLACE_API_KEY");
+  // final String apiKey = const String.fromEnvironment("MAP_PLACE_WEB_API_KEY");
 
   Future<List<Suggestion>> fetchSuggestions(String input, String lang, String sessionToken) async {
     final String sessionTokenString = sessionToken.isNotEmpty ? "&sessiontoken=$sessionToken" : "";
