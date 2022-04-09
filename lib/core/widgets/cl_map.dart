@@ -80,7 +80,7 @@ class _ClMapState extends State<ClMap> {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: BoxConstraints(maxHeight: 280),
+      constraints: const BoxConstraints(maxHeight: 280),
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onDoubleTap: _onDoubleTap,

@@ -2,8 +2,6 @@ import 'dart:typed_data';
 
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:excel/excel.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 
 class ProductExcelTools {
   ProductExcelTools._();

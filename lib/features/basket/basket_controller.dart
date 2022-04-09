@@ -2,10 +2,7 @@ import 'dart:convert';
 
 import 'package:chemin_du_local/features/basket/basket.dart';
 import 'package:chemin_du_local/features/basket/basket_commerce.dart';
-import 'package:chemin_du_local/features/basket/basket_product.dart';
 import 'package:chemin_du_local/features/basket/basket_state.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
-import 'package:chemin_du_local/features/products/product.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';

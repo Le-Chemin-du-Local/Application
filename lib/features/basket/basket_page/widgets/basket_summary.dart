@@ -1,13 +1,7 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
-import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/basket/basket.dart';
-import 'package:chemin_du_local/features/basket/basket_controller.dart';
 import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_commerce_card.dart';
-import 'package:chemin_du_local/features/basket/basket_product.dart';
-import 'package:chemin_du_local/features/basket/basket_state.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
-import 'package:chemin_du_local/features/products/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

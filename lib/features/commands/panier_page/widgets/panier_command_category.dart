@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/widgets/product_categorie_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier_product.dart';
 import 'package:flutter/material.dart';

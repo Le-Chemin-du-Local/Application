@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/features/products/product.dart';
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'basket_product.freezed.dart';

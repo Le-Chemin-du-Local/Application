@@ -112,7 +112,7 @@ class PageHeaderImage extends StatelessWidget {
                             )
                           : Text(
                               storekeeperWordTextController.text,
-                              style: TextStyle(color: Palette.colorWhite),
+                              style: const TextStyle(color: Palette.colorWhite),
                             )
                       ),
                     ],
@@ -170,7 +170,7 @@ class PageHeaderImage extends StatelessWidget {
       );
 
       onImageSelected(file);
-      imageCache?.clear();
+      imageCache.clear();
     }
   } 
 }

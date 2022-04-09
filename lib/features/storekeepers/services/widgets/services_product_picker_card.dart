@@ -1,5 +1,3 @@
-import 'package:chemin_du_local/core/utils/constants.dart';
-import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/widgets/product_card.dart';
 import 'package:flutter/material.dart';

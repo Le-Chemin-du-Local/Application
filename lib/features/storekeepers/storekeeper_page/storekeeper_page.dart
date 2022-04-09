@@ -16,7 +16,6 @@ import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/p
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_schedules_card.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
 import 'package:chemin_du_local/features/user/user.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart';
