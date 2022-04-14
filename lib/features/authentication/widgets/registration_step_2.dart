@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dateime_picker.dart';
+import 'package:chemin_du_local/core/widgets/inputs/cl_phone_input.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/widgets.dart';
@@ -83,15 +84,10 @@ class RegistrationStep2 extends StatelessWidget {
           ),
           const SizedBox(height: 10,),
     
-          ClTextInput(
+          ClPhoneInput(
             controller: phoneTextController,
             labelText: "Mon numéro de téléphone",
             hintText: "0652809335",
-            inputType: TextInputType.phone,
-            validator: (value) {
-              if (value.isEmpty) return "Vous devez rentrerun numéro de téléphone";
-              return null;
-            },
           ),
           const SizedBox(height: 10,),
 
