@@ -5,8 +5,10 @@ import 'package:chemin_du_local/features/authentication/widgets/registration_ste
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_3.dart';
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_password.dart';
 import 'package:chemin_du_local/features/commerces/commerces_graphql.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:latlng/latlng.dart';
 
 mixin RegistrationType {
   static const String client = "client";
@@ -44,6 +46,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
   // Controllers étape 2
   final TextEditingController _storeNameTextController = TextEditingController();
   final TextEditingController _addressTextController = TextEditingController();
+  LatLng? _addressCoordinates;
   
   String _storeType = "";
   
@@ -75,8 +78,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
           "userID": userID,
           "name": _storeNameTextController.text,
           "address": _addressTextController.text,
-          "latitude": 0,
-          "longitude": 0,
+          "latitude": _addressCoordinates!.latitude,
+          "longitude": _addressCoordinates!.longitude,
           "phone": _phoneTextController.text,
           "email": _emailTextController.text,
         });
@@ -215,11 +218,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
     _animateScroll(3);
   }
 
-  void _register({
+  Future _register({
     required RunMutation? registerRunMutation
-  }) {
+  }) async {
     if (!(_passwordFormKey.currentState?.validate() ?? false)) return;
     if (!_hasAcceptedConditions) return;
+
+    if (_registrationType == RegistrationType.storekeeper) {
+      _addressCoordinates = await PlaceAPIProvider.instance.latLgnForAddress(_addressTextController.text);
+      if (_addressCoordinates == null) {
+        // TODO: show error message
+        return;
+      }
+    }
 
     if (registerRunMutation != null) {
       registerRunMutation(<String, dynamic>{

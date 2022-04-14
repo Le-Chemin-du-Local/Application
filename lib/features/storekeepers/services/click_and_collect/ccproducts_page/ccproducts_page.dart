@@ -2,6 +2,7 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
+import 'package:chemin_du_local/features/commerces/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/click_and_collect_grahpql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/services_products_picker.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,8 @@ class _CCProductsPageState extends State<CCProductsPage> {
   String _statusMessage = "";
   bool _isSuccessful = false;
 
+  bool _hasBeenInitialized = false;
+
   MutationOptions _updateProductsClickAndCollect() {
     return MutationOptions<dynamic>(
       document: gql(mutUpdateCCProductsAvailability),
@@ -41,6 +44,12 @@ class _CCProductsPageState extends State<CCProductsPage> {
     );
   }
 
+  QueryOptions _availableProductsForCCQueryOptions() {
+    return QueryOptions<dynamic>(
+      document: gql(qProductsAvailableForClickAndCollect),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Mutation<dynamic>(
@@ -54,12 +63,21 @@ class _CCProductsPageState extends State<CCProductsPage> {
             padding: const EdgeInsets.symmetric(
               horizontal: ScreenHelper.horizontalPadding,
             ),
-            child: Builder(
-              builder: (context) {
-                if (mutationResult?.isLoading ?? false) {
+            child: Query<dynamic>(
+              options: _availableProductsForCCQueryOptions(),
+              builder: (queryResult, {fetchMore, refetch}) {
+                if ((mutationResult?.isLoading ?? false) || queryResult.isLoading) {
                   return const Center(child: CircularProgressIndicator(),);  
                 }
 
+                final Commerce commerce = Commerce.fromJson(queryResult.data!["commerce"] as Map<String, dynamic>);
+                if (!_hasBeenInitialized) {
+                  for (final product in commerce.productsAvailableForClickAndCollect) {
+                    _productsIDs.add(product.id!);
+                  }
+                  _hasBeenInitialized = true;
+                }
+                
                 return Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -69,7 +87,15 @@ class _CCProductsPageState extends State<CCProductsPage> {
                       ClStatusMessage(
                         type: _isSuccessful ? ClStatusMessageType.success : ClStatusMessageType.error,
                         message: _statusMessage,
-                      )
+                      ),
+                      const SizedBox(height: 12,)
+                    },
+
+                    if (queryResult.hasException) ...{
+                      const ClStatusMessage(
+                        message: "Nous n'arrivons pas à charger les produits...",
+                      ),
+                      const SizedBox(height: 20,),
                     },
 
                     // Chackbox

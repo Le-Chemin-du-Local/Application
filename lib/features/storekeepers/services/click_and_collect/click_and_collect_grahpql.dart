@@ -1,3 +1,16 @@
+const String qProductsAvailableForClickAndCollect = r'''
+query productsAvailableForClickAndCollect($commerceID: ID) {
+commerce(id: $commerceID) {
+  id
+  name
+  productsAvailableForClickAndCollect {
+    id
+    name
+  }
+}
+}
+''';
+
 const String qCCCommandsMini = r'''
 query commerce($status: String!) {
 commerce {
