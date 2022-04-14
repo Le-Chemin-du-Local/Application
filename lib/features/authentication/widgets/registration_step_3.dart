@@ -29,54 +29,58 @@ class RegistrationStep3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Le nom du commerce
-          ClTextInput(
-            controller: storeNameController,
-            labelText: "Le nom de mon commerce",
-            hintText: "La Bizhh",
-            validator: (value) {
-              if (value.isEmpty) return "Vous devez rentrer le nom de votre commerce";
-              return null;
-            },
-          ),
-          const SizedBox(height: 10,),
-
-          // Le type du commerce
-          ClDropdown<String>(
-            currentValue: storeType,
-            label: "Le type",
-            items: const {
-              "": "",
-              "Epicerie": "Epicerie",
-              "Brasserie": "Brasserie",
-              "Ostriculture": "Ostriculture",
-              "Autre": "Autre",
-            },
-            onChanged: onStoreTypeChanged,
-            validator: (value) {
-              if ((value ?? "").isEmpty) return "Vous devez rentrer un type de commerce";
-              return null;
-            },
-          ),
-          const SizedBox(height: 10,),
-
-          // l'adresse
-          ClAddressInput(
-            addressTextController: addressTextController,
-            onSelected: (value) {},
-          ),
-          const SizedBox(height: 10,),
-
-          // Le bouton d'acceptation
-          ClElevatedButton(
-            onPressed: onNext,
-            child: const Text("Suivant"),
-          )
-        ],
+      child: SingleChildScrollView(
+        controller: ScrollController(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Le nom du commerce
+            ClTextInput(
+              controller: storeNameController,
+              labelText: "Le nom de mon commerce",
+              hintText: "La Bizhh",
+              validator: (value) {
+                if (value.isEmpty) return "Vous devez rentrer le nom de votre commerce";
+                return null;
+              },
+            ),
+            const SizedBox(height: 10,),
+      
+            // Le type du commerce
+            ClDropdown<String>(
+              currentValue: storeType,
+              label: "Le type",
+              items: const {
+                "": "",
+                "Epicerie": "Epicerie",
+                "Brasserie": "Brasserie",
+                "Ostriculture": "Ostriculture",
+                "Autre": "Autre",
+              },
+              onChanged: onStoreTypeChanged,
+              validator: (value) {
+                if ((value ?? "").isEmpty) return "Vous devez rentrer un type de commerce";
+                return null;
+              },
+            ),
+            const SizedBox(height: 10,),
+      
+            // l'adresse
+            ClAddressInput(
+              addressTextController: addressTextController,
+              onSelected: (value) {},
+            ),
+            const SizedBox(height: 10,),
+      
+            // Le bouton d'acceptation
+            ClElevatedButton(
+              onPressed: onNext,
+              child: const Text("Suivant"),
+            ),
+            const SizedBox(height: 20,)
+          ],
+        ),
       ),
     );
   }

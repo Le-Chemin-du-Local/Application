@@ -26,47 +26,51 @@ class _LoginFormState extends State<LoginForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // The Email field
-          ClTextInput(
-            controller: _emailTextController,
-            labelText: "Mon adresse mail",
-            hintText: "jean@mail.com",
-            inputType: TextInputType.emailAddress,
-            validator: (value) {
-              if (value.isEmpty) return "Vous devez rentrer un email";
-              return null;
-            },
-          ),
-          const SizedBox(height: 12,),
+      child: SingleChildScrollView(
+        controller: ScrollController(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // The Email field
+            ClTextInput(
+              controller: _emailTextController,
+              labelText: "Mon adresse mail",
+              hintText: "jean@mail.com",
+              inputType: TextInputType.emailAddress,
+              validator: (value) {
+                if (value.isEmpty) return "Vous devez rentrer un email";
+                return null;
+              },
+            ),
+            const SizedBox(height: 12,),
+        
+            // The Password field
+            ClTextInput(
+              controller: _passwordTextController,
+              labelText: "Mon mot de passe",
+              hintText: "**********",
+              obscureText: true,
+              validator: (value) {
+                if (value.isEmpty) return "Vous devez rentrer un mot de passe";
+                return null;
+              },
+            ),
+            const SizedBox(height: 40,),
+        
+            ClElevatedButton(
+              onPressed: _onConnect,
+              child: const Text("Me connecter"),
+            ),
+            const SizedBox(height: 12,),
       
-          // The Password field
-          ClTextInput(
-            controller: _passwordTextController,
-            labelText: "Mon mot de passe",
-            hintText: "**********",
-            obscureText: true,
-            validator: (value) {
-              if (value.isEmpty) return "Vous devez rentrer un mot de passe";
-              return null;
-            },
-          ),
-          const SizedBox(height: 40,),
-      
-          ClElevatedButton(
-            onPressed: _onConnect,
-            child: const Text("Me connecter"),
-          ),
-          const SizedBox(height: 12,),
-
-          ClElevatedButton(
-            onPressed: widget.onRegister, 
-            child: const Text("Créer mon compte")
-          )
-        ],
+            ClElevatedButton(
+              onPressed: widget.onRegister, 
+              child: const Text("Créer mon compte")
+            ),
+            const SizedBox(height: 20,),
+          ],
+        ),
       ),
     );
   }

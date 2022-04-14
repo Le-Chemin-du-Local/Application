@@ -170,7 +170,7 @@ class PageHeaderImage extends StatelessWidget {
       );
 
       onImageSelected(file);
-      imageCache.clear();
+      imageCache?.clear();
     }
   } 
 }

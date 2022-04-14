@@ -34,68 +34,72 @@ class RegistrationStep2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Le prénom
-          ClTextInput(
-            controller: firstNameTextController, 
-            labelText: "Mon prénom",
-            hintText: "Victor",
-            validator: (value) {
-              if (value.isEmpty) return "Vous devez rentrer un prénom";
-              return null;
-            },
-          ),
-          const SizedBox(height: 10,),
-    
-          // Le nom
-          ClTextInput(
-            controller: lastNameTextController,
-            labelText: "Mon nom",
-            hintText: "DENIS",
-            validator: (value) {
-              if (value.isEmpty) return "Vous devez rentrer un nom";
-              return null;
-            }
-          ),
-          const SizedBox(height: 10,),
-    
-          ClDateTimePicker(
-             type: DateTimePickerType.date,
-             initialDate: initialDate,
-             label: "Date de naissance",
-             firstDate: DateTime(1900),
-             lastDate: DateTime.now(),
-             onChanged: onBirthdateChange,
-          ),
-          const SizedBox(height: 10,),
-    
-          ClTextInput(
-            controller: emailTextController,
-            labelText: "Mon email",
-            hintText: "marie.dupont@mail.com",
-            inputType: TextInputType.emailAddress,
-            validator: (value) {
-              if (value.isEmpty) return "Vous devez rentrer un mail";
-              return null;
-            },
-          ),
-          const SizedBox(height: 10,),
-    
-          ClPhoneInput(
-            controller: phoneTextController,
-            labelText: "Mon numéro de téléphone",
-            hintText: "0652809335",
-          ),
-          const SizedBox(height: 10,),
-
-          ClElevatedButton(
-            onPressed: onNext,
-            child: const Text("Suivant"),
-          )
-        ],
+      child: SingleChildScrollView(
+        controller: ScrollController(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Le prénom
+            ClTextInput(
+              controller: firstNameTextController, 
+              labelText: "Mon prénom",
+              hintText: "Victor",
+              validator: (value) {
+                if (value.isEmpty) return "Vous devez rentrer un prénom";
+                return null;
+              },
+            ),
+            const SizedBox(height: 10,),
+          
+            // Le nom
+            ClTextInput(
+              controller: lastNameTextController,
+              labelText: "Mon nom",
+              hintText: "DENIS",
+              validator: (value) {
+                if (value.isEmpty) return "Vous devez rentrer un nom";
+                return null;
+              }
+            ),
+            const SizedBox(height: 10,),
+          
+            ClDateTimePicker(
+               type: DateTimePickerType.date,
+               initialDate: initialDate,
+               label: "Date de naissance",
+               firstDate: DateTime(1900),
+               lastDate: DateTime.now(),
+               onChanged: onBirthdateChange,
+            ),
+            const SizedBox(height: 10,),
+          
+            ClTextInput(
+              controller: emailTextController,
+              labelText: "Mon email",
+              hintText: "marie.dupont@mail.com",
+              inputType: TextInputType.emailAddress,
+              validator: (value) {
+                if (value.isEmpty) return "Vous devez rentrer un mail";
+                return null;
+              },
+            ),
+            const SizedBox(height: 10,),
+          
+            ClPhoneInput(
+              controller: phoneTextController,
+              labelText: "Mon numéro de téléphone",
+              hintText: "0652809335",
+            ),
+            const SizedBox(height: 10,),
+      
+            ClElevatedButton(
+              onPressed: onNext,
+              child: const Text("Suivant"),
+            ),
+            const SizedBox(height: 20,)
+          ],
+        ),
       ),
     );
   }

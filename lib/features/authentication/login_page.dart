@@ -65,7 +65,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     child: Container(
                       width: constraints.maxWidth > maxFormWidth ? maxFormWidth : constraints.maxWidth,
                       height: double.infinity,
-                      padding: const EdgeInsets.all(ScreenHelper.horizontalPadding),
+                      padding: const EdgeInsets.only(
+                        top: 20,
+                        left: ScreenHelper.horizontalPadding,
+                        right: ScreenHelper.horizontalPadding,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(20),
@@ -73,57 +77,51 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                         color: Theme.of(context).scaffoldBackgroundColor
                       ),
-                      child: SingleChildScrollView(
-                        controller: ScrollController(),
-                        child: Mutation<dynamic>(
-                          options: _loginMutationOptions(ref),
-                          builder: (loginRunMutation, loginMutationResult) {
-                            if (loginMutationResult?.isLoading ?? false) {
-                              return const Center(child: CircularProgressIndicator(),);
-                            }
-
-                            return Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                if (loginMutationResult?.hasException ?? false) ...{
-                                  const Align(
-                                    alignment: Alignment.topCenter,
-                                    child: ClStatusMessage(
-                                      message: "Nous n'arrivons pas à vous connecter... Vérifier votre email et votre mot de passe",
-                                    )
-                                  ),
-                                  const SizedBox(height: 20,)
-                                },
-
-                                if (_isRegistering) 
-                                  Flexible( 
-                                    child: ConstrainedBox(
-                                      constraints: BoxConstraints(maxHeight: constraints.maxHeight - (230 + ScreenHelper.horizontalPadding)),
-                                      child: RegistrationForm(
-                                        onRegistred: () {
-                                          setState(() {
-                                            _isRegistering = false;
-                                          });
-                                        },
-                                      )
-                                    )
-                                  )
-                                else 
-                                  Flexible(
-                                    child: LoginForm(
-                                      onLogin: (info) => _onConnect(info, loginRunMutation),
-                                      onRegister: () {
-                                        setState(() {
-                                          _isRegistering= true;
-                                        });
-                                      },
-                                                                  ),
-                                  ),
-                              ],
-                            );
+                      child: Mutation<dynamic>(
+                        options: _loginMutationOptions(ref),
+                        builder: (loginRunMutation, loginMutationResult) {
+                          if (loginMutationResult?.isLoading ?? false) {
+                            return const Center(child: CircularProgressIndicator(),);
                           }
-                        ),
+
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              if (loginMutationResult?.hasException ?? false) ...{
+                                const Align(
+                                  alignment: Alignment.topCenter,
+                                  child: ClStatusMessage(
+                                    message: "Nous n'arrivons pas à vous connecter... Vérifier votre email et votre mot de passe",
+                                  )
+                                ),
+                                const SizedBox(height: 20,)
+                              },
+
+                              if (_isRegistering) 
+                                Flexible( 
+                                  child: RegistrationForm(
+                                    onRegistred: () {
+                                      setState(() {
+                                        _isRegistering = false;
+                                      });
+                                    },
+                                  )
+                                )
+                              else 
+                                Flexible(
+                                  child: LoginForm(
+                                    onLogin: (info) => _onConnect(info, loginRunMutation),
+                                    onRegister: () {
+                                      setState(() {
+                                        _isRegistering= true;
+                                      });
+                                    },
+                                                                ),
+                                ),
+                            ],
+                          );
+                        }
                       ),
                     ),
                   ),
