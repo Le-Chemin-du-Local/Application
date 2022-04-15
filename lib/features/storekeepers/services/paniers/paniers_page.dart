@@ -5,6 +5,7 @@ import 'package:chemin_du_local/features/storekeepers/services/paniers/panier.da
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier_edit_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/widgets/panier_card.dart';
+import 'package:chemin_du_local/features/storekeepers/services/paniers/widgets/panier_type_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
@@ -19,11 +20,11 @@ class _PaniersPageState extends State<PaniersPage> {
   bool _shouldRefetch1 = false;
   bool _shouldRefetch2 = false;
 
-  QueryOptions _paniersQueryOptions(String category) {
+  QueryOptions _paniersQueryOptions(String type) {
     return QueryOptions<dynamic>(
       document: gql(qPaniers),
       variables: <String, dynamic>{
-        "category": category
+        "type": type
       }
     );
   }
@@ -43,9 +44,9 @@ class _PaniersPageState extends State<PaniersPage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildGrid(context, PanierCategory.temporary),
+              _buildGrid(context, PanierType.temporary),
               const SizedBox(height: 12,),
-              _buildGrid(context, PanierCategory.permanent),
+              _buildGrid(context, PanierType.permanent),
             ],
           ),
         ),
@@ -57,20 +58,20 @@ class _PaniersPageState extends State<PaniersPage> {
     );
   }
 
-  Widget _buildGrid(BuildContext context, String category) {
+  Widget _buildGrid(BuildContext context, String type) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Le titre
-        if (category == PanierCategory.permanent) 
+        if (type == PanierType.permanent) 
           Text("Paniers en cours permanent", style: Theme.of(context).textTheme.headline2,),
-        if (category == PanierCategory.temporary) 
+        if (type == PanierType.temporary) 
           Text("Paniers en cours temporaire", style: Theme.of(context).textTheme.headline2,),
 
         // Les paniers
         Query<dynamic>(
-          options: _paniersQueryOptions(category),
+          options: _paniersQueryOptions(type),
           builder: (result, {fetchMore, refetch}) {
             if (_shouldRefetch1) {
               if (refetch != null) refetch();
@@ -119,9 +120,19 @@ class _PaniersPageState extends State<PaniersPage> {
   }
 
   Future _onAddNewPanier(BuildContext context) async {
+    final String? category = await showDialog(
+      context: context, 
+      builder: (context) => const PanierTypeDialog()
+    );
+    
+    if (category == null) return;
+
     bool shouldRefetch = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
-        builder: (context) => const PanierEditPage(panierID: null)
+        builder: (context) => PanierEditPage(
+          panierID: null,
+          panierType: category,
+        )
       )
     ) ?? false;
 
@@ -136,7 +147,7 @@ class _PaniersPageState extends State<PaniersPage> {
   Future _onOpenPanier(BuildContext context, Panier panier) async {
     bool shouldRefetch = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
-        builder: (context) => PanierEditPage(panierID: panier.id)
+        builder: (context) => PanierEditPage(panierID: panier.id, panierType: panier.type,)
       )
     ) ?? false;
 

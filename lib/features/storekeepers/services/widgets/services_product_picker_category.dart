@@ -17,9 +17,9 @@ class ServicesProductPickerCategory extends StatelessWidget {
   }) : super(key: key);
 
   final List<String> initialProductsIDs;
-  final Function(String) onProductTapped;
+  final Function(Product) onProductTapped;
   final Map<String, int>? initialQuantities;
-  final Function(String,int)? onQuantityChanged;
+  final Function(Product,int)? onQuantityChanged;
 
   final String category;
   final String? commerceID;

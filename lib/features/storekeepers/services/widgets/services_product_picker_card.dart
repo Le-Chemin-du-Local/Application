@@ -15,7 +15,7 @@ class ServicesProductCard extends StatelessWidget {
   final bool isSelected;
 
   final int? quantity;
-  final Function(String,int)? onQuantityChanged;
+  final Function(Product,int)? onQuantityChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ServicesProductCard extends StatelessWidget {
         showQuantityPicker: onQuantityChanged != null,
         onQuantityUpdated: (value) {
           if (onQuantityChanged != null) {
-            onQuantityChanged!(product.id!, value);
+            onQuantityChanged!(product, value);
           }
         },
       ),

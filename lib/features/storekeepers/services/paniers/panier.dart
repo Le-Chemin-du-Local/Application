@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'panier.freezed.dart';
 part 'panier.g.dart';
 
-mixin PanierCategory {
+mixin PanierType {
   static const String permanent = "PERMANENT";
   static const String temporary = "TEMPORARY";
 
@@ -20,10 +20,12 @@ mixin PanierCategory {
 class Panier with _$Panier {
   const factory Panier(String? id, {
     required String name,
-    required String category,
+    required String type,
+    @Default("Autre") String category,
     @Default("") String description,
     @Default(0) int quantity,
     @Default(0) double price,
+    @Default(0) double reduction,
     @Default(<PanierProduct>[]) List<PanierProduct> products,
     DateTime? endingDate,
   }) = _PanierProduct;

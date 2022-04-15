@@ -82,7 +82,7 @@ class PagePanierCard extends StatelessWidget {
                   const SizedBox(height: 12,),
 
                   // Le temps restant
-                  if (panier.category == PanierCategory.temporary && panier.endingDate!= null) ...{
+                  if (panier.type == PanierType.temporary && panier.endingDate!= null) ...{
                     _buildTimeLeft(),
                     const SizedBox(height: 20,),
                   },

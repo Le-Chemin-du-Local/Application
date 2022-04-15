@@ -9,10 +9,12 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 class PanierEditPage extends StatefulWidget {
   const PanierEditPage({
     Key? key,
-    required this.panierID
+    required this.panierID,
+    required this.panierType,
   }) : super(key: key);
 
   final String? panierID;
+  final String panierType;
 
   @override
   State<PanierEditPage> createState() => _PanierEditPageState();
@@ -112,6 +114,7 @@ class _PanierEditPageState extends State<PanierEditPage> {
             child: PanierEditForm(
               key: _panierFormState,
               panier: panier, 
+              type: widget.panierType,
               runMutation: runMutation,
             )
           ),

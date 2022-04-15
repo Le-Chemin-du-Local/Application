@@ -10,10 +10,12 @@ _$_PanierProduct _$$_PanierProductFromJson(Map<String, dynamic> json) =>
     _$_PanierProduct(
       json['id'] as String?,
       name: json['name'] as String,
-      category: json['category'] as String,
+      type: json['type'] as String,
+      category: json['category'] as String? ?? "Autre",
       description: json['description'] as String? ?? "",
       quantity: json['quantity'] as int? ?? 0,
       price: (json['price'] as num?)?.toDouble() ?? 0,
+      reduction: (json['reduction'] as num?)?.toDouble() ?? 0,
       products: (json['products'] as List<dynamic>?)
               ?.map((e) => PanierProduct.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -27,10 +29,12 @@ Map<String, dynamic> _$$_PanierProductToJson(_$_PanierProduct instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'type': instance.type,
       'category': instance.category,
       'description': instance.description,
       'quantity': instance.quantity,
       'price': instance.price,
+      'reduction': instance.reduction,
       'products': instance.products,
       'endingDate': instance.endingDate?.toIso8601String(),
     };

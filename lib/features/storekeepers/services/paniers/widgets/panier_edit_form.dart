@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/cl_file.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
+import 'package:chemin_du_local/core/widgets/badge.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dateime_picker.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker_big.dart';
@@ -19,10 +20,13 @@ class PanierEditForm extends StatefulWidget {
     Key? key,
     required this.panier,
     required this.runMutation,
+    required this.type,
   }) : super(key: key);
 
   final Panier? panier;
   final RunMutation? runMutation;
+
+  final String type;
 
   @override
   State<PanierEditForm> createState() => PanierEditFormState();
@@ -34,12 +38,11 @@ class PanierEditFormState extends State<PanierEditForm> {
   final TextEditingController _nameTextController = TextEditingController();
   final TextEditingController _descriptionTextController = TextEditingController();
   final TextEditingController _quantityTextController = TextEditingController();
-  final TextEditingController _priceTextController = TextEditingController();
 
   final List<String> _selectedProductsIDs = [];
   final Map<String, int> _quantities = {};
 
-  String _category = PanierCategory.permanent;
+  double _price = 0.0;
   DateTime? _endingDate;
   ClFile? _image;
 
@@ -48,7 +51,6 @@ class PanierEditFormState extends State<PanierEditForm> {
       _nameTextController.text = widget.panier!.name;
       _descriptionTextController.text = widget.panier!.description;
       _quantityTextController.text = widget.panier!.quantity.toString();
-      _priceTextController.text = widget.panier!.price.toString();
 
       if (_selectedProductsIDs.isNotEmpty) {
         _selectedProductsIDs.removeRange(0, _selectedProductsIDs.length - 1);
@@ -59,8 +61,8 @@ class PanierEditFormState extends State<PanierEditForm> {
         _selectedProductsIDs.add(product.product.id!);
       }
 
+      _price = widget.panier!.price;
       _endingDate = widget.panier!.endingDate;
-      _category = widget.panier!.category;
     }
   }
 
@@ -94,6 +96,10 @@ class PanierEditFormState extends State<PanierEditForm> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                // Les infos sur le prix
+                Flexible(child: _buildInfos()),
+                const SizedBox(height: 20,),
+
                 // First section with image picker
                 Flexible(
                   child: LayoutBuilder(
@@ -163,9 +169,9 @@ class PanierEditFormState extends State<PanierEditForm> {
                 Flexible(
                   child: ServicesProductsPicker(
                     initialProductsIDs: _selectedProductsIDs,
-                    onProductTapped: _onProuctSelected,
+                    onProductTapped: (product) => _onProuctSelected(product.id!, product.price ?? 0.0),
                     initialQuantities: _quantities,
-                    onQuantityChanged: _onQuantityUpdated,
+                    onQuantityChanged: (product, quantity) => _onQuantityUpdated(product.id!, product.price ?? 0.0, quantity),
                   ),
                 )         
               ],
@@ -240,96 +246,86 @@ class PanierEditFormState extends State<PanierEditForm> {
                 },
               ),
 
-              // Le prix
-              ClTextInput(
-                controller: _priceTextController,
-                labelText: "Prix du panier",
-                hintText: "5,00€",
-                inputType: const TextInputType.numberWithOptions(decimal: true),
-                validator: (value) {
-                  if (value.isEmpty) return "Vous devez rentrer un prix";
+              // La date si besoin
+              if (widget.type == PanierType.temporary)
+                ClDateTimePicker(
+                  type: DateTimePickerType.dateTime,
+                  initialDate: _endingDate,
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime(2100),
+                  label: "Date de fin du panier",
+                  onChanged: (value) {
+                    if (value == null) return;
 
-                  final double? price = double.tryParse(value);
-                  if (price == null) return "Le nombre n'est pas valide";
-                  if (price < 0.01) return "Vous ne pouvez pas avoir un prix aussi faible";
-                  return null;
-                },
-              )
+                    setState(() {
+                      _endingDate = DateTime.tryParse(value);
+                    });
+                  },
+                  validator: (value) {
+                    if (widget.type != PanierType.temporary) return null; 
+                    if (value?.isEmpty ?? true) return "Vous devez choisir une date";
+                    if (DateTime.parse(value!).isBefore(DateTime.now())) return "La date doit être supérieur à maintenant";
+
+                    return null;
+                  },
+                )
             ],
           ),
         ),
-
-        Flexible(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return GridView(
-                physics: const NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                primary: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: constraints.maxWidth >= 400 ? 2 : 1,
-                  crossAxisSpacing: 16,
-                  mainAxisExtent: 90,
-                  mainAxisSpacing: 16,
-                ),
-                children: [
-                  // Catégorie
-                  ClDropdown<String>(
-                    currentValue: _category,
-                    items: PanierCategory.detailled,
-                    label: "Catégorie du panier",
-                    onChanged: (value) {
-                      setState(() {
-                        _category = value ?? PanierCategory.permanent;
-                      });
-                    },
-                    validator: null,
-                  ),
-
-                  if (_category == PanierCategory.temporary)
-                    ClDateTimePicker(
-                      type: DateTimePickerType.dateTime,
-                      initialDate: _endingDate,
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                      label: "Date de fin du panier",
-                      onChanged: (value) {
-                        if (value == null) return;
-
-                        setState(() {
-                          _endingDate = DateTime.tryParse(value);
-                        });
-                      },
-                      validator: (value) {
-                        if (_category != PanierCategory.temporary) return null; 
-                        if (value?.isEmpty ?? true) return "Vous devez choisir une date";
-                        if (DateTime.parse(value!).isBefore(DateTime.now())) return "La date doit être supérieur à maintenant";
-
-                        return null;
-                      },
-                    )
-                ],
-              );
-            }
-          ),
-        )
       ],
     );
   }
 
-  void _onProuctSelected(String productID) {
+  Widget _buildInfos() {
+    return Container(
+      decoration: const BoxDecoration(
+        color: Color(0xfffff6e5)
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding, vertical: 20),
+      child: Wrap(
+        spacing: 16,
+        runSpacing: 16,
+        crossAxisAlignment: WrapCrossAlignment.center,
+        children: [
+          const Text("Produits du panier", style: TextStyle(fontWeight: FontWeight.bold),),
+          const SizedBox(width: 100,),
+
+          _buildInfoSection("Votre panier contient", "${_selectedProductsIDs.length} produit(s)"),
+          _buildInfoSection("Prix total", "$_price€"),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildInfoSection(String title, String badgeText) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(title),
+        Badge(child: Text(badgeText))
+      ],
+    );
+  }
+
+  void _onProuctSelected(String productID, double price) {
+    int quantity = _quantities[productID] ?? 1;
     setState(() {
       if (_selectedProductsIDs.contains(productID)) {
         _selectedProductsIDs.remove(productID);
+        _price -= price * quantity;
       } 
       else {
         _selectedProductsIDs.add(productID);
+        _price += price * quantity;
       }
     });
   } 
 
-  void _onQuantityUpdated(String productID, int newQuantity) {
+  void _onQuantityUpdated(String productID, double price, int newQuantity) {
+    int oldQuantity = _quantities[productID] ?? 1;
     setState(() {
+      _price -= price * oldQuantity;
+      _price += price * newQuantity;
       _quantities[productID] = newQuantity;
     });
   }
@@ -341,9 +337,9 @@ class PanierEditFormState extends State<PanierEditForm> {
         "id": widget.panier?.id,
         "name": _nameTextController.text,
         "description": _descriptionTextController.text,
-        "category": _category,
+        "type": widget.type,
         "quantity": int.parse(_quantityTextController.text),
-        "price": double.parse(_priceTextController.text),
+        "price": _price,
         if (_image != null) 
           "image": MultipartFile.fromBytes(
             "image",

@@ -24,19 +24,23 @@ class _$PanierTearOff {
 
   _PanierProduct call(String? id,
       {required String name,
-      required String category,
+      required String type,
+      String category = "Autre",
       String description = "",
       int quantity = 0,
       double price = 0,
+      double reduction = 0,
       List<PanierProduct> products = const <PanierProduct>[],
       DateTime? endingDate}) {
     return _PanierProduct(
       id,
       name: name,
+      type: type,
       category: category,
       description: description,
       quantity: quantity,
       price: price,
+      reduction: reduction,
       products: products,
       endingDate: endingDate,
     );
@@ -54,10 +58,12 @@ const $Panier = _$PanierTearOff();
 mixin _$Panier {
   String? get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String get type => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   int get quantity => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
+  double get reduction => throw _privateConstructorUsedError;
   List<PanierProduct> get products => throw _privateConstructorUsedError;
   DateTime? get endingDate => throw _privateConstructorUsedError;
 
@@ -73,10 +79,12 @@ abstract class $PanierCopyWith<$Res> {
   $Res call(
       {String? id,
       String name,
+      String type,
       String category,
       String description,
       int quantity,
       double price,
+      double reduction,
       List<PanierProduct> products,
       DateTime? endingDate});
 }
@@ -93,10 +101,12 @@ class _$PanierCopyWithImpl<$Res> implements $PanierCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? type = freezed,
     Object? category = freezed,
     Object? description = freezed,
     Object? quantity = freezed,
     Object? price = freezed,
+    Object? reduction = freezed,
     Object? products = freezed,
     Object? endingDate = freezed,
   }) {
@@ -108,6 +118,10 @@ class _$PanierCopyWithImpl<$Res> implements $PanierCopyWith<$Res> {
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
               as String,
       category: category == freezed
           ? _value.category
@@ -124,6 +138,10 @@ class _$PanierCopyWithImpl<$Res> implements $PanierCopyWith<$Res> {
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      reduction: reduction == freezed
+          ? _value.reduction
+          : reduction // ignore: cast_nullable_to_non_nullable
               as double,
       products: products == freezed
           ? _value.products
@@ -146,10 +164,12 @@ abstract class _$PanierProductCopyWith<$Res> implements $PanierCopyWith<$Res> {
   $Res call(
       {String? id,
       String name,
+      String type,
       String category,
       String description,
       int quantity,
       double price,
+      double reduction,
       List<PanierProduct> products,
       DateTime? endingDate});
 }
@@ -168,10 +188,12 @@ class __$PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? type = freezed,
     Object? category = freezed,
     Object? description = freezed,
     Object? quantity = freezed,
     Object? price = freezed,
+    Object? reduction = freezed,
     Object? products = freezed,
     Object? endingDate = freezed,
   }) {
@@ -183,6 +205,10 @@ class __$PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      type: type == freezed
+          ? _value.type
+          : type // ignore: cast_nullable_to_non_nullable
               as String,
       category: category == freezed
           ? _value.category
@@ -199,6 +225,10 @@ class __$PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
       price: price == freezed
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      reduction: reduction == freezed
+          ? _value.reduction
+          : reduction // ignore: cast_nullable_to_non_nullable
               as double,
       products: products == freezed
           ? _value.products
@@ -217,10 +247,12 @@ class __$PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
 class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
   const _$_PanierProduct(this.id,
       {required this.name,
-      required this.category,
+      required this.type,
+      this.category = "Autre",
       this.description = "",
       this.quantity = 0,
       this.price = 0,
+      this.reduction = 0,
       this.products = const <PanierProduct>[],
       this.endingDate});
 
@@ -231,6 +263,9 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
   final String? id;
   @override
   final String name;
+  @override
+  final String type;
+  @JsonKey()
   @override
   final String category;
   @JsonKey()
@@ -244,13 +279,16 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
   final double price;
   @JsonKey()
   @override
+  final double reduction;
+  @JsonKey()
+  @override
   final List<PanierProduct> products;
   @override
   final DateTime? endingDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Panier(id: $id, name: $name, category: $category, description: $description, quantity: $quantity, price: $price, products: $products, endingDate: $endingDate)';
+    return 'Panier(id: $id, name: $name, type: $type, category: $category, description: $description, quantity: $quantity, price: $price, reduction: $reduction, products: $products, endingDate: $endingDate)';
   }
 
   @override
@@ -260,10 +298,12 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
       ..add(DiagnosticsProperty('type', 'Panier'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('type', type))
       ..add(DiagnosticsProperty('category', category))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('quantity', quantity))
       ..add(DiagnosticsProperty('price', price))
+      ..add(DiagnosticsProperty('reduction', reduction))
       ..add(DiagnosticsProperty('products', products))
       ..add(DiagnosticsProperty('endingDate', endingDate));
   }
@@ -275,11 +315,13 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
             other is _PanierProduct &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.category, category) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.quantity, quantity) &&
             const DeepCollectionEquality().equals(other.price, price) &&
+            const DeepCollectionEquality().equals(other.reduction, reduction) &&
             const DeepCollectionEquality().equals(other.products, products) &&
             const DeepCollectionEquality()
                 .equals(other.endingDate, endingDate));
@@ -290,10 +332,12 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(type),
       const DeepCollectionEquality().hash(category),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(quantity),
       const DeepCollectionEquality().hash(price),
+      const DeepCollectionEquality().hash(reduction),
       const DeepCollectionEquality().hash(products),
       const DeepCollectionEquality().hash(endingDate));
 
@@ -311,10 +355,12 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
 abstract class _PanierProduct implements Panier {
   const factory _PanierProduct(String? id,
       {required String name,
-      required String category,
+      required String type,
+      String category,
       String description,
       int quantity,
       double price,
+      double reduction,
       List<PanierProduct> products,
       DateTime? endingDate}) = _$_PanierProduct;
 
@@ -326,6 +372,8 @@ abstract class _PanierProduct implements Panier {
   @override
   String get name;
   @override
+  String get type;
+  @override
   String get category;
   @override
   String get description;
@@ -333,6 +381,8 @@ abstract class _PanierProduct implements Panier {
   int get quantity;
   @override
   double get price;
+  @override
+  double get reduction;
   @override
   List<PanierProduct> get products;
   @override

@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/commerce.dart';
+import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/services_product_picker_category.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,9 @@ class ServicesProductsPicker extends StatelessWidget {
   }) : super(key: key);
 
   final List<String> initialProductsIDs;
-  final Function(String) onProductTapped;
+  final Function(Product) onProductTapped;
   final Map<String, int>? initialQuantities;
-  final Function(String,int)? onQuantityChanged;
+  final Function(Product,int)? onQuantityChanged;
 
   final String? commerceID;
 

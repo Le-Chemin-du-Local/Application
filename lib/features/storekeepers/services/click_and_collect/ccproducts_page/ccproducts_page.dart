@@ -110,13 +110,13 @@ class _CCProductsPageState extends State<CCProductsPage> {
                       child: SingleChildScrollView(
                         child: ServicesProductsPicker(
                           initialProductsIDs: _productsIDs,
-                          onProductTapped: (productID) {
+                          onProductTapped: (product) {
                             setState(() {
-                              if (_productsIDs.contains(productID)) {
-                                _productsIDs.remove(productID);
+                              if (_productsIDs.contains(product.id)) {
+                                _productsIDs.remove(product.id);
                               } 
                               else {
-                                _productsIDs.add(productID);
+                                _productsIDs.add(product.id!);
                               }
                             });
                           }),

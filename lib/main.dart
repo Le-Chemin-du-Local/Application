@@ -36,7 +36,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // Strip initialisation
-  if (Platform.isAndroid || Platform.isIOS || kIsWeb) {
+  if (kIsWeb || Platform.isAndroid || Platform.isIOS) {
     Stripe.publishableKey = kStripPublishableKey;
     Stripe.merchantIdentifier = "chemin.du.local.bzh";
     Stripe.urlScheme = "clstrip";

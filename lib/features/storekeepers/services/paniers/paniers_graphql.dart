@@ -1,18 +1,19 @@
 const String qPaniers = r'''
 query getPaniers(
   $commerceID: ID,
-  $category: String!
+  $type: String!
 ) {
   commerce(id: $commerceID) {
     id
     name
     paniers(filters: {
-      category: $category
+      type: $type
     }) {
       edges {
         node {
           id
           name
+          type
           category
           description
           endingDate
@@ -35,6 +36,7 @@ query getPaniers(
         node {
           id
           name
+          type
           category
           quantity
           price
@@ -53,6 +55,7 @@ query getDetailledPanier($id: ID!) {
     id
     name
     description
+    type
     category
     quantity
     price
@@ -84,6 +87,7 @@ commerce {
         panier {
           id
           name
+          type
           category
           price
         }
@@ -109,6 +113,7 @@ query paniercommandDetails($id: ID!) {
     panier {
       id
       name
+      type
       category
       price
       products {
@@ -135,7 +140,7 @@ mutation createPanier(
   $commerce: ID,
   $name: String!,
   $description: String!,
-  $category: String!,
+  $type: String!,
   $quantity: Int!,
   $price: Float!,
   $image: Upload,
@@ -145,9 +150,11 @@ mutation createPanier(
   createPanier(commerceID: $commerce, input: {
     name: $name,
     description: $description,
-    category: $category,
+    type: $type,
+    category: "Autre",
     quantity: $quantity,
     price: $price,
+    reduction: 0,
     image: $image,
     endingDate: $endingDate
     products: $products
@@ -163,7 +170,7 @@ mutation createPanier(
   $id: ID!,
   $name: String!,
   $description: String!,
-  $category: String!,
+  $type: String!,
   $quantity: Int!,
   $price: Float!,
   $image: Upload,
@@ -173,7 +180,8 @@ mutation createPanier(
   updatePanier(id: $id, changes: {
     name: $name,
     description: $description,
-    category: $category,
+    type: $type,
+    category: "Autre",
     quantity: $quantity,
     price: $price,
     image: $image,
