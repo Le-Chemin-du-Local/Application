@@ -43,6 +43,7 @@ class PanierEditFormState extends State<PanierEditForm> {
   final Map<String, int> _quantities = {};
 
   double _price = 0.0;
+  double _reductionPercentage = 0.0;
   DateTime? _endingDate;
   ClFile? _image;
 
@@ -268,7 +269,23 @@ class PanierEditFormState extends State<PanierEditForm> {
 
                     return null;
                   },
-                )
+                ),
+
+              ClDropdown<double>(
+                label: "% de réduction",
+                items: {
+                  0.0: "0%",
+                  5.0: "5%",
+                  10: "10%",
+                }, 
+                currentValue: _reductionPercentage, 
+                onChanged: (value) {
+                  setState(() {
+                    _reductionPercentage = value ?? 0.0;
+                  });
+                }, 
+                validator: null
+              )
             ],
           ),
         ),
@@ -282,16 +299,24 @@ class PanierEditFormState extends State<PanierEditForm> {
         color: Color(0xfffff6e5)
       ),
       padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding, vertical: 20),
-      child: Wrap(
-        spacing: 16,
-        runSpacing: 16,
-        crossAxisAlignment: WrapCrossAlignment.center,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text("Produits du panier", style: TextStyle(fontWeight: FontWeight.bold),),
-          const SizedBox(width: 100,),
 
-          _buildInfoSection("Votre panier contient", "${_selectedProductsIDs.length} produit(s)"),
-          _buildInfoSection("Prix total", "$_price€"),
+          Flexible(
+            child: Wrap(
+              spacing: 16,
+              runSpacing: 16,
+              // crossAxisAlignment: WrapCrossAlignment.center,
+              children: [
+                _buildInfoSection("Votre panier contient", "${_selectedProductsIDs.length} produit(s)"),
+                _buildInfoSection("Prix total", "$_price€"),
+                _buildInfoSection("Prix avec rabais", "${_price * ((100-_reductionPercentage) / 100)}€")
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -302,6 +327,7 @@ class PanierEditFormState extends State<PanierEditForm> {
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(title),
+        const SizedBox(width: 4,),
         Badge(child: Text(badgeText))
       ],
     );
@@ -339,7 +365,8 @@ class PanierEditFormState extends State<PanierEditForm> {
         "description": _descriptionTextController.text,
         "type": widget.type,
         "quantity": int.parse(_quantityTextController.text),
-        "price": _price,
+        "price": _price * ((100-_reductionPercentage) / 100),
+        "reduction": _reductionPercentage,
         if (_image != null) 
           "image": MultipartFile.fromBytes(
             "image",

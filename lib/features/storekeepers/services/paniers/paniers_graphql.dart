@@ -143,6 +143,7 @@ mutation createPanier(
   $type: String!,
   $quantity: Int!,
   $price: Float!,
+  $reduction: Float!
   $image: Upload,
   $endingDate: Time,
   $products: [NewPanierProduct!]!
@@ -154,7 +155,7 @@ mutation createPanier(
     category: "Autre",
     quantity: $quantity,
     price: $price,
-    reduction: 0,
+    reduction: $reduction,
     image: $image,
     endingDate: $endingDate
     products: $products
@@ -166,12 +167,13 @@ mutation createPanier(
 ''';
 
 const String mutUpdatePanier = r'''
-mutation createPanier(
+mutation updatePanier(
   $id: ID!,
   $name: String!,
   $description: String!,
   $type: String!,
   $quantity: Int!,
+  $reduction: Float!,
   $price: Float!,
   $image: Upload,
   $endingDate: Time,
@@ -184,6 +186,7 @@ mutation createPanier(
     category: "Autre",
     quantity: $quantity,
     price: $price,
+    reduction: $reduction,
     image: $image,
     endingDate: $endingDate,
     products: $products
