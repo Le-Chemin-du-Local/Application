@@ -26,7 +26,8 @@ class ClTheme {
       textTheme: GoogleFonts.rubikTextTheme().copyWith(
         headline2: const TextStyle(fontSize: 24, color: Palette.colorDark),
         bodyText1: const TextStyle(fontSize: 12, color: Palette.colorDark),
-        bodyText2: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Palette.colorDark)
+        bodyText2: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Palette.colorDark),
+        caption: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Palette.colorDark)
       ),
 
       visualDensity: VisualDensity.standard

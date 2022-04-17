@@ -21,6 +21,8 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   bool _isRegistering = false;
 
+  String _statusMessage = "";
+
   MutationOptions<dynamic> _loginMutationOptions(WidgetRef ref) {
     return MutationOptions<dynamic>(
       document: gql(mutAuthentication),
@@ -98,12 +100,24 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 const SizedBox(height: 20,)
                               },
 
+                              if (_statusMessage.isNotEmpty) ...{
+                               Align(
+                                  alignment: Alignment.topCenter,
+                                  child: ClStatusMessage(
+                                    type: ClStatusMessageType.success,
+                                    message: _statusMessage,
+                                  ),
+                                ),
+                                const SizedBox(height: 20,)
+                              },
+
                               if (_isRegistering) 
                                 Flexible( 
                                   child: RegistrationForm(
                                     onRegistred: () {
                                       setState(() {
                                         _isRegistering = false;
+                                        _statusMessage = "Vous avez bien été inscrit ! Allez regarder vos mails avant de vous connecter.";
                                       });
                                     },
                                   )

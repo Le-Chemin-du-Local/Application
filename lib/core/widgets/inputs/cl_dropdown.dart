@@ -27,7 +27,7 @@ class ClDropdown<T> extends StatelessWidget {
       children: [
         if (label != null) ...{
           // Text(label!.toUpperCase(), style: const TextStyle(color: Colors.black54, fontSize: 12),),
-          Text(label!, style: const TextStyle(fontSize: 12),),
+          Text(label!, style: Theme.of(context).textTheme.caption,),
           const SizedBox(height: 10.0,),
         },
         ClCard(
