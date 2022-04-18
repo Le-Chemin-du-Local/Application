@@ -29,8 +29,8 @@ class ProductCategoriesPage extends StatelessWidget {
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 200,
           mainAxisExtent: 148,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16
+          crossAxisSpacing: 23,
+          mainAxisSpacing: 15
         ),
         padding: const EdgeInsets.all(18.0),
         children: [

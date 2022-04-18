@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/gradient_icon.dart';
+import 'package:chemin_du_local/core/widgets/gradient_text.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
@@ -40,8 +41,8 @@ class _PickerCategoryButtonState extends State<PickerCategoryButton> {
 
   @override
   Widget build(BuildContext context) {
-    const double width = 120;
-    const double height = 164;
+    const double width = 205;
+    const double height = 205;
 
     return InkWell(
       onTap: () {
@@ -68,11 +69,18 @@ class _PickerCategoryButtonState extends State<PickerCategoryButton> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (_isSelected) 
-                GradientIcon(kCategorieLogo[widget.name], gradient: Palette.gradientPrimary, size: 48,)
-              else
-                Icon(kCategorieLogo[widget.name], size: 48,),
-              Text(widget.name, textAlign: TextAlign.center,)
+              if (_isSelected) ...{
+                GradientIcon(kCategorieLogo[widget.name], gradient: Palette.gradientPrimary, size: 102,),
+                GradientText(
+                  widget.name, 
+                  textAlign: TextAlign.center,
+                  gradient: Palette.gradientPrimary,
+                )
+              }
+              else ...{
+                Icon(kCategorieLogo[widget.name], size: 102,),
+                Text(widget.name, textAlign: TextAlign.center,)
+              }
             ],
           ),
         ),

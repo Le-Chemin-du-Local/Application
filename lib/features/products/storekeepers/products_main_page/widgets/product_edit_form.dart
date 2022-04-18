@@ -350,6 +350,28 @@ class _ProductEditFormState extends State<ProductEditForm> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+                      // La TVA
+                      Flexible(
+                        flex: 3,
+                        child: ClDropdown<double>(
+                          items: {
+                            0: "0%",
+                            5.5: "5,5%",
+                            10: "10%",
+                            20: "20%",
+                          },
+                          currentValue: _currentTVA,
+                          label: "% de TVA",
+                          onChanged: (value) {
+                            setState(() {
+                              _currentTVA = value ?? 20;
+                            });
+                          },
+                          validator: null,
+                        ),
+                      ),
+                      const SizedBox(width: 12,),
+
                       // Prix
                       Flexible(
                         flex: 3,
@@ -369,11 +391,11 @@ class _ProductEditFormState extends State<ProductEditForm> {
 
                       // Unitée
                       Flexible(
-                        flex: 7,
+                        flex: 4,
                         child: ClDropdown<String>(
                           currentValue: _currentUnit,
                           items: const {
-                            "": "Choisir une unitée",
+                            "": "unitée",
                             "unit": "Unité",
                             "gramme": "Gramme"
                           },
@@ -388,31 +410,14 @@ class _ProductEditFormState extends State<ProductEditForm> {
                             });
                           },
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
                 const SizedBox(height: 10,),
 
-                // La TVA
-                Flexible(
-                  child: ClDropdown<double>(
-                    items: {
-                      0: "0%",
-                      5.5: "5,5%",
-                      10: "10%",
-                      20: "20%",
-                    },
-                    currentValue: _currentTVA,
-                    label: "Taux de TVA",
-                    onChanged: (value) {
-                      setState(() {
-                        _currentTVA = value ?? 20;
-                      });
-                    },
-                    validator: null,
-                  ),
-                )
+                // TODO: les tags
+                
               ],
             )
           ],

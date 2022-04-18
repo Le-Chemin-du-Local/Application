@@ -87,9 +87,9 @@ class ProductsPage extends StatelessWidget {
       body: GridView(
         gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 270,
-          mainAxisExtent: 273,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16
+          mainAxisExtent: 298,
+          crossAxisSpacing: 7,
+          mainAxisSpacing: 24
         ),
         padding: const EdgeInsets.all(18),
         children: [

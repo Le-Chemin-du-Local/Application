@@ -27,10 +27,10 @@ class ProductCategoriesPicker extends StatelessWidget {
           child: GridView(
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 178,
-              mainAxisExtent: 220,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16
+              maxCrossAxisExtent: 205,
+              mainAxisExtent: 205,
+              crossAxisSpacing: 14,
+              mainAxisSpacing: 14
             ),
             shrinkWrap: true,
             primary: false,
