@@ -338,11 +338,13 @@ class PanierEditFormState extends State<PanierEditForm> {
     setState(() {
       if (_selectedProductsIDs.contains(productID)) {
         _selectedProductsIDs.remove(productID);
+        _quantities[productID] = 0;
         _price -= price * quantity;
       } 
       else {
         _selectedProductsIDs.add(productID);
-        _price += price * quantity;
+        _quantities[productID] = 1;
+        _price += price;
       }
     });
   } 
