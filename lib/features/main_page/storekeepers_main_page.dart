@@ -89,6 +89,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
       const StoreKeeperPage(canEdit: true),
       StoreKeeperHomePage(
         onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),
+        commerceID: widget.storekeeper.commerce?.id ?? "",
         servicesOffset: clickAndCollectOffset,
         services: widget.storekeeper.commerce?.services ?? [],
       ),

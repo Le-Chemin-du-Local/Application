@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/ccproducts_page/ccproducts_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_home/widgets/dashboard_card.dart';
@@ -10,6 +11,7 @@ class StoreKeeperHomePage extends StatelessWidget {
   const StoreKeeperHomePage({
     Key? key,
     required this.onPageChanged,
+    required this.commerceID,
     this.servicesOffset = 0,
     this.services = const [],
   }) : super(key: key);
@@ -18,6 +20,8 @@ class StoreKeeperHomePage extends StatelessWidget {
   final int servicesOffset;
 
   final List<String> services;
+
+  final String commerceID;
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +88,15 @@ class StoreKeeperHomePage extends StatelessWidget {
           // Carte Click & Collect
           if (services.contains(Services.clickAndCollect))
             DashboardCard(
-              onClick: () => onPageChanged(3 + servicesOffset), 
+              onClick: () async { 
+                onPageChanged(3 + servicesOffset);
+                await Future<dynamic>.delayed(const Duration(milliseconds: 200));
+                Navigator.of(AppManager.instance.serviesPageKey.currentContext ?? context).push<dynamic>(
+                  MaterialPageRoute<dynamic>(
+                    builder: (context) => CCProductsPage(commerceID: commerceID,)
+                  )
+                );
+              },
               backgroundName: "illustration_click_and_collect.png", 
               title: "Click & collect"
             ),
