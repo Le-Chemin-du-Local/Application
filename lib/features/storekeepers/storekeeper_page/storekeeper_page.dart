@@ -208,7 +208,11 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                       child: LayoutBuilder(
                         builder: (context, constraints) {
                           if (constraints.maxWidth >= ScreenHelper.breakpointPC) {
-                            return _buildBigLayout(commerce: commerce, products: products);
+                            return _buildBigLayout(
+                              commerce: commerce, 
+                              products: products,
+                              productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
+                            );
                           }
             
                           return _buildSmallLayout(
@@ -317,7 +321,8 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
 
   Widget _buildBigLayout({
     required Commerce? commerce,
-    required List<Product> products
+    required List<Product> products,
+    required List<Product> productsAvailableForClickAndCollect,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -349,7 +354,12 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                     Flexible(
                       child: PageProductsListBig(
                         enableButton: false,
-                        products: products,
+                        commerce: commerce,
+                        products: products, 
+                        availableForClickAndCollect: [
+                          for (final product in productsAvailableForClickAndCollect)
+                            product.id!
+                        ],
                       ),
                     )
                   ],

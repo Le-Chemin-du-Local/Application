@@ -52,19 +52,52 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
               const SizedBox(height: 12.0,) 
             },
 
-            CreditCardWidget(
-              cardBgColor: Theme.of(context).primaryColor,
-              // glassmorphismConfig: Glassmorphism.defaultConfig(),
-              cardNumber: _cardNumber,
-              expiryDate: _expiryDate, 
-              cardHolderName: _holderName,
-              cvvCode: _cvvCode, 
-              showBackView: _isCVVFocused, 
-              isHolderNameVisible: true,
-              onCreditCardWidgetChange: (changes) {},
-            ),
-            const SizedBox(height: 12,),
+            LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth >= ScreenHelper.breakpointTablet) {
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _content().reversed.toList()
+                  );
+                }
 
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: _content(),
+                );
+              },
+            )
+          ],
+        ),
+      )
+    );
+  }
+
+  List<Widget> _content() {
+    return [
+      Flexible(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxHeight: 300),
+          child: CreditCardWidget(
+            cardBgColor: Theme.of(context).primaryColor,
+            // glassmorphismConfig: Glassmorphism.defaultConfig(),
+            cardNumber: _cardNumber,
+            expiryDate: _expiryDate, 
+            cardHolderName: _holderName,
+            cvvCode: _cvvCode, 
+            showBackView: _isCVVFocused, 
+            isHolderNameVisible: true,
+            onCreditCardWidgetChange: (changes) {},
+          ),
+        ),
+      ),
+      const SizedBox(height: 12,),
+
+      Flexible(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
             CreditCardForm(
               formKey: _formKey,
               cardNumber: _cardNumber,
@@ -85,10 +118,10 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
                   _isCVVFocused = changes.isCvvFocused;
                 });
               },
-
+      
             ),
             const SizedBox(height: 12,),
-
+      
             ClElevatedButton(
               onPressed: _handlePayPress,
               child: Row(
@@ -96,15 +129,15 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
                 children: [
                   const Icon(Icons.lock),
                   const SizedBox(width: 4,),
-
+      
                   Text("Payer ${_calculatePrice().toStringAsFixed(2)}€")
                 ],
               ),
-            )
+            ),
           ],
         ),
       )
-    );
+    ];
   }
 
   InputDecoration _fieldDecoration({
