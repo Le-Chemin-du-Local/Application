@@ -99,6 +99,13 @@ class _PaniersPageState extends State<PaniersPage> {
               paniers.add(Panier.fromJson(mapPanier["node"] as Map<String, dynamic>));
             }
 
+            if (paniers.isEmpty) {
+              return const ClStatusMessage(
+                type: ClStatusMessageType.info,
+                message: "Aucun panier n'a été créé pour le moment. Pour en rajouter un, utiliser le \"+\" en bas à droite.",
+              );
+            }
+
             return Wrap(
               spacing: 16,
               runSpacing: 16,
