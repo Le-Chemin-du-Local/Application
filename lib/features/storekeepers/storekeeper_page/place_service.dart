@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlng/latlng.dart';
@@ -24,9 +26,15 @@ class PlaceAPIProvider {
   Future<List<Suggestion>> fetchSuggestions(String input, String lang, String sessionToken) async {
     final String sessionTokenString = sessionToken.isNotEmpty ? "&sessiontoken=$sessionToken" : "";
 
-    final request = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=$input&types=address&language=$lang&components=country:fr&key=$apiKey$sessionTokenString";
-    final response = await http.get(
-      Uri.parse(request)
+    final response = await http.post(
+      Uri.parse("$kRESTApiBaseUrl/maps/autocomplete"),
+      headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+      },
+      body: jsonEncode({
+        "input": Uri.parse(input).toString(),
+        "sessiontoken": sessionTokenString,
+      })
     );
 
     if (response.statusCode == 200) {
@@ -61,9 +69,15 @@ class PlaceAPIProvider {
       return null;
     }
 
-    final request = "https://maps.googleapis.com/maps/api/place/details/json?place_id=${suggestions.first.placeId}&fields=geometry&key=$apiKey&sessiontoken=$sessionToken";
-    final response = await http.get(
-      Uri.parse(request)
+    final response = await http.post(
+      Uri.parse("$kRESTApiBaseUrl/maps/details"),
+      headers: {
+        HttpHeaders.contentTypeHeader: "application/json",
+      },
+      body: jsonEncode({
+        "placeID": suggestions.first.placeId,
+        "sessiontoken": sessionToken,
+      })
     );
 
     if (response.statusCode == 200) {
