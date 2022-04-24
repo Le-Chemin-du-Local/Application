@@ -2,6 +2,7 @@ import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_quantity_picker.dart';
 import 'package:chemin_du_local/features/products/product.dart';
+import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
@@ -113,7 +114,7 @@ class ProductCard extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 text: "${product.price}€",
-                style: const TextStyle(fontWeight: FontWeight.w500),
+                style: const TextStyle(color: Palette.colorWhite, fontWeight: FontWeight.w500),
                 children: const [
                   TextSpan(text: "/pièce", style: TextStyle(fontSize: 12.0))
                 ]
