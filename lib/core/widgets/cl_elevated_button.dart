@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:chemin_du_local/theme/palette.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ClElevatedButton extends StatelessWidget {
@@ -35,7 +38,7 @@ class ClElevatedButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 38),
           primary: Colors.transparent,
           onPrimary: Palette.colorWhite,
-          shadowColor: Colors.transparent,
+          shadowColor: (!kIsWeb && Platform.isAndroid) ? Palette.colorPrimary : Colors.transparent,
           shape: RoundedRectangleBorder(borderRadius: borderRadius),
         ),
         child: child,
