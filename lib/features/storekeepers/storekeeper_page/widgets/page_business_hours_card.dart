@@ -1,8 +1,8 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/features/commerces/business_hours.dart';
 import 'package:chemin_du_local/features/commerces/schedule.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/schedule_field.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/schedule_field_controller.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class PageBusinessHoursCard extends StatelessWidget {
@@ -33,6 +33,18 @@ class PageBusinessHoursCard extends StatelessWidget {
     if (isEditing) {
       return _buildForm();
     } 
+
+    if (_isEmpty()) {
+      return const ClCard(
+        height: 300,
+        child: Opacity(
+          opacity: 0.4,
+          child: Center(
+            child: Text("Les horaires d'ouverture de votre commerce"),
+          ),
+        ),
+      );
+    }
 
     return _buildContent();   
   }
@@ -145,5 +157,15 @@ class PageBusinessHoursCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  bool _isEmpty() {
+    return mondayController.schedules.isEmpty 
+      && tuesdayController.schedules.isEmpty
+      && wednesdayController.schedules.isEmpty
+      && thursdayController.schedules.isEmpty
+      && fridayController.schedules.isEmpty
+      && saturdayController.schedules.isEmpty
+      && sundayController.schedules.isEmpty;
   }
 }

@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/basket/basket.dart';
@@ -43,45 +44,72 @@ class PageProductsList extends ConsumerWidget {
   Widget _buildContent(WidgetRef ref, Basket basket) {
     final BasketCommerce? basketCommerce = _commerceForID(basket, commerce?.id ?? "");
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // La liste des produits
-        Flexible(
-          child: ListView(
-            controller: ScrollController(),
-            shrinkWrap: true,
-            scrollDirection: Axis.horizontal,
+    return Opacity(
+      opacity: products.isEmpty ? 0.4 : 1.0,
+      child: Stack(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              for (final product in products) 
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 200),
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: ProductCard(
-                      product: product,
-                      showQuantityPicker: availableForClickAndCollect.contains(product.id),
-                      quantity: _productForID(basketCommerce, product.id ?? "")?.quantity ?? 0,
-                      onQuantityUpdated: (value) => _updateProductOnBasket(ref, product, value),
-                    ),
-                  ),
-                )
+              // La liste des produits
+              Flexible(
+                child: ListView(
+                  controller: ScrollController(),
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  children: [
+                    if (products.isEmpty) 
+                      for (int i = 0; i < 4; ++i)
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 200),
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: ClCard(
+                              child: Container(),
+                            ),
+                          ),
+                        )
+                    else 
+                      for (final product in products) 
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 200),
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: ProductCard(
+                              product: product,
+                              showQuantityPicker: availableForClickAndCollect.contains(product.id),
+                              quantity: _productForID(basketCommerce, product.id ?? "")?.quantity ?? 0,
+                              onQuantityUpdated: (value) => _updateProductOnBasket(ref, product, value),
+                            ),
+                          ),
+                        )
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10,),
+    
+              // Le bouton
+              Center(
+                child: ClElevatedButton(
+                  onPressed: () {
+                    if (!enableButton) return;
+                  },
+                  child: const Text("Voir tous les produits"),
+                ),
+              )
             ],
           ),
-        ),
-        const SizedBox(height: 10,),
-
-        // Le bouton
-        Center(
-          child: ClElevatedButton(
-            onPressed: () {
-              if (!enableButton) return;
-            },
-            child: const Text("Voir tous les produits"),
-          ),
-        )
-      ],
+          
+          if (products.isEmpty)
+            const Positioned(
+              top: 0, bottom: 0, left: 0, right: 0,
+              child: Center(
+                child: Text("Vous n'avez pas de produits ! Créez des fiches dans Mes produits"),
+              ),
+            )
+        ],
+      ),
     );
   }
 

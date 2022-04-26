@@ -186,6 +186,17 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
         }
 
         return Scaffold(
+          appBar: AppBar(
+            // backgroundColor: Colors.transparent,
+            actions: [
+              if (widget.canEdit)
+                ClFloatingButton(
+                  onPressed: () => _onEditSavePressed(commerce?.id, runMutation),
+                  icon: _isEditing ? Icons.save : Icons.edit,
+              ) 
+            ],
+          ),
+          // extendBodyBehindAppBar: true,
           body: Form(
             key: _formKey,
             child: CustomScrollView(
@@ -235,10 +246,10 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
               ],
             ),
           ),
-          floatingActionButton: widget.canEdit ? ClFloatingButton(
-            onPressed: () => _onEditSavePressed(commerce?.id, runMutation),
-            icon: _isEditing ? Icons.save : Icons.edit,
-          ) : null,
+          // floatingActionButton: widget.canEdit ? ClFloatingButton(
+          //   onPressed: () => _onEditSavePressed(commerce?.id, runMutation),
+          //   icon: _isEditing ? Icons.save : Icons.edit,
+          // ) : null,
         );
       }
     );
@@ -290,6 +301,13 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                     initialLatLgn: _commerceLatLgn,
                     isEditing: _isEditing,
                   ),
+                ),
+                const SizedBox(height: 10,),
+
+                // La description
+                PageDescriptionCard(
+                  descriptionTextController: _descriptionTextController, 
+                  isEditing: _isEditing
                 ),
                 const SizedBox(height: 10,),
               ],

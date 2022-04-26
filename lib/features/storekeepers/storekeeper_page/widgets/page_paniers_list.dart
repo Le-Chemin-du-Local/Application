@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/basket/basket.dart';
 import 'package:chemin_du_local/features/basket/basket_commerce.dart';
@@ -90,25 +91,52 @@ class PagePaniersList extends ConsumerWidget {
   Widget _buildContent(WidgetRef ref, Basket basket, {
     required List<Panier> paniers,
   }) {
-    return ListView(
-      controller: ScrollController(),
-      shrinkWrap: true,
-      scrollDirection: Axis.horizontal,
-      children: [
-        for (final panier in paniers) 
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 720),
-            child: Padding(
-              padding: const EdgeInsets.only(right: 12),
-              child: PagePanierCard(
-                panier: panier.copyWith(
-                  quantity: panier.quantity - _deductibleQuantity(basket, panier)
-                ),
-                onOpen: () => _addPanierOnBasket(ref, basket, panier),
+    return Opacity(
+      opacity: paniers.isEmpty ? 0.4 : 1.0,
+      child: Stack(
+        children: [
+          ListView(
+            controller: ScrollController(),
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            children: [
+              if (paniers.isEmpty) 
+                for (int i = 0; i < 4; ++i)
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 720),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: ClCard(
+                        child: Container(),
+                      ),
+                    ),
+                  )
+              else 
+                for (final panier in paniers) 
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 720),
+                    child: Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: PagePanierCard(
+                        panier: panier.copyWith(
+                          quantity: panier.quantity - _deductibleQuantity(basket, panier)
+                        ),
+                        onOpen: () => _addPanierOnBasket(ref, basket, panier),
+                      ),
+                    ),
+                  )
+            ],
+          ),
+
+          if (paniers.isEmpty)
+            const Positioned(
+              top: 0, bottom: 0, left: 0, right: 0,
+              child: Center(
+                child: Text("Vous n'avez pas créé de paniers ! Créez en un grâce au service Paniers"),
               ),
-            ),
-          )
-      ],
+            )
+        ],
+      ),
     );
   }
 
