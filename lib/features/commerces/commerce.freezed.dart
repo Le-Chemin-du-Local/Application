@@ -36,6 +36,7 @@ class _$CommerceTearOff {
       String? facebook,
       String? twitter,
       String? instagram,
+      BusinessHours? businessHours,
       double? latitude,
       double? longitude}) {
     return _Commerce(
@@ -53,6 +54,7 @@ class _$CommerceTearOff {
       facebook: facebook,
       twitter: twitter,
       instagram: instagram,
+      businessHours: businessHours,
       latitude: latitude,
       longitude: longitude,
     );
@@ -83,6 +85,7 @@ mixin _$Commerce {
   String? get facebook => throw _privateConstructorUsedError;
   String? get twitter => throw _privateConstructorUsedError;
   String? get instagram => throw _privateConstructorUsedError;
+  BusinessHours? get businessHours => throw _privateConstructorUsedError;
   double? get latitude => throw _privateConstructorUsedError;
   double? get longitude => throw _privateConstructorUsedError;
 
@@ -111,10 +114,12 @@ abstract class $CommerceCopyWith<$Res> {
       String? facebook,
       String? twitter,
       String? instagram,
+      BusinessHours? businessHours,
       double? latitude,
       double? longitude});
 
   $UserCopyWith<$Res>? get storekeeper;
+  $BusinessHoursCopyWith<$Res>? get businessHours;
 }
 
 /// @nodoc
@@ -141,6 +146,7 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? facebook = freezed,
     Object? twitter = freezed,
     Object? instagram = freezed,
+    Object? businessHours = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
   }) {
@@ -202,6 +208,10 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
           ? _value.instagram
           : instagram // ignore: cast_nullable_to_non_nullable
               as String?,
+      businessHours: businessHours == freezed
+          ? _value.businessHours
+          : businessHours // ignore: cast_nullable_to_non_nullable
+              as BusinessHours?,
       latitude: latitude == freezed
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
@@ -221,6 +231,17 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
 
     return $UserCopyWith<$Res>(_value.storekeeper!, (value) {
       return _then(_value.copyWith(storekeeper: value));
+    });
+  }
+
+  @override
+  $BusinessHoursCopyWith<$Res>? get businessHours {
+    if (_value.businessHours == null) {
+      return null;
+    }
+
+    return $BusinessHoursCopyWith<$Res>(_value.businessHours!, (value) {
+      return _then(_value.copyWith(businessHours: value));
     });
   }
 }
@@ -245,11 +266,14 @@ abstract class _$CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       String? facebook,
       String? twitter,
       String? instagram,
+      BusinessHours? businessHours,
       double? latitude,
       double? longitude});
 
   @override
   $UserCopyWith<$Res>? get storekeeper;
+  @override
+  $BusinessHoursCopyWith<$Res>? get businessHours;
 }
 
 /// @nodoc
@@ -277,6 +301,7 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? facebook = freezed,
     Object? twitter = freezed,
     Object? instagram = freezed,
+    Object? businessHours = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
   }) {
@@ -338,6 +363,10 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value.instagram
           : instagram // ignore: cast_nullable_to_non_nullable
               as String?,
+      businessHours: businessHours == freezed
+          ? _value.businessHours
+          : businessHours // ignore: cast_nullable_to_non_nullable
+              as BusinessHours?,
       latitude: latitude == freezed
           ? _value.latitude
           : latitude // ignore: cast_nullable_to_non_nullable
@@ -367,6 +396,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       this.facebook,
       this.twitter,
       this.instagram,
+      this.businessHours,
       this.latitude,
       this.longitude});
 
@@ -405,13 +435,15 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   @override
   final String? instagram;
   @override
+  final BusinessHours? businessHours;
+  @override
   final double? latitude;
   @override
   final double? longitude;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, latitude: $latitude, longitude: $longitude)';
+    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, businessHours: $businessHours, latitude: $latitude, longitude: $longitude)';
   }
 
   @override
@@ -434,6 +466,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('facebook', facebook))
       ..add(DiagnosticsProperty('twitter', twitter))
       ..add(DiagnosticsProperty('instagram', instagram))
+      ..add(DiagnosticsProperty('businessHours', businessHours))
       ..add(DiagnosticsProperty('latitude', latitude))
       ..add(DiagnosticsProperty('longitude', longitude));
   }
@@ -463,6 +496,8 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality().equals(other.facebook, facebook) &&
             const DeepCollectionEquality().equals(other.twitter, twitter) &&
             const DeepCollectionEquality().equals(other.instagram, instagram) &&
+            const DeepCollectionEquality()
+                .equals(other.businessHours, businessHours) &&
             const DeepCollectionEquality().equals(other.latitude, latitude) &&
             const DeepCollectionEquality().equals(other.longitude, longitude));
   }
@@ -484,6 +519,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       const DeepCollectionEquality().hash(facebook),
       const DeepCollectionEquality().hash(twitter),
       const DeepCollectionEquality().hash(instagram),
+      const DeepCollectionEquality().hash(businessHours),
       const DeepCollectionEquality().hash(latitude),
       const DeepCollectionEquality().hash(longitude));
 
@@ -513,6 +549,7 @@ abstract class _Commerce implements Commerce {
       String? facebook,
       String? twitter,
       String? instagram,
+      BusinessHours? businessHours,
       double? latitude,
       double? longitude}) = _$_Commerce;
 
@@ -546,6 +583,8 @@ abstract class _Commerce implements Commerce {
   String? get twitter;
   @override
   String? get instagram;
+  @override
+  BusinessHours? get businessHours;
   @override
   double? get latitude;
   @override

@@ -4,16 +4,19 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/cl_file.dart';
 import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/features/commerces/business_hours.dart';
 import 'package:chemin_du_local/features/commerces/commerce.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_address_card.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_business_hours_card.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_description_card.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_header_image.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_paniers_list.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_products_list.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_products_list_big.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_schedules_card.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/schedule_field_controller.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
 import 'package:chemin_du_local/features/user/user.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +53,13 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
   final TextEditingController _twitterTextController = TextEditingController();
   final TextEditingController _instagramTextController = TextEditingController();
 
-  final Map<String, String> _schedules = {};
+  final ScheduleFieldController _mondayController = ScheduleFieldController();
+  final ScheduleFieldController _tuesdayController = ScheduleFieldController();
+  final ScheduleFieldController _wednesdayController = ScheduleFieldController();
+  final ScheduleFieldController _thursdayController = ScheduleFieldController();
+  final ScheduleFieldController _fridayController = ScheduleFieldController();
+  final ScheduleFieldController _saturdayController = ScheduleFieldController();
+  final ScheduleFieldController _sundayController = ScheduleFieldController();
 
   ClFile? _image;
   ClFile? _profilePicture;
@@ -104,15 +113,13 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
       _commerceLatLgn = LatLng(commerce.latitude!, commerce.longitude!);      
     }
 
-    _schedules.addAll({
-      "Monday": "Fermé",
-      "Tuesday": "10h00 - 12h00 / 14h00 - 19h00",
-      "Wednesday": "10h00 - 12h00",
-      "Thursday": "10h00 - 12h00 / 14h00 - 19h00",
-      "Friday": "10h00 - 12h00 / 14h00 - 19h00",
-      "Saturday": "10h00 - 12h00 / 14h00 - 19h00",
-      "Sunday": "Fermé"
-    });
+    _mondayController.schedules = commerce?.businessHours?.monday ?? [];
+    _tuesdayController.schedules = commerce?.businessHours?.tuesday?? [];
+    _wednesdayController.schedules = commerce?.businessHours?.wednesday ?? [];
+    _thursdayController.schedules = commerce?.businessHours?.thursday ?? [];
+    _fridayController.schedules = commerce?.businessHours?.friday ?? [];
+    _saturdayController.schedules = commerce?.businessHours?.saturday ?? [];
+    _sundayController.schedules = commerce?.businessHours?.sunday ?? [];
 
     _initialized = true;
   }
@@ -258,7 +265,16 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
               children: [
                 // Les horaires
                 Flexible(
-                  child: PageSchedulesCard(schedules: _schedules),
+                  child: PageBusinessHoursCard(
+                    mondayController: _mondayController,
+                    tuesdayController: _tuesdayController,
+                    wednesdayController: _wednesdayController,
+                    thursdayController: _thursdayController,
+                    fridayController: _fridayController,
+                    saturdayController: _saturdayController,
+                    sundayController: _sundayController,
+                    isEditing: _isEditing
+                  ),
                 ),
                 const SizedBox(height: 10,),
 
@@ -376,7 +392,16 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
                   children:[
                     // Les horraires
                     Flexible(
-                      child: PageSchedulesCard(schedules: _schedules),
+                      child: PageBusinessHoursCard(
+                        mondayController: _mondayController,
+                        tuesdayController: _tuesdayController,
+                        wednesdayController: _wednesdayController,
+                        thursdayController: _thursdayController,
+                        fridayController: _fridayController,
+                        saturdayController: _saturdayController,
+                        sundayController: _sundayController,
+                        isEditing: _isEditing
+                      ),
                     ),
                     const SizedBox(height: 10,),
         
@@ -447,6 +472,15 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
         "facebook": _facebookTextController.text,
         "twitter": _twitterTextController.text,
         "instagram": _instagramTextController.text,
+        "businessHours": {
+          "monday": _mondayController.schedules,
+          "tuesday": _tuesdayController.schedules,
+          "wednesday": _wednesdayController.schedules,
+          "thursday": _thursdayController.schedules,
+          "friday": _fridayController.schedules,
+          "saturday": _saturdayController.schedules,
+          "sunday": _sundayController.schedules,
+        },
         if (_image != null) 
           "image": MultipartFile.fromBytes(
             "image",

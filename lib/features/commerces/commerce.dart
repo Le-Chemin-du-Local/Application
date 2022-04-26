@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/features/commerces/business_hours.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/user/user.dart';
 import 'package:flutter/foundation.dart';
@@ -27,6 +28,7 @@ class Commerce with _$Commerce {
     String? facebook,
     String? twitter,
     String? instagram,
+    BusinessHours? businessHours,
     double? latitude,
     double? longitude,
   }) = _Commerce;
