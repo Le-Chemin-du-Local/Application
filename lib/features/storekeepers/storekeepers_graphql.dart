@@ -18,6 +18,36 @@ query GetStoreKeeperCommerce(
       facebook
       twitter
       instagram
+      businessHours {
+        monday {
+          opening
+          closing
+        }
+        tuesday {
+          opening
+          closing
+        }
+        wednesday {
+          opening
+          closing
+        }
+        thursday {
+          opening
+          closing
+        }
+        friday {
+          opening
+          closing
+        }
+        saturday {
+          opening
+          closing
+        }
+        sunday {
+          opening
+          closing
+        }
+      }
       productsAvailableForClickAndCollect {
         id
         name
@@ -57,6 +87,7 @@ mutation updateCommerce(
   $facebook: String,
   $twitter: String,
   $instagram: String,
+  $businessHours: ChangesBusinessHours,
   $image: Upload,
   $profilePicture: Upload
 ) {
@@ -73,6 +104,7 @@ mutation updateCommerce(
       facebook: $facebook,
       twitter: $twitter,
       instagram: $instagram,
+      businessHours: $businessHours,
       image: $image,
       profilePicture: $profilePicture
     }

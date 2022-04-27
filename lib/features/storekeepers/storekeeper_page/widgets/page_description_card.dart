@@ -14,8 +14,13 @@ class PageDescriptionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final String descriptionText = descriptionTextController.text.isEmpty 
+      ? "La description de votre commerce"
+      : descriptionTextController.text;
+
     return ClCard(
       // backgroundColor: isEditing ? Theme.of(context).scaffoldBackgroundColor : Theme.of(context).cardColor, 
+      height: descriptionTextController.text.isEmpty ? 180 : null,
       child: isEditing ?
         // First case, edit mode show a text input
         ClTextInput(
@@ -31,7 +36,10 @@ class PageDescriptionCard extends StatelessWidget {
           },
         ) :
         // Second case, we just show the actual text
-        Text(descriptionTextController.text),
+        Opacity(
+          opacity: descriptionTextController.text.isEmpty ? 0.40 : 1.0,
+          child: Text(descriptionText)
+        ),
     );
   }
 }

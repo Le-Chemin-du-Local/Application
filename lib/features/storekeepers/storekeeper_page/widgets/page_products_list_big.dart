@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/basket/basket.dart';
@@ -44,46 +45,64 @@ class PageProductsListBig extends ConsumerWidget {
     final BasketCommerce? basketCommerce = _commerceForID(basket, commerce?.id ?? "");
 
     final List<Widget> content = [
-    for (final product in products) 
-      ConstrainedBox(
-        constraints: const BoxConstraints(maxHeight: 300, maxWidth: 200),
-        child: ProductCard(
-          product: product,
-          showQuantityPicker: availableForClickAndCollect.contains(product.id),
-          quantity: _productForID(basketCommerce, product.id ?? "")?.quantity ?? 0,
-          onQuantityUpdated: (value) => _updateProductOnBasket(ref, product, value),
-        )
+      if (products.isEmpty) 
+        for (int i = 0; i < 4; ++i) 
+          ClCard(child: Container())
+      else 
+        for (final product in products) 
+          ConstrainedBox(
+            constraints: const BoxConstraints(maxHeight: 300, maxWidth: 200),
+            child: ProductCard(
+            product: product,
+            showQuantityPicker: availableForClickAndCollect.contains(product.id),
+            quantity: _productForID(basketCommerce, product.id ?? "")?.quantity ?? 0,
+            onQuantityUpdated: (value) => _updateProductOnBasket(ref, product, value),
+          )
       )
     ];
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        GridView(
-          physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: 270,
-            mainAxisExtent: 273,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16
+    return Opacity(
+      opacity: products.isEmpty ? 0.4 : 1.0,
+      child: Stack(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              GridView(
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 270,
+                  mainAxisExtent: 273,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16
+                ),
+                shrinkWrap: true,
+                primary: false,
+                children: content,
+              ),
+              const SizedBox(height: 12,),
+    
+              // The view products button
+              Center(
+                child: ClElevatedButton(
+                  onPressed: () {
+                    if (!enableButton) return;
+                  },
+                  child: const Text("Voir tous les produits"),
+                ),
+              ),
+            ],
           ),
-          shrinkWrap: true,
-          primary: false,
-          children: content,
-        ),
-        const SizedBox(height: 12,),
-
-        // The view products button
-        Center(
-          child: ClElevatedButton(
-            onPressed: () {
-              if (!enableButton) return;
-            },
-            child: const Text("Voir tous les produits"),
-          ),
-        ),
-      ],
+          if (products.isEmpty)
+            const Positioned(
+              top: 0, bottom: 0, left: 0, right: 0,
+              child: Center(
+                child: Text("Vous n'avez pas de produts ! Créez des fiches dans Mes produits"),
+              )
+            )
+        ],
+      ),
     );
   }
 

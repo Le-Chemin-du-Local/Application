@@ -7,6 +7,7 @@ class ClDateTimePicker extends StatelessWidget {
     Key? key,
     this.type = DateTimePickerType.date,
     this.initialDate,
+    this.initialValue,
     this.firstDate,
     this.lastDate,
     required this.onChanged,
@@ -17,6 +18,7 @@ class ClDateTimePicker extends StatelessWidget {
   final DateTimePickerType type;
 
   final DateTime? initialDate;
+  final String? initialValue;
   final DateTime? firstDate;
   final DateTime? lastDate;
 
@@ -41,6 +43,7 @@ class ClDateTimePicker extends StatelessWidget {
           child: DateTimePicker(
             type: type,
             initialDate: initialDate,
+            initialValue: initialValue,
             dateMask: 'dd/MM/yyyy hh:mm',
             firstDate: firstDate,
             lastDate: lastDate,
