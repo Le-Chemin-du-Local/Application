@@ -58,6 +58,7 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
                     child: BasketSchedulesList(
                       commerce: widget.commerce,
                       currentDateIndex: _timeIndex,
+                      day: _day,
                       onIndexChanged: (index) {
                         setState(() {
                           _timeIndex = index;
