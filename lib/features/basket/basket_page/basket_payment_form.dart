@@ -210,7 +210,9 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
 
     try {
       final paymentMethod = await Stripe.instance.createPaymentMethod(
-        const PaymentMethodParams.card()
+        const PaymentMethodParams.card(
+          paymentMethodData: PaymentMethodData()
+        )
       );
 
       final paymentIntentResult = await StripeService.instance.handlePaymentIntent(

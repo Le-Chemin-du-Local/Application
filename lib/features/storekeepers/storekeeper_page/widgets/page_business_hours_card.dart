@@ -2,7 +2,6 @@ import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/features/commerces/schedule.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/schedule_field.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/schedule_field_controller.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class PageBusinessHoursCard extends StatelessWidget {

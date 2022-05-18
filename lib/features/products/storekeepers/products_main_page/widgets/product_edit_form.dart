@@ -486,6 +486,6 @@ class _ProductEditFormState extends State<ProductEditForm> {
       });
     }
 
-    imageCache?.clear();
+    imageCache.clear();
   }
 }

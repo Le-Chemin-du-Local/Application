@@ -4,7 +4,6 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/cl_file.dart';
 import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/commerces/business_hours.dart';
 import 'package:chemin_du_local/features/commerces/commerce.dart';
 import 'package:chemin_du_local/features/products/product.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
@@ -15,7 +14,6 @@ import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/p
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_paniers_list.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_products_list.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_products_list_big.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_schedules_card.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/schedule_field_controller.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
 import 'package:chemin_du_local/features/user/user.dart';
