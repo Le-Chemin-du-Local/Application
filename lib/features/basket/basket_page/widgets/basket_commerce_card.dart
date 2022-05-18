@@ -1,8 +1,10 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/features/basket/basket_commerce.dart';
+import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_product_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BasketCommerceCard extends StatelessWidget {
+class BasketCommerceCard extends ConsumerWidget {
   const BasketCommerceCard({
     Key? key,
     required this.commerce
@@ -11,7 +13,7 @@ class BasketCommerceCard extends StatelessWidget {
   final BasketCommerce commerce;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -47,24 +49,18 @@ class BasketCommerceCard extends StatelessWidget {
           ),
         ),
         Flexible(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: ScreenHelper.horizontalPadding,
-              vertical: 10
-            ),
-            child: ListView(
-              primary: false,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              children: [
-                for (final product in commerce.products)
-                  Text("${product.product.name} (x${product.quantity})"),
-                const Divider(),
+          child: ListView(
+            primary: false,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              for (final product in commerce.products)
+                BasketProductCard(product: product,),
+              const Divider(),
 
-                for (final panier in commerce.paniers) 
-                  Text("Panier : ${panier.name}")
-              ],
-            ),
+              for (final panier in commerce.paniers) 
+                Text("Panier : ${panier.name}")
+            ],
           ),
         )
       ],
