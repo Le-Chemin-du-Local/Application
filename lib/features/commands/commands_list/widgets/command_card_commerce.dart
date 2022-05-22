@@ -1,7 +1,6 @@
 import 'package:chemin_du_local/core/widgets/badge.dart';
 import 'package:chemin_du_local/features/commands/commerce_command.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class CommandCardCommerce extends StatelessWidget {

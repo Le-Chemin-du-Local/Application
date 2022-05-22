@@ -7,7 +7,6 @@ import 'package:chemin_du_local/features/commands/commands_list/widgets/command_
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:intl/intl.dart';
 
 class CommandsList extends ConsumerWidget {
   const CommandsList({Key? key}) : super(key: key);
