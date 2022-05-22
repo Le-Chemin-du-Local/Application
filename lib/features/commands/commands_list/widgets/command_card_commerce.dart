@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/widgets/badge.dart';
 import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
+import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -40,7 +41,24 @@ class CommandCardCommerce extends StatelessWidget {
           const SizedBox(width: 24,),
     
           // Le badge de status
-          const Badge(child: Text("En cours"))
+          Badge(
+            child: Row(
+              children: [
+                Icon(
+                  CommandStatus.icon[commerceCommand.status], 
+                  size: 16,
+                  color: Palette.colorWhite,
+                ),
+                const SizedBox(width: 4,),
+                Text(
+                  CommandStatus.detailed[commerceCommand.status] ?? "Inconnue",
+                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                    color: Palette.colorWhite
+                  ),
+                ),
+              ],
+            )
+          )
         ],
       ),
     );
