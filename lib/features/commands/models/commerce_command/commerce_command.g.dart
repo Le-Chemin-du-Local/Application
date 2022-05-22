@@ -19,6 +19,14 @@ _$_CommerceCommand _$$_CommerceCommandFromJson(Map<String, dynamic> json) =>
       user: json['user'] == null
           ? null
           : User.fromJson(json['user'] as Map<String, dynamic>),
+      cccommands: (json['cccommands'] as List<dynamic>?)
+              ?.map((e) => CCCommand.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <CCCommand>[],
+      panierCommands: (json['panierCommands'] as List<dynamic>?)
+              ?.map((e) => PanierCommand.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <PanierCommand>[],
     );
 
 Map<String, dynamic> _$$_CommerceCommandToJson(_$_CommerceCommand instance) =>
@@ -28,4 +36,6 @@ Map<String, dynamic> _$$_CommerceCommandToJson(_$_CommerceCommand instance) =>
       'pickupDate': instance.pickupDate?.toIso8601String(),
       'commerce': instance.commerce,
       'user': instance.user,
+      'cccommands': instance.cccommands,
+      'panierCommands': instance.panierCommands,
     };

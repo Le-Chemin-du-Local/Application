@@ -1,6 +1,7 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
+import 'package:chemin_du_local/features/commands/command_details_page/command_details_page.dart';
 import 'package:chemin_du_local/features/commands/commands_graphql.dart';
 import 'package:chemin_du_local/features/commands/commands_list/widgets/command_card.dart';
 import 'package:chemin_du_local/features/commands/models/command/command.dart';
@@ -8,6 +9,7 @@ import 'package:chemin_du_local/features/commands/models/commerce_command/commer
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:intl/intl.dart';
 
 class CommandsList extends ConsumerWidget {
   const CommandsList({Key? key}) : super(key: key);
@@ -64,12 +66,12 @@ class CommandsList extends ConsumerWidget {
           return Container();
         }
 
-        return _buildContent(commands);
+        return _buildContent(context, commands);
       },
     );
   }
 
-  Widget _buildContent(List<Command> commands) {
+  Widget _buildContent(BuildContext context, List<Command> commands) {
     return ListView(
       primary: true,
       shrinkWrap: true,
@@ -78,9 +80,27 @@ class CommandsList extends ConsumerWidget {
         for (final command in commands) 
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding, vertical: 8),
-            child: CommandCard(command: command),
+            child: InkWell(
+              onTap: () => _openCommandDetail(context, command),
+              child: CommandCard(command: command)
+            ),
           )
       ],
     );
+  }
+
+  Future _openCommandDetail(BuildContext context, Command command) async {
+    final String creationDateString = command.creationDate != null 
+      ? DateFormat("dd/MM/yyyy").format(command.creationDate!)
+      : "Date inconnue";
+
+      await Navigator.of(context).push<dynamic>(
+        MaterialPageRoute<dynamic>(
+          builder: (context) => CommandDetailsPage(
+            commandID: command.id!,
+            commandDateString: creationDateString
+          )
+        )
+      );
   }
 }

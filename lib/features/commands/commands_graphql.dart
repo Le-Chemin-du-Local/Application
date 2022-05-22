@@ -6,6 +6,7 @@ query getCommands(
   commands(first: $first, filter: $filter) {
     edges {
       node {
+        id
         creationDate
         commerces {
           commerce {
@@ -16,6 +17,39 @@ query getCommands(
           pickupDate
         }
       }
+    }
+  }
+}
+''';
+
+const String qGetCommandDetailed = r'''
+query getCommand(
+  $id: ID!
+) {
+  command(id: $id) {
+    id
+    creationDate
+    commerces {
+      id
+      commerce {
+        id
+        name
+        address
+        phone
+      }
+      cccommands {
+        id
+        products {
+          quantity
+          product {
+            id
+            name
+            price
+          }
+        }
+      }
+      status
+      pickupDate
     }
   }
 }

@@ -9,6 +9,8 @@ part 'command.g.dart';
 @freezed
 @immutable
 class Command with _$Command {
+  const Command._();
+
   const factory Command(String? id, {
     DateTime? creationDate, 
     User? user,
@@ -17,4 +19,45 @@ class Command with _$Command {
   }) = _Command;
 
   factory Command.fromJson(Map<String, dynamic> json) => _$CommandFromJson(json);
+
+  double get totalPrice {
+    double result = 0;
+
+    for (final commerceCommand in commerces) {
+      // On commence avec les produits
+      for (final cccommand in commerceCommand.cccommands) {
+        for (final product in cccommand.products) {
+          result += product.product.price ?? 0 * product.quantity;
+        }
+      }
+
+      // Ensuite les paniers
+      for (final panierCommand in commerceCommand.panierCommands) {
+        result += panierCommand.panier.price;
+      }
+    }
+
+    return result;
+  }
+
+
+  int get totalCount {
+    int result = 0;
+
+    for (final commerceCommand in commerces) {
+      // On commence avec les produits
+      for (final cccommand in commerceCommand.cccommands) {
+        for (final product in cccommand.products) {
+          result += product.quantity;
+        }
+      }
+
+      // Ensuite les paniers
+      for (int i = 0; i < commerceCommand.panierCommands.length; ++i) {
+        result += 1;
+      }
+    }
+
+    return result;
+  }
 }

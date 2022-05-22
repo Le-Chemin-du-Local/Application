@@ -1,4 +1,6 @@
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
+import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/models/cccommand/cccommand.dart';
+import 'package:chemin_du_local/features/storekeepers/services/paniers/models/panier_command/panier_command.dart';
 import 'package:chemin_du_local/features/user/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +35,8 @@ class CommerceCommand with _$CommerceCommand {
     DateTime? pickupDate,
     Commerce? commerce,
     User? user,
+    @Default(<CCCommand>[]) List<CCCommand> cccommands,
+    @Default(<PanierCommand>[]) List<PanierCommand> panierCommands,
   }) = _CommerceCommand;
 
   factory CommerceCommand.fromJson(Map<String, dynamic> json) => _$CommerceCommandFromJson(json);

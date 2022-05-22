@@ -16,10 +16,7 @@ mixin CCCommandStatus {
 @immutable
 class CCCommand with _$CCCommand {
   const factory CCCommand(String? id, {
-    required String status,
-    required DateTime pickupDate,
     @Default(<CCProduct>[]) List<CCProduct> products,
-    User? user,
   }) = _CCCommand;
 
   factory CCCommand.fromJson(Map<String, dynamic> json) => _$CCCommandFromJson(json);

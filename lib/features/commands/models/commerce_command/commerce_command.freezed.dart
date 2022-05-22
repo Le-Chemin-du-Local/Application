@@ -25,6 +25,8 @@ mixin _$CommerceCommand {
   DateTime? get pickupDate => throw _privateConstructorUsedError;
   Commerce? get commerce => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
+  List<CCCommand> get cccommands => throw _privateConstructorUsedError;
+  List<PanierCommand> get panierCommands => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,7 +44,9 @@ abstract class $CommerceCommandCopyWith<$Res> {
       String status,
       DateTime? pickupDate,
       Commerce? commerce,
-      User? user});
+      User? user,
+      List<CCCommand> cccommands,
+      List<PanierCommand> panierCommands});
 
   $CommerceCopyWith<$Res>? get commerce;
   $UserCopyWith<$Res>? get user;
@@ -64,6 +68,8 @@ class _$CommerceCommandCopyWithImpl<$Res>
     Object? pickupDate = freezed,
     Object? commerce = freezed,
     Object? user = freezed,
+    Object? cccommands = freezed,
+    Object? panierCommands = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -86,6 +92,14 @@ class _$CommerceCommandCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      cccommands: cccommands == freezed
+          ? _value.cccommands
+          : cccommands // ignore: cast_nullable_to_non_nullable
+              as List<CCCommand>,
+      panierCommands: panierCommands == freezed
+          ? _value.panierCommands
+          : panierCommands // ignore: cast_nullable_to_non_nullable
+              as List<PanierCommand>,
     ));
   }
 
@@ -124,7 +138,9 @@ abstract class _$$_CommerceCommandCopyWith<$Res>
       String status,
       DateTime? pickupDate,
       Commerce? commerce,
-      User? user});
+      User? user,
+      List<CCCommand> cccommands,
+      List<PanierCommand> panierCommands});
 
   @override
   $CommerceCopyWith<$Res>? get commerce;
@@ -150,6 +166,8 @@ class __$$_CommerceCommandCopyWithImpl<$Res>
     Object? pickupDate = freezed,
     Object? commerce = freezed,
     Object? user = freezed,
+    Object? cccommands = freezed,
+    Object? panierCommands = freezed,
   }) {
     return _then(_$_CommerceCommand(
       id == freezed
@@ -172,6 +190,14 @@ class __$$_CommerceCommandCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      cccommands: cccommands == freezed
+          ? _value._cccommands
+          : cccommands // ignore: cast_nullable_to_non_nullable
+              as List<CCCommand>,
+      panierCommands: panierCommands == freezed
+          ? _value._panierCommands
+          : panierCommands // ignore: cast_nullable_to_non_nullable
+              as List<PanierCommand>,
     ));
   }
 }
@@ -182,7 +208,14 @@ class _$_CommerceCommand
     with DiagnosticableTreeMixin
     implements _CommerceCommand {
   const _$_CommerceCommand(this.id,
-      {required this.status, this.pickupDate, this.commerce, this.user});
+      {required this.status,
+      this.pickupDate,
+      this.commerce,
+      this.user,
+      final List<CCCommand> cccommands = const <CCCommand>[],
+      final List<PanierCommand> panierCommands = const <PanierCommand>[]})
+      : _cccommands = cccommands,
+        _panierCommands = panierCommands;
 
   factory _$_CommerceCommand.fromJson(Map<String, dynamic> json) =>
       _$$_CommerceCommandFromJson(json);
@@ -197,10 +230,25 @@ class _$_CommerceCommand
   final Commerce? commerce;
   @override
   final User? user;
+  final List<CCCommand> _cccommands;
+  @override
+  @JsonKey()
+  List<CCCommand> get cccommands {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_cccommands);
+  }
+
+  final List<PanierCommand> _panierCommands;
+  @override
+  @JsonKey()
+  List<PanierCommand> get panierCommands {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_panierCommands);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CommerceCommand(id: $id, status: $status, pickupDate: $pickupDate, commerce: $commerce, user: $user)';
+    return 'CommerceCommand(id: $id, status: $status, pickupDate: $pickupDate, commerce: $commerce, user: $user, cccommands: $cccommands, panierCommands: $panierCommands)';
   }
 
   @override
@@ -212,7 +260,9 @@ class _$_CommerceCommand
       ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('pickupDate', pickupDate))
       ..add(DiagnosticsProperty('commerce', commerce))
-      ..add(DiagnosticsProperty('user', user));
+      ..add(DiagnosticsProperty('user', user))
+      ..add(DiagnosticsProperty('cccommands', cccommands))
+      ..add(DiagnosticsProperty('panierCommands', panierCommands));
   }
 
   @override
@@ -225,7 +275,11 @@ class _$_CommerceCommand
             const DeepCollectionEquality()
                 .equals(other.pickupDate, pickupDate) &&
             const DeepCollectionEquality().equals(other.commerce, commerce) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality()
+                .equals(other._cccommands, _cccommands) &&
+            const DeepCollectionEquality()
+                .equals(other._panierCommands, _panierCommands));
   }
 
   @JsonKey(ignore: true)
@@ -236,7 +290,9 @@ class _$_CommerceCommand
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(pickupDate),
       const DeepCollectionEquality().hash(commerce),
-      const DeepCollectionEquality().hash(user));
+      const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(_cccommands),
+      const DeepCollectionEquality().hash(_panierCommands));
 
   @JsonKey(ignore: true)
   @override
@@ -254,7 +310,9 @@ abstract class _CommerceCommand implements CommerceCommand {
       {required final String status,
       final DateTime? pickupDate,
       final Commerce? commerce,
-      final User? user}) = _$_CommerceCommand;
+      final User? user,
+      final List<CCCommand> cccommands,
+      final List<PanierCommand> panierCommands}) = _$_CommerceCommand;
 
   factory _CommerceCommand.fromJson(Map<String, dynamic> json) =
       _$_CommerceCommand.fromJson;
@@ -269,6 +327,10 @@ abstract class _CommerceCommand implements CommerceCommand {
   Commerce? get commerce => throw _privateConstructorUsedError;
   @override
   User? get user => throw _privateConstructorUsedError;
+  @override
+  List<CCCommand> get cccommands => throw _privateConstructorUsedError;
+  @override
+  List<PanierCommand> get panierCommands => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_CommerceCommandCopyWith<_$_CommerceCommand> get copyWith =>

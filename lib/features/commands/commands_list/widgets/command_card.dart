@@ -31,7 +31,7 @@ class CommandCard extends StatelessWidget {
           const SizedBox(height: 18,),
 
           for (int i = 0; i < command.commerces.length; ++i) ...{
-            Text("Addresse ${i+1}", style: const TextStyle(fontWeight: FontWeight.bold),),
+            Text("Commerce ${i+1}", style: const TextStyle(fontWeight: FontWeight.bold),),
             const SizedBox(height: 4,),
             CommandCardCommerce(commerceCommand: command.commerces[i],)
           }

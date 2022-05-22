@@ -158,13 +158,14 @@ class __$$_CommandCopyWithImpl<$Res> extends _$CommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Command with DiagnosticableTreeMixin implements _Command {
+class _$_Command extends _Command with DiagnosticableTreeMixin {
   const _$_Command(this.id,
       {this.creationDate,
       this.user,
       final List<CommerceCommand> commerces = const <CommerceCommand>[],
       this.status})
-      : _commerces = commerces;
+      : _commerces = commerces,
+        super._();
 
   factory _$_Command.fromJson(Map<String, dynamic> json) =>
       _$$_CommandFromJson(json);
@@ -238,12 +239,13 @@ class _$_Command with DiagnosticableTreeMixin implements _Command {
   }
 }
 
-abstract class _Command implements Command {
+abstract class _Command extends Command {
   const factory _Command(final String? id,
       {final DateTime? creationDate,
       final User? user,
       final List<CommerceCommand> commerces,
       final String? status}) = _$_Command;
+  const _Command._() : super._();
 
   factory _Command.fromJson(Map<String, dynamic> json) = _$_Command.fromJson;
 
