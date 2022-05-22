@@ -1,7 +1,7 @@
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/ccproducts_page/ccproducts_page.dart';
-import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_page.dart';
+import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_page/paniers_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_home/widgets/dashboard_card.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_home/widgets/dashboard_services_card.dart';

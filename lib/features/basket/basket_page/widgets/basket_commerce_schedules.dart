@@ -2,7 +2,7 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/dates_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_schedules_list.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

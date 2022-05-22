@@ -1,5 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/features/basket/basket.dart';
+import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:flutter/material.dart';
 
 class BasketSuccess extends StatelessWidget {

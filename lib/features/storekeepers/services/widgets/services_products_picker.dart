@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
-import 'package:chemin_du_local/features/products/product.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
+import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/services_product_picker_category.dart';
 import 'package:flutter/material.dart';

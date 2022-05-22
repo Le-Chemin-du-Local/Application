@@ -1,4 +1,4 @@
-import 'package:chemin_du_local/features/products/product.dart';
+import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/services_product_picker_card.dart';
 import 'package:flutter/material.dart';
 

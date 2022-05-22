@@ -1,10 +1,10 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/basket/basket.dart';
-import 'package:chemin_du_local/features/basket/basket_commerce.dart';
-import 'package:chemin_du_local/features/basket/basket_controller.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
-import 'package:chemin_du_local/features/storekeepers/services/paniers/panier.dart';
+import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
+import 'package:chemin_du_local/features/basket/models/basket_commerce/basket_commerce.dart';
+import 'package:chemin_du_local/features/basket/riverpod/basket_controller.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
+import 'package:chemin_du_local/features/storekeepers/services/paniers/models/panier/panier.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_panier_card.dart';
 import 'package:flutter/material.dart';

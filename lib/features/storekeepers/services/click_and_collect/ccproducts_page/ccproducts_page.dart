@@ -2,7 +2,7 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/click_and_collect_grahpql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/services_products_picker.dart';
 import 'package:flutter/material.dart';

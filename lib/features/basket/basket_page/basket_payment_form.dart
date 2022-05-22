@@ -2,7 +2,7 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
-import 'package:chemin_du_local/features/basket/basket.dart';
+import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:chemin_du_local/features/stripe/stripe_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';

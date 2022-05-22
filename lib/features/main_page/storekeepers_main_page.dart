@@ -1,10 +1,10 @@
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/features/commands/storekeeper_commands/storekeeper_commands_page.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/main_page/main_page.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/products_main_page.dart';
-import 'package:chemin_du_local/features/storekeepers/services/services_page.dart';
+import 'package:chemin_du_local/features/storekeepers/services/services_page/services_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_home/storekeeper_home_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/storekeeper_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_settings/storekeeper_settings_page.dart';

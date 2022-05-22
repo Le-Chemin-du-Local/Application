@@ -1,9 +1,9 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
-import 'package:chemin_du_local/features/commands/command.dart';
 import 'package:chemin_du_local/features/commands/commands_graphql.dart';
 import 'package:chemin_du_local/features/commands/commands_list/widgets/command_card.dart';
+import 'package:chemin_du_local/features/commands/models/command/command.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';

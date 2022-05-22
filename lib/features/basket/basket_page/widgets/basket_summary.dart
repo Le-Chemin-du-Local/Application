@@ -1,7 +1,7 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
-import 'package:chemin_du_local/features/basket/basket.dart';
 import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_commerce_card.dart';
+import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:chemin_du_local/features/commands/commands_list/commands_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

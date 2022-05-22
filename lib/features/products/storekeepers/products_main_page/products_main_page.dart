@@ -1,12 +1,12 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
-import 'package:chemin_du_local/features/products/storekeepers/products_main_page/empty_products_page.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
+import 'package:chemin_du_local/features/products/storekeepers/empty_products_page/empty_products_page.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
-import 'package:chemin_du_local/features/products/storekeepers/products_main_page/product_categories_page.dart';
-import 'package:chemin_du_local/features/products/storekeepers/products_main_page/product_edit_page.dart';
-import 'package:chemin_du_local/features/products/storekeepers/products_main_page/products_page.dart';
+import 'package:chemin_du_local/features/products/storekeepers/product_categories_page/product_categories_page.dart';
+import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/product_edit_page.dart';
+import 'package:chemin_du_local/features/products/storekeepers/products_page/products_page.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 

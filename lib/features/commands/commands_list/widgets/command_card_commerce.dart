@@ -1,5 +1,5 @@
 import 'package:chemin_du_local/core/widgets/badge.dart';
-import 'package:chemin_du_local/features/commands/commerce_command.dart';
+import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -1,5 +1,5 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/products/product.dart';
+import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/services_products_picker_row.dart';
 import 'package:flutter/material.dart';

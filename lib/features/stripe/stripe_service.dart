@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:chemin_du_local/core/utils/constants.dart';
-import 'package:chemin_du_local/features/basket/basket.dart';
+import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 

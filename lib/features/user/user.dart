@@ -1,4 +1,4 @@
-import 'package:chemin_du_local/features/commerces/commerce.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

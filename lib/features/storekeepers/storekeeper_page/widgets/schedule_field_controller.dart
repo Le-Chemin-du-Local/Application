@@ -1,4 +1,4 @@
-import 'package:chemin_du_local/features/commerces/schedule.dart';
+import 'package:chemin_du_local/features/commerces/models/schedule/schedule.dart';
 import 'package:flutter/cupertino.dart';
 
 class ScheduleFieldController extends ChangeNotifier {

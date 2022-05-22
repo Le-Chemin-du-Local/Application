@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
-import 'package:chemin_du_local/features/commerces/schedule.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
+import 'package:chemin_du_local/features/commerces/models/schedule/schedule.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

@@ -1,13 +1,13 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/basket/basket.dart';
-import 'package:chemin_du_local/features/basket/basket_commerce.dart';
-import 'package:chemin_du_local/features/basket/basket_controller.dart';
-import 'package:chemin_du_local/features/basket/basket_product.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
-import 'package:chemin_du_local/features/products/product.dart';
-import 'package:chemin_du_local/features/products/storekeepers/products_main_page/widgets/product_card.dart';
+import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
+import 'package:chemin_du_local/features/basket/models/basket_commerce/basket_commerce.dart';
+import 'package:chemin_du_local/features/basket/models/basket_product/basket_product.dart';
+import 'package:chemin_du_local/features/basket/riverpod/basket_controller.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
+import 'package:chemin_du_local/features/products/models/product/product.dart';
+import 'package:chemin_du_local/features/products/storekeepers/products_page/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

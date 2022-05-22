@@ -1,5 +1,5 @@
-import 'package:chemin_du_local/features/products/product.dart';
-import 'package:chemin_du_local/features/products/storekeepers/products_main_page/widgets/product_card.dart';
+import 'package:chemin_du_local/features/products/models/product/product.dart';
+import 'package:chemin_du_local/features/products/storekeepers/products_page/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 
 class ServicesProductCard extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:chemin_du_local/core/widgets/inputs/cl_dateime_picker.dart';
-import 'package:chemin_du_local/features/commerces/schedule.dart';
+import 'package:chemin_du_local/features/commerces/models/schedule/schedule.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/schedule_field_controller.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
 import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/badge.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/features/commerces/commerce.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/storekeeper_page.dart';
 import 'package:chemin_du_local/theme/palette.dart';

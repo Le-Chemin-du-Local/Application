@@ -1,7 +1,7 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_quantity_picker.dart';
-import 'package:chemin_du_local/features/basket/basket_product.dart';
+import 'package:chemin_du_local/features/basket/models/basket_product/basket_product.dart';
 import 'package:flutter/material.dart';
 
 class BasketProductCard extends StatelessWidget {
