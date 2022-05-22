@@ -12,61 +12,11 @@ part of 'commerce.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Commerce _$CommerceFromJson(Map<String, dynamic> json) {
   return _Commerce.fromJson(json);
 }
-
-/// @nodoc
-class _$CommerceTearOff {
-  const _$CommerceTearOff();
-
-  _Commerce call(String? id,
-      {required String name,
-      User? storekeeper,
-      List<String> categories = const <String>[],
-      List<String> services = const <String>[],
-      List<Product> productsAvailableForClickAndCollect = const <Product>[],
-      String? storekeeperWord,
-      String? description,
-      String? address,
-      String? phone,
-      String? email,
-      String? facebook,
-      String? twitter,
-      String? instagram,
-      BusinessHours? businessHours,
-      double? latitude,
-      double? longitude}) {
-    return _Commerce(
-      id,
-      name: name,
-      storekeeper: storekeeper,
-      categories: categories,
-      services: services,
-      productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
-      storekeeperWord: storekeeperWord,
-      description: description,
-      address: address,
-      phone: phone,
-      email: email,
-      facebook: facebook,
-      twitter: twitter,
-      instagram: instagram,
-      businessHours: businessHours,
-      latitude: latitude,
-      longitude: longitude,
-    );
-  }
-
-  Commerce fromJson(Map<String, Object?> json) {
-    return Commerce.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Commerce = _$CommerceTearOff();
 
 /// @nodoc
 mixin _$Commerce {
@@ -247,9 +197,10 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
-  factory _$CommerceCopyWith(_Commerce value, $Res Function(_Commerce) then) =
-      __$CommerceCopyWithImpl<$Res>;
+abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
+  factory _$$_CommerceCopyWith(
+          _$_Commerce value, $Res Function(_$_Commerce) then) =
+      __$$_CommerceCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? id,
@@ -277,13 +228,14 @@ abstract class _$CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
-    implements _$CommerceCopyWith<$Res> {
-  __$CommerceCopyWithImpl(_Commerce _value, $Res Function(_Commerce) _then)
-      : super(_value, (v) => _then(v as _Commerce));
+class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
+    implements _$$_CommerceCopyWith<$Res> {
+  __$$_CommerceCopyWithImpl(
+      _$_Commerce _value, $Res Function(_$_Commerce) _then)
+      : super(_value, (v) => _then(v as _$_Commerce));
 
   @override
-  _Commerce get _value => super._value as _Commerce;
+  _$_Commerce get _value => super._value as _$_Commerce;
 
   @override
   $Res call({
@@ -305,7 +257,7 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? latitude = freezed,
     Object? longitude = freezed,
   }) {
-    return _then(_Commerce(
+    return _then(_$_Commerce(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -319,16 +271,16 @@ class __$CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           : storekeeper // ignore: cast_nullable_to_non_nullable
               as User?,
       categories: categories == freezed
-          ? _value.categories
+          ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
       services: services == freezed
-          ? _value.services
+          ? _value._services
           : services // ignore: cast_nullable_to_non_nullable
               as List<String>,
       productsAvailableForClickAndCollect: productsAvailableForClickAndCollect ==
               freezed
-          ? _value.productsAvailableForClickAndCollect
+          ? _value._productsAvailableForClickAndCollect
           : productsAvailableForClickAndCollect // ignore: cast_nullable_to_non_nullable
               as List<Product>,
       storekeeperWord: storekeeperWord == freezed
@@ -385,9 +337,10 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   const _$_Commerce(this.id,
       {required this.name,
       this.storekeeper,
-      this.categories = const <String>[],
-      this.services = const <String>[],
-      this.productsAvailableForClickAndCollect = const <Product>[],
+      final List<String> categories = const <String>[],
+      final List<String> services = const <String>[],
+      final List<Product> productsAvailableForClickAndCollect =
+          const <Product>[],
       this.storekeeperWord,
       this.description,
       this.address,
@@ -398,7 +351,11 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       this.instagram,
       this.businessHours,
       this.latitude,
-      this.longitude});
+      this.longitude})
+      : _categories = categories,
+        _services = services,
+        _productsAvailableForClickAndCollect =
+            productsAvailableForClickAndCollect;
 
   factory _$_Commerce.fromJson(Map<String, dynamic> json) =>
       _$$_CommerceFromJson(json);
@@ -409,15 +366,30 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   final String name;
   @override
   final User? storekeeper;
-  @JsonKey()
+  final List<String> _categories;
   @override
-  final List<String> categories;
   @JsonKey()
+  List<String> get categories {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
+  final List<String> _services;
   @override
-  final List<String> services;
   @JsonKey()
+  List<String> get services {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_services);
+  }
+
+  final List<Product> _productsAvailableForClickAndCollect;
   @override
-  final List<Product> productsAvailableForClickAndCollect;
+  @JsonKey()
+  List<Product> get productsAvailableForClickAndCollect {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_productsAvailableForClickAndCollect);
+  }
+
   @override
   final String? storekeeperWord;
   @override
@@ -475,17 +447,17 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Commerce &&
+            other is _$_Commerce &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
                 .equals(other.storekeeper, storekeeper) &&
             const DeepCollectionEquality()
-                .equals(other.categories, categories) &&
-            const DeepCollectionEquality().equals(other.services, services) &&
+                .equals(other._categories, _categories) &&
+            const DeepCollectionEquality().equals(other._services, _services) &&
             const DeepCollectionEquality().equals(
-                other.productsAvailableForClickAndCollect,
-                productsAvailableForClickAndCollect) &&
+                other._productsAvailableForClickAndCollect,
+                _productsAvailableForClickAndCollect) &&
             const DeepCollectionEquality()
                 .equals(other.storekeeperWord, storekeeperWord) &&
             const DeepCollectionEquality()
@@ -502,15 +474,16 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality().equals(other.longitude, longitude));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
       const DeepCollectionEquality().hash(storekeeper),
-      const DeepCollectionEquality().hash(categories),
-      const DeepCollectionEquality().hash(services),
-      const DeepCollectionEquality().hash(productsAvailableForClickAndCollect),
+      const DeepCollectionEquality().hash(_categories),
+      const DeepCollectionEquality().hash(_services),
+      const DeepCollectionEquality().hash(_productsAvailableForClickAndCollect),
       const DeepCollectionEquality().hash(storekeeperWord),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(address),
@@ -525,8 +498,8 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
 
   @JsonKey(ignore: true)
   @override
-  _$CommerceCopyWith<_Commerce> get copyWith =>
-      __$CommerceCopyWithImpl<_Commerce>(this, _$identity);
+  _$$_CommerceCopyWith<_$_Commerce> get copyWith =>
+      __$$_CommerceCopyWithImpl<_$_Commerce>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -535,62 +508,63 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
 }
 
 abstract class _Commerce implements Commerce {
-  const factory _Commerce(String? id,
-      {required String name,
-      User? storekeeper,
-      List<String> categories,
-      List<String> services,
-      List<Product> productsAvailableForClickAndCollect,
-      String? storekeeperWord,
-      String? description,
-      String? address,
-      String? phone,
-      String? email,
-      String? facebook,
-      String? twitter,
-      String? instagram,
-      BusinessHours? businessHours,
-      double? latitude,
-      double? longitude}) = _$_Commerce;
+  const factory _Commerce(final String? id,
+      {required final String name,
+      final User? storekeeper,
+      final List<String> categories,
+      final List<String> services,
+      final List<Product> productsAvailableForClickAndCollect,
+      final String? storekeeperWord,
+      final String? description,
+      final String? address,
+      final String? phone,
+      final String? email,
+      final String? facebook,
+      final String? twitter,
+      final String? instagram,
+      final BusinessHours? businessHours,
+      final double? latitude,
+      final double? longitude}) = _$_Commerce;
 
   factory _Commerce.fromJson(Map<String, dynamic> json) = _$_Commerce.fromJson;
 
   @override
-  String? get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  User? get storekeeper;
+  User? get storekeeper => throw _privateConstructorUsedError;
   @override
-  List<String> get categories;
+  List<String> get categories => throw _privateConstructorUsedError;
   @override
-  List<String> get services;
+  List<String> get services => throw _privateConstructorUsedError;
   @override
-  List<Product> get productsAvailableForClickAndCollect;
+  List<Product> get productsAvailableForClickAndCollect =>
+      throw _privateConstructorUsedError;
   @override
-  String? get storekeeperWord;
+  String? get storekeeperWord => throw _privateConstructorUsedError;
   @override
-  String? get description;
+  String? get description => throw _privateConstructorUsedError;
   @override
-  String? get address;
+  String? get address => throw _privateConstructorUsedError;
   @override
-  String? get phone;
+  String? get phone => throw _privateConstructorUsedError;
   @override
-  String? get email;
+  String? get email => throw _privateConstructorUsedError;
   @override
-  String? get facebook;
+  String? get facebook => throw _privateConstructorUsedError;
   @override
-  String? get twitter;
+  String? get twitter => throw _privateConstructorUsedError;
   @override
-  String? get instagram;
+  String? get instagram => throw _privateConstructorUsedError;
   @override
-  BusinessHours? get businessHours;
+  BusinessHours? get businessHours => throw _privateConstructorUsedError;
   @override
-  double? get latitude;
+  double? get latitude => throw _privateConstructorUsedError;
   @override
-  double? get longitude;
+  double? get longitude => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$CommerceCopyWith<_Commerce> get copyWith =>
+  _$$_CommerceCopyWith<_$_Commerce> get copyWith =>
       throw _privateConstructorUsedError;
 }

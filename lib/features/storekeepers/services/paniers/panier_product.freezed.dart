@@ -12,30 +12,11 @@ part of 'panier_product.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 PanierProduct _$PanierProductFromJson(Map<String, dynamic> json) {
   return _PanierProduct.fromJson(json);
 }
-
-/// @nodoc
-class _$PanierProductTearOff {
-  const _$PanierProductTearOff();
-
-  _PanierProduct call({required int quantity, required Product product}) {
-    return _PanierProduct(
-      quantity: quantity,
-      product: product,
-    );
-  }
-
-  PanierProduct fromJson(Map<String, Object?> json) {
-    return PanierProduct.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $PanierProduct = _$PanierProductTearOff();
 
 /// @nodoc
 mixin _$PanierProduct {
@@ -93,11 +74,11 @@ class _$PanierProductCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$PanierProductCopyWith<$Res>
+abstract class _$$_PanierProductCopyWith<$Res>
     implements $PanierProductCopyWith<$Res> {
-  factory _$PanierProductCopyWith(
-          _PanierProduct value, $Res Function(_PanierProduct) then) =
-      __$PanierProductCopyWithImpl<$Res>;
+  factory _$$_PanierProductCopyWith(
+          _$_PanierProduct value, $Res Function(_$_PanierProduct) then) =
+      __$$_PanierProductCopyWithImpl<$Res>;
   @override
   $Res call({int quantity, Product product});
 
@@ -106,22 +87,22 @@ abstract class _$PanierProductCopyWith<$Res>
 }
 
 /// @nodoc
-class __$PanierProductCopyWithImpl<$Res>
+class __$$_PanierProductCopyWithImpl<$Res>
     extends _$PanierProductCopyWithImpl<$Res>
-    implements _$PanierProductCopyWith<$Res> {
-  __$PanierProductCopyWithImpl(
-      _PanierProduct _value, $Res Function(_PanierProduct) _then)
-      : super(_value, (v) => _then(v as _PanierProduct));
+    implements _$$_PanierProductCopyWith<$Res> {
+  __$$_PanierProductCopyWithImpl(
+      _$_PanierProduct _value, $Res Function(_$_PanierProduct) _then)
+      : super(_value, (v) => _then(v as _$_PanierProduct));
 
   @override
-  _PanierProduct get _value => super._value as _PanierProduct;
+  _$_PanierProduct get _value => super._value as _$_PanierProduct;
 
   @override
   $Res call({
     Object? quantity = freezed,
     Object? product = freezed,
   }) {
-    return _then(_PanierProduct(
+    return _then(_$_PanierProduct(
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -165,11 +146,12 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PanierProduct &&
+            other is _$_PanierProduct &&
             const DeepCollectionEquality().equals(other.quantity, quantity) &&
             const DeepCollectionEquality().equals(other.product, product));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -178,8 +160,8 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
 
   @JsonKey(ignore: true)
   @override
-  _$PanierProductCopyWith<_PanierProduct> get copyWith =>
-      __$PanierProductCopyWithImpl<_PanierProduct>(this, _$identity);
+  _$$_PanierProductCopyWith<_$_PanierProduct> get copyWith =>
+      __$$_PanierProductCopyWithImpl<_$_PanierProduct>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -189,17 +171,18 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
 
 abstract class _PanierProduct implements PanierProduct {
   const factory _PanierProduct(
-      {required int quantity, required Product product}) = _$_PanierProduct;
+      {required final int quantity,
+      required final Product product}) = _$_PanierProduct;
 
   factory _PanierProduct.fromJson(Map<String, dynamic> json) =
       _$_PanierProduct.fromJson;
 
   @override
-  int get quantity;
+  int get quantity => throw _privateConstructorUsedError;
   @override
-  Product get product;
+  Product get product => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PanierProductCopyWith<_PanierProduct> get copyWith =>
+  _$$_PanierProductCopyWith<_$_PanierProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }

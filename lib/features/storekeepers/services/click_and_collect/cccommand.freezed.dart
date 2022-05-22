@@ -12,37 +12,11 @@ part of 'cccommand.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 CCCommand _$CCCommandFromJson(Map<String, dynamic> json) {
   return _CCCommand.fromJson(json);
 }
-
-/// @nodoc
-class _$CCCommandTearOff {
-  const _$CCCommandTearOff();
-
-  _CCCommand call(String? id,
-      {required String status,
-      required DateTime pickupDate,
-      List<CCProduct> products = const <CCProduct>[],
-      User? user}) {
-    return _CCCommand(
-      id,
-      status: status,
-      pickupDate: pickupDate,
-      products: products,
-      user: user,
-    );
-  }
-
-  CCCommand fromJson(Map<String, Object?> json) {
-    return CCCommand.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $CCCommand = _$CCCommandTearOff();
 
 /// @nodoc
 mixin _$CCCommand {
@@ -125,10 +99,10 @@ class _$CCCommandCopyWithImpl<$Res> implements $CCCommandCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$CCCommandCopyWith<$Res> implements $CCCommandCopyWith<$Res> {
-  factory _$CCCommandCopyWith(
-          _CCCommand value, $Res Function(_CCCommand) then) =
-      __$CCCommandCopyWithImpl<$Res>;
+abstract class _$$_CCCommandCopyWith<$Res> implements $CCCommandCopyWith<$Res> {
+  factory _$$_CCCommandCopyWith(
+          _$_CCCommand value, $Res Function(_$_CCCommand) then) =
+      __$$_CCCommandCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? id,
@@ -142,13 +116,14 @@ abstract class _$CCCommandCopyWith<$Res> implements $CCCommandCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$CCCommandCopyWithImpl<$Res> extends _$CCCommandCopyWithImpl<$Res>
-    implements _$CCCommandCopyWith<$Res> {
-  __$CCCommandCopyWithImpl(_CCCommand _value, $Res Function(_CCCommand) _then)
-      : super(_value, (v) => _then(v as _CCCommand));
+class __$$_CCCommandCopyWithImpl<$Res> extends _$CCCommandCopyWithImpl<$Res>
+    implements _$$_CCCommandCopyWith<$Res> {
+  __$$_CCCommandCopyWithImpl(
+      _$_CCCommand _value, $Res Function(_$_CCCommand) _then)
+      : super(_value, (v) => _then(v as _$_CCCommand));
 
   @override
-  _CCCommand get _value => super._value as _CCCommand;
+  _$_CCCommand get _value => super._value as _$_CCCommand;
 
   @override
   $Res call({
@@ -158,7 +133,7 @@ class __$CCCommandCopyWithImpl<$Res> extends _$CCCommandCopyWithImpl<$Res>
     Object? products = freezed,
     Object? user = freezed,
   }) {
-    return _then(_CCCommand(
+    return _then(_$_CCCommand(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -172,7 +147,7 @@ class __$CCCommandCopyWithImpl<$Res> extends _$CCCommandCopyWithImpl<$Res>
           : pickupDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
       products: products == freezed
-          ? _value.products
+          ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
               as List<CCProduct>,
       user: user == freezed
@@ -189,8 +164,9 @@ class _$_CCCommand with DiagnosticableTreeMixin implements _CCCommand {
   const _$_CCCommand(this.id,
       {required this.status,
       required this.pickupDate,
-      this.products = const <CCProduct>[],
-      this.user});
+      final List<CCProduct> products = const <CCProduct>[],
+      this.user})
+      : _products = products;
 
   factory _$_CCCommand.fromJson(Map<String, dynamic> json) =>
       _$$_CCCommandFromJson(json);
@@ -201,9 +177,14 @@ class _$_CCCommand with DiagnosticableTreeMixin implements _CCCommand {
   final String status;
   @override
   final DateTime pickupDate;
-  @JsonKey()
+  final List<CCProduct> _products;
   @override
-  final List<CCProduct> products;
+  @JsonKey()
+  List<CCProduct> get products {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
+
   @override
   final User? user;
 
@@ -228,28 +209,29 @@ class _$_CCCommand with DiagnosticableTreeMixin implements _CCCommand {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CCCommand &&
+            other is _$_CCCommand &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.pickupDate, pickupDate) &&
-            const DeepCollectionEquality().equals(other.products, products) &&
+            const DeepCollectionEquality().equals(other._products, _products) &&
             const DeepCollectionEquality().equals(other.user, user));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(pickupDate),
-      const DeepCollectionEquality().hash(products),
+      const DeepCollectionEquality().hash(_products),
       const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
-  _$CCCommandCopyWith<_CCCommand> get copyWith =>
-      __$CCCommandCopyWithImpl<_CCCommand>(this, _$identity);
+  _$$_CCCommandCopyWith<_$_CCCommand> get copyWith =>
+      __$$_CCCommandCopyWithImpl<_$_CCCommand>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -258,27 +240,27 @@ class _$_CCCommand with DiagnosticableTreeMixin implements _CCCommand {
 }
 
 abstract class _CCCommand implements CCCommand {
-  const factory _CCCommand(String? id,
-      {required String status,
-      required DateTime pickupDate,
-      List<CCProduct> products,
-      User? user}) = _$_CCCommand;
+  const factory _CCCommand(final String? id,
+      {required final String status,
+      required final DateTime pickupDate,
+      final List<CCProduct> products,
+      final User? user}) = _$_CCCommand;
 
   factory _CCCommand.fromJson(Map<String, dynamic> json) =
       _$_CCCommand.fromJson;
 
   @override
-  String? get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String get status;
+  String get status => throw _privateConstructorUsedError;
   @override
-  DateTime get pickupDate;
+  DateTime get pickupDate => throw _privateConstructorUsedError;
   @override
-  List<CCProduct> get products;
+  List<CCProduct> get products => throw _privateConstructorUsedError;
   @override
-  User? get user;
+  User? get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$CCCommandCopyWith<_CCCommand> get copyWith =>
+  _$$_CCCommandCopyWith<_$_CCCommand> get copyWith =>
       throw _privateConstructorUsedError;
 }

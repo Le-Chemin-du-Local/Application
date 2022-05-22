@@ -12,22 +12,7 @@ part of 'app_user_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$AppUserStateTearOff {
-  const _$AppUserStateTearOff();
-
-  _AppUserState call({String? token, bool goBackToBasketPayment = false}) {
-    return _AppUserState(
-      token: token,
-      goBackToBasketPayment: goBackToBasketPayment,
-    );
-  }
-}
-
-/// @nodoc
-const $AppUserState = _$AppUserStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$AppUserState {
@@ -74,31 +59,32 @@ class _$AppUserStateCopyWithImpl<$Res> implements $AppUserStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AppUserStateCopyWith<$Res>
+abstract class _$$_AppUserStateCopyWith<$Res>
     implements $AppUserStateCopyWith<$Res> {
-  factory _$AppUserStateCopyWith(
-          _AppUserState value, $Res Function(_AppUserState) then) =
-      __$AppUserStateCopyWithImpl<$Res>;
+  factory _$$_AppUserStateCopyWith(
+          _$_AppUserState value, $Res Function(_$_AppUserState) then) =
+      __$$_AppUserStateCopyWithImpl<$Res>;
   @override
   $Res call({String? token, bool goBackToBasketPayment});
 }
 
 /// @nodoc
-class __$AppUserStateCopyWithImpl<$Res> extends _$AppUserStateCopyWithImpl<$Res>
-    implements _$AppUserStateCopyWith<$Res> {
-  __$AppUserStateCopyWithImpl(
-      _AppUserState _value, $Res Function(_AppUserState) _then)
-      : super(_value, (v) => _then(v as _AppUserState));
+class __$$_AppUserStateCopyWithImpl<$Res>
+    extends _$AppUserStateCopyWithImpl<$Res>
+    implements _$$_AppUserStateCopyWith<$Res> {
+  __$$_AppUserStateCopyWithImpl(
+      _$_AppUserState _value, $Res Function(_$_AppUserState) _then)
+      : super(_value, (v) => _then(v as _$_AppUserState));
 
   @override
-  _AppUserState get _value => super._value as _AppUserState;
+  _$_AppUserState get _value => super._value as _$_AppUserState;
 
   @override
   $Res call({
     Object? token = freezed,
     Object? goBackToBasketPayment = freezed,
   }) {
-    return _then(_AppUserState(
+    return _then(_$_AppUserState(
       token: token == freezed
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
@@ -118,8 +104,8 @@ class _$_AppUserState with DiagnosticableTreeMixin implements _AppUserState {
 
   @override
   final String? token;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool goBackToBasketPayment;
 
   @override
@@ -141,7 +127,7 @@ class _$_AppUserState with DiagnosticableTreeMixin implements _AppUserState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AppUserState &&
+            other is _$_AppUserState &&
             const DeepCollectionEquality().equals(other.token, token) &&
             const DeepCollectionEquality()
                 .equals(other.goBackToBasketPayment, goBackToBasketPayment));
@@ -155,20 +141,21 @@ class _$_AppUserState with DiagnosticableTreeMixin implements _AppUserState {
 
   @JsonKey(ignore: true)
   @override
-  _$AppUserStateCopyWith<_AppUserState> get copyWith =>
-      __$AppUserStateCopyWithImpl<_AppUserState>(this, _$identity);
+  _$$_AppUserStateCopyWith<_$_AppUserState> get copyWith =>
+      __$$_AppUserStateCopyWithImpl<_$_AppUserState>(this, _$identity);
 }
 
 abstract class _AppUserState implements AppUserState {
-  const factory _AppUserState({String? token, bool goBackToBasketPayment}) =
-      _$_AppUserState;
+  const factory _AppUserState(
+      {final String? token,
+      final bool goBackToBasketPayment}) = _$_AppUserState;
 
   @override
-  String? get token;
+  String? get token => throw _privateConstructorUsedError;
   @override
-  bool get goBackToBasketPayment;
+  bool get goBackToBasketPayment => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AppUserStateCopyWith<_AppUserState> get copyWith =>
+  _$$_AppUserStateCopyWith<_$_AppUserState> get copyWith =>
       throw _privateConstructorUsedError;
 }

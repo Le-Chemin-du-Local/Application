@@ -12,45 +12,11 @@ part of 'product.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Product _$ProductFromJson(Map<String, dynamic> json) {
   return _Product.fromJson(json);
 }
-
-/// @nodoc
-class _$ProductTearOff {
-  const _$ProductTearOff();
-
-  _Product call(String? id,
-      {required String name,
-      List<String> categories = const <String>[],
-      List<String> tags = const <String>[],
-      String? description,
-      double? price,
-      String? unit,
-      double? tva,
-      bool? isBreton}) {
-    return _Product(
-      id,
-      name: name,
-      categories: categories,
-      tags: tags,
-      description: description,
-      price: price,
-      unit: unit,
-      tva: tva,
-      isBreton: isBreton,
-    );
-  }
-
-  Product fromJson(Map<String, Object?> json) {
-    return Product.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Product = _$ProductTearOff();
 
 /// @nodoc
 mixin _$Product {
@@ -147,9 +113,10 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
-  factory _$ProductCopyWith(_Product value, $Res Function(_Product) then) =
-      __$ProductCopyWithImpl<$Res>;
+abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
+  factory _$$_ProductCopyWith(
+          _$_Product value, $Res Function(_$_Product) then) =
+      __$$_ProductCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? id,
@@ -164,13 +131,13 @@ abstract class _$ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
-    implements _$ProductCopyWith<$Res> {
-  __$ProductCopyWithImpl(_Product _value, $Res Function(_Product) _then)
-      : super(_value, (v) => _then(v as _Product));
+class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
+    implements _$$_ProductCopyWith<$Res> {
+  __$$_ProductCopyWithImpl(_$_Product _value, $Res Function(_$_Product) _then)
+      : super(_value, (v) => _then(v as _$_Product));
 
   @override
-  _Product get _value => super._value as _Product;
+  _$_Product get _value => super._value as _$_Product;
 
   @override
   $Res call({
@@ -184,7 +151,7 @@ class __$ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
     Object? tva = freezed,
     Object? isBreton = freezed,
   }) {
-    return _then(_Product(
+    return _then(_$_Product(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -194,11 +161,11 @@ class __$ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       categories: categories == freezed
-          ? _value.categories
+          ? _value._categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
       tags: tags == freezed
-          ? _value.tags
+          ? _value._tags
           : tags // ignore: cast_nullable_to_non_nullable
               as List<String>,
       description: description == freezed
@@ -230,13 +197,15 @@ class __$ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
 class _$_Product with DiagnosticableTreeMixin implements _Product {
   const _$_Product(this.id,
       {required this.name,
-      this.categories = const <String>[],
-      this.tags = const <String>[],
+      final List<String> categories = const <String>[],
+      final List<String> tags = const <String>[],
       this.description,
       this.price,
       this.unit,
       this.tva,
-      this.isBreton});
+      this.isBreton})
+      : _categories = categories,
+        _tags = tags;
 
   factory _$_Product.fromJson(Map<String, dynamic> json) =>
       _$$_ProductFromJson(json);
@@ -245,12 +214,22 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
   final String? id;
   @override
   final String name;
-  @JsonKey()
+  final List<String> _categories;
   @override
-  final List<String> categories;
   @JsonKey()
+  List<String> get categories {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
+  final List<String> _tags;
   @override
-  final List<String> tags;
+  @JsonKey()
+  List<String> get tags {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tags);
+  }
+
   @override
   final String? description;
   @override
@@ -287,12 +266,12 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Product &&
+            other is _$_Product &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
-                .equals(other.categories, categories) &&
-            const DeepCollectionEquality().equals(other.tags, tags) &&
+                .equals(other._categories, _categories) &&
+            const DeepCollectionEquality().equals(other._tags, _tags) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.price, price) &&
@@ -301,13 +280,14 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
             const DeepCollectionEquality().equals(other.isBreton, isBreton));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(categories),
-      const DeepCollectionEquality().hash(tags),
+      const DeepCollectionEquality().hash(_categories),
+      const DeepCollectionEquality().hash(_tags),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(unit),
@@ -316,8 +296,8 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
 
   @JsonKey(ignore: true)
   @override
-  _$ProductCopyWith<_Product> get copyWith =>
-      __$ProductCopyWithImpl<_Product>(this, _$identity);
+  _$$_ProductCopyWith<_$_Product> get copyWith =>
+      __$$_ProductCopyWithImpl<_$_Product>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -326,38 +306,38 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
 }
 
 abstract class _Product implements Product {
-  const factory _Product(String? id,
-      {required String name,
-      List<String> categories,
-      List<String> tags,
-      String? description,
-      double? price,
-      String? unit,
-      double? tva,
-      bool? isBreton}) = _$_Product;
+  const factory _Product(final String? id,
+      {required final String name,
+      final List<String> categories,
+      final List<String> tags,
+      final String? description,
+      final double? price,
+      final String? unit,
+      final double? tva,
+      final bool? isBreton}) = _$_Product;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$_Product.fromJson;
 
   @override
-  String? get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  List<String> get categories;
+  List<String> get categories => throw _privateConstructorUsedError;
   @override
-  List<String> get tags;
+  List<String> get tags => throw _privateConstructorUsedError;
   @override
-  String? get description;
+  String? get description => throw _privateConstructorUsedError;
   @override
-  double? get price;
+  double? get price => throw _privateConstructorUsedError;
   @override
-  String? get unit;
+  String? get unit => throw _privateConstructorUsedError;
   @override
-  double? get tva;
+  double? get tva => throw _privateConstructorUsedError;
   @override
-  bool? get isBreton;
+  bool? get isBreton => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ProductCopyWith<_Product> get copyWith =>
+  _$$_ProductCopyWith<_$_Product> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,30 +12,11 @@ part of 'ccproduct.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 CCProduct _$CCProductFromJson(Map<String, dynamic> json) {
   return _CCProduct.fromJson(json);
 }
-
-/// @nodoc
-class _$CCProductTearOff {
-  const _$CCProductTearOff();
-
-  _CCProduct call({required int quantity, required Product product}) {
-    return _CCProduct(
-      quantity: quantity,
-      product: product,
-    );
-  }
-
-  CCProduct fromJson(Map<String, Object?> json) {
-    return CCProduct.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $CCProduct = _$CCProductTearOff();
 
 /// @nodoc
 mixin _$CCProduct {
@@ -91,10 +72,10 @@ class _$CCProductCopyWithImpl<$Res> implements $CCProductCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$CCProductCopyWith<$Res> implements $CCProductCopyWith<$Res> {
-  factory _$CCProductCopyWith(
-          _CCProduct value, $Res Function(_CCProduct) then) =
-      __$CCProductCopyWithImpl<$Res>;
+abstract class _$$_CCProductCopyWith<$Res> implements $CCProductCopyWith<$Res> {
+  factory _$$_CCProductCopyWith(
+          _$_CCProduct value, $Res Function(_$_CCProduct) then) =
+      __$$_CCProductCopyWithImpl<$Res>;
   @override
   $Res call({int quantity, Product product});
 
@@ -103,20 +84,21 @@ abstract class _$CCProductCopyWith<$Res> implements $CCProductCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$CCProductCopyWithImpl<$Res> extends _$CCProductCopyWithImpl<$Res>
-    implements _$CCProductCopyWith<$Res> {
-  __$CCProductCopyWithImpl(_CCProduct _value, $Res Function(_CCProduct) _then)
-      : super(_value, (v) => _then(v as _CCProduct));
+class __$$_CCProductCopyWithImpl<$Res> extends _$CCProductCopyWithImpl<$Res>
+    implements _$$_CCProductCopyWith<$Res> {
+  __$$_CCProductCopyWithImpl(
+      _$_CCProduct _value, $Res Function(_$_CCProduct) _then)
+      : super(_value, (v) => _then(v as _$_CCProduct));
 
   @override
-  _CCProduct get _value => super._value as _CCProduct;
+  _$_CCProduct get _value => super._value as _$_CCProduct;
 
   @override
   $Res call({
     Object? quantity = freezed,
     Object? product = freezed,
   }) {
-    return _then(_CCProduct(
+    return _then(_$_CCProduct(
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -160,11 +142,12 @@ class _$_CCProduct with DiagnosticableTreeMixin implements _CCProduct {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _CCProduct &&
+            other is _$_CCProduct &&
             const DeepCollectionEquality().equals(other.quantity, quantity) &&
             const DeepCollectionEquality().equals(other.product, product));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -173,8 +156,8 @@ class _$_CCProduct with DiagnosticableTreeMixin implements _CCProduct {
 
   @JsonKey(ignore: true)
   @override
-  _$CCProductCopyWith<_CCProduct> get copyWith =>
-      __$CCProductCopyWithImpl<_CCProduct>(this, _$identity);
+  _$$_CCProductCopyWith<_$_CCProduct> get copyWith =>
+      __$$_CCProductCopyWithImpl<_$_CCProduct>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -183,18 +166,19 @@ class _$_CCProduct with DiagnosticableTreeMixin implements _CCProduct {
 }
 
 abstract class _CCProduct implements CCProduct {
-  const factory _CCProduct({required int quantity, required Product product}) =
-      _$_CCProduct;
+  const factory _CCProduct(
+      {required final int quantity,
+      required final Product product}) = _$_CCProduct;
 
   factory _CCProduct.fromJson(Map<String, dynamic> json) =
       _$_CCProduct.fromJson;
 
   @override
-  int get quantity;
+  int get quantity => throw _privateConstructorUsedError;
   @override
-  Product get product;
+  Product get product => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$CCProductCopyWith<_CCProduct> get copyWith =>
+  _$$_CCProductCopyWith<_$_CCProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }

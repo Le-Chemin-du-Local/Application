@@ -12,42 +12,11 @@ part of 'business_hours.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 BusinessHours _$BusinessHoursFromJson(Map<String, dynamic> json) {
   return _BusinessHours.fromJson(json);
 }
-
-/// @nodoc
-class _$BusinessHoursTearOff {
-  const _$BusinessHoursTearOff();
-
-  _BusinessHours call(
-      {List<Schedule>? monday,
-      List<Schedule>? tuesday,
-      List<Schedule>? wednesday,
-      List<Schedule>? thursday,
-      List<Schedule>? friday,
-      List<Schedule>? saturday,
-      List<Schedule>? sunday}) {
-    return _BusinessHours(
-      monday: monday,
-      tuesday: tuesday,
-      wednesday: wednesday,
-      thursday: thursday,
-      friday: friday,
-      saturday: saturday,
-      sunday: sunday,
-    );
-  }
-
-  BusinessHours fromJson(Map<String, Object?> json) {
-    return BusinessHours.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $BusinessHours = _$BusinessHoursTearOff();
 
 /// @nodoc
 mixin _$BusinessHours {
@@ -133,11 +102,11 @@ class _$BusinessHoursCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$BusinessHoursCopyWith<$Res>
+abstract class _$$_BusinessHoursCopyWith<$Res>
     implements $BusinessHoursCopyWith<$Res> {
-  factory _$BusinessHoursCopyWith(
-          _BusinessHours value, $Res Function(_BusinessHours) then) =
-      __$BusinessHoursCopyWithImpl<$Res>;
+  factory _$$_BusinessHoursCopyWith(
+          _$_BusinessHours value, $Res Function(_$_BusinessHours) then) =
+      __$$_BusinessHoursCopyWithImpl<$Res>;
   @override
   $Res call(
       {List<Schedule>? monday,
@@ -150,15 +119,15 @@ abstract class _$BusinessHoursCopyWith<$Res>
 }
 
 /// @nodoc
-class __$BusinessHoursCopyWithImpl<$Res>
+class __$$_BusinessHoursCopyWithImpl<$Res>
     extends _$BusinessHoursCopyWithImpl<$Res>
-    implements _$BusinessHoursCopyWith<$Res> {
-  __$BusinessHoursCopyWithImpl(
-      _BusinessHours _value, $Res Function(_BusinessHours) _then)
-      : super(_value, (v) => _then(v as _BusinessHours));
+    implements _$$_BusinessHoursCopyWith<$Res> {
+  __$$_BusinessHoursCopyWithImpl(
+      _$_BusinessHours _value, $Res Function(_$_BusinessHours) _then)
+      : super(_value, (v) => _then(v as _$_BusinessHours));
 
   @override
-  _BusinessHours get _value => super._value as _BusinessHours;
+  _$_BusinessHours get _value => super._value as _$_BusinessHours;
 
   @override
   $Res call({
@@ -170,33 +139,33 @@ class __$BusinessHoursCopyWithImpl<$Res>
     Object? saturday = freezed,
     Object? sunday = freezed,
   }) {
-    return _then(_BusinessHours(
+    return _then(_$_BusinessHours(
       monday: monday == freezed
-          ? _value.monday
+          ? _value._monday
           : monday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       tuesday: tuesday == freezed
-          ? _value.tuesday
+          ? _value._tuesday
           : tuesday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       wednesday: wednesday == freezed
-          ? _value.wednesday
+          ? _value._wednesday
           : wednesday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       thursday: thursday == freezed
-          ? _value.thursday
+          ? _value._thursday
           : thursday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       friday: friday == freezed
-          ? _value.friday
+          ? _value._friday
           : friday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       saturday: saturday == freezed
-          ? _value.saturday
+          ? _value._saturday
           : saturday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       sunday: sunday == freezed
-          ? _value.sunday
+          ? _value._sunday
           : sunday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
     ));
@@ -207,31 +176,86 @@ class __$BusinessHoursCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BusinessHours with DiagnosticableTreeMixin implements _BusinessHours {
   const _$_BusinessHours(
-      {this.monday,
-      this.tuesday,
-      this.wednesday,
-      this.thursday,
-      this.friday,
-      this.saturday,
-      this.sunday});
+      {final List<Schedule>? monday,
+      final List<Schedule>? tuesday,
+      final List<Schedule>? wednesday,
+      final List<Schedule>? thursday,
+      final List<Schedule>? friday,
+      final List<Schedule>? saturday,
+      final List<Schedule>? sunday})
+      : _monday = monday,
+        _tuesday = tuesday,
+        _wednesday = wednesday,
+        _thursday = thursday,
+        _friday = friday,
+        _saturday = saturday,
+        _sunday = sunday;
 
   factory _$_BusinessHours.fromJson(Map<String, dynamic> json) =>
       _$$_BusinessHoursFromJson(json);
 
+  final List<Schedule>? _monday;
   @override
-  final List<Schedule>? monday;
+  List<Schedule>? get monday {
+    final value = _monday;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Schedule>? _tuesday;
   @override
-  final List<Schedule>? tuesday;
+  List<Schedule>? get tuesday {
+    final value = _tuesday;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Schedule>? _wednesday;
   @override
-  final List<Schedule>? wednesday;
+  List<Schedule>? get wednesday {
+    final value = _wednesday;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Schedule>? _thursday;
   @override
-  final List<Schedule>? thursday;
+  List<Schedule>? get thursday {
+    final value = _thursday;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Schedule>? _friday;
   @override
-  final List<Schedule>? friday;
+  List<Schedule>? get friday {
+    final value = _friday;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Schedule>? _saturday;
   @override
-  final List<Schedule>? saturday;
+  List<Schedule>? get saturday {
+    final value = _saturday;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Schedule>? _sunday;
   @override
-  final List<Schedule>? sunday;
+  List<Schedule>? get sunday {
+    final value = _sunday;
+    if (value == null) return null;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -256,31 +280,33 @@ class _$_BusinessHours with DiagnosticableTreeMixin implements _BusinessHours {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _BusinessHours &&
-            const DeepCollectionEquality().equals(other.monday, monday) &&
-            const DeepCollectionEquality().equals(other.tuesday, tuesday) &&
-            const DeepCollectionEquality().equals(other.wednesday, wednesday) &&
-            const DeepCollectionEquality().equals(other.thursday, thursday) &&
-            const DeepCollectionEquality().equals(other.friday, friday) &&
-            const DeepCollectionEquality().equals(other.saturday, saturday) &&
-            const DeepCollectionEquality().equals(other.sunday, sunday));
+            other is _$_BusinessHours &&
+            const DeepCollectionEquality().equals(other._monday, _monday) &&
+            const DeepCollectionEquality().equals(other._tuesday, _tuesday) &&
+            const DeepCollectionEquality()
+                .equals(other._wednesday, _wednesday) &&
+            const DeepCollectionEquality().equals(other._thursday, _thursday) &&
+            const DeepCollectionEquality().equals(other._friday, _friday) &&
+            const DeepCollectionEquality().equals(other._saturday, _saturday) &&
+            const DeepCollectionEquality().equals(other._sunday, _sunday));
   }
-
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(monday),
-      const DeepCollectionEquality().hash(tuesday),
-      const DeepCollectionEquality().hash(wednesday),
-      const DeepCollectionEquality().hash(thursday),
-      const DeepCollectionEquality().hash(friday),
-      const DeepCollectionEquality().hash(saturday),
-      const DeepCollectionEquality().hash(sunday));
 
   @JsonKey(ignore: true)
   @override
-  _$BusinessHoursCopyWith<_BusinessHours> get copyWith =>
-      __$BusinessHoursCopyWithImpl<_BusinessHours>(this, _$identity);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_monday),
+      const DeepCollectionEquality().hash(_tuesday),
+      const DeepCollectionEquality().hash(_wednesday),
+      const DeepCollectionEquality().hash(_thursday),
+      const DeepCollectionEquality().hash(_friday),
+      const DeepCollectionEquality().hash(_saturday),
+      const DeepCollectionEquality().hash(_sunday));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_BusinessHoursCopyWith<_$_BusinessHours> get copyWith =>
+      __$$_BusinessHoursCopyWithImpl<_$_BusinessHours>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -290,33 +316,33 @@ class _$_BusinessHours with DiagnosticableTreeMixin implements _BusinessHours {
 
 abstract class _BusinessHours implements BusinessHours {
   const factory _BusinessHours(
-      {List<Schedule>? monday,
-      List<Schedule>? tuesday,
-      List<Schedule>? wednesday,
-      List<Schedule>? thursday,
-      List<Schedule>? friday,
-      List<Schedule>? saturday,
-      List<Schedule>? sunday}) = _$_BusinessHours;
+      {final List<Schedule>? monday,
+      final List<Schedule>? tuesday,
+      final List<Schedule>? wednesday,
+      final List<Schedule>? thursday,
+      final List<Schedule>? friday,
+      final List<Schedule>? saturday,
+      final List<Schedule>? sunday}) = _$_BusinessHours;
 
   factory _BusinessHours.fromJson(Map<String, dynamic> json) =
       _$_BusinessHours.fromJson;
 
   @override
-  List<Schedule>? get monday;
+  List<Schedule>? get monday => throw _privateConstructorUsedError;
   @override
-  List<Schedule>? get tuesday;
+  List<Schedule>? get tuesday => throw _privateConstructorUsedError;
   @override
-  List<Schedule>? get wednesday;
+  List<Schedule>? get wednesday => throw _privateConstructorUsedError;
   @override
-  List<Schedule>? get thursday;
+  List<Schedule>? get thursday => throw _privateConstructorUsedError;
   @override
-  List<Schedule>? get friday;
+  List<Schedule>? get friday => throw _privateConstructorUsedError;
   @override
-  List<Schedule>? get saturday;
+  List<Schedule>? get saturday => throw _privateConstructorUsedError;
   @override
-  List<Schedule>? get sunday;
+  List<Schedule>? get sunday => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$BusinessHoursCopyWith<_BusinessHours> get copyWith =>
+  _$$_BusinessHoursCopyWith<_$_BusinessHours> get copyWith =>
       throw _privateConstructorUsedError;
 }

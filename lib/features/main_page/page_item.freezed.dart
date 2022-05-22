@@ -12,32 +12,7 @@ part of 'page_item.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$PageItemTearOff {
-  const _$PageItemTearOff();
-
-  _PageItem call(
-      {required int index,
-      required String title,
-      required String appBarTitle,
-      bool showOnMobile = true,
-      IconData? icon,
-      Widget? suffixWidget}) {
-    return _PageItem(
-      index: index,
-      title: title,
-      appBarTitle: appBarTitle,
-      showOnMobile: showOnMobile,
-      icon: icon,
-      suffixWidget: suffixWidget,
-    );
-  }
-}
-
-/// @nodoc
-const $PageItem = _$PageItemTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$PageItem {
@@ -113,9 +88,10 @@ class _$PageItemCopyWithImpl<$Res> implements $PageItemCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PageItemCopyWith<$Res> implements $PageItemCopyWith<$Res> {
-  factory _$PageItemCopyWith(_PageItem value, $Res Function(_PageItem) then) =
-      __$PageItemCopyWithImpl<$Res>;
+abstract class _$$_PageItemCopyWith<$Res> implements $PageItemCopyWith<$Res> {
+  factory _$$_PageItemCopyWith(
+          _$_PageItem value, $Res Function(_$_PageItem) then) =
+      __$$_PageItemCopyWithImpl<$Res>;
   @override
   $Res call(
       {int index,
@@ -127,13 +103,14 @@ abstract class _$PageItemCopyWith<$Res> implements $PageItemCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$PageItemCopyWithImpl<$Res> extends _$PageItemCopyWithImpl<$Res>
-    implements _$PageItemCopyWith<$Res> {
-  __$PageItemCopyWithImpl(_PageItem _value, $Res Function(_PageItem) _then)
-      : super(_value, (v) => _then(v as _PageItem));
+class __$$_PageItemCopyWithImpl<$Res> extends _$PageItemCopyWithImpl<$Res>
+    implements _$$_PageItemCopyWith<$Res> {
+  __$$_PageItemCopyWithImpl(
+      _$_PageItem _value, $Res Function(_$_PageItem) _then)
+      : super(_value, (v) => _then(v as _$_PageItem));
 
   @override
-  _PageItem get _value => super._value as _PageItem;
+  _$_PageItem get _value => super._value as _$_PageItem;
 
   @override
   $Res call({
@@ -144,7 +121,7 @@ class __$PageItemCopyWithImpl<$Res> extends _$PageItemCopyWithImpl<$Res>
     Object? icon = freezed,
     Object? suffixWidget = freezed,
   }) {
-    return _then(_PageItem(
+    return _then(_$_PageItem(
       index: index == freezed
           ? _value.index
           : index // ignore: cast_nullable_to_non_nullable
@@ -190,8 +167,8 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
   final String title;
   @override
   final String appBarTitle;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool showOnMobile;
   @override
   final IconData? icon;
@@ -220,7 +197,7 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PageItem &&
+            other is _$_PageItem &&
             const DeepCollectionEquality().equals(other.index, index) &&
             const DeepCollectionEquality().equals(other.title, title) &&
             const DeepCollectionEquality()
@@ -244,33 +221,33 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
 
   @JsonKey(ignore: true)
   @override
-  _$PageItemCopyWith<_PageItem> get copyWith =>
-      __$PageItemCopyWithImpl<_PageItem>(this, _$identity);
+  _$$_PageItemCopyWith<_$_PageItem> get copyWith =>
+      __$$_PageItemCopyWithImpl<_$_PageItem>(this, _$identity);
 }
 
 abstract class _PageItem implements PageItem {
   const factory _PageItem(
-      {required int index,
-      required String title,
-      required String appBarTitle,
-      bool showOnMobile,
-      IconData? icon,
-      Widget? suffixWidget}) = _$_PageItem;
+      {required final int index,
+      required final String title,
+      required final String appBarTitle,
+      final bool showOnMobile,
+      final IconData? icon,
+      final Widget? suffixWidget}) = _$_PageItem;
 
   @override
-  int get index;
+  int get index => throw _privateConstructorUsedError;
   @override
-  String get title;
+  String get title => throw _privateConstructorUsedError;
   @override
-  String get appBarTitle;
+  String get appBarTitle => throw _privateConstructorUsedError;
   @override
-  bool get showOnMobile;
+  bool get showOnMobile => throw _privateConstructorUsedError;
   @override
-  IconData? get icon;
+  IconData? get icon => throw _privateConstructorUsedError;
   @override
-  Widget? get suffixWidget;
+  Widget? get suffixWidget => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PageItemCopyWith<_PageItem> get copyWith =>
+  _$$_PageItemCopyWith<_$_PageItem> get copyWith =>
       throw _privateConstructorUsedError;
 }

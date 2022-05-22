@@ -12,36 +12,11 @@ part of 'basket_commerce.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 BasketCommerce _$BasketCommerceFromJson(Map<String, dynamic> json) {
   return _BasketCommerce.fromJson(json);
 }
-
-/// @nodoc
-class _$BasketCommerceTearOff {
-  const _$BasketCommerceTearOff();
-
-  _BasketCommerce call(
-      {required Commerce commerce,
-      List<BasketProduct> products = const <BasketProduct>[],
-      List<Panier> paniers = const <Panier>[],
-      DateTime? pickupDate}) {
-    return _BasketCommerce(
-      commerce: commerce,
-      products: products,
-      paniers: paniers,
-      pickupDate: pickupDate,
-    );
-  }
-
-  BasketCommerce fromJson(Map<String, Object?> json) {
-    return BasketCommerce.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $BasketCommerce = _$BasketCommerceTearOff();
 
 /// @nodoc
 mixin _$BasketCommerce {
@@ -115,11 +90,11 @@ class _$BasketCommerceCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$BasketCommerceCopyWith<$Res>
+abstract class _$$_BasketCommerceCopyWith<$Res>
     implements $BasketCommerceCopyWith<$Res> {
-  factory _$BasketCommerceCopyWith(
-          _BasketCommerce value, $Res Function(_BasketCommerce) then) =
-      __$BasketCommerceCopyWithImpl<$Res>;
+  factory _$$_BasketCommerceCopyWith(
+          _$_BasketCommerce value, $Res Function(_$_BasketCommerce) then) =
+      __$$_BasketCommerceCopyWithImpl<$Res>;
   @override
   $Res call(
       {Commerce commerce,
@@ -132,15 +107,15 @@ abstract class _$BasketCommerceCopyWith<$Res>
 }
 
 /// @nodoc
-class __$BasketCommerceCopyWithImpl<$Res>
+class __$$_BasketCommerceCopyWithImpl<$Res>
     extends _$BasketCommerceCopyWithImpl<$Res>
-    implements _$BasketCommerceCopyWith<$Res> {
-  __$BasketCommerceCopyWithImpl(
-      _BasketCommerce _value, $Res Function(_BasketCommerce) _then)
-      : super(_value, (v) => _then(v as _BasketCommerce));
+    implements _$$_BasketCommerceCopyWith<$Res> {
+  __$$_BasketCommerceCopyWithImpl(
+      _$_BasketCommerce _value, $Res Function(_$_BasketCommerce) _then)
+      : super(_value, (v) => _then(v as _$_BasketCommerce));
 
   @override
-  _BasketCommerce get _value => super._value as _BasketCommerce;
+  _$_BasketCommerce get _value => super._value as _$_BasketCommerce;
 
   @override
   $Res call({
@@ -149,17 +124,17 @@ class __$BasketCommerceCopyWithImpl<$Res>
     Object? paniers = freezed,
     Object? pickupDate = freezed,
   }) {
-    return _then(_BasketCommerce(
+    return _then(_$_BasketCommerce(
       commerce: commerce == freezed
           ? _value.commerce
           : commerce // ignore: cast_nullable_to_non_nullable
               as Commerce,
       products: products == freezed
-          ? _value.products
+          ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
               as List<BasketProduct>,
       paniers: paniers == freezed
-          ? _value.paniers
+          ? _value._paniers
           : paniers // ignore: cast_nullable_to_non_nullable
               as List<Panier>,
       pickupDate: pickupDate == freezed
@@ -177,21 +152,33 @@ class _$_BasketCommerce
     implements _BasketCommerce {
   const _$_BasketCommerce(
       {required this.commerce,
-      this.products = const <BasketProduct>[],
-      this.paniers = const <Panier>[],
-      this.pickupDate});
+      final List<BasketProduct> products = const <BasketProduct>[],
+      final List<Panier> paniers = const <Panier>[],
+      this.pickupDate})
+      : _products = products,
+        _paniers = paniers;
 
   factory _$_BasketCommerce.fromJson(Map<String, dynamic> json) =>
       _$$_BasketCommerceFromJson(json);
 
   @override
   final Commerce commerce;
-  @JsonKey()
+  final List<BasketProduct> _products;
   @override
-  final List<BasketProduct> products;
   @JsonKey()
+  List<BasketProduct> get products {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
+
+  final List<Panier> _paniers;
   @override
-  final List<Panier> paniers;
+  @JsonKey()
+  List<Panier> get paniers {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_paniers);
+  }
+
   @override
   final DateTime? pickupDate;
 
@@ -215,26 +202,27 @@ class _$_BasketCommerce
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _BasketCommerce &&
+            other is _$_BasketCommerce &&
             const DeepCollectionEquality().equals(other.commerce, commerce) &&
-            const DeepCollectionEquality().equals(other.products, products) &&
-            const DeepCollectionEquality().equals(other.paniers, paniers) &&
+            const DeepCollectionEquality().equals(other._products, _products) &&
+            const DeepCollectionEquality().equals(other._paniers, _paniers) &&
             const DeepCollectionEquality()
                 .equals(other.pickupDate, pickupDate));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(commerce),
-      const DeepCollectionEquality().hash(products),
-      const DeepCollectionEquality().hash(paniers),
+      const DeepCollectionEquality().hash(_products),
+      const DeepCollectionEquality().hash(_paniers),
       const DeepCollectionEquality().hash(pickupDate));
 
   @JsonKey(ignore: true)
   @override
-  _$BasketCommerceCopyWith<_BasketCommerce> get copyWith =>
-      __$BasketCommerceCopyWithImpl<_BasketCommerce>(this, _$identity);
+  _$$_BasketCommerceCopyWith<_$_BasketCommerce> get copyWith =>
+      __$$_BasketCommerceCopyWithImpl<_$_BasketCommerce>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -244,24 +232,24 @@ class _$_BasketCommerce
 
 abstract class _BasketCommerce implements BasketCommerce {
   const factory _BasketCommerce(
-      {required Commerce commerce,
-      List<BasketProduct> products,
-      List<Panier> paniers,
-      DateTime? pickupDate}) = _$_BasketCommerce;
+      {required final Commerce commerce,
+      final List<BasketProduct> products,
+      final List<Panier> paniers,
+      final DateTime? pickupDate}) = _$_BasketCommerce;
 
   factory _BasketCommerce.fromJson(Map<String, dynamic> json) =
       _$_BasketCommerce.fromJson;
 
   @override
-  Commerce get commerce;
+  Commerce get commerce => throw _privateConstructorUsedError;
   @override
-  List<BasketProduct> get products;
+  List<BasketProduct> get products => throw _privateConstructorUsedError;
   @override
-  List<Panier> get paniers;
+  List<Panier> get paniers => throw _privateConstructorUsedError;
   @override
-  DateTime? get pickupDate;
+  DateTime? get pickupDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$BasketCommerceCopyWith<_BasketCommerce> get copyWith =>
+  _$$_BasketCommerceCopyWith<_$_BasketCommerce> get copyWith =>
       throw _privateConstructorUsedError;
 }

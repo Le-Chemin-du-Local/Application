@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'panier_command.dart';
+part of 'commerce_command.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,55 +14,55 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PanierCommand _$PanierCommandFromJson(Map<String, dynamic> json) {
-  return _PanierCommand.fromJson(json);
+CommerceCommand _$CommerceCommandFromJson(Map<String, dynamic> json) {
+  return _CommerceCommand.fromJson(json);
 }
 
 /// @nodoc
-mixin _$PanierCommand {
+mixin _$CommerceCommand {
   String? get id => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
-  DateTime get pickupDate => throw _privateConstructorUsedError;
-  Panier get panier => throw _privateConstructorUsedError;
+  DateTime? get pickupDate => throw _privateConstructorUsedError;
+  Commerce? get commerce => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PanierCommandCopyWith<PanierCommand> get copyWith =>
+  $CommerceCommandCopyWith<CommerceCommand> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PanierCommandCopyWith<$Res> {
-  factory $PanierCommandCopyWith(
-          PanierCommand value, $Res Function(PanierCommand) then) =
-      _$PanierCommandCopyWithImpl<$Res>;
+abstract class $CommerceCommandCopyWith<$Res> {
+  factory $CommerceCommandCopyWith(
+          CommerceCommand value, $Res Function(CommerceCommand) then) =
+      _$CommerceCommandCopyWithImpl<$Res>;
   $Res call(
       {String? id,
       String status,
-      DateTime pickupDate,
-      Panier panier,
+      DateTime? pickupDate,
+      Commerce? commerce,
       User? user});
 
-  $PanierCopyWith<$Res> get panier;
+  $CommerceCopyWith<$Res>? get commerce;
   $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
-class _$PanierCommandCopyWithImpl<$Res>
-    implements $PanierCommandCopyWith<$Res> {
-  _$PanierCommandCopyWithImpl(this._value, this._then);
+class _$CommerceCommandCopyWithImpl<$Res>
+    implements $CommerceCommandCopyWith<$Res> {
+  _$CommerceCommandCopyWithImpl(this._value, this._then);
 
-  final PanierCommand _value;
+  final CommerceCommand _value;
   // ignore: unused_field
-  final $Res Function(PanierCommand) _then;
+  final $Res Function(CommerceCommand) _then;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? status = freezed,
     Object? pickupDate = freezed,
-    Object? panier = freezed,
+    Object? commerce = freezed,
     Object? user = freezed,
   }) {
     return _then(_value.copyWith(
@@ -77,11 +77,11 @@ class _$PanierCommandCopyWithImpl<$Res>
       pickupDate: pickupDate == freezed
           ? _value.pickupDate
           : pickupDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      panier: panier == freezed
-          ? _value.panier
-          : panier // ignore: cast_nullable_to_non_nullable
-              as Panier,
+              as DateTime?,
+      commerce: commerce == freezed
+          ? _value.commerce
+          : commerce // ignore: cast_nullable_to_non_nullable
+              as Commerce?,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -90,9 +90,13 @@ class _$PanierCommandCopyWithImpl<$Res>
   }
 
   @override
-  $PanierCopyWith<$Res> get panier {
-    return $PanierCopyWith<$Res>(_value.panier, (value) {
-      return _then(_value.copyWith(panier: value));
+  $CommerceCopyWith<$Res>? get commerce {
+    if (_value.commerce == null) {
+      return null;
+    }
+
+    return $CommerceCopyWith<$Res>(_value.commerce!, (value) {
+      return _then(_value.copyWith(commerce: value));
     });
   }
 
@@ -109,45 +113,45 @@ class _$PanierCommandCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$$_PanierCommandCopyWith<$Res>
-    implements $PanierCommandCopyWith<$Res> {
-  factory _$$_PanierCommandCopyWith(
-          _$_PanierCommand value, $Res Function(_$_PanierCommand) then) =
-      __$$_PanierCommandCopyWithImpl<$Res>;
+abstract class _$$_CommerceCommandCopyWith<$Res>
+    implements $CommerceCommandCopyWith<$Res> {
+  factory _$$_CommerceCommandCopyWith(
+          _$_CommerceCommand value, $Res Function(_$_CommerceCommand) then) =
+      __$$_CommerceCommandCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? id,
       String status,
-      DateTime pickupDate,
-      Panier panier,
+      DateTime? pickupDate,
+      Commerce? commerce,
       User? user});
 
   @override
-  $PanierCopyWith<$Res> get panier;
+  $CommerceCopyWith<$Res>? get commerce;
   @override
   $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
-class __$$_PanierCommandCopyWithImpl<$Res>
-    extends _$PanierCommandCopyWithImpl<$Res>
-    implements _$$_PanierCommandCopyWith<$Res> {
-  __$$_PanierCommandCopyWithImpl(
-      _$_PanierCommand _value, $Res Function(_$_PanierCommand) _then)
-      : super(_value, (v) => _then(v as _$_PanierCommand));
+class __$$_CommerceCommandCopyWithImpl<$Res>
+    extends _$CommerceCommandCopyWithImpl<$Res>
+    implements _$$_CommerceCommandCopyWith<$Res> {
+  __$$_CommerceCommandCopyWithImpl(
+      _$_CommerceCommand _value, $Res Function(_$_CommerceCommand) _then)
+      : super(_value, (v) => _then(v as _$_CommerceCommand));
 
   @override
-  _$_PanierCommand get _value => super._value as _$_PanierCommand;
+  _$_CommerceCommand get _value => super._value as _$_CommerceCommand;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? status = freezed,
     Object? pickupDate = freezed,
-    Object? panier = freezed,
+    Object? commerce = freezed,
     Object? user = freezed,
   }) {
-    return _then(_$_PanierCommand(
+    return _then(_$_CommerceCommand(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -159,11 +163,11 @@ class __$$_PanierCommandCopyWithImpl<$Res>
       pickupDate: pickupDate == freezed
           ? _value.pickupDate
           : pickupDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      panier: panier == freezed
-          ? _value.panier
-          : panier // ignore: cast_nullable_to_non_nullable
-              as Panier,
+              as DateTime?,
+      commerce: commerce == freezed
+          ? _value.commerce
+          : commerce // ignore: cast_nullable_to_non_nullable
+              as Commerce?,
       user: user == freezed
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
@@ -174,41 +178,40 @@ class __$$_PanierCommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
-  const _$_PanierCommand(this.id,
-      {required this.status,
-      required this.pickupDate,
-      required this.panier,
-      this.user});
+class _$_CommerceCommand
+    with DiagnosticableTreeMixin
+    implements _CommerceCommand {
+  const _$_CommerceCommand(this.id,
+      {required this.status, this.pickupDate, this.commerce, this.user});
 
-  factory _$_PanierCommand.fromJson(Map<String, dynamic> json) =>
-      _$$_PanierCommandFromJson(json);
+  factory _$_CommerceCommand.fromJson(Map<String, dynamic> json) =>
+      _$$_CommerceCommandFromJson(json);
 
   @override
   final String? id;
   @override
   final String status;
   @override
-  final DateTime pickupDate;
+  final DateTime? pickupDate;
   @override
-  final Panier panier;
+  final Commerce? commerce;
   @override
   final User? user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PanierCommand(id: $id, status: $status, pickupDate: $pickupDate, panier: $panier, user: $user)';
+    return 'CommerceCommand(id: $id, status: $status, pickupDate: $pickupDate, commerce: $commerce, user: $user)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'PanierCommand'))
+      ..add(DiagnosticsProperty('type', 'CommerceCommand'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('pickupDate', pickupDate))
-      ..add(DiagnosticsProperty('panier', panier))
+      ..add(DiagnosticsProperty('commerce', commerce))
       ..add(DiagnosticsProperty('user', user));
   }
 
@@ -216,12 +219,12 @@ class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PanierCommand &&
+            other is _$_CommerceCommand &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.pickupDate, pickupDate) &&
-            const DeepCollectionEquality().equals(other.panier, panier) &&
+            const DeepCollectionEquality().equals(other.commerce, commerce) &&
             const DeepCollectionEquality().equals(other.user, user));
   }
 
@@ -232,42 +235,42 @@ class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(pickupDate),
-      const DeepCollectionEquality().hash(panier),
+      const DeepCollectionEquality().hash(commerce),
       const DeepCollectionEquality().hash(user));
 
   @JsonKey(ignore: true)
   @override
-  _$$_PanierCommandCopyWith<_$_PanierCommand> get copyWith =>
-      __$$_PanierCommandCopyWithImpl<_$_PanierCommand>(this, _$identity);
+  _$$_CommerceCommandCopyWith<_$_CommerceCommand> get copyWith =>
+      __$$_CommerceCommandCopyWithImpl<_$_CommerceCommand>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PanierCommandToJson(this);
+    return _$$_CommerceCommandToJson(this);
   }
 }
 
-abstract class _PanierCommand implements PanierCommand {
-  const factory _PanierCommand(final String? id,
+abstract class _CommerceCommand implements CommerceCommand {
+  const factory _CommerceCommand(final String? id,
       {required final String status,
-      required final DateTime pickupDate,
-      required final Panier panier,
-      final User? user}) = _$_PanierCommand;
+      final DateTime? pickupDate,
+      final Commerce? commerce,
+      final User? user}) = _$_CommerceCommand;
 
-  factory _PanierCommand.fromJson(Map<String, dynamic> json) =
-      _$_PanierCommand.fromJson;
+  factory _CommerceCommand.fromJson(Map<String, dynamic> json) =
+      _$_CommerceCommand.fromJson;
 
   @override
   String? get id => throw _privateConstructorUsedError;
   @override
   String get status => throw _privateConstructorUsedError;
   @override
-  DateTime get pickupDate => throw _privateConstructorUsedError;
+  DateTime? get pickupDate => throw _privateConstructorUsedError;
   @override
-  Panier get panier => throw _privateConstructorUsedError;
+  Commerce? get commerce => throw _privateConstructorUsedError;
   @override
   User? get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$$_PanierCommandCopyWith<_$_PanierCommand> get copyWith =>
+  _$$_CommerceCommandCopyWith<_$_CommerceCommand> get copyWith =>
       throw _privateConstructorUsedError;
 }

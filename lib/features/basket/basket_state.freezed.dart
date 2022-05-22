@@ -12,21 +12,7 @@ part of 'basket_state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$BasketStateTearOff {
-  const _$BasketStateTearOff();
-
-  _BasketState call({required AsyncValue<Basket> basket}) {
-    return _BasketState(
-      basket: basket,
-    );
-  }
-}
-
-/// @nodoc
-const $BasketState = _$BasketStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$BasketState {
@@ -67,30 +53,30 @@ class _$BasketStateCopyWithImpl<$Res> implements $BasketStateCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$BasketStateCopyWith<$Res>
+abstract class _$$_BasketStateCopyWith<$Res>
     implements $BasketStateCopyWith<$Res> {
-  factory _$BasketStateCopyWith(
-          _BasketState value, $Res Function(_BasketState) then) =
-      __$BasketStateCopyWithImpl<$Res>;
+  factory _$$_BasketStateCopyWith(
+          _$_BasketState value, $Res Function(_$_BasketState) then) =
+      __$$_BasketStateCopyWithImpl<$Res>;
   @override
   $Res call({AsyncValue<Basket> basket});
 }
 
 /// @nodoc
-class __$BasketStateCopyWithImpl<$Res> extends _$BasketStateCopyWithImpl<$Res>
-    implements _$BasketStateCopyWith<$Res> {
-  __$BasketStateCopyWithImpl(
-      _BasketState _value, $Res Function(_BasketState) _then)
-      : super(_value, (v) => _then(v as _BasketState));
+class __$$_BasketStateCopyWithImpl<$Res> extends _$BasketStateCopyWithImpl<$Res>
+    implements _$$_BasketStateCopyWith<$Res> {
+  __$$_BasketStateCopyWithImpl(
+      _$_BasketState _value, $Res Function(_$_BasketState) _then)
+      : super(_value, (v) => _then(v as _$_BasketState));
 
   @override
-  _BasketState get _value => super._value as _BasketState;
+  _$_BasketState get _value => super._value as _$_BasketState;
 
   @override
   $Res call({
     Object? basket = freezed,
   }) {
-    return _then(_BasketState(
+    return _then(_$_BasketState(
       basket: basket == freezed
           ? _value.basket
           : basket // ignore: cast_nullable_to_non_nullable
@@ -124,7 +110,7 @@ class _$_BasketState with DiagnosticableTreeMixin implements _BasketState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _BasketState &&
+            other is _$_BasketState &&
             const DeepCollectionEquality().equals(other.basket, basket));
   }
 
@@ -134,18 +120,18 @@ class _$_BasketState with DiagnosticableTreeMixin implements _BasketState {
 
   @JsonKey(ignore: true)
   @override
-  _$BasketStateCopyWith<_BasketState> get copyWith =>
-      __$BasketStateCopyWithImpl<_BasketState>(this, _$identity);
+  _$$_BasketStateCopyWith<_$_BasketState> get copyWith =>
+      __$$_BasketStateCopyWithImpl<_$_BasketState>(this, _$identity);
 }
 
 abstract class _BasketState implements BasketState {
-  const factory _BasketState({required AsyncValue<Basket> basket}) =
+  const factory _BasketState({required final AsyncValue<Basket> basket}) =
       _$_BasketState;
 
   @override
-  AsyncValue<Basket> get basket;
+  AsyncValue<Basket> get basket => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$BasketStateCopyWith<_BasketState> get copyWith =>
+  _$$_BasketStateCopyWith<_$_BasketState> get copyWith =>
       throw _privateConstructorUsedError;
 }

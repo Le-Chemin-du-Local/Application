@@ -12,32 +12,11 @@ part of 'cl_file.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 ClFile _$ClFileFromJson(Map<String, dynamic> json) {
   return _ClFile.fromJson(json);
 }
-
-/// @nodoc
-class _$ClFileTearOff {
-  const _$ClFileTearOff();
-
-  _ClFile call(
-      {@JsonKey(name: "name") required String filename,
-      @JsonKey(name: "content") String? base64content}) {
-    return _ClFile(
-      filename: filename,
-      base64content: base64content,
-    );
-  }
-
-  ClFile fromJson(Map<String, Object?> json) {
-    return ClFile.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $ClFile = _$ClFileTearOff();
 
 /// @nodoc
 mixin _$ClFile {
@@ -87,9 +66,9 @@ class _$ClFileCopyWithImpl<$Res> implements $ClFileCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ClFileCopyWith<$Res> implements $ClFileCopyWith<$Res> {
-  factory _$ClFileCopyWith(_ClFile value, $Res Function(_ClFile) then) =
-      __$ClFileCopyWithImpl<$Res>;
+abstract class _$$_ClFileCopyWith<$Res> implements $ClFileCopyWith<$Res> {
+  factory _$$_ClFileCopyWith(_$_ClFile value, $Res Function(_$_ClFile) then) =
+      __$$_ClFileCopyWithImpl<$Res>;
   @override
   $Res call(
       {@JsonKey(name: "name") String filename,
@@ -97,20 +76,20 @@ abstract class _$ClFileCopyWith<$Res> implements $ClFileCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ClFileCopyWithImpl<$Res> extends _$ClFileCopyWithImpl<$Res>
-    implements _$ClFileCopyWith<$Res> {
-  __$ClFileCopyWithImpl(_ClFile _value, $Res Function(_ClFile) _then)
-      : super(_value, (v) => _then(v as _ClFile));
+class __$$_ClFileCopyWithImpl<$Res> extends _$ClFileCopyWithImpl<$Res>
+    implements _$$_ClFileCopyWith<$Res> {
+  __$$_ClFileCopyWithImpl(_$_ClFile _value, $Res Function(_$_ClFile) _then)
+      : super(_value, (v) => _then(v as _$_ClFile));
 
   @override
-  _ClFile get _value => super._value as _ClFile;
+  _$_ClFile get _value => super._value as _$_ClFile;
 
   @override
   $Res call({
     Object? filename = freezed,
     Object? base64content = freezed,
   }) {
-    return _then(_ClFile(
+    return _then(_$_ClFile(
       filename: filename == freezed
           ? _value.filename
           : filename // ignore: cast_nullable_to_non_nullable
@@ -158,12 +137,13 @@ class _$_ClFile with DiagnosticableTreeMixin implements _ClFile {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _ClFile &&
+            other is _$_ClFile &&
             const DeepCollectionEquality().equals(other.filename, filename) &&
             const DeepCollectionEquality()
                 .equals(other.base64content, base64content));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -172,8 +152,8 @@ class _$_ClFile with DiagnosticableTreeMixin implements _ClFile {
 
   @JsonKey(ignore: true)
   @override
-  _$ClFileCopyWith<_ClFile> get copyWith =>
-      __$ClFileCopyWithImpl<_ClFile>(this, _$identity);
+  _$$_ClFileCopyWith<_$_ClFile> get copyWith =>
+      __$$_ClFileCopyWithImpl<_$_ClFile>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -183,18 +163,19 @@ class _$_ClFile with DiagnosticableTreeMixin implements _ClFile {
 
 abstract class _ClFile implements ClFile {
   const factory _ClFile(
-      {@JsonKey(name: "name") required String filename,
-      @JsonKey(name: "content") String? base64content}) = _$_ClFile;
+      {@JsonKey(name: "name") required final String filename,
+      @JsonKey(name: "content") final String? base64content}) = _$_ClFile;
 
   factory _ClFile.fromJson(Map<String, dynamic> json) = _$_ClFile.fromJson;
 
   @override
   @JsonKey(name: "name")
-  String get filename;
+  String get filename => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: "content")
-  String? get base64content;
+  String? get base64content => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ClFileCopyWith<_ClFile> get copyWith => throw _privateConstructorUsedError;
+  _$$_ClFileCopyWith<_$_ClFile> get copyWith =>
+      throw _privateConstructorUsedError;
 }

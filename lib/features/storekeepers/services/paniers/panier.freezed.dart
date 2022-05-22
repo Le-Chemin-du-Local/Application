@@ -12,47 +12,11 @@ part of 'panier.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Panier _$PanierFromJson(Map<String, dynamic> json) {
   return _PanierProduct.fromJson(json);
 }
-
-/// @nodoc
-class _$PanierTearOff {
-  const _$PanierTearOff();
-
-  _PanierProduct call(String? id,
-      {required String name,
-      required String type,
-      String category = "Autre",
-      String description = "",
-      int quantity = 0,
-      double price = 0,
-      double reduction = 0,
-      List<PanierProduct> products = const <PanierProduct>[],
-      DateTime? endingDate}) {
-    return _PanierProduct(
-      id,
-      name: name,
-      type: type,
-      category: category,
-      description: description,
-      quantity: quantity,
-      price: price,
-      reduction: reduction,
-      products: products,
-      endingDate: endingDate,
-    );
-  }
-
-  Panier fromJson(Map<String, Object?> json) {
-    return Panier.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Panier = _$PanierTearOff();
 
 /// @nodoc
 mixin _$Panier {
@@ -156,10 +120,11 @@ class _$PanierCopyWithImpl<$Res> implements $PanierCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PanierProductCopyWith<$Res> implements $PanierCopyWith<$Res> {
-  factory _$PanierProductCopyWith(
-          _PanierProduct value, $Res Function(_PanierProduct) then) =
-      __$PanierProductCopyWithImpl<$Res>;
+abstract class _$$_PanierProductCopyWith<$Res>
+    implements $PanierCopyWith<$Res> {
+  factory _$$_PanierProductCopyWith(
+          _$_PanierProduct value, $Res Function(_$_PanierProduct) then) =
+      __$$_PanierProductCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? id,
@@ -175,14 +140,14 @@ abstract class _$PanierProductCopyWith<$Res> implements $PanierCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
-    implements _$PanierProductCopyWith<$Res> {
-  __$PanierProductCopyWithImpl(
-      _PanierProduct _value, $Res Function(_PanierProduct) _then)
-      : super(_value, (v) => _then(v as _PanierProduct));
+class __$$_PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
+    implements _$$_PanierProductCopyWith<$Res> {
+  __$$_PanierProductCopyWithImpl(
+      _$_PanierProduct _value, $Res Function(_$_PanierProduct) _then)
+      : super(_value, (v) => _then(v as _$_PanierProduct));
 
   @override
-  _PanierProduct get _value => super._value as _PanierProduct;
+  _$_PanierProduct get _value => super._value as _$_PanierProduct;
 
   @override
   $Res call({
@@ -197,7 +162,7 @@ class __$PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
     Object? products = freezed,
     Object? endingDate = freezed,
   }) {
-    return _then(_PanierProduct(
+    return _then(_$_PanierProduct(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -231,7 +196,7 @@ class __$PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
           : reduction // ignore: cast_nullable_to_non_nullable
               as double,
       products: products == freezed
-          ? _value.products
+          ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
               as List<PanierProduct>,
       endingDate: endingDate == freezed
@@ -253,8 +218,9 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
       this.quantity = 0,
       this.price = 0,
       this.reduction = 0,
-      this.products = const <PanierProduct>[],
-      this.endingDate});
+      final List<PanierProduct> products = const <PanierProduct>[],
+      this.endingDate})
+      : _products = products;
 
   factory _$_PanierProduct.fromJson(Map<String, dynamic> json) =>
       _$$_PanierProductFromJson(json);
@@ -265,24 +231,29 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
   final String name;
   @override
   final String type;
-  @JsonKey()
   @override
+  @JsonKey()
   final String category;
-  @JsonKey()
   @override
+  @JsonKey()
   final String description;
-  @JsonKey()
   @override
+  @JsonKey()
   final int quantity;
-  @JsonKey()
   @override
+  @JsonKey()
   final double price;
-  @JsonKey()
   @override
+  @JsonKey()
   final double reduction;
-  @JsonKey()
+  final List<PanierProduct> _products;
   @override
-  final List<PanierProduct> products;
+  @JsonKey()
+  List<PanierProduct> get products {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_products);
+  }
+
   @override
   final DateTime? endingDate;
 
@@ -312,7 +283,7 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _PanierProduct &&
+            other is _$_PanierProduct &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.type, type) &&
@@ -322,11 +293,12 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
             const DeepCollectionEquality().equals(other.quantity, quantity) &&
             const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality().equals(other.reduction, reduction) &&
-            const DeepCollectionEquality().equals(other.products, products) &&
+            const DeepCollectionEquality().equals(other._products, _products) &&
             const DeepCollectionEquality()
                 .equals(other.endingDate, endingDate));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -338,13 +310,13 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
       const DeepCollectionEquality().hash(quantity),
       const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(reduction),
-      const DeepCollectionEquality().hash(products),
+      const DeepCollectionEquality().hash(_products),
       const DeepCollectionEquality().hash(endingDate));
 
   @JsonKey(ignore: true)
   @override
-  _$PanierProductCopyWith<_PanierProduct> get copyWith =>
-      __$PanierProductCopyWithImpl<_PanierProduct>(this, _$identity);
+  _$$_PanierProductCopyWith<_$_PanierProduct> get copyWith =>
+      __$$_PanierProductCopyWithImpl<_$_PanierProduct>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -353,42 +325,42 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
 }
 
 abstract class _PanierProduct implements Panier {
-  const factory _PanierProduct(String? id,
-      {required String name,
-      required String type,
-      String category,
-      String description,
-      int quantity,
-      double price,
-      double reduction,
-      List<PanierProduct> products,
-      DateTime? endingDate}) = _$_PanierProduct;
+  const factory _PanierProduct(final String? id,
+      {required final String name,
+      required final String type,
+      final String category,
+      final String description,
+      final int quantity,
+      final double price,
+      final double reduction,
+      final List<PanierProduct> products,
+      final DateTime? endingDate}) = _$_PanierProduct;
 
   factory _PanierProduct.fromJson(Map<String, dynamic> json) =
       _$_PanierProduct.fromJson;
 
   @override
-  String? get id;
+  String? get id => throw _privateConstructorUsedError;
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  String get type;
+  String get type => throw _privateConstructorUsedError;
   @override
-  String get category;
+  String get category => throw _privateConstructorUsedError;
   @override
-  String get description;
+  String get description => throw _privateConstructorUsedError;
   @override
-  int get quantity;
+  int get quantity => throw _privateConstructorUsedError;
   @override
-  double get price;
+  double get price => throw _privateConstructorUsedError;
   @override
-  double get reduction;
+  double get reduction => throw _privateConstructorUsedError;
   @override
-  List<PanierProduct> get products;
+  List<PanierProduct> get products => throw _privateConstructorUsedError;
   @override
-  DateTime? get endingDate;
+  DateTime? get endingDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PanierProductCopyWith<_PanierProduct> get copyWith =>
+  _$$_PanierProductCopyWith<_$_PanierProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }

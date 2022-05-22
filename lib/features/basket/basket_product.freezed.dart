@@ -12,30 +12,11 @@ part of 'basket_product.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 BasketProduct _$BasketProductFromJson(Map<String, dynamic> json) {
   return _BasketProduct.fromJson(json);
 }
-
-/// @nodoc
-class _$BasketProductTearOff {
-  const _$BasketProductTearOff();
-
-  _BasketProduct call({required int quantity, required Product product}) {
-    return _BasketProduct(
-      quantity: quantity,
-      product: product,
-    );
-  }
-
-  BasketProduct fromJson(Map<String, Object?> json) {
-    return BasketProduct.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $BasketProduct = _$BasketProductTearOff();
 
 /// @nodoc
 mixin _$BasketProduct {
@@ -93,11 +74,11 @@ class _$BasketProductCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$BasketProductCopyWith<$Res>
+abstract class _$$_BasketProductCopyWith<$Res>
     implements $BasketProductCopyWith<$Res> {
-  factory _$BasketProductCopyWith(
-          _BasketProduct value, $Res Function(_BasketProduct) then) =
-      __$BasketProductCopyWithImpl<$Res>;
+  factory _$$_BasketProductCopyWith(
+          _$_BasketProduct value, $Res Function(_$_BasketProduct) then) =
+      __$$_BasketProductCopyWithImpl<$Res>;
   @override
   $Res call({int quantity, Product product});
 
@@ -106,22 +87,22 @@ abstract class _$BasketProductCopyWith<$Res>
 }
 
 /// @nodoc
-class __$BasketProductCopyWithImpl<$Res>
+class __$$_BasketProductCopyWithImpl<$Res>
     extends _$BasketProductCopyWithImpl<$Res>
-    implements _$BasketProductCopyWith<$Res> {
-  __$BasketProductCopyWithImpl(
-      _BasketProduct _value, $Res Function(_BasketProduct) _then)
-      : super(_value, (v) => _then(v as _BasketProduct));
+    implements _$$_BasketProductCopyWith<$Res> {
+  __$$_BasketProductCopyWithImpl(
+      _$_BasketProduct _value, $Res Function(_$_BasketProduct) _then)
+      : super(_value, (v) => _then(v as _$_BasketProduct));
 
   @override
-  _BasketProduct get _value => super._value as _BasketProduct;
+  _$_BasketProduct get _value => super._value as _$_BasketProduct;
 
   @override
   $Res call({
     Object? quantity = freezed,
     Object? product = freezed,
   }) {
-    return _then(_BasketProduct(
+    return _then(_$_BasketProduct(
       quantity: quantity == freezed
           ? _value.quantity
           : quantity // ignore: cast_nullable_to_non_nullable
@@ -156,11 +137,12 @@ class _$_BasketProduct implements _BasketProduct {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _BasketProduct &&
+            other is _$_BasketProduct &&
             const DeepCollectionEquality().equals(other.quantity, quantity) &&
             const DeepCollectionEquality().equals(other.product, product));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -169,8 +151,8 @@ class _$_BasketProduct implements _BasketProduct {
 
   @JsonKey(ignore: true)
   @override
-  _$BasketProductCopyWith<_BasketProduct> get copyWith =>
-      __$BasketProductCopyWithImpl<_BasketProduct>(this, _$identity);
+  _$$_BasketProductCopyWith<_$_BasketProduct> get copyWith =>
+      __$$_BasketProductCopyWithImpl<_$_BasketProduct>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -180,17 +162,18 @@ class _$_BasketProduct implements _BasketProduct {
 
 abstract class _BasketProduct implements BasketProduct {
   const factory _BasketProduct(
-      {required int quantity, required Product product}) = _$_BasketProduct;
+      {required final int quantity,
+      required final Product product}) = _$_BasketProduct;
 
   factory _BasketProduct.fromJson(Map<String, dynamic> json) =
       _$_BasketProduct.fromJson;
 
   @override
-  int get quantity;
+  int get quantity => throw _privateConstructorUsedError;
   @override
-  Product get product;
+  Product get product => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$BasketProductCopyWith<_BasketProduct> get copyWith =>
+  _$$_BasketProductCopyWith<_$_BasketProduct> get copyWith =>
       throw _privateConstructorUsedError;
 }
