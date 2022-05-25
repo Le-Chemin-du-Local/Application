@@ -12,9 +12,14 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart';
 
 class CommandsList extends ConsumerWidget {
-  const CommandsList({Key? key}) : super(key: key);
+  const CommandsList({
+    Key? key,
+    required this.status,
+  }) : super(key: key);
 
-  QueryOptions<dynamic> _commandsQueryOptions(String status) {
+  final List<String> status;
+
+  QueryOptions<dynamic> _commandsQueryOptions() {
     return QueryOptions<dynamic>(
       document: gql(qGetCommandsMini),
       variables: <String, dynamic>{
@@ -40,8 +45,8 @@ class CommandsList extends ConsumerWidget {
     }
 
     return Query<dynamic>(
-      options: _commandsQueryOptions(CommandStatus.inProgress),
-      builder: (result, {fetchMore, refetch}) {
+      options: _commandsQueryOptions(),
+      builder: (QueryResult result, { fetchMore, refetch }) {
         if (result.isLoading) {
           return const Center(child: CircularProgressIndicator(),);
         }

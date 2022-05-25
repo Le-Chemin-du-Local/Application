@@ -3,6 +3,7 @@ import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_commerce_card.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:chemin_du_local/features/commands/commands_list/commands_list.dart';
+import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -33,7 +34,12 @@ class BasketSummary extends ConsumerWidget {
                   child: Text("Commandes à retirer", style: Theme.of(context).textTheme.headline2,),
                 ),
                 const Flexible(
-                  child: CommandsList(),
+                  child: CommandsList(
+                    status: [
+                      CommandStatus.inProgress,
+                      CommandStatus.ready,
+                    ],
+                  ),
                 ),
                 
                 // La liste des produits
