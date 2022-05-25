@@ -66,12 +66,12 @@ class CommandsList extends ConsumerWidget {
           return Container();
         }
 
-        return _buildContent(context, commands);
+        return _buildContent(context, commands, refetch);
       },
     );
   }
 
-  Widget _buildContent(BuildContext context, List<Command> commands) {
+  Widget _buildContent(BuildContext context, List<Command> commands, Refetch? refetch) {
     return ListView(
       primary: true,
       shrinkWrap: true,
@@ -81,7 +81,7 @@ class CommandsList extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding, vertical: 8),
             child: InkWell(
-              onTap: () => _openCommandDetail(context, command),
+              onTap: () => _openCommandDetail(context, command, refetch),
               child: CommandCard(command: command)
             ),
           )
@@ -89,18 +89,22 @@ class CommandsList extends ConsumerWidget {
     );
   }
 
-  Future _openCommandDetail(BuildContext context, Command command) async {
+  Future _openCommandDetail(BuildContext context, Command command, Refetch? refetch) async {
     final String creationDateString = command.creationDate != null 
       ? DateFormat("dd/MM/yyyy").format(command.creationDate!)
       : "Date inconnue";
 
-      await Navigator.of(context).push<dynamic>(
-        MaterialPageRoute<dynamic>(
+      bool shouldRefetch = await Navigator.of(context).push<bool?>(
+        MaterialPageRoute<bool?>(
           builder: (context) => CommandDetailsPage(
             commandID: command.id!,
             commandDateString: creationDateString
           )
         )
-      );
+      ) ?? false;
+
+      if (shouldRefetch && refetch != null) {
+        refetch();
+      } 
   }
 }

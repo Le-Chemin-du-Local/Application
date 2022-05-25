@@ -7,10 +7,13 @@ import 'package:flutter/material.dart';
 class CommandCommercesList extends StatelessWidget {
   const CommandCommercesList({
     Key? key,
-    required this.commerceCommands
+    required this.commerceCommands,
+    required this.onCommerceCommandDone,
   }) : super(key: key);
 
   final List<CommerceCommand> commerceCommands;
+
+  final Function() onCommerceCommandDone;
 
   @override
   Widget build(BuildContext context) {
@@ -43,10 +46,14 @@ class CommandCommercesList extends StatelessWidget {
   }
 
   Future _openCommerceCommandDetails(BuildContext context, CommerceCommand commerceCommand, int index) async {
-    Navigator.of(context).push<dynamic>(
-      MaterialPageRoute<dynamic>(
+    final bool commerceDone = await Navigator.of(context).push<bool?>(
+      MaterialPageRoute<bool?>(
         builder: (context) => CommerceCommandDetailsPage(commerceCommand: commerceCommand, commandIndex: index)
       )
-    );
+    ) ?? false;
+
+    if (commerceDone) {
+      onCommerceCommandDone();
+    }
   }
 }

@@ -50,13 +50,13 @@ class CommandDetailsPage extends StatelessWidget {
 
           final Command command = Command.fromJson(result.data!["command"] as Map<String, dynamic>);
 
-          return _buildContent(command);
+          return _buildContent(context, command, refetch);
         },
       ),
     );
   }
 
-  Widget _buildContent(Command command) {
+  Widget _buildContent(BuildContext context, Command command, Refetch? refetch) {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -76,10 +76,24 @@ class CommandDetailsPage extends StatelessWidget {
             const SizedBox(height: 12,),
 
             // La liste des commerces
-            CommandCommercesList(commerceCommands: command.commerces),
+            CommandCommercesList(
+              commerceCommands: command.commerces,
+              onCommerceCommandDone: () => _onCommerceCommandDone(context, command, refetch),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void _onCommerceCommandDone(BuildContext context, Command command, Refetch? refetch) {
+    if (command.commerces.length > 1) {
+      if (refetch != null) {
+        refetch();
+      }
+    }
+    else {
+      Navigator.of(context).pop(true);
+    }
   }
 }

@@ -54,3 +54,21 @@ query getCommand(
   }
 }
 ''';
+
+const String mutUpdateCommerceCommand = r'''
+mutation updateCommerceCommand(
+  $id: ID!
+  $changes: ChangesCommerceCommand!
+) {
+  updateCommerceCommand(
+    id: $id, 
+    changes: $changes
+  ) {
+    id
+    commerce {
+      name
+    }
+    status
+  }
+}
+''';
