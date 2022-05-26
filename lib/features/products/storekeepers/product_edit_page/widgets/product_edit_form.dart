@@ -4,7 +4,6 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/cl_file.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
@@ -207,7 +206,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
           alignment: Alignment.bottomCenter,
           child: Padding(
             padding: const EdgeInsets.only(bottom: 16.0),
-            child: ClElevatedButton(
+            child: ElevatedButton(
               onPressed: () => _onSave(
                 runCreateMutation: runCreateMutation,
                 runUpdateMutation: runUpdateMutation,

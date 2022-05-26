@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:chemin_du_local/features/basket/models/basket_commerce/basket_commerce.dart';
@@ -85,7 +84,7 @@ class PageProductsListBig extends ConsumerWidget {
     
               // The view products button
               Center(
-                child: ClElevatedButton(
+                child: ElevatedButton(
                   onPressed: () {
                     if (!enableButton) return;
                   },

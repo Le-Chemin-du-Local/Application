@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:chemin_du_local/core/utils/cl_file.dart';
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -79,7 +78,7 @@ class _ClImagePickerBigState extends State<ClImagePickerBig> {
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.all(8),
-              child: ClElevatedButton(
+              child: ElevatedButton(
                 onPressed: _pickImage,
                 child: const Text("Ajouter"),
               ),

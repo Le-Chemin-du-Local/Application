@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/main_page/widgets/menu_drawer_item.dart';
 import 'package:flutter/material.dart';
@@ -58,16 +57,10 @@ class MenuDrawer extends StatelessWidget {
             // The special button
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 48),
-              child: ClElevatedButton(
+              child: ElevatedButton.icon(
                 onPressed: () => onSelectedPage(pageItems[0]),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(pageItems[0].icon),
-                    const SizedBox(width: 8),
-                    Text(pageItems[0].title),
-                  ],
-                ),
+                label: Text(pageItems[0].title),
+                icon: Icon(pageItems[0].icon),
               ),
             ),
             const SizedBox(height: 32,),

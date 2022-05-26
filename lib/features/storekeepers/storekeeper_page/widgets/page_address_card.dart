@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/gradient_icon.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
@@ -65,7 +64,7 @@ class PageAddressCard extends StatelessWidget {
           // Le bouton d'itinéraire
           Align(
             alignment: Alignment.center,
-            child: ClElevatedButton(
+            child: ElevatedButton(
               onPressed: () {},
               child: const Text("Voir l'itinéraire")
             ),

@@ -1,8 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
-import 'package:chemin_du_local/core/widgets/cl_outlined_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
@@ -78,7 +76,7 @@ class _EmptyProductsPageState extends State<EmptyProductsPage> {
                   Flexible(child: _buildCheckBoxText("Soit tous vos produits d'un seul coup grâce au template Excel")),
                   const SizedBox(height: 16.0,),
 
-                  ClElevatedButton(
+                  ElevatedButton(
                     onPressed: widget.onAddProduct,
                     child: const Text("Ajouter mon premier produit"),
                   ),
@@ -87,15 +85,13 @@ class _EmptyProductsPageState extends State<EmptyProductsPage> {
                   const Text("ou"),
                   const SizedBox(height: 8.0,),
 
-                  ClOutlinedButton(
-                    gradient: Palette.gradientPrimary,
+                  OutlinedButton(
                     onPressed: _downloadExcelTemplate,
                     child: const Text("Télécharger le template Excel"),
                   ),
                   const SizedBox(height: 8.0,),
 
-                  ClOutlinedButton(
-                    gradient: Palette.gradientPrimary,
+                  OutlinedButton(
                     onPressed: () => _openExcelProducts(runMutation),
                     child: const Text("Importer mon fichier Excel"),
                   ),

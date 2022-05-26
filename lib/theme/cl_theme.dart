@@ -37,11 +37,37 @@ class ClTheme {
         systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
 
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          primary: Palette.colorPrimary,
+          onPrimary: Palette.colorWhite,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0)
+          )
+        )
+      ),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          primary: Palette.colorPrimary,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          side: const BorderSide(
+            color: Palette.colorPrimary,
+          )
+        )
+      ),
+
       textTheme: GoogleFonts.rubikTextTheme().copyWith(
         headline2: const TextStyle(fontSize: 24, color: Palette.colorDark),
         bodyText1: const TextStyle(fontSize: 12, color: Palette.colorDark),
         bodyText2: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Palette.colorDark),
-        caption: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Palette.colorDark)
+        caption: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Palette.colorDark),
+        button: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
       ),
 
       visualDensity: VisualDensity.standard

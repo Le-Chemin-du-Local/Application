@@ -1,8 +1,7 @@
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class RegistrationStep3 extends StatelessWidget {
   const RegistrationStep3({
@@ -74,7 +73,7 @@ class RegistrationStep3 extends StatelessWidget {
             const SizedBox(height: 10,),
       
             // Le bouton d'acceptation
-            ClElevatedButton(
+            ElevatedButton(
               onPressed: onNext,
               child: const Text("Suivant"),
             ),

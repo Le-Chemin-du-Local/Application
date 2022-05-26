@@ -1,7 +1,6 @@
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class RegistrationStepPassword extends StatelessWidget {
   const RegistrationStepPassword({
@@ -65,7 +64,7 @@ class RegistrationStepPassword extends StatelessWidget {
             ),
             const SizedBox(height: 10,),
       
-            ClElevatedButton(
+            ElevatedButton(
               onPressed: onNext,
               child: const Text("Créer mon compte",)
             ),

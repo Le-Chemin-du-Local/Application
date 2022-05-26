@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
@@ -122,7 +121,7 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
             ),
             const SizedBox(height: 12,),
       
-            ClElevatedButton(
+            ElevatedButton(
               onPressed: _handlePayPress,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

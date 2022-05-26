@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:flutter/material.dart';
 
 class ServiceCard extends StatelessWidget {
@@ -53,7 +52,7 @@ class ServiceCard extends StatelessWidget {
             // The button
             child: Align(
               alignment: Alignment.bottomLeft,
-              child: ClElevatedButton(
+              child: ElevatedButton(
                 onPressed: onClick,
                 child: Row(
                   children: [

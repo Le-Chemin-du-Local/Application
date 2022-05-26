@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:flutter/material.dart';
 
@@ -58,13 +57,13 @@ class _LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height: 40,),
         
-            ClElevatedButton(
+            ElevatedButton(
               onPressed: _onConnect,
               child: const Text("Me connecter"),
             ),
             const SizedBox(height: 12,),
       
-            ClElevatedButton(
+            ElevatedButton(
               onPressed: widget.onRegister, 
               child: const Text("Créer mon compte")
             ),

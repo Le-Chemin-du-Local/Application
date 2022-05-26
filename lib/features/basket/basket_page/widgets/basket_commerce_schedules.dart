@@ -1,6 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/dates_helper.dart';
-import 'package:chemin_du_local/core/widgets/cl_elevated_button.dart';
 import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_schedules_list.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +68,7 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
                   const SizedBox(height: 8,),
 
                   Flexible(
-                    child: ClElevatedButton(
+                    child: ElevatedButton(
                       onPressed: _onDateChoosed,
                       child: const Text("Continuer"),
                     ),
@@ -99,13 +98,17 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
         ),
 
         Flexible(
-          child: ClElevatedButton(
-            onPressed: () {},
-            borderRadius: BorderRadius.circular(1.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius:  BorderRadius.circular(1.0),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
             child: Text(
               _day.isSameDate(DateTime.now()) 
                 ? "Aujourd'hui"
-                : DateFormat("dd/MM/yyyy").format(_day)
+                : DateFormat("dd/MM/yyyy").format(_day),
+              style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSecondary),
             ),
           ),
         )
