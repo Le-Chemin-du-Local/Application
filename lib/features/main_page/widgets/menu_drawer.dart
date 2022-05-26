@@ -27,16 +27,16 @@ class MenuDrawer extends StatelessWidget {
       elevation: 0,
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color:  Theme.of(context).colorScheme.surface,
           border: Border(
             right: BorderSide(
-              color: Theme.of(context).dividerColor
+              color: Theme.of(context).colorScheme.outline
             ),
             top: BorderSide(
-              color: Theme.of(context).dividerColor
+              color: Theme.of(context).colorScheme.outline
             ),
             bottom: BorderSide(
-              color: Theme.of(context).dividerColor
+              color: Theme.of(context).colorScheme.outline
             )
           )
         ),

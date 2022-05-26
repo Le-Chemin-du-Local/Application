@@ -38,7 +38,7 @@ class PageAddressCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClCard(
-      // backgroundColor: isEditing ? Theme.of(context).scaffoldBackgroundColor : Theme.of(context).cardColor, 
+      // backgroundColor: isEditing ? Theme.of(context).colorScheme.background :  Theme.of(context).colorScheme.surface, 
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -185,7 +185,7 @@ class PageAddressCard extends StatelessWidget {
                   decoration: BoxDecoration(
                     border: Border(
                       right: BorderSide(
-                        color: Theme.of(context).dividerColor,
+                        color: Theme.of(context).colorScheme.outline,
                         width: 0.5
                       )
                     )

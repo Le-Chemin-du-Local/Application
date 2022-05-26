@@ -39,7 +39,7 @@ class CommandSummaryCard extends StatelessWidget {
           // Le total
           DefaultTextStyle(
             style: Theme.of(context).textTheme.headline2!.copyWith(
-              color: Theme.of(context).primaryColor
+              color: Theme.of(context).colorScheme.primary
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

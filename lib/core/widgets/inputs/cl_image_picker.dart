@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:chemin_du_local/core/utils/cl_file.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
@@ -55,7 +54,7 @@ class _ClImagePickerState extends State<ClImagePicker> {
             borderRadius: BorderRadius.circular(widget.size / 2),
             child: Container(
               height: widget.size, width: widget.size,
-              color: Theme.of(context).dividerColor,
+              color: Theme.of(context).colorScheme.outline,
               child: Image.memory(
                 base64Decode(_image!.base64content!),
                 fit: BoxFit.cover,
@@ -67,7 +66,7 @@ class _ClImagePickerState extends State<ClImagePicker> {
           borderRadius: BorderRadius.circular(widget.size / 2),
           child: Container(
             height: widget.size, width: widget.size,
-            color: Theme.of(context).dividerColor,
+            color: Theme.of(context).colorScheme.outline,
             child: Image.network(
               widget.imageURL,
               fit: BoxFit.cover,
@@ -81,7 +80,7 @@ class _ClImagePickerState extends State<ClImagePicker> {
               errorBuilder: (context, error, stackTrace) {
                 return Container(
                   width: widget.size, height: widget.size,
-                  color: Theme.of(context).scaffoldBackgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                   child: Icon(Icons.image, size: widget.size * 0.5,),
                 );
               },
@@ -94,11 +93,11 @@ class _ClImagePickerState extends State<ClImagePicker> {
             right: 0,
             child: CircleAvatar(
               radius: 14,
-              backgroundColor: Theme.of(context).primaryColor,
+              backgroundColor: Theme.of(context).colorScheme.secondary,
               child: IconButton(
                 onPressed: _pickImage,
                 iconSize: 14,
-                icon: const Icon(Icons.edit, color: Palette.colorWhite,),
+                icon: Icon(Icons.edit, color: Theme.of(context).colorScheme.onSecondary,),
               ),
             ),
           )

@@ -94,7 +94,7 @@ class CommerceCard extends StatelessWidget {
               ),
             ),
             errorBuilder: (context, error, stackTrace) {
-              return Icon(Icons.image, size: 92, color: Theme.of(context).dividerColor,);
+              return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
             },
           )
         ),
@@ -148,7 +148,7 @@ class CommerceCard extends StatelessWidget {
         Icon(
           icon,
           size: 24,
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.primary,
         ),
         const SizedBox(width: 4,),
 

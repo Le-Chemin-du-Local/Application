@@ -87,17 +87,17 @@ class _ClTextInput extends State<ClTextInput> {
             decoration: InputDecoration(
               hintText: widget.hintText,
               contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              fillColor: (widget.readOnly && !widget.invisibleReadOnly) ? Theme.of(context).disabledColor : Theme.of(context).cardColor,
+              fillColor: (widget.readOnly && !widget.invisibleReadOnly) ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.surface,
               filled: true,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Theme.of(context).dividerColor
+                  color: Theme.of(context).colorScheme.outline
                 ),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               border: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Theme.of(context).dividerColor
+                  color: Theme.of(context).colorScheme.outline
                 ),
                 borderRadius: BorderRadius.circular(12.0),
               ),

@@ -19,7 +19,7 @@ class PageDescriptionCard extends StatelessWidget {
       : descriptionTextController.text;
 
     return ClCard(
-      // backgroundColor: isEditing ? Theme.of(context).scaffoldBackgroundColor : Theme.of(context).cardColor, 
+      // backgroundColor: isEditing ? Theme.of(context).colorScheme.background :  Theme.of(context).colorScheme.surface, 
       height: descriptionTextController.text.isEmpty ? 180 : null,
       child: isEditing ?
         // First case, edit mode show a text input

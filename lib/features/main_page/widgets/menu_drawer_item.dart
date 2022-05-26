@@ -21,15 +21,15 @@ class MenuDrawerItem extends StatelessWidget {
           // height: 100,
           padding: const EdgeInsets.symmetric(vertical: 20),
           decoration: BoxDecoration(
-            color: isActive ? Theme.of(context).primaryColor.withOpacity(0.1) : Theme.of(context).cardColor,
+            color: isActive ? Theme.of(context).colorScheme.primary.withOpacity(0.1) :  Theme.of(context).colorScheme.surface,
             border: !isActive ? null : Border(
-              left: BorderSide(width: 4, color: Theme.of(context).primaryColor)
+              left: BorderSide(width: 4, color: Theme.of(context).colorScheme.primary)
             )
           ),
           child: DefaultTextStyle(
             style: TextStyle(
               color: isActive 
-              ? Theme.of(context).primaryColor 
+              ? Theme.of(context).colorScheme.primary 
               : Theme.of(context).textTheme.bodyText2!.color,
             ),
             child: Row(
@@ -39,7 +39,7 @@ class MenuDrawerItem extends StatelessWidget {
                     item.icon, 
                     size: 20, 
                     color: isActive 
-                    ? Theme.of(context).primaryColor 
+                    ? Theme.of(context).colorScheme.primary 
                     : Theme.of(context).textTheme.bodyText2!.color,
                   ),
                 ),
@@ -66,7 +66,7 @@ class MenuDrawerItem extends StatelessWidget {
               height: 20,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Theme.of(context).primaryColor
+                color: Theme.of(context).colorScheme.primary
               ),
               child: Center(
                 child: DefaultTextStyle(

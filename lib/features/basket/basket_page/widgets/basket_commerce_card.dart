@@ -19,7 +19,7 @@ class BasketCommerceCard extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Container(
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.primary,
           padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
           height: 36,
           child: Row(
@@ -35,7 +35,7 @@ class BasketCommerceCard extends ConsumerWidget {
               Container(
                 width: 24, height: 24,
                 decoration: BoxDecoration(
-                  color: Theme.of(context).scaffoldBackgroundColor,
+                  color: Theme.of(context).colorScheme.background,
                   borderRadius: BorderRadius.circular(12.0)
                 ),
                 child: Center(

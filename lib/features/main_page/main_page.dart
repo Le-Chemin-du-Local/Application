@@ -100,7 +100,7 @@ class MainPageState extends State<MainPage> {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    color: Theme.of(context).scaffoldBackgroundColor,
+                    color: Theme.of(context).colorScheme.background,
                     child: custom.BottomAppBar(
                       currentPageIndex: _currentIndex,
                       onSelectedPage: selectedPage,

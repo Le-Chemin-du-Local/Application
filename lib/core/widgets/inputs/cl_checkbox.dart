@@ -21,7 +21,7 @@ class ClCheckBox extends StatelessWidget {
         Checkbox(
           value: value,
           onChanged: onChanged,
-          activeColor: Theme.of(context).primaryColor,
+          activeColor: Theme.of(context).colorScheme.primary,
         ),
         Flexible(child: Text(text, style: Theme.of(context).textTheme.caption)),
       ],

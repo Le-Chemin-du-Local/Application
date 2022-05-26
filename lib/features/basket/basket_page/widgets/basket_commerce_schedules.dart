@@ -126,9 +126,9 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
       child: Container(
         width: 32, height: 32,
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color:  Theme.of(context).colorScheme.surface,
           border: Border.all(
-            color: Theme.of(context).dividerColor
+            color: Theme.of(context).colorScheme.outline
           ),
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8.0),
@@ -155,9 +155,9 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
       child: Container(
         width: 32, height: 32,
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color:  Theme.of(context).colorScheme.surface,
           border: Border.all(
-            color: Theme.of(context).dividerColor
+            color: Theme.of(context).colorScheme.outline
           ),
           borderRadius: const BorderRadius.only(
             topRight: Radius.circular(8.0),

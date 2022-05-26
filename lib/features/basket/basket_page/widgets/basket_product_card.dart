@@ -37,7 +37,7 @@ class BasketProductCard extends StatelessWidget {
                   ),
                 ),
                 errorBuilder: (context, error, stackTrace) {
-                  return Icon(Icons.image, size: 92, color: Theme.of(context).dividerColor,);
+                  return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
                 },
               )
             ),
@@ -75,7 +75,7 @@ class BasketProductCard extends StatelessWidget {
                         child: RichText(
                           text: TextSpan(
                             style: Theme.of(context).textTheme.headline2!.copyWith(
-                              color: Theme.of(context).primaryColor
+                              color: Theme.of(context).colorScheme.primary
                             ),
                             text: "${product.product.price}€",
                             children: [

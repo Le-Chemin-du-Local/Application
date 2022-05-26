@@ -51,14 +51,14 @@ class ClDateTimePicker extends StatelessWidget {
             timeLabelText: "Heure",
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              fillColor: Theme.of(context).cardColor,
+              fillColor: Theme.of(context).colorScheme.surface,
               filled: true,
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).dividerColor),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               border: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).dividerColor),
+                borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
                 borderRadius: BorderRadius.circular(12.0),
               ),
             ),

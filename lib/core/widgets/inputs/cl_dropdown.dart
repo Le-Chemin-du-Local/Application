@@ -32,7 +32,7 @@ class ClDropdown<T> extends StatelessWidget {
         },
         ClCard(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-          borderColor: Theme.of(context).dividerColor,
+          borderColor: Theme.of(context).colorScheme.outline,
           child: DropdownButtonFormField<T>(
             value: currentValue,
             icon: const Icon(Icons.arrow_drop_down),

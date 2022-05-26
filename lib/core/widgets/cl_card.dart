@@ -33,7 +33,7 @@ class ClCard extends StatelessWidget {
       margin: margin,
       padding: padding,
       decoration: BoxDecoration(
-        color: backgroundColor ?? Theme.of(context).cardColor,
+        color: backgroundColor ?? Theme.of(context).colorScheme.surface,
         gradient: backgroundGradient,
         border: borderColor != null ? Border.all(
           color: borderColor!,

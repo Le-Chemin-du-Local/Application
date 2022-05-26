@@ -6,15 +6,29 @@ import 'package:google_fonts/google_fonts.dart';
 class ClTheme {
   static ThemeData theme(BuildContext context) {
     return ThemeData(
-      colorScheme: ColorScheme.fromSwatch(
-        primarySwatch: colorSwatch(Palette.colorPrimary.value),
-        accentColor: Palette.colorPrimary,
-        backgroundColor: Palette.colorScaffold,
-        cardColor: Palette.colorScaffold
-      ),
+      colorScheme: const ColorScheme.light(
+        primary: Palette.colorPrimary, // #FF5858 (RED)
+        onPrimary: Palette.colorWhite,
+        primaryContainer: Palette.colorSecondaryLight, // #FFC9C9 (RED LIGHT)
+        onPrimaryContainer: Palette.colorWhite,
 
-      scaffoldBackgroundColor: Palette.colorScaffold,
-      primaryColor: Palette.colorPrimary,
+        secondary: Palette.colorSecondary, // #FF8C60 (ORANGE)
+        onSecondary: Palette.colorWhite,
+        secondaryContainer: Palette.colorSecondaryLight, // #FFC9B2 (ORANGE LIGHT)
+        onSecondaryContainer: Palette.colorWhite,
+
+        error: Palette.colorError, // #E01C1C
+        onError: Palette.colorWhite,
+        errorContainer: Palette.colorBackgroundError, // #F8D7DA
+        onErrorContainer: Palette.colorTextError, // #721C24
+
+        surface: Palette.colorWhite,
+        onSurface: Palette.colorDark,
+        background: Palette.colorScaffold,
+        onBackground: Palette.colorDark,
+
+        outline: Palette.colorLightGrey,
+      ),
 
       appBarTheme: const AppBarTheme(
         backgroundColor: Palette.colorScaffold,

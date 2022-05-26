@@ -117,7 +117,7 @@ class _EmptyProductsPageState extends State<EmptyProductsPage> {
           child: Checkbox(
             value: true,
             onChanged: (value) {},
-            activeColor: Theme.of(context).primaryColor,
+            activeColor: Theme.of(context).colorScheme.primary,
           ),
         ),
         const SizedBox(width: 8,),

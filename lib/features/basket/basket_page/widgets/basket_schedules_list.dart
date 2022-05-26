@@ -70,7 +70,7 @@ class BasketSchedulesList extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: Theme.of(context).dividerColor
+            color: Theme.of(context).colorScheme.outline
           )
         )
       ),
@@ -95,10 +95,10 @@ class BasketSchedulesList extends StatelessWidget {
             onTap: () => onIndexChanged(i),
             child: Container(
               decoration: BoxDecoration(
-                color: i == currentDateIndex ? Theme.of(context).primaryColor : Theme.of(context).cardColor,
+                color: i == currentDateIndex ? Theme.of(context).colorScheme.primary :  Theme.of(context).colorScheme.surface,
                 border: Border(
                   bottom: BorderSide(
-                    color: Theme.of(context).dividerColor
+                    color: Theme.of(context).colorScheme.outline
                   )
                 ) 
               ),
@@ -123,7 +123,7 @@ class BasketSchedulesList extends StatelessWidget {
                           fontStyle: FontStyle.italic
                         )
                       : TextStyle(
-                          color: Theme.of(context).primaryColor,
+                          color: Theme.of(context).colorScheme.primary,
                           decoration: TextDecoration.underline
                         ),
                   ) 

@@ -33,7 +33,7 @@ class BottomAppBarItem extends StatelessWidget {
                 constraints: const BoxConstraints(),
                 icon: Icon(
                   icon,
-                  color: isCurrentItem ? Theme.of(context).primaryColor : Palette.colorDarkGrey,
+                  color: isCurrentItem ? Theme.of(context).colorScheme.primary : Palette.colorDarkGrey,
                 ),
                 onPressed: () {
                   if (pageItem != null) {
@@ -49,7 +49,7 @@ class BottomAppBarItem extends StatelessWidget {
               child: Text(
                 text,
                 style: TextStyle(
-                  color: isCurrentItem ? Theme.of(context).primaryColor : Palette.colorDarkGrey,
+                  color: isCurrentItem ? Theme.of(context).colorScheme.primary : Palette.colorDarkGrey,
                   fontSize: 12
                 ),
               ),

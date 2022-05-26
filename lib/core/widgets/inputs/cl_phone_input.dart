@@ -53,17 +53,17 @@ class ClPhoneInput extends StatelessWidget {
             decoration: InputDecoration(
               hintText: hintText,
               contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              fillColor: (readOnly && !invisibleReadOnly) ? Theme.of(context).disabledColor : Theme.of(context).cardColor,
+              fillColor: (readOnly && !invisibleReadOnly) ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.surface,
               filled: true,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Theme.of(context).dividerColor
+                  color: Theme.of(context).colorScheme.outline
                 ),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               border: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Theme.of(context).dividerColor
+                  color: Theme.of(context).colorScheme.outline
                 ),
                 borderRadius: BorderRadius.circular(12.0),
               ),

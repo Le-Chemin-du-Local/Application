@@ -57,11 +57,11 @@ class _PickerCategoryButtonState extends State<PickerCategoryButton> {
         width: width,
         height: height,
         backgroundGradient: _isSelected ? Palette.gradientPrimary : null,
-        backgroundColor: _isSelected ? null : Theme.of(context).cardColor,
+        backgroundColor: _isSelected ? null :  Theme.of(context).colorScheme.surface,
         child: Container(
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+            color:  Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(8)
           ),
           child: Column(

@@ -43,7 +43,7 @@ class _ClImagePickerBigState extends State<ClImagePickerBig> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Theme.of(context).dividerColor,
+      color: Theme.of(context).colorScheme.outline,
       height: 180,
       child: Stack(
         children: [

@@ -80,7 +80,7 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxHeight: 300),
           child: CreditCardWidget(
-            cardBgColor: Theme.of(context).primaryColor,
+            cardBgColor: Theme.of(context).colorScheme.primary,
             // glassmorphismConfig: Glassmorphism.defaultConfig(),
             cardNumber: _cardNumber,
             expiryDate: _expiryDate, 
@@ -104,7 +104,7 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
               expiryDate: _expiryDate,
               cvvCode: _cvvCode,
               cardHolderName: _holderName,
-              themeColor: Theme.of(context).primaryColor,
+              themeColor: Theme.of(context).colorScheme.primary,
               cardNumberDecoration: _fieldDecoration(label: "Numéro de carte", hint: "XXXX XXXX XXXX XXXX"),
               expiryDateDecoration: _fieldDecoration(label: "Date d'expiration", hint: "XX/XX"),
               cvvCodeDecoration: _fieldDecoration(label: "CVV", hint: "XXX"),
@@ -146,19 +146,19 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
   }) {
     return InputDecoration(
       contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      fillColor: Theme.of(context).cardColor,
+      fillColor:  Theme.of(context).colorScheme.surface,
       filled: true,
       labelText: label,
       hintText: hint,
       enabledBorder: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Theme.of(context).dividerColor
+          color: Theme.of(context).colorScheme.outline
         ),
         borderRadius: BorderRadius.circular(12.0),
       ),
       border: OutlineInputBorder(
         borderSide: BorderSide(
-          color: Theme.of(context).dividerColor
+          color: Theme.of(context).colorScheme.outline
         ),
         borderRadius: BorderRadius.circular(12.0),
       ),

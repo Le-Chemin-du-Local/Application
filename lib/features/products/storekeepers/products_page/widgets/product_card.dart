@@ -95,7 +95,7 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             errorBuilder: (context, error, stackTrace) {
-              return Icon(Icons.image, size: 92, color: Theme.of(context).dividerColor,);
+              return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
             },
           )
         ),
@@ -105,7 +105,7 @@ class ProductCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
             decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12.0),
                 bottomRight: Radius.circular(12.0)

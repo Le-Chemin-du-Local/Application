@@ -64,7 +64,7 @@ class PageHeaderImage extends StatelessWidget {
                         ),
                       ),
                       errorBuilder: (context, error, stackTrace) {
-                        return Icon(Icons.image, size: 92, color: Theme.of(context).dividerColor,);
+                        return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
                       },
                     )
                   : Image.memory(
@@ -125,7 +125,7 @@ class PageHeaderImage extends StatelessWidget {
                   right: 16,
                   child: CircleAvatar(
                     radius: 24,
-                    backgroundColor: Theme.of(context).primaryColor,
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                     child: IconButton(
                       icon: const Icon(
                         Icons.edit,

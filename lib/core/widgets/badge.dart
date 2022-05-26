@@ -15,7 +15,7 @@ class Badge extends StatelessWidget {
       style: const TextStyle(color: Palette.colorWhite),
       child: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor,
+          color: Theme.of(context).colorScheme.secondary,
           borderRadius: BorderRadius.circular(20)
         ),
         padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),

@@ -28,7 +28,7 @@ class DialogHeader extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.close),
             iconSize: 22,
-            color: Theme.of(context).textTheme.bodyText1!.color,
+            color: Theme.of(context).colorScheme.onSurface,
             onPressed: () {
               if (onClose != null) {
                 onClose!();

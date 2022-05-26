@@ -40,7 +40,7 @@ class PagePanierCard extends StatelessWidget {
                       ),
                     ),
                     errorBuilder: (context, error, stackTrace) {
-                      return Icon(Icons.image, size: 92, color: Theme.of(context).dividerColor,);
+                      return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
                     },
                   ),
                 ),

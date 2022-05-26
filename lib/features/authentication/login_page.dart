@@ -77,7 +77,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           topLeft: Radius.circular(20),
                           topRight: Radius.circular(20),
                         ),
-                        color: Theme.of(context).scaffoldBackgroundColor
+                        color: Theme.of(context).colorScheme.background
                       ),
                       child: Mutation<dynamic>(
                         options: _loginMutationOptions(ref),
