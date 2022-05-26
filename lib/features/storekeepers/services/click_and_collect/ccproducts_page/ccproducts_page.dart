@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
@@ -127,9 +126,9 @@ class _CCProductsPageState extends State<CCProductsPage> {
               },
             ),
           ),
-          floatingActionButton: ClFloatingButton(
-            icon: Icons.save,
+          floatingActionButton: FloatingActionButton(
             onPressed: () => _onSave(runMutation),
+            child: const Icon(Icons.save),
           ),
         );
       }

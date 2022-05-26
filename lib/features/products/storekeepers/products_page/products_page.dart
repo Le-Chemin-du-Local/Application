@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
@@ -102,9 +101,9 @@ class ProductsPage extends StatelessWidget {
             )
         ]
       ),
-      floatingActionButton: ClFloatingButton(
+      floatingActionButton: FloatingActionButton(
         onPressed: () => _openProductEditPage(context, refetch: refetch),
-        icon: Icons.add,
+        child: const Icon(Icons.add),
       ),
     );
   }

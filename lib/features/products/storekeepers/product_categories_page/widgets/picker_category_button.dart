@@ -1,8 +1,5 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/core/widgets/gradient_icon.dart';
-import 'package:chemin_du_local/core/widgets/gradient_text.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 class PickerCategoryButton extends StatefulWidget {
@@ -44,6 +41,10 @@ class _PickerCategoryButtonState extends State<PickerCategoryButton> {
     const double width = 205;
     const double height = 205;
 
+    final Color textColor = _isSelected 
+      ? Theme.of(context).colorScheme.secondary
+      : Theme.of(context).colorScheme.onSurface;
+
     return InkWell(
       onTap: () {
         setState(() {
@@ -56,8 +57,8 @@ class _PickerCategoryButtonState extends State<PickerCategoryButton> {
         padding: const EdgeInsets.all(4),
         width: width,
         height: height,
-        backgroundGradient: _isSelected ? Palette.gradientPrimary : null,
-        backgroundColor: _isSelected ? null :  Theme.of(context).colorScheme.surface,
+        borderColor: _isSelected ? Theme.of(context).colorScheme.secondary : Theme.of(context).colorScheme.surface,
+        backgroundColor: Theme.of(context).colorScheme.surface,
         child: Container(
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
@@ -69,18 +70,16 @@ class _PickerCategoryButtonState extends State<PickerCategoryButton> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              if (_isSelected) ...{
-                GradientIcon(kCategorieLogo[widget.name], gradient: Palette.gradientPrimary, size: 102,),
-                GradientText(
-                  widget.name, 
-                  textAlign: TextAlign.center,
-                  gradient: Palette.gradientPrimary,
-                )
-              }
-              else ...{
-                Icon(kCategorieLogo[widget.name], size: 102,),
-                Text(widget.name, textAlign: TextAlign.center,)
-              }
+              Icon(
+                kCategorieLogo[widget.name], 
+                color: textColor,
+                size: 102,
+              ),
+              Text(
+                widget.name,
+                style: TextStyle(color: textColor),
+                textAlign: TextAlign.center,
+              )
             ],
           ),
         ),

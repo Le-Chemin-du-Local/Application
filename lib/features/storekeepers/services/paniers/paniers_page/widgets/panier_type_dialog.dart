@@ -21,7 +21,7 @@ class PanierTypeDialog extends StatelessWidget {
                 onTap: () => Navigator.of(context).pop(PanierType.temporary),
                 child: Container(
                   decoration: BoxDecoration(
-                    gradient: Palette.gradientPrimary,
+                    color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(12)
                   ),
                   padding: const EdgeInsets.all(40),
@@ -51,7 +51,7 @@ class PanierTypeDialog extends StatelessWidget {
                 onTap: () => Navigator.of(context).pop(PanierType.permanent),
                 child: Container(
                   decoration: BoxDecoration(
-                    gradient: Palette.gradientPrimary,
+                    color: Theme.of(context).colorScheme.primary,
                     borderRadius: BorderRadius.circular(12)
                   ),
                   padding: const EdgeInsets.all(40),

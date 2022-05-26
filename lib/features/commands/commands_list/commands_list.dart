@@ -5,7 +5,6 @@ import 'package:chemin_du_local/features/commands/command_details_page/command_d
 import 'package:chemin_du_local/features/commands/commands_graphql.dart';
 import 'package:chemin_du_local/features/commands/commands_list/widgets/command_card.dart';
 import 'package:chemin_du_local/features/commands/models/command/command.dart';
-import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';

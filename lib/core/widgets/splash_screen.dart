@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -7,8 +6,8 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        gradient: Palette.gradientPrimary
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondary
       ),
       child: Center(
         child: ConstrainedBox(

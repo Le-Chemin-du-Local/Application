@@ -19,7 +19,7 @@ class ProductCategoryCard extends StatelessWidget {
     return InkWell(
       onTap: onClick,
       child: ClCard(
-        backgroundGradient: Palette.gradientPrimary,
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,

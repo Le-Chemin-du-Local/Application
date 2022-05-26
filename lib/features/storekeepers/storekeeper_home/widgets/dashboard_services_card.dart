@@ -21,7 +21,7 @@ class DashboardServicesCard extends StatelessWidget {
             height: 228,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8.0),
-              gradient: Palette.gradientPrimary,
+              color: Theme.of(context).colorScheme.primary,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

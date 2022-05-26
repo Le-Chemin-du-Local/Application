@@ -4,7 +4,6 @@ import 'package:chemin_du_local/features/authentication/app_user_controller.dart
 import 'package:chemin_du_local/features/authentication/authentication_graphql.dart';
 import 'package:chemin_du_local/features/authentication/widgets/login_form.dart';
 import 'package:chemin_du_local/features/authentication/widgets/registration_form.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -49,8 +48,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Container(
-        decoration: const BoxDecoration(
-          gradient: Palette.gradientPrimary
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.secondary,
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {

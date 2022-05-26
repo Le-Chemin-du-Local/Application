@@ -41,19 +41,19 @@ class Palette {
 
   static const Color colorCommandReady = Color(0xffd9f8d9);
 
-  static const LinearGradient gradientPrimary = LinearGradient(
-    colors: [
-      Color(0xffe60669),
-      Color(0xffff8c60)
-    ],
-    stops: [
-      0.0,
-      0.61,
-    ],
-    begin: Alignment(-1.0, 0.0),
-    end: Alignment(1.0, 0.0),
-    transform: GradientRotation(math.pi / 3.7)
-  );
+  // static const LinearGradient gradientPrimary = LinearGradient(
+  //   colors: [
+  //     Color(0xffe60669),
+  //     Color(0xffff8c60)
+  //   ],
+  //   stops: [
+  //     0.0,
+  //     0.61,
+  //   ],
+  //   begin: Alignment(-1.0, 0.0),
+  //   end: Alignment(1.0, 0.0),
+  //   transform: GradientRotation(math.pi / 3.7)
+  // );
 
   static const LinearGradient gradientBlackCover = LinearGradient(
     colors: [
@@ -70,16 +70,16 @@ class Palette {
     end: Alignment.bottomCenter
   );
 
-  static LinearGradient colorToGradient(Color color) {
-    return LinearGradient(
-      colors: [
-        color,
-        color
-      ],
-      stops: const [
-        0,
-        1
-      ]
-    );
-  }
+  // static LinearGradient colorToGradient(Color color) {
+  //   return LinearGradient(
+  //     colors: [
+  //       color,
+  //       color
+  //     ],
+  //     stops: const [
+  //       0,
+  //       1
+  //     ]
+  //   );
+  // }
 }

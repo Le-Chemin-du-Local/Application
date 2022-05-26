@@ -6,10 +6,11 @@ class CommerceInfoCard extends StatelessWidget {
   const CommerceInfoCard({
     Key? key, 
     required this.commerce
-  }) : super(key: key);@override
-
+  }) : super(key: key);
+  
   final Commerce commerce;
   
+  @override
   Widget build(BuildContext context) {
     return ClCard(
       child: Column(

@@ -1,9 +1,7 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/core/widgets/gradient_icon.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/core/widgets/cl_map.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:latlng/latlng.dart';
@@ -221,45 +219,45 @@ class PageAddressCard extends StatelessWidget {
         ),
         const SizedBox(height: 20,),
 
-        Flexible(child: _buildSocialNetworksIcons(),),
+        Flexible(child: _buildSocialNetworksIcons(context),),
       ],
     );
   }
 
-  Widget _buildSocialNetworksIcons() {
+  Widget _buildSocialNetworksIcons(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // Logo Facebook
         if (facebookTextController.text.isNotEmpty)
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: GradientIcon(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Icon(
               FontAwesome.facebook_f,
               size: 32,
-              gradient: Palette.gradientPrimary,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
 
         // Logo Twitter
         if (twitterTextController.text.isNotEmpty)
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: GradientIcon(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Icon(
               FontAwesome.twitter,
               size: 32,
-              gradient: Palette.gradientPrimary
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
 
         // Logo Instagram
         if (instagramTextController.text.isNotEmpty) 
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8),
-            child: GradientIcon(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Icon(
               FontAwesome.instagram,
               size: 32,
-              gradient: Palette.gradientPrimary
+              color: Theme.of(context).colorScheme.secondary,
             ),
           )
       ],

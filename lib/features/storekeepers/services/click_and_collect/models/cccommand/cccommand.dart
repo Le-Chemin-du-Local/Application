@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/models/ccproduct/ccproduct.dart';
-import 'package:chemin_du_local/features/user/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

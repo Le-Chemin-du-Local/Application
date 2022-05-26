@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/cl_file.dart';
-import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
@@ -188,9 +187,9 @@ class _StoreKeeperPageState extends State<StoreKeeperPage> {
             // backgroundColor: Colors.transparent,
             actions: [
               if (widget.canEdit)
-                ClFloatingButton(
+                FloatingActionButton(
                   onPressed: () => _onEditSavePressed(commerce?.id, runMutation),
-                  icon: _isEditing ? Icons.save : Icons.edit,
+                  child: Icon(_isEditing ? Icons.save : Icons.edit,),
               ) 
             ],
           ),

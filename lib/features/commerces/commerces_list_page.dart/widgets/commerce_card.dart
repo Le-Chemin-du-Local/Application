@@ -28,7 +28,7 @@ class CommerceCard extends StatelessWidget {
               flex: 6,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12.0),
-                child: _buildImageWithName(),              )
+                child: _buildImageWithName(context),              )
             ),
             const SizedBox(height: 12,),
 
@@ -79,7 +79,7 @@ class CommerceCard extends StatelessWidget {
     );
   }
 
-  Widget _buildImageWithName() {
+  Widget _buildImageWithName(BuildContext context) {
     return Stack(
       children: [
         Positioned.fill(
@@ -103,9 +103,9 @@ class CommerceCard extends StatelessWidget {
           right: 0,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 8.0),
-            decoration: const BoxDecoration(
-              gradient: Palette.gradientPrimary,
-              borderRadius: BorderRadius.only(
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12.0),
                 bottomRight: Radius.circular(12.0)
               )

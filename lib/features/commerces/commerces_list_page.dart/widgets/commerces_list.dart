@@ -1,12 +1,10 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_map.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/core/widgets/gradient_icon.dart';
 import 'package:chemin_du_local/features/commerces/commerces_graphql.dart';
 import 'package:chemin_du_local/features/commerces/commerces_list_page.dart/widgets/commerce_card.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:latlng/latlng.dart';
@@ -115,10 +113,10 @@ class CommercesList extends StatelessWidget {
                       Flexible(
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            GradientIcon(CLIcons.mapage, gradient: Palette.gradientPrimary),
-                            SizedBox(width: 4,),
-                            Text("Découvrez nos commerces de proximité")
+                          children: [
+                            Icon(CLIcons.mapage, color: Theme.of(context).colorScheme.primary),
+                            const SizedBox(width: 4,),
+                            const Text("Découvrez nos commerces de proximité")
                           ],
                         ),
                       ),

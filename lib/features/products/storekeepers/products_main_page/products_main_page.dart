@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/storekeepers/empty_products_page/empty_products_page.dart';
@@ -122,9 +121,9 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
                       body: const Center(
                         child: Text("Veuillez selectionner une catégorie"),
                       ),
-                      floatingActionButton: ClFloatingButton(
+                      floatingActionButton: FloatingActionButton(
                         onPressed: () => _openProductCreationPage(refetch),
-                        icon: Icons.add,
+                        child: const Icon(Icons.add)
                       ),
                     )
                   )

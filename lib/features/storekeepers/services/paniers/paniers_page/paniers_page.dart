@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/models/panier/panier.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier_edit_page/panier_edit_page.dart';
@@ -51,9 +50,9 @@ class _PaniersPageState extends State<PaniersPage> {
           ),
         ),
       ),
-      floatingActionButton: ClFloatingButton(
-        icon: Icons.add,
+      floatingActionButton: FloatingActionButton(
         onPressed: () => _onAddNewPanier(context),
+        child: const Icon(Icons.add),
       )
     );
   }

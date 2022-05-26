@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/core/widgets/cl_floating_button.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/product_edit_page.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_categories_page/widgets/product_categorie_card.dart';
@@ -41,9 +40,9 @@ class ProductCategoriesPage extends StatelessWidget {
             )
         ],
       ),
-      floatingActionButton: !showAddButton ? null : ClFloatingButton(
+      floatingActionButton: !showAddButton ? null : FloatingActionButton(
         onPressed: () => _openProductCreationPage(context),
-        icon: Icons.add,
+        child: const Icon(Icons.add),
       ),
     );
   }

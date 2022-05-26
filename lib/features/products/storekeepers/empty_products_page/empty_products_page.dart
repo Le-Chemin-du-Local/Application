@@ -5,7 +5,6 @@ import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/products/product_excel_tools.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
