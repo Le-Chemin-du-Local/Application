@@ -23,7 +23,7 @@ class HeaderImage extends StatelessWidget {
 
     return SliverAppBar(
       pinned: false,
-      expandedHeight: height,
+      expandedHeight: height - 90, // On doit enlever 90 pour compenser l'appbar
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           color: Theme.of(context).disabledColor,
