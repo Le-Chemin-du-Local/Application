@@ -4,8 +4,8 @@ import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/models/panier/panier.dart';
 import 'package:flutter/material.dart';
 
-class PagePanierCard extends StatelessWidget {
-  const PagePanierCard({
+class PanierCard extends StatelessWidget {
+  const PanierCard({
     Key? key,
     required this.panier,
     required this.onOpen,

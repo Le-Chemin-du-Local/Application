@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
@@ -6,13 +7,13 @@ import 'package:chemin_du_local/features/basket/riverpod/basket_controller.dart'
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/models/panier/panier.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_graphql.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/page_panier_card.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/panier_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class PagePaniersList extends ConsumerWidget {
-  const PagePaniersList({
+class PaniersList extends ConsumerWidget {
+  const PaniersList({
     Key? key,
     required this.commerce,
   }) : super(key: key);
@@ -36,9 +37,12 @@ class PagePaniersList extends ConsumerWidget {
       children: [
         // Headline
         const Flexible(
-          child: Text(
-            "Sinon laissez vous tenter par nos paniers", 
-            style: TextStyle(fontWeight: FontWeight.bold),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+            child: Text(
+              "Sinon laissez vous tenter par nos paniers", 
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
           ),
         ),
         const SizedBox(height: 20,),
@@ -100,6 +104,8 @@ class PagePaniersList extends ConsumerWidget {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children: [
+              const SizedBox(width: ScreenHelper.horizontalPadding,),
+              // S'il n'y a pas de paniers, on met un placeholder
               if (paniers.isEmpty) 
                 for (int i = 0; i < 4; ++i)
                   ConstrainedBox(
@@ -111,13 +117,14 @@ class PagePaniersList extends ConsumerWidget {
                       ),
                     ),
                   )
+              // Sinon, on met la liste des paniers
               else 
                 for (final panier in paniers) 
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 720),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 12),
-                      child: PagePanierCard(
+                      child: PanierCard(
                         panier: panier.copyWith(
                           quantity: panier.quantity - _deductibleQuantity(basket, panier)
                         ),

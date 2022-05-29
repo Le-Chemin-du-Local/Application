@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
@@ -10,8 +11,8 @@ import 'package:chemin_du_local/features/products/storekeepers/products_page/wid
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PageProductsList extends ConsumerWidget {
-  const PageProductsList({
+class ProductsList extends ConsumerWidget {
+  const ProductsList({
     Key? key,
     required this.enableButton,
     required this.products,
@@ -58,6 +59,9 @@ class PageProductsList extends ConsumerWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   children: [
+                    const SizedBox(width: ScreenHelper.horizontalPadding,),
+
+                    // Si la liste est vide, on met un placeholder
                     if (products.isEmpty) 
                       for (int i = 0; i < 4; ++i)
                         ConstrainedBox(
@@ -69,6 +73,7 @@ class PageProductsList extends ConsumerWidget {
                             ),
                           ),
                         )
+                    // Sinon on met la liste des produits
                     else 
                       for (final product in products) 
                         ConstrainedBox(

@@ -10,8 +10,8 @@ import 'package:chemin_du_local/features/products/storekeepers/products_page/wid
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class PageProductsListBig extends ConsumerWidget {
- const PageProductsListBig({
+class ProductsGrid extends ConsumerWidget {
+  const ProductsGrid({
     Key? key,
     required this.enableButton,
     required this.products,
@@ -25,6 +25,7 @@ class PageProductsListBig extends ConsumerWidget {
 
   final List<Product> products;
   final List<String> availableForClickAndCollect;
+
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,9 +45,11 @@ class PageProductsListBig extends ConsumerWidget {
     final BasketCommerce? basketCommerce = _commerceForID(basket, commerce?.id ?? "");
 
     final List<Widget> content = [
+      // Si il n'y a pas de produit, on affiche un placeholder
       if (products.isEmpty) 
         for (int i = 0; i < 4; ++i) 
           ClCard(child: Container())
+      // Sinon on met les vrai produits
       else 
         for (final product in products) 
           ConstrainedBox(
