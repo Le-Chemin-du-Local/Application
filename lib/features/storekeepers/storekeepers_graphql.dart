@@ -75,39 +75,10 @@ query GetStoreKeeperCommerce(
 ''';
 
 const String mutUpdateStorekeerCommercePage = r'''
-mutation updateCommerce(
-  $id: ID!,
-  $storekeeperWord: String,
-  $description: String,
-  $address: String,
-  $latitude: Float,
-  $longitude: Float,
-  $phone: String,
-  $email: String,
-  $facebook: String,
-  $twitter: String,
-  $instagram: String,
-  $businessHours: ChangesBusinessHours,
-  $image: Upload,
-  $profilePicture: Upload
-) {
+mutation updateCommerce($id: ID!, $changes: ChangesCommerce!) {
   updateCommerce(
     id: $id,
-    changes: {
-      storekeeperWord: $storekeeperWord,
-      description: $description,
-      address: $address,
-      latitude: $latitude,
-      longitude: $longitude,
-      phone: $phone,
-      email: $email,
-      facebook: $facebook,
-      twitter: $twitter,
-      instagram: $instagram,
-      businessHours: $businessHours,
-      image: $image,
-      profilePicture: $profilePicture
-    }
+    changes: $changes,
   ) {
     id
     name

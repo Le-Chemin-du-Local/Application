@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -46,7 +46,7 @@ dependencies:
   graphql_flutter: ^5.0.1
   http: ^0.13.4
   intl: ^0.17.0
-  json_annotation: ^4.4.0
+  json_annotation: ^4.5.0
   latlng: ^0.1.0
   map: ^1.0.0
   shared_preferences: ^2.0.13
@@ -60,14 +60,12 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   freezed: ^2.0.3+1
-
   json_serializable: ^6.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

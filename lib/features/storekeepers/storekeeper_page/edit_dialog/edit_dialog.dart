@@ -1,12 +1,17 @@
+import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/dialog/closable_dialog.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/edit_dialog/widgets/schedule_field_controller.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/edit_dialog/widgets/schedule_form.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart';
+import 'package:latlng/latlng.dart';
 
 class EditDialog extends StatefulWidget {
   const EditDialog({
@@ -21,6 +26,8 @@ class EditDialog extends StatefulWidget {
 }
 
 class _EditDialogState extends State<EditDialog> {
+  String _errorMessage = "";
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController _storekeeperWordController = TextEditingController();
@@ -42,6 +49,20 @@ class _EditDialogState extends State<EditDialog> {
   final ScheduleFieldController _fridayController = ScheduleFieldController();
   final ScheduleFieldController _saturdayController = ScheduleFieldController();
   final ScheduleFieldController _sundayController = ScheduleFieldController();
+
+  MutationOptions _updateCommerceOptions() {
+    return MutationOptions<dynamic>(
+      document: gql(mutUpdateStorekeerCommercePage),
+      onError: (error) {
+        _errorMessage = "Nous n'avons pas pu mettre à jour votre commerce. Veuillez vérifier votre connexion internet et recommencer.";
+      },
+      onCompleted: (dynamic data) {
+        if (data != null) {
+          Navigator.of(context).pop(true);
+        }
+      }
+    );
+  }
 
   void _initialize() {
     if (widget.commerce != null) {
@@ -82,154 +103,205 @@ class _EditDialogState extends State<EditDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return ClosableDialog(
-      title: "Ma fiche commerce",
-      child: SingleChildScrollView(
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Le petit mot du commerçant
-              ClTextInput(
-                controller: _storekeeperWordController,
-                labelText: "Petit mot du commerçant",
-                hintText: "Ecrivez un petit mot concernant votre commerce",
-                validator: (value) {
-                  if (value.isEmpty) return "Vous devez rentrer un mot";
-                  return null;
-                },
-              ),
-              const SizedBox(height: 22,),
+    return Mutation<dynamic>(
+      options: _updateCommerceOptions(),
+      builder: (runMutation, mutationResult) {
+        return ClosableDialog(
+          title: "Ma fiche commerce",
+          child: Builder(
+            builder: (context) {
+              if (mutationResult?.isLoading ?? false) {
+                return const Center(child: CircularProgressIndicator(),);
+              }
 
-              // La description du commerce
-              ClTextInput(
-                controller: _descriptionController,
-                labelText: "Description du commerce",
-                hintText: "Entrez une description de votre commerce",
-                inputType: TextInputType.multiline,
-                maxLines: 5,
-                validator: (value) {
-                  if (value.isEmpty) return "Vous devez rentrer une description";
-                  return null;
-                },
-              ),
-              const SizedBox(height: 22,),
+              return SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (_errorMessage.isNotEmpty) ...{
+                        ClStatusMessage(message: _errorMessage,),
+                        const SizedBox(height: 22,),
+                      },
 
-              // Les horaires d'ouverture
-              Text("Horaires d'ouverture du commerce", style: Theme.of(context).textTheme.caption,),
-              ScheduleForm(
-                mondayController: _mondayController,
-                tuesdayController: _tuesdayController,
-                wednesdayController: _wednesdayController,
-                thursdayController: _thursdayController,
-                fridayController: _fridayController,
-                saturdayController: _saturdayController,
-                sundayController: _sundayController,
-              ),
-              const SizedBox(height: 22),
+                      // Le petit mot du commerçant
+                      ClTextInput(
+                        controller: _storekeeperWordController,
+                        labelText: "Petit mot du commerçant",
+                        hintText: "Ecrivez un petit mot concernant votre commerce",
+                        validator: (value) {
+                          if (value.isEmpty) return "Vous devez rentrer un mot";
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 22,),
 
-              // Le numéro de téléphone
-              ClTextInput(
-                controller: _phoneController,
-                labelText: "Numéro de téléphone",
-                hintText: "Rentrer un numéro de téléphone",
-                inputType: TextInputType.phone,
-                validator: (value) {
-                  if (value.isEmpty) return "Vous devez rentrer un numéro de téléphone";
+                      // La description du commerce
+                      ClTextInput(
+                        controller: _descriptionController,
+                        labelText: "Description du commerce",
+                        hintText: "Entrez une description de votre commerce",
+                        inputType: TextInputType.multiline,
+                        maxLines: 5,
+                        validator: (value) {
+                          if (value.isEmpty) return "Vous devez rentrer une description";
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 22,),
 
-                  return null;
-                },
-              ),
-              const SizedBox(height: 22.0,),
+                      // Les horaires d'ouverture
+                      Text("Horaires d'ouverture du commerce", style: Theme.of(context).textTheme.caption,),
+                      ScheduleForm(
+                        mondayController: _mondayController,
+                        tuesdayController: _tuesdayController,
+                        wednesdayController: _wednesdayController,
+                        thursdayController: _thursdayController,
+                        fridayController: _fridayController,
+                        saturdayController: _saturdayController,
+                        sundayController: _sundayController,
+                      ),
+                      const SizedBox(height: 22),
 
-              // L'email
-              ClTextInput(
-                controller: _emailController,
-                labelText: "Email",
-                hintText: "Rentrer un email",
-                inputType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value.isEmpty) return "Vous devez rentrer une adresse mail";
+                      // Le numéro de téléphone
+                      ClTextInput(
+                        controller: _phoneController,
+                        labelText: "Numéro de téléphone",
+                        hintText: "Rentrer un numéro de téléphone",
+                        inputType: TextInputType.phone,
+                        validator: (value) {
+                          if (value.isEmpty) return "Vous devez rentrer un numéro de téléphone";
 
-                  return null;
-                },
-              ),
-              const SizedBox(height: 22.0,),
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 22.0,),
 
-              // L'adresse
-              Flexible(
-                child: ClAddressInput(addressTextController: _addressController),
-              ),
-              const SizedBox(height: 22.0,),  
+                      // L'email
+                      ClTextInput(
+                        controller: _emailController,
+                        labelText: "Email",
+                        hintText: "Rentrer un email",
+                        inputType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value.isEmpty) return "Vous devez rentrer une adresse mail";
 
-              // Facebook
-              ClTextInput(
-                controller: _facebookController,
-                labelText: "Facebook",
-                hintText: "https://facebook.com/monprofile",
-                validator: (value) {
-                  if (value.isNotEmpty) {
-                    if (!value.startsWith("https://facebook.com/")) {
-                      return "Vous devez rentrer une adresse commençant par https://facebook.com/";
-                    }
-                  }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 22.0,),
 
-                  return null;
-                },
-              ),
-              const SizedBox(height: 22.0,),
+                      // L'adresse
+                      Flexible(
+                        child: ClAddressInput(addressTextController: _addressController),
+                      ),
+                      const SizedBox(height: 22.0,),  
 
-              // Twitter
-              ClTextInput(
-                controller: _twitterController,
-                labelText: "Twitter",
-                hintText: "https://twitter.com/monprofile",
-                validator: (value) {
-                  if (value.isNotEmpty) {
-                    if (!value.startsWith("https://twitter.com/")) {
-                      return "Vous devez rentrer une adresse commençant par https://twitter.com/";
-                    }
-                  }
+                      // Facebook
+                      ClTextInput(
+                        controller: _facebookController,
+                        labelText: "Facebook",
+                        hintText: "https://facebook.com/monprofile",
+                        validator: (value) {
+                          if (value.isNotEmpty) {
+                            if (!value.startsWith("https://facebook.com/")) {
+                              return "Vous devez rentrer une adresse commençant par https://facebook.com/";
+                            }
+                          }
 
-                  return null;
-                },
-              ),
-              const SizedBox(height: 22.0,),
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 22.0,),
 
-              // Instagram
-              ClTextInput(
-                controller: _instagramController,
-                labelText: "Instagram",
-                hintText: "https://instagram.com/monprofile",
-                validator: (value) {
-                  if (value.isNotEmpty) {
-                    if (!value.startsWith("https://instagram.com/")) {
-                      return "Vous devez rentrer une adresse commençant par https://instagram.com/";
-                    }
-                  }
+                      // Twitter
+                      ClTextInput(
+                        controller: _twitterController,
+                        labelText: "Twitter",
+                        hintText: "https://twitter.com/monprofile",
+                        validator: (value) {
+                          if (value.isNotEmpty) {
+                            if (!value.startsWith("https://twitter.com/")) {
+                              return "Vous devez rentrer une adresse commençant par https://twitter.com/";
+                            }
+                          }
 
-                  return null;
-                },
-              ),
-              const SizedBox(height: 22.0,),
-            ],
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 22.0,),
+
+                      // Instagram
+                      ClTextInput(
+                        controller: _instagramController,
+                        labelText: "Instagram",
+                        hintText: "https://instagram.com/monprofile",
+                        validator: (value) {
+                          if (value.isNotEmpty) {
+                            if (!value.startsWith("https://instagram.com/")) {
+                              return "Vous devez rentrer une adresse commençant par https://instagram.com/";
+                            }
+                          }
+
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 22.0,),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
-        ),
-      ),
-      actions: [
-        const SizedBox(height: 10,),
-        // Le bouton de validation
-        ElevatedButton(
-          onPressed: _validateForm,
-          child: const Text("Sauvegarder"),
-        )
-      ],
+          actions: [
+            const SizedBox(height: 10,),
+            // Le bouton de validation
+            ElevatedButton(
+              onPressed: () => _validateForm(runMutation),
+              child: const Text("Sauvegarder"),
+            )
+          ],
+        );
+      }
     );
   }
 
-  void _validateForm() {
-    if (!_formKey.currentState!.validate()) return;
+  Future _validateForm(RunMutation? runMutation) async {
+    if (!_formKey.currentState!.validate() || runMutation == null) return;
+
+    LatLng? commerceLatLgn = await PlaceAPIProvider.instance.latLgnForAddress(_addressController.text);
+
+    if (commerceLatLgn == null) {
+      setState(() {
+        _errorMessage = "Nous n'arrivons pas à récupérer les coordonnées du commerce. Verifiez l'adresse.";
+      });
+    }
+
+    runMutation(<String, dynamic>{
+      "id": widget.commerce?.id,
+      "changes": <String, dynamic>{
+        "storekeeperWord": _storekeeperWordController.text,
+        "description": _descriptionController.text,
+        "address": _addressController.text,
+        "latitude": commerceLatLgn!.latitude,
+        "longitude": commerceLatLgn.longitude,
+        "phone": _phoneController.text,
+        "email": _emailController.text,
+        "facebook": _facebookController.text,
+        "twitter": _twitterController.text,
+        "instagram": _instagramController.text,
+        "businessHours": {
+          "monday": _mondayController.schedules,
+          "tuesday": _tuesdayController.schedules,
+          "wednesday": _wednesdayController.schedules,
+          "thursday": _thursdayController.schedules,
+          "friday": _fridayController.schedules,
+          "saturday": _saturdayController.schedules,
+          "sunday": _sundayController.schedules,
+        },
+      }
+    });
   }
 }
