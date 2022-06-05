@@ -1,16 +1,15 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/dialog/closable_dialog.dart';
-import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/edit_dialog/widgets/schedule_field_controller.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/edit_dialog/widgets/schedule_form.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
+import 'package:chemin_du_local/place/place_service.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
+import 'package:chemin_du_local/place/widgets/address_controller.dart';
+import 'package:chemin_du_local/place/widgets/address_form.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
-import 'package:http/http.dart';
 import 'package:latlng/latlng.dart';
 
 class EditDialog extends StatefulWidget {
@@ -33,7 +32,7 @@ class _EditDialogState extends State<EditDialog> {
   final TextEditingController _storekeeperWordController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
-  final TextEditingController _addressController = TextEditingController();
+  final AddressController _addressController = AddressController();
 
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
@@ -69,7 +68,7 @@ class _EditDialogState extends State<EditDialog> {
       _storekeeperWordController.text = widget.commerce!.storekeeperWord ?? "";
       _descriptionController.text = widget.commerce!.description ?? "";
 
-      _addressController.text = widget.commerce!.address ?? "";
+      // _addressController.text = widget.commerce!.address ?? "";
 
       _phoneController.text = widget.commerce!.phone ?? "";
       _emailController.text = widget.commerce!.email ?? "";
@@ -195,7 +194,9 @@ class _EditDialogState extends State<EditDialog> {
 
                       // L'adresse
                       Flexible(
-                        child: ClAddressInput(addressTextController: _addressController),
+                        child: AddressForm(
+                          addressController: _addressController,
+                        ),
                       ),
                       const SizedBox(height: 22.0,),  
 
@@ -271,7 +272,7 @@ class _EditDialogState extends State<EditDialog> {
   Future _validateForm(RunMutation? runMutation) async {
     if (!_formKey.currentState!.validate() || runMutation == null) return;
 
-    LatLng? commerceLatLgn = await PlaceAPIProvider.instance.latLgnForAddress(_addressController.text);
+    LatLng? commerceLatLgn = await PlaceAPIProvider.instance.latLgnForAddress(_addressController.address.detailled);
 
     if (commerceLatLgn == null) {
       setState(() {
@@ -284,7 +285,7 @@ class _EditDialogState extends State<EditDialog> {
       "changes": <String, dynamic>{
         "storekeeperWord": _storekeeperWordController.text,
         "description": _descriptionController.text,
-        "address": _addressController.text,
+        "addressDetailed": _addressController.address.toJson(),
         "latitude": commerceLatLgn!.latitude,
         "longitude": commerceLatLgn.longitude,
         "phone": _phoneController.text,

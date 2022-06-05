@@ -5,7 +5,7 @@ import 'package:chemin_du_local/features/authentication/widgets/registration_ste
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_3.dart';
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_password.dart';
 import 'package:chemin_du_local/features/commerces/commerces_graphql.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
+import 'package:chemin_du_local/place/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:latlng/latlng.dart';

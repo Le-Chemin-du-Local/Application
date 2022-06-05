@@ -1,6 +1,7 @@
 import 'package:chemin_du_local/features/commerces/models/business_hours/business_hours.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/user/user.dart';
+import 'package:chemin_du_local/place/models/address/address.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,7 +23,8 @@ class Commerce with _$Commerce {
     @Default(<Product>[]) List<Product> productsAvailableForClickAndCollect,
     String? storekeeperWord,
     String? description,
-    String? address,
+    @JsonKey(name: "addressDetailed")
+    Address? address,
     String? phone,
     String? email,
     String? facebook,

@@ -10,7 +10,13 @@ query GetStoreKeeperCommerce(
       name
       description
       storekeeperWord
-      address
+      addressDetailed {
+        number
+        route
+        optionalRoute
+        postalCode
+        city
+      }
       latitude
       longitude
       phone

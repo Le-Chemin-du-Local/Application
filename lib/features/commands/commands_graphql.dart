@@ -11,7 +11,13 @@ query getCommands(
         commerces {
           commerce {
             name
-            address
+            addressDetailed {
+              number
+              route
+              optionalRoute
+              postalCode
+              city
+            }
           }
           status
           pickupDate
@@ -34,7 +40,13 @@ query getCommand(
       commerce {
         id
         name
-        address
+        addressDetailed {
+          number
+          route
+          optionalRoute
+          postalCode
+          city
+        }
         phone
       }
       cccommands {

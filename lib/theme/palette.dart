@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'dart:math' as math;
 
 class Palette {
   static const Color colorScaffold = Color(0xfffafafe);

@@ -20,7 +20,13 @@ query getCommerces(
         name
         latitude
         longitude
-        address
+        addressDetailed {
+          number
+          route
+          optionalRoute
+          postalCode
+          city
+        }
         services
       }
     }
@@ -32,7 +38,7 @@ const String mutCreateCommerce = r'''
 mutation createCommerce(
   $userID: ID!
   $name: String!
-  $address: String!
+  $address: NewAddress!
   $latitude: Float!
   $longitude: Float!
   $phone: String!
@@ -42,7 +48,7 @@ mutation createCommerce(
     userID: $userID
     input: {
       name: $name,
-      address: $address,
+      addressDetailed: $address,
       latitude: $latitude,
       longitude: $longitude,
       phone: $phone,

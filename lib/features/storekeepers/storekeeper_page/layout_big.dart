@@ -91,7 +91,7 @@ class LayoutBig extends StatelessWidget {
                     Flexible(
                       child: AddressCard(
                         initialLatLgn: commerceLatLgn,
-                        address: commerce?.address ?? "Pas d'adress",
+                        address: commerce?.address?.detailled ?? "Pas d'adress",
                         email: commerce?.email ?? "",
                         phone: commerce?.phone ?? "",
                         facebook: commerce?.facebook ?? "",

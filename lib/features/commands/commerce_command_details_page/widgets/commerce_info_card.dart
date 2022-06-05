@@ -26,7 +26,7 @@ class CommerceInfoCard extends StatelessWidget {
           const SizedBox(height: 4,),
           
           // L'adresse du commerce
-          Text(commerce.address ?? "Adresse inconnue"),
+          Text(commerce.address?.detailled ?? "Adresse inconnue"),
           const SizedBox(height: 4,),
 
           // Le téléphone du commerce

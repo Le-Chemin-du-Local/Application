@@ -1,5 +1,5 @@
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeeper_page/place_service.dart';
+import 'package:chemin_du_local/place/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 

@@ -130,7 +130,7 @@ class CommerceCard extends StatelessWidget {
             context,
             icon: Icons.location_on,
             child: Text(
-              (commerce.address ?? "Adresse Iconnue").replaceAll(", France", ""),
+              (commerce.address?.detailled ?? "Adresse Iconnue").replaceAll(", France", ""),
               style: const TextStyle(fontWeight: FontWeight.bold),
             )
           ),

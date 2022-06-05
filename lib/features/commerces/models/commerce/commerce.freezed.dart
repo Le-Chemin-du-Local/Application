@@ -29,7 +29,8 @@ mixin _$Commerce {
       throw _privateConstructorUsedError;
   String? get storekeeperWord => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  String? get address => throw _privateConstructorUsedError;
+  @JsonKey(name: "addressDetailed")
+  Address? get address => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   String? get facebook => throw _privateConstructorUsedError;
@@ -58,7 +59,7 @@ abstract class $CommerceCopyWith<$Res> {
       List<Product> productsAvailableForClickAndCollect,
       String? storekeeperWord,
       String? description,
-      String? address,
+      @JsonKey(name: "addressDetailed") Address? address,
       String? phone,
       String? email,
       String? facebook,
@@ -69,6 +70,7 @@ abstract class $CommerceCopyWith<$Res> {
       double? longitude});
 
   $UserCopyWith<$Res>? get storekeeper;
+  $AddressCopyWith<$Res>? get address;
   $BusinessHoursCopyWith<$Res>? get businessHours;
 }
 
@@ -137,7 +139,7 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Address?,
       phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -185,6 +187,17 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
   }
 
   @override
+  $AddressCopyWith<$Res>? get address {
+    if (_value.address == null) {
+      return null;
+    }
+
+    return $AddressCopyWith<$Res>(_value.address!, (value) {
+      return _then(_value.copyWith(address: value));
+    });
+  }
+
+  @override
   $BusinessHoursCopyWith<$Res>? get businessHours {
     if (_value.businessHours == null) {
       return null;
@@ -211,7 +224,7 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       List<Product> productsAvailableForClickAndCollect,
       String? storekeeperWord,
       String? description,
-      String? address,
+      @JsonKey(name: "addressDetailed") Address? address,
       String? phone,
       String? email,
       String? facebook,
@@ -223,6 +236,8 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
 
   @override
   $UserCopyWith<$Res>? get storekeeper;
+  @override
+  $AddressCopyWith<$Res>? get address;
   @override
   $BusinessHoursCopyWith<$Res>? get businessHours;
 }
@@ -294,7 +309,7 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
       address: address == freezed
           ? _value.address
           : address // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as Address?,
       phone: phone == freezed
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -343,7 +358,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
           const <Product>[],
       this.storekeeperWord,
       this.description,
-      this.address,
+      @JsonKey(name: "addressDetailed") this.address,
       this.phone,
       this.email,
       this.facebook,
@@ -395,7 +410,8 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   @override
   final String? description;
   @override
-  final String? address;
+  @JsonKey(name: "addressDetailed")
+  final Address? address;
   @override
   final String? phone;
   @override
@@ -516,7 +532,7 @@ abstract class _Commerce implements Commerce {
       final List<Product> productsAvailableForClickAndCollect,
       final String? storekeeperWord,
       final String? description,
-      final String? address,
+      @JsonKey(name: "addressDetailed") final Address? address,
       final String? phone,
       final String? email,
       final String? facebook,
@@ -546,7 +562,8 @@ abstract class _Commerce implements Commerce {
   @override
   String? get description => throw _privateConstructorUsedError;
   @override
-  String? get address => throw _privateConstructorUsedError;
+  @JsonKey(name: "addressDetailed")
+  Address? get address => throw _privateConstructorUsedError;
   @override
   String? get phone => throw _privateConstructorUsedError;
   @override

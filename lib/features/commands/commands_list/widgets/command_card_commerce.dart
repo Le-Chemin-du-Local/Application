@@ -33,7 +33,7 @@ class CommandCardCommerce extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(commerceCommand.commerce?.address ?? "Addresse inconnue"),
+                Text(commerceCommand.commerce?.address?.detailled ?? "Addresse inconnue"),
                 Text("Collecte : $collectDateString")
               ],
             ),

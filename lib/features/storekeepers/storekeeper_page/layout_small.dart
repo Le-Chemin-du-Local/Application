@@ -60,7 +60,7 @@ class LayoutSmall extends StatelessWidget {
               initialLatLgn: commerceLatLgn,
               phone: commerce?.phone ?? "",
               email: commerce?.email ?? "",
-              address: commerce?.address ?? "",
+              address: commerce?.address?.detailled ?? "",
               facebook: commerce?.facebook ?? "",
               twitter: commerce?.twitter ?? "",
               instagram: commerce?.instagram ?? "",
