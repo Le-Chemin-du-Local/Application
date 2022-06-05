@@ -141,31 +141,31 @@ class __$$_BusinessHoursCopyWithImpl<$Res>
   }) {
     return _then(_$_BusinessHours(
       monday: monday == freezed
-          ? _value._monday
+          ? _value.monday
           : monday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       tuesday: tuesday == freezed
-          ? _value._tuesday
+          ? _value.tuesday
           : tuesday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       wednesday: wednesday == freezed
-          ? _value._wednesday
+          ? _value.wednesday
           : wednesday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       thursday: thursday == freezed
-          ? _value._thursday
+          ? _value.thursday
           : thursday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       friday: friday == freezed
-          ? _value._friday
+          ? _value.friday
           : friday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       saturday: saturday == freezed
-          ? _value._saturday
+          ? _value.saturday
           : saturday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
       sunday: sunday == freezed
-          ? _value._sunday
+          ? _value.sunday
           : sunday // ignore: cast_nullable_to_non_nullable
               as List<Schedule>?,
     ));
@@ -176,86 +176,31 @@ class __$$_BusinessHoursCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_BusinessHours with DiagnosticableTreeMixin implements _BusinessHours {
   const _$_BusinessHours(
-      {final List<Schedule>? monday,
-      final List<Schedule>? tuesday,
-      final List<Schedule>? wednesday,
-      final List<Schedule>? thursday,
-      final List<Schedule>? friday,
-      final List<Schedule>? saturday,
-      final List<Schedule>? sunday})
-      : _monday = monday,
-        _tuesday = tuesday,
-        _wednesday = wednesday,
-        _thursday = thursday,
-        _friday = friday,
-        _saturday = saturday,
-        _sunday = sunday;
+      {this.monday,
+      this.tuesday,
+      this.wednesday,
+      this.thursday,
+      this.friday,
+      this.saturday,
+      this.sunday});
 
   factory _$_BusinessHours.fromJson(Map<String, dynamic> json) =>
       _$$_BusinessHoursFromJson(json);
 
-  final List<Schedule>? _monday;
   @override
-  List<Schedule>? get monday {
-    final value = _monday;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Schedule>? _tuesday;
+  final List<Schedule>? monday;
   @override
-  List<Schedule>? get tuesday {
-    final value = _tuesday;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Schedule>? _wednesday;
+  final List<Schedule>? tuesday;
   @override
-  List<Schedule>? get wednesday {
-    final value = _wednesday;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Schedule>? _thursday;
+  final List<Schedule>? wednesday;
   @override
-  List<Schedule>? get thursday {
-    final value = _thursday;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Schedule>? _friday;
+  final List<Schedule>? thursday;
   @override
-  List<Schedule>? get friday {
-    final value = _friday;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Schedule>? _saturday;
+  final List<Schedule>? friday;
   @override
-  List<Schedule>? get saturday {
-    final value = _saturday;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Schedule>? _sunday;
+  final List<Schedule>? saturday;
   @override
-  List<Schedule>? get sunday {
-    final value = _sunday;
-    if (value == null) return null;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
+  final List<Schedule>? sunday;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -281,27 +226,26 @@ class _$_BusinessHours with DiagnosticableTreeMixin implements _BusinessHours {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BusinessHours &&
-            const DeepCollectionEquality().equals(other._monday, _monday) &&
-            const DeepCollectionEquality().equals(other._tuesday, _tuesday) &&
-            const DeepCollectionEquality()
-                .equals(other._wednesday, _wednesday) &&
-            const DeepCollectionEquality().equals(other._thursday, _thursday) &&
-            const DeepCollectionEquality().equals(other._friday, _friday) &&
-            const DeepCollectionEquality().equals(other._saturday, _saturday) &&
-            const DeepCollectionEquality().equals(other._sunday, _sunday));
+            const DeepCollectionEquality().equals(other.monday, monday) &&
+            const DeepCollectionEquality().equals(other.tuesday, tuesday) &&
+            const DeepCollectionEquality().equals(other.wednesday, wednesday) &&
+            const DeepCollectionEquality().equals(other.thursday, thursday) &&
+            const DeepCollectionEquality().equals(other.friday, friday) &&
+            const DeepCollectionEquality().equals(other.saturday, saturday) &&
+            const DeepCollectionEquality().equals(other.sunday, sunday));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_monday),
-      const DeepCollectionEquality().hash(_tuesday),
-      const DeepCollectionEquality().hash(_wednesday),
-      const DeepCollectionEquality().hash(_thursday),
-      const DeepCollectionEquality().hash(_friday),
-      const DeepCollectionEquality().hash(_saturday),
-      const DeepCollectionEquality().hash(_sunday));
+      const DeepCollectionEquality().hash(monday),
+      const DeepCollectionEquality().hash(tuesday),
+      const DeepCollectionEquality().hash(wednesday),
+      const DeepCollectionEquality().hash(thursday),
+      const DeepCollectionEquality().hash(friday),
+      const DeepCollectionEquality().hash(saturday),
+      const DeepCollectionEquality().hash(sunday));
 
   @JsonKey(ignore: true)
   @override

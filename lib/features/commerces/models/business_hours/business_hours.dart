@@ -6,7 +6,7 @@ part 'business_hours.freezed.dart';
 part 'business_hours.g.dart';
 
 @immutable
-@freezed
+@Freezed(makeCollectionsUnmodifiable: false)
 class BusinessHours with _$BusinessHours {
   const factory BusinessHours({
     List<Schedule>? monday,
