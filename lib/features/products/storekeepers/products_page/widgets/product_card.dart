@@ -64,11 +64,26 @@ class ProductCard extends StatelessWidget {
                 
                 if (showQuantityPicker)
                   Flexible(
-                    child: ClQuantityPicker(
-                      minValue: 0,
-                      currentValue: quantity,
-                      onChanged: onQuantityUpdated,
-                    ),
+                    child: quantity > 0 
+                      ? ClQuantityPicker(
+                          minValue: 0,
+                          currentValue: quantity,
+                          onChanged: onQuantityUpdated,
+                        )
+                      : CircleAvatar(
+                          backgroundColor: Theme.of(context).colorScheme.primary,
+                          radius: 36,
+                          child: IconButton(
+                            padding: EdgeInsets.zero,
+                            splashRadius: 36,
+                            icon: Icon(
+                              Icons.add,
+                              size: 18,
+                              color: Theme.of(context).colorScheme.onPrimary,
+                            ),
+                            onPressed: onQuantityUpdated == null ? null : () => onQuantityUpdated!(1),
+                          ),
+                      )
                   )
                 else  
                   Container()
