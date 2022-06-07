@@ -4,6 +4,7 @@ import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/edit_dialog/widgets/schedule_field_controller.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/edit_dialog/widgets/schedule_form.dart';
+import 'package:chemin_du_local/place/models/address/address.dart';
 import 'package:chemin_du_local/place/place_service.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
 import 'package:chemin_du_local/place/widgets/address_controller.dart';
@@ -49,6 +50,15 @@ class _EditDialogState extends State<EditDialog> {
   final ScheduleFieldController _saturdayController = ScheduleFieldController();
   final ScheduleFieldController _sundayController = ScheduleFieldController();
 
+  // Pour les horaires de Click&Collect
+  final ScheduleFieldController _ccMondayController = ScheduleFieldController();
+  final ScheduleFieldController _ccTuesdayController = ScheduleFieldController();
+  final ScheduleFieldController _ccWednesdayController = ScheduleFieldController();
+  final ScheduleFieldController _ccThursdayController = ScheduleFieldController();
+  final ScheduleFieldController _ccFridayController = ScheduleFieldController();
+  final ScheduleFieldController _ccSaturdayController = ScheduleFieldController();
+  final ScheduleFieldController _ccSundayController = ScheduleFieldController();
+
   MutationOptions _updateCommerceOptions() {
     return MutationOptions<dynamic>(
       document: gql(mutUpdateStorekeerCommercePage),
@@ -68,7 +78,7 @@ class _EditDialogState extends State<EditDialog> {
       _storekeeperWordController.text = widget.commerce!.storekeeperWord ?? "";
       _descriptionController.text = widget.commerce!.description ?? "";
 
-      // _addressController.text = widget.commerce!.address ?? "";
+      _addressController.address = widget.commerce?.address ?? const Address();
 
       _phoneController.text = widget.commerce!.phone ?? "";
       _emailController.text = widget.commerce!.email ?? "";
@@ -83,6 +93,14 @@ class _EditDialogState extends State<EditDialog> {
       _fridayController.schedules = widget.commerce?.businessHours?.friday ?? [];
       _saturdayController.schedules = widget.commerce?.businessHours?.saturday ?? [];
       _sundayController.schedules = widget.commerce?.businessHours?.sunday ?? [];
+
+      _ccMondayController.schedules = widget.commerce?.clickAndCollectHours?.monday ?? [];
+      _ccTuesdayController.schedules = widget.commerce?.clickAndCollectHours?.tuesday?? [];
+      _ccWednesdayController.schedules = widget.commerce?.clickAndCollectHours?.wednesday ?? [];
+      _ccThursdayController.schedules = widget.commerce?.clickAndCollectHours?.thursday ?? [];
+      _ccFridayController.schedules = widget.commerce?.clickAndCollectHours?.friday ?? [];
+      _ccSaturdayController.schedules = widget.commerce?.clickAndCollectHours?.saturday ?? [];
+      _ccSundayController.schedules = widget.commerce?.clickAndCollectHours?.sunday ?? [];
     }
   }
 
@@ -161,6 +179,19 @@ class _EditDialogState extends State<EditDialog> {
                         fridayController: _fridayController,
                         saturdayController: _saturdayController,
                         sundayController: _sundayController,
+                      ),
+                      const SizedBox(height: 22),
+
+                      // Les horaires de click and collect
+                      Text("Gestion des créneaux de Click&Collect", style: Theme.of(context).textTheme.caption,),
+                      ScheduleForm(
+                        mondayController: _ccMondayController,
+                        tuesdayController: _ccTuesdayController,
+                        wednesdayController: _ccWednesdayController,
+                        thursdayController: _ccThursdayController,
+                        fridayController: _ccFridayController,
+                        saturdayController: _ccSaturdayController,
+                        sundayController: _ccSundayController,
                       ),
                       const SizedBox(height: 22),
 
@@ -301,6 +332,15 @@ class _EditDialogState extends State<EditDialog> {
           "friday": _fridayController.schedules,
           "saturday": _saturdayController.schedules,
           "sunday": _sundayController.schedules,
+        },
+        "clickAndCollectHours": {
+          "monday": _ccMondayController.schedules,
+          "tuesday": _ccTuesdayController.schedules,
+          "wednesday": _ccWednesdayController.schedules,
+          "thursday": _ccThursdayController.schedules,
+          "friday": _ccFridayController.schedules,
+          "saturday": _ccSaturdayController.schedules,
+          "sunday": _ccSundayController.schedules,
         },
       }
     });

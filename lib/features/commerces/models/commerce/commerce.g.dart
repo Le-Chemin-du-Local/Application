@@ -39,6 +39,10 @@ _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
           ? null
           : BusinessHours.fromJson(
               json['businessHours'] as Map<String, dynamic>),
+      clickAndCollectHours: json['clickAndCollectHours'] == null
+          ? null
+          : BusinessHours.fromJson(
+              json['clickAndCollectHours'] as Map<String, dynamic>),
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
     );
@@ -61,6 +65,7 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
       'twitter': instance.twitter,
       'instagram': instance.instagram,
       'businessHours': instance.businessHours,
+      'clickAndCollectHours': instance.clickAndCollectHours,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
     };

@@ -31,6 +31,7 @@ class Commerce with _$Commerce {
     String? twitter,
     String? instagram,
     BusinessHours? businessHours,
+    BusinessHours? clickAndCollectHours,
     double? latitude,
     double? longitude,
   }) = _Commerce;
