@@ -1,6 +1,7 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker.dart';
+import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/header_profile_picture.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
@@ -68,11 +69,9 @@ class HeaderImage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       // La photo de profil
-                      ClImagePicker(
-                        imageURL: "$kImagesBaseUrl/commerces/${commerceID ?? ""}/profile.jpg", 
-                        onImageSelected: (image) {},
-                        showEditButton: canEdit,
-                        size: 120,
+                      HeaderProfilePicture(
+                        commerceID: commerceID,
+                        canEdit: canEdit,
                       ),
                       const SizedBox(width: 12,),
 

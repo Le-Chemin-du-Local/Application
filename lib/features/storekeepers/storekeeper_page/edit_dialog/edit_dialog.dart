@@ -1,5 +1,11 @@
+import 'dart:convert';
+
+import 'package:chemin_du_local/core/utils/cl_file.dart';
+import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/dialog/closable_dialog.dart';
+import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker.dart';
+import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker_big.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/edit_dialog/widgets/schedule_field_controller.dart';
@@ -11,6 +17,7 @@ import 'package:chemin_du_local/place/widgets/address_controller.dart';
 import 'package:chemin_du_local/place/widgets/address_form.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:http/http.dart';
 import 'package:latlng/latlng.dart';
 
 class EditDialog extends StatefulWidget {
@@ -27,6 +34,9 @@ class EditDialog extends StatefulWidget {
 
 class _EditDialogState extends State<EditDialog> {
   String _errorMessage = "";
+
+  ClFile? _image;
+  ClFile? _profilePicture;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -142,6 +152,31 @@ class _EditDialogState extends State<EditDialog> {
                         ClStatusMessage(message: _errorMessage,),
                         const SizedBox(height: 22,),
                       },
+
+                      // La photo de profil
+                      Text("Logo du commerce", style: Theme.of(context).textTheme.caption,),
+                      const SizedBox(height: 8,),
+                      Center(
+                        child: ClImagePicker(
+                          imageURL: "$kImagesBaseUrl/commerces/${widget.commerce?.id ?? ""}/profile.jpg", 
+                          imageData: _profilePicture,
+                          onImageSelected: _onProfilePictureSelected,
+                          size: 120,
+                        ),
+                      ),
+                      const SizedBox(height: 22,),
+
+                      // La photo de couverture
+                      Text("Photo de couverture du commerce", style: Theme.of(context).textTheme.caption,),
+                      const SizedBox(height: 8,),
+                      Center(
+                        child: ClImagePickerBig(
+                          imageURL: "$kImagesBaseUrl/commerces/${widget.commerce?.id ?? ""}/header.jpg", 
+                          imageData: _image,
+                          onImageSelected: _onCoverSelected,
+                        ),
+                      ),
+                      const SizedBox(height: 22,),
 
                       // Le petit mot du commerçant
                       ClTextInput(
@@ -300,6 +335,18 @@ class _EditDialogState extends State<EditDialog> {
     );
   }
 
+  void _onProfilePictureSelected(ClFile image) {
+    setState(() {
+      _profilePicture = image;
+    });
+  }
+
+  void _onCoverSelected(ClFile image) {
+    setState(() {
+      _image = image;
+    });
+  }
+
   Future _validateForm(RunMutation? runMutation) async {
     if (!_formKey.currentState!.validate() || runMutation == null) return;
 
@@ -342,6 +389,18 @@ class _EditDialogState extends State<EditDialog> {
           "saturday": _ccSaturdayController.schedules,
           "sunday": _ccSundayController.schedules,
         },
+        if (_profilePicture != null) 
+          "profilePicture": MultipartFile.fromBytes(
+            "profilePicture",
+            base64Decode(_profilePicture!.base64content!),
+            filename: _profilePicture!.filename
+          ),
+        if (_image != null) 
+          "image": MultipartFile.fromBytes(
+            "image",
+            base64Decode(_image!.base64content!),
+            filename: _image!.filename
+          ),
       }
     });
   }
