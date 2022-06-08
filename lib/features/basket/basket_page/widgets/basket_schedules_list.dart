@@ -25,43 +25,43 @@ class BasketSchedulesList extends StatelessWidget {
     final List<DateTime> hours = [];
     
     if (day.weekday == DateTime.monday) {
-      for (final Schedule schedule in (commerce.businessHours?.monday ?? [])) {
+      for (final Schedule schedule in (commerce.clickAndCollectHours?.monday ?? [])) {
         hours.addAll(_halfHours(schedule));
       }
     }
 
     if (day.weekday == DateTime.tuesday) {
-      for (final Schedule schedule in (commerce.businessHours?.tuesday ?? [])) {
+      for (final Schedule schedule in (commerce.clickAndCollectHours?.tuesday ?? [])) {
         hours.addAll(_halfHours(schedule));
       }
     }
 
     if (day.weekday == DateTime.wednesday) {
-      for (final Schedule schedule in (commerce.businessHours?.wednesday ?? [])) {
+      for (final Schedule schedule in (commerce.clickAndCollectHours?.wednesday ?? [])) {
         hours.addAll(_halfHours(schedule));
       }
     }
 
     if (day.weekday == DateTime.thursday) {
-      for (final Schedule schedule in (commerce.businessHours?.thursday ?? [])) {
+      for (final Schedule schedule in (commerce.clickAndCollectHours?.thursday ?? [])) {
         hours.addAll(_halfHours(schedule));
       }
     }
 
     if (day.weekday == DateTime.friday) {
-      for (final Schedule schedule in (commerce.businessHours?.friday ?? [])) {
+      for (final Schedule schedule in (commerce.clickAndCollectHours?.friday ?? [])) {
         hours.addAll(_halfHours(schedule));
       }
     }
 
     if (day.weekday == DateTime.saturday) {
-      for (final Schedule schedule in (commerce.businessHours?.saturday ?? [])) {
+      for (final Schedule schedule in (commerce.clickAndCollectHours?.saturday ?? [])) {
         hours.addAll(_halfHours(schedule));
       }
     }
 
     if (day.weekday == DateTime.sunday) {
-      for (final Schedule schedule in (commerce.businessHours?.sunday ?? [])) {
+      for (final Schedule schedule in (commerce.clickAndCollectHours?.sunday ?? [])) {
         hours.addAll(_halfHours(schedule));
       }
     }
@@ -76,7 +76,7 @@ class BasketSchedulesList extends StatelessWidget {
       ),
       child: hours.isEmpty
         ? const ClStatusMessage(
-          message: "Le commerce n'est pas ouvert ce jours là",
+          message: "Le commerce ne propose pas de crénaux de Click&Collect ce jours là",
           type: ClStatusMessageType.info,
         )
         : Column(
@@ -155,9 +155,4 @@ class BasketSchedulesList extends StatelessWidget {
 
     return result;
   }
-
-  int _openingHourFromSchedule(Schedule schedule) {
-    return int.parse(schedule.opening.split(":")[0]);
-  }
-
 }
