@@ -88,14 +88,15 @@ class StoreKeeperPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         toolbarHeight: 90,
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: ElevatedButton.icon(
-              onPressed: () => _editPage(context, refetch, commerce), 
-              icon: const Icon(Icons.edit),
-              label: const Text("Modifier la page"),
-            ),
-          )
+          if (canEdit)
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: ElevatedButton.icon(
+                onPressed: () => _editPage(context, refetch, commerce), 
+                icon: const Icon(Icons.edit),
+                label: const Text("Modifier la page"),
+              ),
+            )
         ],
       ),
       extendBodyBehindAppBar: true,
