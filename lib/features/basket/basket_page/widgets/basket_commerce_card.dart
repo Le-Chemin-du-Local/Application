@@ -55,7 +55,10 @@ class BasketCommerceCard extends ConsumerWidget {
             physics: const NeverScrollableScrollPhysics(),
             children: [
               for (final product in commerce.products)
-                BasketProductCard(product: product,),
+                BasketProductCard(
+                  commerce: commerce,
+                  product: product,
+                ),
               const Divider(),
 
               for (final panier in commerce.paniers) 

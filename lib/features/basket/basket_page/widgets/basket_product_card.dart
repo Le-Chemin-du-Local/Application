@@ -1,19 +1,24 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_quantity_picker.dart';
+import 'package:chemin_du_local/features/basket/models/basket_commerce/basket_commerce.dart';
 import 'package:chemin_du_local/features/basket/models/basket_product/basket_product.dart';
+import 'package:chemin_du_local/features/basket/riverpod/basket_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BasketProductCard extends StatelessWidget {
+class BasketProductCard extends ConsumerWidget {
   const BasketProductCard({
     Key? key,
+    required this.commerce,
     required this.product,
   }) : super(key: key);
 
   final BasketProduct product;
+  final BasketCommerce commerce;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         vertical: 8,
@@ -44,7 +49,7 @@ class BasketProductCard extends StatelessWidget {
           ),
           const SizedBox(width: 20,),
 
-          // Le contenye
+          // Le conteneur
           Expanded(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -57,11 +62,9 @@ class BasketProductCard extends StatelessWidget {
                         child: Text(product.product.name, style: Theme.of(context).textTheme.headline2,),
                       ),
 
-                      IconButton(
-                        onPressed: () {}, 
-                        iconSize: 18,
-                        splashRadius: 12,
-                        icon: const Icon(Icons.delete_outline)
+                      ElevatedButton(
+                        onPressed: () => _removeProduct(ref), 
+                        child: const Text("Supprimer", style: TextStyle(fontSize: 12),),
                       )
                     ],
                   ),
@@ -90,7 +93,8 @@ class BasketProductCard extends StatelessWidget {
 
                       ClQuantityPicker(
                         currentValue: product.quantity,
-                        onChanged: (value) {},
+                        minValue: 1,
+                        onChanged: (value) => _updateProductQuantity(ref, value),
                       )
                     ],
                   ),
@@ -100,6 +104,32 @@ class BasketProductCard extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Future _updateProductQuantity(WidgetRef ref, int quantity) async {
+    ref.read(basketControllerProvider.notifier).updateBasketCommerce(
+      commerce.copyWith(
+        products: [
+          for (final basketProduct in commerce.products)
+            if (basketProduct.product.id == product.product.id)
+              product.copyWith(quantity: quantity)
+            else 
+              basketProduct
+        ]
+      )
+    );
+  }
+
+  Future _removeProduct(WidgetRef ref) async {
+    ref.read(basketControllerProvider.notifier).updateBasketCommerce(
+      commerce.copyWith(
+        products: [
+          for (final basketProduct in commerce.products)
+            if (basketProduct.product.id != product.product.id)
+              basketProduct
+        ]
+      )
     );
   }
 }
