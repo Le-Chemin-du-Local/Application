@@ -52,7 +52,9 @@ class ClQuantityPicker extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.0),
-        color: Theme.of(context).colorScheme.secondary
+        color: onTap != null
+          ? Theme.of(context).colorScheme.secondary
+          : Theme.of(context).disabledColor
       ),
       width: 20, height: 20,
       child: Center(
