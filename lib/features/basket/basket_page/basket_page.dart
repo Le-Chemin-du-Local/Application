@@ -1,6 +1,7 @@
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/core/widgets/steps_indicator.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/authentication/login_dialog.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_payment_form.dart';
@@ -23,6 +24,7 @@ class _BasketPageState extends ConsumerState<BasketPage> {
   final PageController _pageController = PageController(initialPage: 0);
 
   int _currentIndex = 0;
+  int _currentStep = 0;
   Basket? _successBasket;
 
   @override
@@ -56,6 +58,18 @@ class _BasketPageState extends ConsumerState<BasketPage> {
         if (_currentIndex != 0) {
           setState(() {
             _currentIndex--; 
+            if (_currentIndex == 0) {
+              _currentStep = 0;
+            }
+            else if (_currentIndex <= basket.commerces.length + 1) {
+              _currentStep = 1;
+            }
+            else if (_currentIndex == basket.commerces.length + 2) {
+              _currentStep = 2;
+            }
+            else {
+              _currentStep = 3;
+            }
             _animateScroll(_currentIndex);
           });
 
@@ -65,28 +79,50 @@ class _BasketPageState extends ConsumerState<BasketPage> {
         return true;
       },
       child: Scaffold(
-        body: _successBasket != null ? BasketSuccess(basket: _successBasket!) : PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
+        body: _successBasket != null ? BasketSuccess(basket: _successBasket!) : Column(
+          // mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            BasketSummary(
-              basket: basket,
-              onPay: _onProceedToPayment,
-            ),
-            for (final commerce in basket.commerces) 
-              BasketCommerceSchedule(
-                commerce: commerce.commerce,
-                onDateChoosed: (date) => _onScheduleChoosed(commerce.commerce.id!, date),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 12
               ),
-            BasketPaymentForm(
-              basket: basket,
-              onSuccess: () {
-                setState(() {
-                  _successBasket = basket;
-                });
-                ref.watch(basketControllerProvider.notifier).reset();
-              },
-            )
+              child: StepsIndicator(
+                currentStep: _currentStep, 
+                stepsTitle: const [
+                  "Panier", "Crénaux", "Coordonnées", "Confirmation",
+                ], 
+                onStepClicked: _selectStep
+              ),
+            ),
+            const SizedBox(height: 20,),
+            Expanded(
+              flex: 1,
+              child: PageView(
+                controller: _pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: [
+                  BasketSummary(
+                    basket: basket,
+                    onPay: _onProceedToPayment,
+                  ),
+                  for (final commerce in basket.commerces) 
+                    BasketCommerceSchedule(
+                      commerce: commerce.commerce,
+                      onDateChoosed: (date) => _onScheduleChoosed(basket, commerce.commerce.id!, date),
+                    ),
+                  BasketPaymentForm(
+                    basket: basket,
+                    onSuccess: () {
+                      setState(() {
+                        _successBasket = basket;
+                      });
+                      ref.watch(basketControllerProvider.notifier).reset();
+                    },
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ), 
@@ -99,6 +135,7 @@ class _BasketPageState extends ConsumerState<BasketPage> {
     if (isConnected) {
       setState(() {
         _currentIndex = 1;
+        _currentStep = 1;
         _animateScroll(_currentIndex);
       });
     }
@@ -114,12 +151,30 @@ class _BasketPageState extends ConsumerState<BasketPage> {
     }
   }
 
-  void _onScheduleChoosed(String commerceID, DateTime time) async {
+  void _onScheduleChoosed(Basket basket, String commerceID, DateTime time) async {
     ref.read(basketControllerProvider.notifier).updateSchedule(commerceID, time);
     setState(() {
+        if (_currentIndex == basket.commerces.length) _currentStep = 2;
         _currentIndex++;
         _animateScroll(_currentIndex);
       });
+  }
+
+  void _selectStep(int step) {
+    setState(() {
+      _currentStep = step;
+      if (step == 0) {
+        _currentIndex = 0;
+      }
+      else if (step == 1) {
+        _currentIndex = 1;
+      }
+      else if (step == 2) {
+        // _currentIndex == 
+      }
+
+      _animateScroll(_currentIndex);
+    });
   }
 
   Future _animateScroll(int page) async {
