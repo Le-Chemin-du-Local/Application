@@ -22,39 +22,39 @@ class BottomAppBarItem extends StatelessWidget {
 
     return Material(
       color: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Flexible(
-              child: IconButton(
-                padding: EdgeInsets.zero,
-                constraints: const BoxConstraints(),
-                icon: Icon(
+      child: InkWell(
+        customBorder: const CircleBorder(),
+        onTap: () {
+          if (pageItem != null) {
+            onSelectedPage(pageItem!);
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(
+                child: Icon(
                   icon,
-                  color: isCurrentItem ? Theme.of(context).colorScheme.primary : Palette.colorDarkGrey,
-                ),
-                onPressed: () {
-                  if (pageItem != null) {
-                    onSelectedPage(pageItem!);
-                  }
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 1,
-            ),
-            Flexible(
-              child: Text(
-                text,
-                style: TextStyle(
-                  color: isCurrentItem ? Theme.of(context).colorScheme.primary : Palette.colorDarkGrey,
-                  fontSize: 12
+                  size: 26,
+                  color: isCurrentItem ? Theme.of(context).colorScheme.secondary : Palette.colorDarkGrey,
                 ),
               ),
-            )
-          ]
+              const SizedBox(
+                height: 8,
+              ),
+              Flexible(
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    color: isCurrentItem ? Theme.of(context).colorScheme.secondary : Palette.colorDarkGrey,
+                    fontSize: 9
+                  ),
+                ),
+              )
+            ]
+          ),
         ),
       ),
     );
