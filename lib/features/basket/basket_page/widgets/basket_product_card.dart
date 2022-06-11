@@ -59,7 +59,7 @@ class BasketProductCard extends ConsumerWidget {
                   child: Row(
                     children: [
                       Expanded(
-                        child: Text(product.product.name, style: Theme.of(context).textTheme.headline2,),
+                        child: Text(product.product.name, style: Theme.of(context).textTheme.headlineSmall,),
                       ),
 
                       ElevatedButton(
@@ -77,13 +77,14 @@ class BasketProductCard extends ConsumerWidget {
                       Expanded(
                         child: RichText(
                           text: TextSpan(
-                            style: Theme.of(context).textTheme.headline2!.copyWith(
-                              color: Theme.of(context).colorScheme.primary
+                            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                              color: Theme.of(context).colorScheme.secondary,
+                              fontWeight: FontWeight.w500
                             ),
                             text: "${product.product.price}€",
                             children: [
                               TextSpan(
-                                style: Theme.of(context).textTheme.bodyText2,
+                                style: Theme.of(context).textTheme.bodyMedium,
                                 text: " /${product.product.unit}",
                               )
                             ]

@@ -84,8 +84,8 @@ class _BasketPageState extends ConsumerState<BasketPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12
+              padding: EdgeInsets.symmetric(
+                horizontal: 54 - ScreenHelper.instance.horizontalPadding,
               ),
               child: StepsIndicator(
                 currentStep: _currentStep, 

@@ -27,19 +27,20 @@ class BasketSummary extends ConsumerWidget {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                // La liste des commandes
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
-                  child: Text("Commandes à retirer", style: Theme.of(context).textTheme.headline2,),
-                ),
-                const Flexible(
-                  child: CommandsList(
-                    status: [
-                      CommandStatus.inProgress,
-                      CommandStatus.ready,
-                    ],
-                  ),
-                ),
+                // TODO: Normalement Marion devrait rajouter un bouton
+                // // La liste des commandes
+                // Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
+                //   child: Text("Commandes à retirer", style: Theme.of(context).textTheme.headline2,),
+                // ),
+                // const Flexible(
+                //   child: CommandsList(
+                //     status: [
+                //       CommandStatus.inProgress,
+                //       CommandStatus.ready,
+                //     ],
+                //   ),
+                // ),
                 
                 // La liste des produits
                 for (final commerce in basket.commerces)
@@ -50,26 +51,101 @@ class BasketSummary extends ConsumerWidget {
         ),
 
         // Le bouton
-        Padding(
+        Container(
+          color: Theme.of(context).colorScheme.surface,
           padding: EdgeInsets.symmetric(
             horizontal: ScreenHelper.instance.horizontalPadding,
-            vertical: 10
+            vertical: 14
           ),
-          child: ElevatedButton(
-            onPressed: basket.commerces.isNotEmpty ? onPay : null, 
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Icon(Icons.shopping_basket_sharp),
-                SizedBox(width: 12,),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Le prix sous total
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Sous-total (${_calculateTotalItems()} articles)", style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.w500
+                  ),),
+                  Text("${_calculatePrice().toStringAsFixed(2)}€", style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                    fontWeight: FontWeight.w500
+                  ),)
+                ],
+              ),
+              const SizedBox(height: 6,),
 
-                Text("Passer ma commande")
-              ],
-            )
+              // La remise potentielle
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Remise", style: Theme.of(context).textTheme.titleMedium,),
+                  Text("0€", style: Theme.of(context).textTheme.titleMedium)
+                ],
+              ),
+              const SizedBox(height: 6,),
+
+              // Le total
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Total", style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.secondary
+                  ),),
+                  Text("${_calculatePrice().toStringAsFixed(2)}€", style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.secondary
+                  ),)
+                ],
+              ),
+              const SizedBox(height: 26,),
+
+              ElevatedButton(
+                onPressed: basket.commerces.isNotEmpty ? onPay : null, 
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(Icons.shopping_basket_sharp),
+                    SizedBox(width: 12,),
+
+                    Text("Passer ma commande")
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8,)
+            ],
           ),
         ),
-        const SizedBox(height: 12,)
       ],
     );
+  }
+
+  int _calculateTotalItems() {
+    int result = 0;
+    for (final commerce in basket.commerces) {
+      result += commerce.paniers.length;
+      for (final product in commerce.products) {
+        result += product.quantity;
+      }
+    }
+
+    return result;
+  }
+
+  double _calculatePrice() {
+    double price = 0.0;
+
+    for (final commerce in basket.commerces) {
+      for (final product in commerce.products) {
+        price += ((product.product.price ?? 0) * product.quantity);
+      }
+
+      for (final panier in commerce.paniers) {
+        price += panier.price;
+      }
+    } 
+
+    return price;
   }
 }

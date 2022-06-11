@@ -58,7 +58,7 @@ class StepsIndicator extends StatelessWidget {
                     ],
                   ),
                 ),
-                Text(stepsTitle[i]),
+                Text(stepsTitle[i], style: Theme.of(context).textTheme.bodySmall,),
               ],
             ),
           ),
@@ -72,7 +72,7 @@ class StepsIndicator extends StatelessWidget {
                   height: 2,
                   color: i >= currentStep ? Theme.of(context).colorScheme.secondaryContainer : Theme.of(context).colorScheme.secondary,
                 ),
-                const SizedBox(height: 19,)
+                const SizedBox(height: 16,)
               ],
             )
           )
@@ -98,7 +98,7 @@ class StepsIndicator extends StatelessWidget {
                   Flexible(child: Container(height: 2,))
                 ],
               ),
-              Text(stepsTitle.last)
+              Text(stepsTitle.last, style: Theme.of(context).textTheme.bodySmall,)
             ],
           ),
         ),

@@ -65,19 +65,25 @@ class ClTheme {
         )
       ),
 
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        extendedPadding: EdgeInsets.zero,
+        backgroundColor: Palette.colorSecondary,
+        shape: CircleBorder()
+      ),
+
       textTheme: GoogleFonts.rubikTextTheme().copyWith(
         // Body
-        bodyLarge: const TextStyle(fontSize: 16),
-        bodyMedium: const TextStyle(fontSize: 14),
-        bodySmall: const TextStyle(fontSize: 12),
+        bodyLarge: const TextStyle(fontSize: 16, color: Palette.colorDark),
+        bodyMedium: const TextStyle(fontSize: 14, color: Palette.colorDark),
+        bodySmall: const TextStyle(fontSize: 12, color: Palette.colorDark),
 
         // Heading
-        headlineLarge: const TextStyle(fontSize: 32),
-        headlineMedium: const TextStyle(fontSize: 24),
-        headlineSmall: const TextStyle(fontSize: 20),
+        headlineLarge: const TextStyle(fontSize: 32, color: Palette.colorDark),
+        headlineMedium: const TextStyle(fontSize: 24, color: Palette.colorDark),
+        headlineSmall: const TextStyle(fontSize: 20, color: Palette.colorDark),
 
         // Titiel
-        titleMedium: const TextStyle(fontSize: 16)
+        titleMedium: const TextStyle(fontSize: 16, color: Palette.colorDark)
       ),
 
       visualDensity: VisualDensity.standard
@@ -90,6 +96,7 @@ class ClTheme {
       elevation: 0,
       foregroundColor: Palette.colorDark,
       systemOverlayStyle: SystemUiOverlayStyle.light,
+      titleTextStyle: TextStyle(fontSize: 24, color: Palette.colorDark), 
     );
   }
 

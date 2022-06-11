@@ -18,17 +18,20 @@ class BasketCommerceCard extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // Le nom du commerce
         Container(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.secondaryContainer,
           padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
-          height: 36,
+          height: 42,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
                 child: Text(
                   commerce.commerce.name,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontWeight: FontWeight.w500
+                  )
                 ),
               ),
 
@@ -41,29 +44,40 @@ class BasketCommerceCard extends ConsumerWidget {
                 child: Center(
                   child: Text(
                     commerce.products.length.toString(),
-                    style: const TextStyle(fontWeight: FontWeight.bold),
                   )
                 ),
               )
             ],
           ),
         ),
+        // Les produits et paniers
         Flexible(
-          child: ListView(
-            primary: false,
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              for (final product in commerce.products)
-                BasketProductCard(
-                  commerce: commerce,
-                  product: product,
-                ),
-              const Divider(),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
+            child: ListView(
+              primary: false,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              children: [
+                for (final product in commerce.products)
+                  BasketProductCard(
+                    commerce: commerce,
+                    product: product,
+                  ),
+                if (commerce.paniers.isNotEmpty)... {
+                  const Divider(),
 
-              for (final panier in commerce.paniers) 
-                Text("Panier : ${panier.name}")
-            ],
+                  for (final panier in commerce.paniers) 
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 8,
+                        horizontal: ScreenHelper.instance.horizontalPadding
+                      ),
+                      child: Text("Panier : ${panier.name}", style: Theme.of(context).textTheme.headlineSmall,),
+                    )
+                }
+              ],
+            ),
           ),
         )
       ],
