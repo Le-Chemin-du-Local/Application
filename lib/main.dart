@@ -66,41 +66,43 @@ class MyApp extends ConsumerWidget {
         title: 'Le Chemin du Local',
         navigatorKey: AppManager.instance.appNavigatorKey,
         theme: ClTheme.theme(context),
-        home: GraphQLConsumer(
-          builder: (client) => FutureBuilder<dynamic>(
-            future: Init.instance.initialize(client, ref),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const SplashScreen();
-              }
+        home: SafeArea(
+          child: GraphQLConsumer(
+            builder: (client) => FutureBuilder<dynamic>(
+              future: Init.instance.initialize(client, ref),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const SplashScreen();
+                }
+          
+                token = ref.read(appUserControllerProvider).token;
         
-              token = ref.read(appUserControllerProvider).token;
-
-              if (token != null) {
-                // We need the user role
-                return Query<dynamic>(
-                  options: QueryOptions<dynamic>(
-                    document: gql(qGetLoggedUser),
-                  ),
-                  builder: (result, {fetchMore, refetch}) {
-                    final User appUser = User.fromJson(result.data?["user"] as Map<String, dynamic>? ?? <String, dynamic>{});
-      
-      
-                    if (appUser.role == UserRoles.storeKeeper) {
-                      return StoreKeepersMainPage(
-                        storekeeper: appUser,
+                if (token != null) {
+                  // We need the user role
+                  return Query<dynamic>(
+                    options: QueryOptions<dynamic>(
+                      document: gql(qGetLoggedUser),
+                    ),
+                    builder: (result, {fetchMore, refetch}) {
+                      final User appUser = User.fromJson(result.data?["user"] as Map<String, dynamic>? ?? <String, dynamic>{});
+              
+              
+                      if (appUser.role == UserRoles.storeKeeper) {
+                        return StoreKeepersMainPage(
+                          storekeeper: appUser,
+                        );
+                      }
+        
+                      return ClientsMainPage(
+                        returnToBasketPayment: ref.watch(appUserControllerProvider).goBackToBasketPayment,
                       );
-                    }
-
-                    return ClientsMainPage(
-                      returnToBasketPayment: ref.watch(appUserControllerProvider).goBackToBasketPayment,
-                    );
-                  },
-                );
+                    },
+                  );
+                }
+        
+                return const ClientsMainPage();
               }
-
-              return const ClientsMainPage();
-            }
+            ),
           ),
         ),
       ),

@@ -33,16 +33,16 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // The image of the product
-          Expanded(
-            flex: 7,
+          AspectRatio(
+            aspectRatio: 0.9,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: _buildImageWithPrice(context),
-            )
+            ),
           ),
-          const SizedBox(height: 8.0,),
+          const SizedBox(height: 5.0,),
           // The name of the product
-          Flexible(child: Text(product.name, style: const TextStyle(fontWeight: FontWeight.bold),)),
+          Flexible(child: Text(product.name, style: const TextStyle(fontWeight: FontWeight.w500))),
           const SizedBox(height: 8.0,),
 
 
@@ -118,7 +118,7 @@ class ProductCard extends StatelessWidget {
           bottom: 0,
           right: 0,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 4.0),
             decoration: BoxDecoration(
               color: Theme.of(context).colorScheme.primary,
               borderRadius: const BorderRadius.only(
@@ -129,7 +129,9 @@ class ProductCard extends StatelessWidget {
             child: RichText(
               text: TextSpan(
                 text: "${product.price}€",
-                style: const TextStyle(color: Palette.colorWhite, fontWeight: FontWeight.w500),
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: Palette.colorWhite
+                ),
                 children: const [
                   TextSpan(text: "/pièce", style: TextStyle(fontSize: 12.0))
                 ]

@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class ClTheme {
   static ThemeData theme(BuildContext context) {
     return ThemeData(
+      useMaterial3: true,
       colorScheme: const ColorScheme.light(
         primary: Palette.colorPrimary, // #FF5858 (RED)
         onPrimary: Palette.colorWhite,
@@ -39,6 +40,7 @@ class ClTheme {
 
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           primary: Palette.colorPrimary,
@@ -51,6 +53,7 @@ class ClTheme {
 
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
+          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           primary: Palette.colorPrimary,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           shape: RoundedRectangleBorder(
@@ -63,11 +66,18 @@ class ClTheme {
       ),
 
       textTheme: GoogleFonts.rubikTextTheme().copyWith(
-        headline2: const TextStyle(fontSize: 24, color: Palette.colorDark),
-        bodyText1: const TextStyle(fontSize: 12, color: Palette.colorDark),
-        bodyText2: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Palette.colorDark),
-        caption: const TextStyle(fontSize: 16, fontWeight: FontWeight.w300, color: Palette.colorDark),
-        button: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        // Body
+        bodyLarge: const TextStyle(fontSize: 16),
+        bodyMedium: const TextStyle(fontSize: 14),
+        bodySmall: const TextStyle(fontSize: 12),
+
+        // Heading
+        headlineLarge: const TextStyle(fontSize: 32),
+        headlineMedium: const TextStyle(fontSize: 24),
+        headlineSmall: const TextStyle(fontSize: 20),
+
+        // Titiel
+        titleMedium: const TextStyle(fontSize: 16)
       ),
 
       visualDensity: VisualDensity.standard
