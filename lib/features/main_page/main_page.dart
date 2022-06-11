@@ -54,61 +54,32 @@ class MainPageState extends State<MainPage> {
         builder: (context, constraints) {
           bool useBigLayout = constraints.maxWidth >= ScreenHelper.breakpointPC;
 
-          return Column(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    if (useBigLayout) 
-                      AnimatedContainer(
-                        duration: const Duration(milliseconds: 200),
-                        width: _isMenuBarMinimified ? 68 : 312,
-                        child: MenuDrawer(
-                          pageItems: widget.pageItems,
-                          currentPageIndex: _currentIndex,
-                          onSelectedPage: selectedPage,
-                          shouldPop: false,
-                          isMinimified: _isMenuBarMinimified,
-                        ),
-                      ),
-              
-                    Expanded(
-                      child: Scaffold(
-                        appBar:AppBar(
-                          title: Text(widget.pageItems[_currentIndex].title),
-                          leading: !useBigLayout ? null : IconButton(
-                            icon: const Icon(Icons.menu),
-                            onPressed: () {
-                              setState(() {
-                                _isMenuBarMinimified = !_isMenuBarMinimified;
-                              });
-                            },
-                          ),
-                        ),
-                        body: Theme(
-                          data: Theme.of(context).copyWith(
-                            appBarTheme: ClTheme.themeSecondAppBar(context)
-                          ),
-                          child: widget.pages[_currentIndex]
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+          return  SafeArea(
+            child: Scaffold(
+              appBar:AppBar(
+                title: Text(widget.pageItems[_currentIndex].title),
               ),
-              if (!useBigLayout)
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    color: Theme.of(context).colorScheme.background,
-                    child: custom.BottomAppBar(
-                      currentPageIndex: _currentIndex,
-                      onSelectedPage: selectedPage,
-                      pageItems: widget.pageItems,
-                    ),
-                  ),
-                )
-            ],
+              body: Theme(
+                data: Theme.of(context).copyWith(
+                  appBarTheme: ClTheme.themeSecondAppBar(context)
+                ),
+                child: widget.pages[_currentIndex]
+              ),
+              drawer: useBigLayout 
+                ? MenuDrawer(
+                    pageItems: widget.pageItems,
+                    currentPageIndex: _currentIndex,
+                    onSelectedPage: selectedPage,
+                    shouldPop: false,
+                    isMinimified: _isMenuBarMinimified,
+                  )
+                : null,
+              bottomNavigationBar: useBigLayout ? null : custom.BottomAppBar(
+                currentPageIndex: _currentIndex,
+                onSelectedPage: selectedPage,
+                pageItems: widget.pageItems,
+              ),
+            ),
           );
         },
       ),

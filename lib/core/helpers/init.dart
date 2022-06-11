@@ -11,5 +11,7 @@ class Init {
   Future initialize(GraphQLClient client, WidgetRef ref) async {
     await ref.read(appUserControllerProvider.notifier).initializeUser(client);
     await ref.read(basketControllerProvider.notifier).syncBasket(client);
+
+    await Future<void>.delayed(const Duration(milliseconds: 2500));
   }
 }

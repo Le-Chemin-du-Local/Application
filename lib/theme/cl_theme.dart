@@ -31,11 +31,15 @@ class ClTheme {
         outline: Palette.colorLightGrey,
       ),
 
+      brightness: Brightness.light,
+
       appBarTheme: const AppBarTheme(
+        centerTitle: false,
         backgroundColor: Palette.colorScaffold,
         elevation: 0,
         foregroundColor: Palette.colorDark,
         systemOverlayStyle: SystemUiOverlayStyle.light,
+        titleTextStyle: TextStyle(fontSize: 24, color: Palette.colorDark), 
       ),
 
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -92,6 +96,7 @@ class ClTheme {
 
   static AppBarTheme themeSecondAppBar(BuildContext context) {
     return const AppBarTheme(
+      centerTitle: false,
       backgroundColor: Palette.colorScaffold,
       elevation: 0,
       foregroundColor: Palette.colorDark,
