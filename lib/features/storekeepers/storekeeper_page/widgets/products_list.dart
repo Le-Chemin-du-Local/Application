@@ -59,7 +59,7 @@ class ProductsList extends ConsumerWidget {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   children: [
-                    const SizedBox(width: ScreenHelper.horizontalPadding,),
+                    SizedBox(width: ScreenHelper.instance.horizontalPadding,),
 
                     // Si la liste est vide, on met un placeholder
                     if (products.isEmpty) 

@@ -180,7 +180,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
         Positioned.fill(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(ScreenHelper.horizontalPadding),
+              padding: EdgeInsets.all(ScreenHelper.instance.horizontalPadding),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: ScreenHelper.maxContainerWidth),
                 child: LayoutBuilder(

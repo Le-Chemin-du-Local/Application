@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:chemin_du_local/core/graphql/graphql_client.dart';
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/init.dart';
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/splash_screen.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
@@ -71,6 +72,7 @@ class MyApp extends ConsumerWidget {
             builder: (client) => FutureBuilder<dynamic>(
               future: Init.instance.initialize(client, ref),
               builder: (context, snapshot) {
+                ScreenHelper.instance.setValues(context);
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const SplashScreen();
                 }

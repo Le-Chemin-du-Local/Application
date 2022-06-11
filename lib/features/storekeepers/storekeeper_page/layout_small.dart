@@ -39,8 +39,8 @@ class LayoutSmall extends StatelessWidget {
         // Les horaires
         Flexible(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: ScreenHelper.horizontalPadding,
+            padding: EdgeInsets.symmetric(
+              horizontal: ScreenHelper.instance.horizontalPadding,
               vertical: 5
             ),
             child: BusinessHoursCard(
@@ -52,8 +52,8 @@ class LayoutSmall extends StatelessWidget {
         // Les coordonnées
         Flexible(
           child: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: ScreenHelper.horizontalPadding,
+            padding: EdgeInsets.symmetric(
+              horizontal: ScreenHelper.instance.horizontalPadding,
               vertical: 5
             ),
             child: AddressCard(
@@ -71,8 +71,8 @@ class LayoutSmall extends StatelessWidget {
 
         // La description
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ScreenHelper.horizontalPadding,
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenHelper.instance.horizontalPadding,
             vertical: 5
           ),
           child: ClCard(

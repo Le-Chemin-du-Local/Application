@@ -36,10 +36,10 @@ class PaniersList extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Headline
-        const Flexible(
+        Flexible(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
-            child: Text(
+            padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
+            child: const Text(
               "Sinon laissez vous tenter par nos paniers", 
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
@@ -104,7 +104,7 @@ class PaniersList extends ConsumerWidget {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children: [
-              const SizedBox(width: ScreenHelper.horizontalPadding,),
+              SizedBox(width: ScreenHelper.instance.horizontalPadding,),
               // S'il n'y a pas de paniers, on met un placeholder
               if (paniers.isEmpty) 
                 for (int i = 0; i < 4; ++i)

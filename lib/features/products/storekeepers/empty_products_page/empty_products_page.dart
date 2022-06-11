@@ -44,7 +44,7 @@ class _EmptyProductsPageState extends State<EmptyProductsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+        padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
         width: double.infinity,
         child: Mutation<dynamic>(
           options: _createProductMutationOptions(),

@@ -33,8 +33,8 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
         Expanded(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: ScreenHelper.horizontalPadding,
+              padding: EdgeInsets.symmetric(
+                horizontal: ScreenHelper.instance.horizontalPadding,
                 vertical: 10
               ),
               child: Column(

@@ -27,7 +27,7 @@ class _CommercesListPageState extends State<CommercesListPage> {
         children: [
           // La bar de recherche
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+            padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
             child: ClAddressInput(
               addressTextController: _addressTextController,
               onSelected: _onAddressSelected,

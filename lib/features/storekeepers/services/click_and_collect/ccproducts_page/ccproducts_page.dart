@@ -59,8 +59,8 @@ class _CCProductsPageState extends State<CCProductsPage> {
             title: const Text("Gérer mes produits click and collect"),
           ),
           body: Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: ScreenHelper.horizontalPadding,
+            padding: EdgeInsets.symmetric(
+              horizontal: ScreenHelper.instance.horizontalPadding,
             ),
             child: Query<dynamic>(
               options: _availableProductsForCCQueryOptions(),

@@ -85,9 +85,9 @@ class PanierEditFormState extends State<PanierEditForm> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           vertical: 20,
-          horizontal: ScreenHelper.horizontalPadding,
+          horizontal: ScreenHelper.instance.horizontalPadding,
         ),
         child: Align(
           alignment: Alignment.topCenter,
@@ -298,7 +298,7 @@ class PanierEditFormState extends State<PanierEditForm> {
       decoration: const BoxDecoration(
         color: Color(0xfffff6e5)
       ),
-      padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding, vertical: 20),
+      padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding, vertical: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,

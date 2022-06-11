@@ -49,9 +49,9 @@ class CommerceCommandDetailsPage extends StatelessWidget {
               Positioned.fill(
                 child: SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
+                    padding: EdgeInsets.symmetric(
                       vertical: 16,
-                      horizontal: ScreenHelper.horizontalPadding
+                      horizontal: ScreenHelper.instance.horizontalPadding
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -86,8 +86,8 @@ class CommerceCommandDetailsPage extends StatelessWidget {
               // Le bouton de validation
               Positioned(
                 bottom: 28,
-                left: ScreenHelper.horizontalPadding,
-                right: ScreenHelper.horizontalPadding,
+                left: ScreenHelper.instance.horizontalPadding,
+                right: ScreenHelper.instance.horizontalPadding,
                 child: ValidationButton(
                   onValidate: commerceCommand.status == CommandStatus.ready 
                     ? () => _onValidate(runMutation)

@@ -37,8 +37,8 @@ class LayoutBig extends StatelessWidget {
 
         // Les deux colonnes principales
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ScreenHelper.horizontalPadding
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenHelper.instance.horizontalPadding
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,

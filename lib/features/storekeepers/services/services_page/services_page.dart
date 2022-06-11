@@ -63,10 +63,10 @@ class ServicesPage extends StatelessWidget {
     required String commerceID,
   }) {
     return Padding(
-      padding: const EdgeInsets.only(
+      padding: EdgeInsets.only(
         top: 20,
-        left: ScreenHelper.horizontalPadding,
-        right: ScreenHelper.horizontalPadding
+        left: ScreenHelper.instance.horizontalPadding,
+        right: ScreenHelper.instance.horizontalPadding
       ),
       child: CustomScrollView(
         slivers: [

@@ -20,7 +20,7 @@ class BasketCommerceCard extends ConsumerWidget {
       children: [
         Container(
           color: Theme.of(context).colorScheme.primary,
-          padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+          padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
           height: 36,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

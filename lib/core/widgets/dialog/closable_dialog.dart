@@ -24,7 +24,7 @@ class ClosableDialog extends StatelessWidget {
           color: Theme.of(context).colorScheme.surface,
         ),
         child: Padding(
-          padding: const EdgeInsets.all(ScreenHelper.horizontalPadding),
+          padding: EdgeInsets.all(ScreenHelper.instance.horizontalPadding),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,

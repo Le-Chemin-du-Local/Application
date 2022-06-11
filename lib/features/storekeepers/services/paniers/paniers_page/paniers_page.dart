@@ -33,10 +33,10 @@ class _PaniersPageState extends State<PaniersPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("Paniers")),
       body: Padding(
-        padding: const EdgeInsets.only(
+        padding: EdgeInsets.only(
           top: 20,
-          left: ScreenHelper.horizontalPadding,
-          right: ScreenHelper.horizontalPadding
+          left: ScreenHelper.instance.horizontalPadding,
+          right: ScreenHelper.instance.horizontalPadding
         ),
         child: SingleChildScrollView(
           child: Column(

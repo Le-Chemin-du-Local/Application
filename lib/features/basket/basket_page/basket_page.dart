@@ -32,11 +32,11 @@ class _BasketPageState extends ConsumerState<BasketPage> {
     return ref.watch(basketControllerProvider).basket.when(
       data: (data) => _buildContent(data),
       loading: () => const Center(child: CircularProgressIndicator(),),
-      error: (error, stackTrace) => const Align(
+      error: (error, stackTrace) => Align(
         alignment: Alignment.topCenter,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
-          child: ClStatusMessage(
+          padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
+          child: const ClStatusMessage(
             message: "Nous n'arrivons pas à charger votre panier...",
           ),
         ),

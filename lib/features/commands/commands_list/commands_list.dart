@@ -83,7 +83,7 @@ class CommandsList extends ConsumerWidget {
       children: [
         for (final command in commands) 
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding, vertical: 8),
             child: InkWell(
               onTap: () => _openCommandDetail(context, command, refetch),
               child: CommandCard(command: command)

@@ -20,9 +20,9 @@ class BasketProductCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
+      padding: EdgeInsets.symmetric(
         vertical: 8,
-        horizontal: ScreenHelper.horizontalPadding
+        horizontal: ScreenHelper.instance.horizontalPadding
       ),
       child: Row(
         children: [

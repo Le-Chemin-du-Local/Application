@@ -12,9 +12,9 @@ class BasketSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.all(ScreenHelper.horizontalPadding),
-      child: Text("Nous vous remercions de votre commande !"),
+    return Padding(
+      padding: EdgeInsets.all(ScreenHelper.instance.horizontalPadding),
+      child: const Text("Nous vous remercions de votre commande !"),
     );
   }
 }

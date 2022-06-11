@@ -40,7 +40,7 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(ScreenHelper.horizontalPadding),
+        padding: EdgeInsets.all(ScreenHelper.instance.horizontalPadding),
         child: _isLoading ? const Center(child: CircularProgressIndicator(),) : Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [

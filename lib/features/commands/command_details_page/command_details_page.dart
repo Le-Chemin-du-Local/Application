@@ -59,9 +59,9 @@ class CommandDetailsPage extends StatelessWidget {
   Widget _buildContent(BuildContext context, Command command, Refetch? refetch) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           vertical: 16,
-          horizontal: ScreenHelper.horizontalPadding
+          horizontal: ScreenHelper.instance.horizontalPadding
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

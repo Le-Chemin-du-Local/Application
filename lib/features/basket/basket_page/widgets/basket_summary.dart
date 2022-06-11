@@ -29,7 +29,7 @@ class BasketSummary extends ConsumerWidget {
               children: [
                 // La liste des commandes
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+                  padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
                   child: Text("Commandes à retirer", style: Theme.of(context).textTheme.headline2,),
                 ),
                 const Flexible(
@@ -51,8 +51,8 @@ class BasketSummary extends ConsumerWidget {
 
         // Le bouton
         Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: ScreenHelper.horizontalPadding,
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenHelper.instance.horizontalPadding,
             vertical: 10
           ),
           child: ElevatedButton(

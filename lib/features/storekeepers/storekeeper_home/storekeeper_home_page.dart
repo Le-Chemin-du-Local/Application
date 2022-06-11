@@ -26,7 +26,7 @@ class StoreKeeperHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: ScreenHelper.horizontalPadding, left: ScreenHelper.horizontalPadding, right: ScreenHelper.horizontalPadding),
+      padding: EdgeInsets.only(top: ScreenHelper.instance.horizontalPadding, left: ScreenHelper.instance.horizontalPadding, right: ScreenHelper.instance.horizontalPadding),
       child: CustomScrollView(
         controller: ScrollController(),
         slivers: [

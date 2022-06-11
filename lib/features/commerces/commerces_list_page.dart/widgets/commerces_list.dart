@@ -89,7 +89,7 @@ class CommercesList extends StatelessWidget {
             Flexible(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+                  padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,    

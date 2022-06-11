@@ -1,6 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
-import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/header_profile_picture.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +63,7 @@ class HeaderImage extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: ScreenHelper.horizontalPadding),
+                  padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [

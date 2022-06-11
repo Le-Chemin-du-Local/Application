@@ -66,10 +66,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     child: Container(
                       width: constraints.maxWidth > maxFormWidth ? maxFormWidth : constraints.maxWidth,
                       height: double.infinity,
-                      padding: const EdgeInsets.only(
+                      padding: EdgeInsets.only(
                         top: 20,
-                        left: ScreenHelper.horizontalPadding,
-                        right: ScreenHelper.horizontalPadding,
+                        left: ScreenHelper.instance.horizontalPadding,
+                        right: ScreenHelper.instance.horizontalPadding,
                       ),
                       decoration: BoxDecoration(
                         borderRadius: const BorderRadius.only(
