@@ -7,7 +7,7 @@ import 'package:chemin_du_local/features/storekeepers/storekeeper_page/layout_bi
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/layout_small.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/widgets/header_image.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
-import 'package:chemin_du_local/features/user/user.dart';
+import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:sliver_tools/sliver_tools.dart';

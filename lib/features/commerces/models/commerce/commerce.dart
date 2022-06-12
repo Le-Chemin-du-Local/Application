@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/features/commerces/models/business_hours/business_hours.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
-import 'package:chemin_du_local/features/user/user.dart';
+import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/place/models/address/address.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';

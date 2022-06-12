@@ -8,7 +8,7 @@ import 'package:chemin_du_local/features/storekeepers/services/services_page/ser
 import 'package:chemin_du_local/features/storekeepers/storekeeper_home/storekeeper_home_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/storekeeper_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_settings/storekeeper_settings_page.dart';
-import 'package:chemin_du_local/features/user/user.dart';
+import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
 import 'package:flutter/material.dart';
 

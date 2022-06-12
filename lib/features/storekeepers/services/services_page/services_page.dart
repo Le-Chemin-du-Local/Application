@@ -5,7 +5,7 @@ import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_p
 import 'package:chemin_du_local/features/storekeepers/services/services.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/widgets/service_card.dart';
-import 'package:chemin_du_local/features/user/user.dart';
+import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 

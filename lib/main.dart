@@ -10,7 +10,7 @@ import 'package:chemin_du_local/features/authentication/app_user_controller.dart
 import 'package:chemin_du_local/features/authentication/authentication_graphql.dart';
 import 'package:chemin_du_local/features/main_page/clients_main_page.dart';
 import 'package:chemin_du_local/features/main_page/storekeepers_main_page.dart';
-import 'package:chemin_du_local/features/user/user.dart';
+import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/theme/cl_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
 import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
-import 'package:chemin_du_local/features/user/user.dart';
+import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

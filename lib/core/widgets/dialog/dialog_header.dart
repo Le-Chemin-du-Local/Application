@@ -20,7 +20,9 @@ class DialogHeader extends StatelessWidget {
         children: [
           // The title
           Expanded(
-            child: Text(title, style: Theme.of(context).textTheme.headline2,),
+            child: Text(title, style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              fontWeight: FontWeight.w500
+            ),),
           ),
           const SizedBox(width: 8.0,),
 
