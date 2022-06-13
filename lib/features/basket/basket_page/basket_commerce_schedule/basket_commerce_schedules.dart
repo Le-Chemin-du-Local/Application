@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/dates_helper.dart';
-import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_schedules_list.dart';
+import 'package:chemin_du_local/features/basket/basket_page/basket_commerce_schedule/widgets/basket_schedules_list.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -43,9 +43,12 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
                 children: [
                   // Le titre
                   Text(
-                    "Choix du créneau de retrait pour ${widget.commerce.name}",
-                    style: Theme.of(context).textTheme.headline2,
+                    "Choix du créneau de retrait pour",
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
+                  Text(widget.commerce.name, style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    fontWeight: FontWeight.w500
+                  ),),
                   const SizedBox(height: 12,),
 
                   // Le selecteur de date

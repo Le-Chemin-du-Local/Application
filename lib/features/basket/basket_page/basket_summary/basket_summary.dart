@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_commerce_card.dart';
+import 'package:chemin_du_local/features/basket/basket_page/basket_summary/widgets/basket_commerce_card.dart';
+import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_price.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:chemin_du_local/features/commands/commands_list/commands_list.dart';
 import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
@@ -61,44 +62,8 @@ class BasketSummary extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Le prix sous total
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Sous-total (${_calculateTotalItems()} articles)", style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    fontWeight: FontWeight.w500
-                  ),),
-                  Text("${_calculatePrice().toStringAsFixed(2)}€", style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    fontWeight: FontWeight.w500
-                  ),)
-                ],
-              ),
-              const SizedBox(height: 6,),
-
-              // La remise potentielle
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Remise", style: Theme.of(context).textTheme.titleMedium,),
-                  Text("0€", style: Theme.of(context).textTheme.titleMedium)
-                ],
-              ),
-              const SizedBox(height: 6,),
-
-              // Le total
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Total", style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.secondary
-                  ),),
-                  Text("${_calculatePrice().toStringAsFixed(2)}€", style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.secondary
-                  ),)
-                ],
-              ),
+              // Le prix
+              BasketPrice(basket: basket),
               const SizedBox(height: 26,),
 
               ElevatedButton(
@@ -119,33 +84,5 @@ class BasketSummary extends ConsumerWidget {
         ),
       ],
     );
-  }
-
-  int _calculateTotalItems() {
-    int result = 0;
-    for (final commerce in basket.commerces) {
-      result += commerce.paniers.length;
-      for (final product in commerce.products) {
-        result += product.quantity;
-      }
-    }
-
-    return result;
-  }
-
-  double _calculatePrice() {
-    double price = 0.0;
-
-    for (final commerce in basket.commerces) {
-      for (final product in commerce.products) {
-        price += ((product.product.price ?? 0) * product.quantity);
-      }
-
-      for (final panier in commerce.paniers) {
-        price += panier.price;
-      }
-    } 
-
-    return price;
   }
 }

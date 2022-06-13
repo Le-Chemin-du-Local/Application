@@ -95,7 +95,7 @@ class BasketSchedulesList extends StatelessWidget {
             onTap: () => onIndexChanged(i),
             child: Container(
               decoration: BoxDecoration(
-                color: i == currentDateIndex ? Theme.of(context).colorScheme.primary :  Theme.of(context).colorScheme.surface,
+                color: i == currentDateIndex ? Theme.of(context).colorScheme.secondaryContainer :  Theme.of(context).colorScheme.surface,
                 border: Border(
                   bottom: BorderSide(
                     color: Theme.of(context).colorScheme.outline
@@ -110,21 +110,19 @@ class BasketSchedulesList extends StatelessWidget {
                   Text(
                     "${DateFormat("HH:mm").format(hours[i])}-${DateFormat("HH:mm").format(hours[i+1])}",
                     style: TextStyle(
-                      fontWeight: i == currentDateIndex ? FontWeight.bold : FontWeight.normal
+                      fontWeight: i == currentDateIndex ? FontWeight.w600 : FontWeight.w400
                     ),
                   ),
                   
                   // Le bouton choisir
                   Text(
-                    "Choisir de créneau",
+                    i == currentDateIndex ? "Séléctionné" : "Choisir de créneau",
                     style: i == currentDateIndex 
                       ? const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontStyle: FontStyle.italic
+                          fontWeight: FontWeight.w600,
                         )
                       : TextStyle(
-                          color: Theme.of(context).colorScheme.primary,
-                          decoration: TextDecoration.underline
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                   ) 
                 ],

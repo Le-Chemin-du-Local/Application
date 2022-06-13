@@ -27,6 +27,10 @@ mixin _$User {
   String? get lastName => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
   Commerce? get commerce => throw _privateConstructorUsedError;
+  List<ClPaymentMethod> get registeredPaymentMethods =>
+      throw _privateConstructorUsedError;
+  ClPaymentMethod? get defaultPaymentMethod =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,9 +48,12 @@ abstract class $UserCopyWith<$Res> {
       String? firstName,
       String? lastName,
       DateTime? createdAt,
-      Commerce? commerce});
+      Commerce? commerce,
+      List<ClPaymentMethod> registeredPaymentMethods,
+      ClPaymentMethod? defaultPaymentMethod});
 
   $CommerceCopyWith<$Res>? get commerce;
+  $ClPaymentMethodCopyWith<$Res>? get defaultPaymentMethod;
 }
 
 /// @nodoc
@@ -66,6 +73,8 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? lastName = freezed,
     Object? createdAt = freezed,
     Object? commerce = freezed,
+    Object? registeredPaymentMethods = freezed,
+    Object? defaultPaymentMethod = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -96,6 +105,14 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.commerce
           : commerce // ignore: cast_nullable_to_non_nullable
               as Commerce?,
+      registeredPaymentMethods: registeredPaymentMethods == freezed
+          ? _value.registeredPaymentMethods
+          : registeredPaymentMethods // ignore: cast_nullable_to_non_nullable
+              as List<ClPaymentMethod>,
+      defaultPaymentMethod: defaultPaymentMethod == freezed
+          ? _value.defaultPaymentMethod
+          : defaultPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as ClPaymentMethod?,
     ));
   }
 
@@ -107,6 +124,18 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
 
     return $CommerceCopyWith<$Res>(_value.commerce!, (value) {
       return _then(_value.copyWith(commerce: value));
+    });
+  }
+
+  @override
+  $ClPaymentMethodCopyWith<$Res>? get defaultPaymentMethod {
+    if (_value.defaultPaymentMethod == null) {
+      return null;
+    }
+
+    return $ClPaymentMethodCopyWith<$Res>(_value.defaultPaymentMethod!,
+        (value) {
+      return _then(_value.copyWith(defaultPaymentMethod: value));
     });
   }
 }
@@ -123,10 +152,14 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       String? firstName,
       String? lastName,
       DateTime? createdAt,
-      Commerce? commerce});
+      Commerce? commerce,
+      List<ClPaymentMethod> registeredPaymentMethods,
+      ClPaymentMethod? defaultPaymentMethod});
 
   @override
   $CommerceCopyWith<$Res>? get commerce;
+  @override
+  $ClPaymentMethodCopyWith<$Res>? get defaultPaymentMethod;
 }
 
 /// @nodoc
@@ -147,6 +180,8 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? lastName = freezed,
     Object? createdAt = freezed,
     Object? commerce = freezed,
+    Object? registeredPaymentMethods = freezed,
+    Object? defaultPaymentMethod = freezed,
   }) {
     return _then(_$_User(
       id == freezed
@@ -177,6 +212,14 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.commerce
           : commerce // ignore: cast_nullable_to_non_nullable
               as Commerce?,
+      registeredPaymentMethods: registeredPaymentMethods == freezed
+          ? _value._registeredPaymentMethods
+          : registeredPaymentMethods // ignore: cast_nullable_to_non_nullable
+              as List<ClPaymentMethod>,
+      defaultPaymentMethod: defaultPaymentMethod == freezed
+          ? _value.defaultPaymentMethod
+          : defaultPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as ClPaymentMethod?,
     ));
   }
 }
@@ -190,7 +233,11 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       this.firstName,
       this.lastName,
       this.createdAt,
-      this.commerce});
+      this.commerce,
+      final List<ClPaymentMethod> registeredPaymentMethods =
+          const <ClPaymentMethod>[],
+      this.defaultPaymentMethod})
+      : _registeredPaymentMethods = registeredPaymentMethods;
 
   factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
 
@@ -208,10 +255,20 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   final DateTime? createdAt;
   @override
   final Commerce? commerce;
+  final List<ClPaymentMethod> _registeredPaymentMethods;
+  @override
+  @JsonKey()
+  List<ClPaymentMethod> get registeredPaymentMethods {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_registeredPaymentMethods);
+  }
+
+  @override
+  final ClPaymentMethod? defaultPaymentMethod;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, role: $role, email: $email, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, commerce: $commerce)';
+    return 'User(id: $id, role: $role, email: $email, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, commerce: $commerce, registeredPaymentMethods: $registeredPaymentMethods, defaultPaymentMethod: $defaultPaymentMethod)';
   }
 
   @override
@@ -225,7 +282,10 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('lastName', lastName))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('commerce', commerce));
+      ..add(DiagnosticsProperty('commerce', commerce))
+      ..add(DiagnosticsProperty(
+          'registeredPaymentMethods', registeredPaymentMethods))
+      ..add(DiagnosticsProperty('defaultPaymentMethod', defaultPaymentMethod));
   }
 
   @override
@@ -239,7 +299,11 @@ class _$_User with DiagnosticableTreeMixin implements _User {
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
-            const DeepCollectionEquality().equals(other.commerce, commerce));
+            const DeepCollectionEquality().equals(other.commerce, commerce) &&
+            const DeepCollectionEquality().equals(
+                other._registeredPaymentMethods, _registeredPaymentMethods) &&
+            const DeepCollectionEquality()
+                .equals(other.defaultPaymentMethod, defaultPaymentMethod));
   }
 
   @JsonKey(ignore: true)
@@ -252,7 +316,9 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(createdAt),
-      const DeepCollectionEquality().hash(commerce));
+      const DeepCollectionEquality().hash(commerce),
+      const DeepCollectionEquality().hash(_registeredPaymentMethods),
+      const DeepCollectionEquality().hash(defaultPaymentMethod));
 
   @JsonKey(ignore: true)
   @override
@@ -272,7 +338,9 @@ abstract class _User implements User {
       final String? firstName,
       final String? lastName,
       final DateTime? createdAt,
-      final Commerce? commerce}) = _$_User;
+      final Commerce? commerce,
+      final List<ClPaymentMethod> registeredPaymentMethods,
+      final ClPaymentMethod? defaultPaymentMethod}) = _$_User;
 
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
@@ -290,6 +358,12 @@ abstract class _User implements User {
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @override
   Commerce? get commerce => throw _privateConstructorUsedError;
+  @override
+  List<ClPaymentMethod> get registeredPaymentMethods =>
+      throw _privateConstructorUsedError;
+  @override
+  ClPaymentMethod? get defaultPaymentMethod =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

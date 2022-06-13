@@ -11,24 +11,20 @@ class StripeService {
 
   static final StripeService instance = StripeService._();
 
-  Future<Map<String, dynamic>> handlePaymentIntent({
+  Future<Map<String, dynamic>> handleCreateOrder({
     required String authorizationHeader,
     required Basket basket,
     String? paymentMethodId,
-    String? paymentIntentId,
   }) async {
     final response = await http.post(
-      Uri.parse("$kRESTApiBaseUrl/create-payment-intent"),
+      Uri.parse("$kRESTApiBaseUrl/create-order"),
       headers: {
         HttpHeaders.authorizationHeader: authorizationHeader,
         HttpHeaders.contentTypeHeader: "application/json",
       },
       body: json.encode({
-        "useStripeSDK": true,
         if (paymentMethodId != null)
           "paymentMethodId": paymentMethodId, 
-        if (paymentIntentId != null) 
-          "paymentIntentId": paymentIntentId,
         "basket": <String, dynamic>{
           "commerces": <Map<String, dynamic>>[
             for (final commerce in basket.commerces) <String, dynamic>{
@@ -47,6 +43,31 @@ class StripeService {
             }
           ]
         }
+      })
+    );
+
+    if (response.statusCode != 200) {
+      throw PlatformException(code: response.statusCode.toString(), message: response.body);
+    }
+
+    return json.decode(response.body) as Map<String, dynamic>;
+  }
+
+
+  Future<Map<String, dynamic>> handleSetupIntent({
+    required String authorizationHeader,
+    String? paymentMethodId,
+    String? setupIntentId,
+  }) async {
+    final response = await http.post(
+      Uri.parse("$kRESTApiBaseUrl/create-setup-intent"),
+      headers: {
+        HttpHeaders.authorizationHeader: authorizationHeader,
+        HttpHeaders.contentTypeHeader: "application/json",
+      },
+      body: json.encode({
+        if (paymentMethodId != null)
+          "paymentMethodId": paymentMethodId, 
       })
     );
 

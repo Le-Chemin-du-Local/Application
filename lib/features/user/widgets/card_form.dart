@@ -1,29 +1,25 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
-import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:chemin_du_local/features/stripe/stripe_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
-class BasketPaymentForm extends ConsumerStatefulWidget {
-  const BasketPaymentForm({
+class CardForm extends ConsumerStatefulWidget {
+  const CardForm({
     Key? key,
-    required this.basket,
-    required this.onSuccess,
+    this.payButtonText = "Payer avec cette carte"
   }) : super(key: key);
 
-  final Basket basket;
-
-  final Function() onSuccess;
+  final String payButtonText;
 
   @override
-  ConsumerState<BasketPaymentForm> createState() => _BasketPaymentFormState();
+  ConsumerState<CardForm> createState() => _CardFormState();
 }
 
-class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
+class _CardFormState extends ConsumerState<CardForm> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _cardNumber = "";
@@ -38,38 +34,40 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.all(ScreenHelper.instance.horizontalPadding),
-        child: _isLoading ? const Center(child: CircularProgressIndicator(),) : Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (_errorMessage.isNotEmpty) ...{
-              ClStatusMessage(
-                message: _errorMessage,
-              ),
-              const SizedBox(height: 12.0,) 
-            },
-
-            LayoutBuilder(
-              builder: (context, constraints) {
-                if (constraints.maxWidth >= ScreenHelper.breakpointTablet) {
-                  return Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: _content().reversed.toList()
-                  );
-                }
-
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: _content(),
-                );
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(ScreenHelper.instance.horizontalPadding),
+          child: _isLoading ? const Center(child: CircularProgressIndicator(),) : Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (_errorMessage.isNotEmpty) ...{
+                ClStatusMessage(
+                  message: _errorMessage,
+                ),
+                const SizedBox(height: 12.0,) 
               },
-            )
-          ],
-        ),
-      )
+    
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  if (constraints.maxWidth >= ScreenHelper.breakpointTablet) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: _content().reversed.toList()
+                    );
+                  }
+    
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: _content(),
+                  );
+                },
+              )
+            ],
+          ),
+        )
+      ),
     );
   }
 
@@ -129,7 +127,7 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
                   const Icon(Icons.lock),
                   const SizedBox(width: 4,),
       
-                  Text("Payer ${_calculatePrice().toStringAsFixed(2)}€")
+                  Text(widget.payButtonText),
                 ],
               ),
             ),
@@ -162,22 +160,6 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
         borderRadius: BorderRadius.circular(12.0),
       ),
     );
-  }
-
-  double _calculatePrice() {
-    double price = 0.0;
-
-    for (final commerce in widget.basket.commerces) {
-      for (final product in commerce.products) {
-        price += ((product.product.price ?? 0) * product.quantity);
-      }
-
-      for (final panier in commerce.paniers) {
-        price += panier.price;
-      }
-    } 
-
-    return price;
   }
 
   Future _handlePayPress() async {
@@ -214,40 +196,25 @@ class _BasketPaymentFormState extends ConsumerState<BasketPaymentForm> {
         )
       );
 
-      final paymentIntentResult = await StripeService.instance.handlePaymentIntent(
+      final setupIntentResult = await StripeService.instance.handleSetupIntent(
         authorizationHeader: authHeader,
         paymentMethodId: paymentMethod.id,
-        basket: widget.basket
       );
 
-      final String? clientSecret = paymentIntentResult["clientSecret"] as String?;
-      final bool? requiresAction = paymentIntentResult["requiresAction"] as bool?;
+      final String? clientSecret = setupIntentResult["clientSecret"] as String?;
 
-      if (clientSecret != null && !(requiresAction ?? false)) {
-        widget.onSuccess(); 
+      if (clientSecret != null) {
+        final setupIntent = await Stripe.instance.confirmSetupIntent(clientSecret, const PaymentMethodParams.card(
+          paymentMethodData: PaymentMethodData()
+        ));
+
+        Navigator.of(context).pop(setupIntent.paymentMethodId);
       }
-
-      if (clientSecret != null && (requiresAction ?? false)) {
-         final paymentIntent = await Stripe.instance.handleCardAction(clientSecret);
-
-         final result = await StripeService.instance.handlePaymentIntent(
-           authorizationHeader: authHeader,
-           paymentMethodId: paymentMethod.id,
-           paymentIntentId: paymentIntent.id,
-           basket: widget.basket
-          );
-
-         if ((result["clientSecret"] as String?) != null) {
-           widget.onSuccess();
-         }
-      }
-
-
     }
-    on Exception {
+    on Exception catch(e) {
       setState(() {
         _isLoading = false;
-        _errorMessage = "Le paiement n'a pas put se faire...";
+        _errorMessage = "Le paiement n'a pas put se faire... $e";
       });
     }
   }

@@ -77,17 +77,17 @@ class ClTheme {
 
       textTheme: GoogleFonts.rubikTextTheme().copyWith(
         // Body
-        bodyLarge: const TextStyle(fontSize: 16, color: Palette.colorDark),
-        bodyMedium: const TextStyle(fontSize: 14, color: Palette.colorDark),
-        bodySmall: const TextStyle(fontSize: 12, color: Palette.colorDark),
+        bodyLarge: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Palette.colorDark),
+        bodyMedium: const TextStyle(fontSize: 14, fontWeight: FontWeight.w400, color: Palette.colorDark),
+        bodySmall: const TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: Palette.colorDark),
 
         // Heading
-        headlineLarge: const TextStyle(fontSize: 32, color: Palette.colorDark),
-        headlineMedium: const TextStyle(fontSize: 24, color: Palette.colorDark),
-        headlineSmall: const TextStyle(fontSize: 20, color: Palette.colorDark),
+        headlineLarge: const TextStyle(fontSize: 32, fontWeight: FontWeight.w400, color: Palette.colorDark),
+        headlineMedium: const TextStyle(fontSize: 24, fontWeight: FontWeight.w400, color: Palette.colorDark),
+        headlineSmall: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400, color: Palette.colorDark),
 
         // Titiel
-        titleMedium: const TextStyle(fontSize: 16, color: Palette.colorDark)
+        titleMedium: const TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: Palette.colorDark)
       ),
 
       visualDensity: VisualDensity.standard

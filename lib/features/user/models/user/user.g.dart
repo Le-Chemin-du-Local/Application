@@ -18,6 +18,15 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       commerce: json['commerce'] == null
           ? null
           : Commerce.fromJson(json['commerce'] as Map<String, dynamic>),
+      registeredPaymentMethods: (json['registeredPaymentMethods']
+                  as List<dynamic>?)
+              ?.map((e) => ClPaymentMethod.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <ClPaymentMethod>[],
+      defaultPaymentMethod: json['defaultPaymentMethod'] == null
+          ? null
+          : ClPaymentMethod.fromJson(
+              json['defaultPaymentMethod'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
@@ -28,4 +37,6 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'lastName': instance.lastName,
       'createdAt': instance.createdAt?.toIso8601String(),
       'commerce': instance.commerce,
+      'registeredPaymentMethods': instance.registeredPaymentMethods,
+      'defaultPaymentMethod': instance.defaultPaymentMethod,
     };

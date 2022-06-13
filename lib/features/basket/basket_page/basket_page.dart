@@ -4,10 +4,11 @@ import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/steps_indicator.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/authentication/login_dialog.dart';
-import 'package:chemin_du_local/features/basket/basket_page/basket_payment_form.dart';
-import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_commerce_schedules.dart';
+import 'package:chemin_du_local/features/basket/basket_page/basket_commerce_schedule/basket_commerce_schedules.dart';
+import 'package:chemin_du_local/features/basket/basket_page/basket_payment/basket_payment.dart';
+import 'package:chemin_du_local/features/user/widgets/card_form.dart';
 import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_success.dart';
-import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_summary.dart';
+import 'package:chemin_du_local/features/basket/basket_page/basket_summary/basket_summary.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:chemin_du_local/features/basket/riverpod/basket_controller.dart';
 import 'package:flutter/material.dart';
@@ -111,14 +112,14 @@ class _BasketPageState extends ConsumerState<BasketPage> {
                       commerce: commerce.commerce,
                       onDateChoosed: (date) => _onScheduleChoosed(basket, commerce.commerce.id!, date),
                     ),
-                  BasketPaymentForm(
+                  BasketPayment(
                     basket: basket,
-                    onSuccess: () {
+                    onHasBeenPayed: () {
                       setState(() {
                         _successBasket = basket;
-                      });
-                      ref.watch(basketControllerProvider.notifier).reset();
-                    },
+                        });
+                        ref.watch(basketControllerProvider.notifier).reset();
+                      },
                   )
                 ],
               ),

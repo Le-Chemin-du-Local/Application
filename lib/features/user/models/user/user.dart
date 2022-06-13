@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
+import 'package:chemin_du_local/features/user/models/cl_payment_method/cl_payment_method.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -21,6 +22,8 @@ class User with _$User {
     String? lastName,
     DateTime? createdAt,
     Commerce? commerce,
+    @Default(<ClPaymentMethod>[]) List<ClPaymentMethod> registeredPaymentMethods,
+    ClPaymentMethod? defaultPaymentMethod,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
