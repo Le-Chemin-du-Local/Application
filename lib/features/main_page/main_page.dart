@@ -52,29 +52,49 @@ class MainPageState extends State<MainPage> {
         builder: (context, constraints) {
           bool useBigLayout = constraints.maxWidth >= ScreenHelper.breakpointPC;
 
-          return  SafeArea(
-            child: Scaffold(
-              appBar:AppBar(
-                title: Text(widget.pageItems[_currentIndex].title),
+          final List<Color> gradient = [
+            Theme.of(context).colorScheme.background,
+            Theme.of(context).colorScheme.background,
+            Colors.black,
+            Colors.black,
+          ];
+          const double fillPercent = 50; // fills 56.23% for container from bottom
+          const double fillStop = (100 - fillPercent) / 100;
+          final List<double> stops = [0.0, fillStop, fillStop, 1.0];
+
+          return  Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: gradient,
+                stops: stops,
+                end: Alignment.bottomCenter,
+                begin: Alignment.topCenter,
               ),
-              body: Theme(
-                data: Theme.of(context).copyWith(
-                  appBarTheme: ClTheme.themeSecondAppBar(context)
+            ),
+            child: SafeArea(
+              child: Scaffold(
+                appBar:AppBar(
+                  title: Text(widget.pageItems[_currentIndex].title),
                 ),
-                child: widget.pages[_currentIndex]
-              ),
-              drawer: useBigLayout 
-                ? MenuDrawer(
-                    pageItems: widget.pageItems,
-                    currentPageIndex: _currentIndex,
-                    onSelectedPage: selectedPage,
-                    shouldPop: false,
-                  )
-                : null,
-              bottomNavigationBar: useBigLayout ? null : custom.BottomAppBar(
-                currentPageIndex: _currentIndex,
-                onSelectedPage: selectedPage,
-                pageItems: widget.pageItems,
+                body: Theme(
+                  data: Theme.of(context).copyWith(
+                    appBarTheme: ClTheme.themeSecondAppBar(context)
+                  ),
+                  child: widget.pages[_currentIndex]
+                ),
+                drawer: useBigLayout 
+                  ? MenuDrawer(
+                      pageItems: widget.pageItems,
+                      currentPageIndex: _currentIndex,
+                      onSelectedPage: selectedPage,
+                      shouldPop: false,
+                    )
+                  : null,
+                bottomNavigationBar: useBigLayout ? null : custom.BottomAppBar(
+                  currentPageIndex: _currentIndex,
+                  onSelectedPage: selectedPage,
+                  pageItems: widget.pageItems,
+                ),
               ),
             ),
           );
