@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class CommerceInfoCard extends StatelessWidget {
   const CommerceInfoCard({
@@ -18,7 +18,12 @@ class CommerceInfoCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Le titre
-          const Text("Informations sur le commerce", style: TextStyle(fontWeight: FontWeight.bold),),
+          Text(
+            "Informations sur le commerce", 
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              fontWeight: FontWeight.w500
+            ),
+          ),
           const SizedBox(height: 4,),
 
           // Le nom du commerce

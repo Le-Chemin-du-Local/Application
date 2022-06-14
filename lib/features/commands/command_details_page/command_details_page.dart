@@ -68,7 +68,10 @@ class CommandDetailsPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Text descriptif
-            const Text("Présentez-vous au commerce au créneau de collecte indiqué en lui présentant la carte associée à l’adresse. Il validera ce reçu et vous pourrez repartir avec les produits de votre commerçant préféré 😉"),
+            Text(
+              "Présentez-vous au commerce au créneau de collecte indiqué en lui présentant la carte associée à l’adresse. Il validera ce reçu et vous pourrez repartir avec les produits de votre commerçant préféré 😉",
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
             const SizedBox(height: 24,),
 
             // Le résumé

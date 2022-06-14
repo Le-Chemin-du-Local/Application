@@ -52,7 +52,7 @@ class CommandCardCommerce extends StatelessWidget {
                 const SizedBox(width: 4,),
                 Text(
                   CommandStatus.detailed[commerceCommand.status] ?? "Inconnue",
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: Palette.colorWhite
                   ),
                 ),

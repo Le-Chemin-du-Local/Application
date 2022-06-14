@@ -2,8 +2,6 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_summary/widgets/basket_commerce_card.dart';
 import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_price.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
-import 'package:chemin_du_local/features/commands/commands_list/commands_list.dart';
-import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -32,7 +30,12 @@ class BasketSummary extends ConsumerWidget {
                 // // La liste des commandes
                 // Padding(
                 //   padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
-                //   child: Text("Commandes à retirer", style: Theme.of(context).textTheme.headline2,),
+                //   child: Text(
+                //     "Commandes à retirer", 
+                //     style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                //       fontWeight: FontWeight.w500
+                //     ),
+                //   ),
                 // ),
                 // const Flexible(
                 //   child: CommandsList(

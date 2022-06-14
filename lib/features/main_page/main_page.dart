@@ -27,8 +27,6 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   int _currentIndex = 1;
 
-  bool _isMenuBarMinimified = false;
-
   @override
   void initState() {
     super.initState();
@@ -71,7 +69,6 @@ class MainPageState extends State<MainPage> {
                     currentPageIndex: _currentIndex,
                     onSelectedPage: selectedPage,
                     shouldPop: false,
-                    isMinimified: _isMenuBarMinimified,
                   )
                 : null,
               bottomNavigationBar: useBigLayout ? null : custom.BottomAppBar(

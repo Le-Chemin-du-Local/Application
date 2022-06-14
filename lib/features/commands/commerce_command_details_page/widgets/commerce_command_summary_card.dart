@@ -18,15 +18,20 @@ class CommerceCommandSummaryCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // Le titre
-          Text("Récapitulatif de command", style: Theme.of(context).textTheme.headline2),
+          Text(
+            "Récapitulatif de command", 
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              fontWeight: FontWeight.w500
+            )
+          ),
           const SizedBox(height: 18,),
 
           // Les produits 
           for (final cccommand in command.cccommands)
             for (final product in cccommand.products) ...{
               DefaultTextStyle(
-                style: Theme.of(context).textTheme.bodyText2!.copyWith(
-                  fontWeight: FontWeight.bold
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.w500
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

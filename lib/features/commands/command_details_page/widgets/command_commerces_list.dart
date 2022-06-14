@@ -22,19 +22,24 @@ class CommandCommercesList extends StatelessWidget {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       children: [
-        for (int i = 0; i < commerceCommands.length; ++i) ...{
+        for (final command in commerceCommands) ...{
           InkWell(
-            onTap: () => _openCommerceCommandDetails(context, commerceCommands[i], i + 1),
+            onTap: () => _openCommerceCommandDetails(context, command),
             child: ClCard(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Le titre
-                  Text("Commerce ${i+1}", style: const TextStyle(fontWeight: FontWeight.bold),),
+                  Text(
+                    command.commerce?.name ?? "Nom inconnue", 
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      fontWeight: FontWeight.w500
+                    ),
+                  ),
                   const SizedBox(height: 18,),
 
-                  CommandCardCommerce(commerceCommand: commerceCommands[i])
+                  CommandCardCommerce(commerceCommand: command)
                 ],
               ),
             ),
@@ -45,10 +50,10 @@ class CommandCommercesList extends StatelessWidget {
     );
   }
 
-  Future _openCommerceCommandDetails(BuildContext context, CommerceCommand commerceCommand, int index) async {
+  Future _openCommerceCommandDetails(BuildContext context, CommerceCommand commerceCommand) async {
     final bool commerceDone = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
-        builder: (context) => CommerceCommandDetailsPage(commerceCommand: commerceCommand, commandIndex: index)
+        builder: (context) => CommerceCommandDetailsPage(commerceCommand: commerceCommand)
       )
     ) ?? false;
 

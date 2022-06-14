@@ -54,6 +54,31 @@ class StripeService {
   }
 
 
+  Future<Map<String, dynamic>> handleCompleteOrder({
+    required String authorizationHeader,
+    required String orderId,
+    String? paymentIntentId,
+  }) async {
+    final response = await http.post(
+      Uri.parse("$kRESTApiBaseUrl/complete-order"),
+      headers: {
+        HttpHeaders.authorizationHeader: authorizationHeader,
+        HttpHeaders.contentTypeHeader: "application/json",
+      },
+      body: json.encode({
+        "commerceCommandId": orderId,
+        if (paymentIntentId != null)
+          "paymentIntentId": paymentIntentId, 
+      })
+    );
+
+    if (response.statusCode != 200) {
+      throw PlatformException(code: response.statusCode.toString(), message: response.body);
+    }
+
+    return json.decode(response.body) as Map<String, dynamic>;
+  }
+
   Future<Map<String, dynamic>> handleSetupIntent({
     required String authorizationHeader,
     String? paymentMethodId,

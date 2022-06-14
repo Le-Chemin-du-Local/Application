@@ -8,7 +8,6 @@ import 'package:chemin_du_local/features/basket/basket_page/basket_payment/widge
 import 'package:chemin_du_local/features/basket/basket_page/widgets/basket_price.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:chemin_du_local/features/stripe/stripe_service.dart';
-import 'package:chemin_du_local/features/user/models/cl_payment_method/cl_payment_method.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -96,6 +95,11 @@ class _BasketPaymentState extends ConsumerState<BasketPayment> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                if (_errorMessage.isNotEmpty) ...{
+                  ClStatusMessage(message: _errorMessage,),
+                  const SizedBox(height: 18,)
+                },
+
                 // Le récapitulatif
                 SummaryCard(basket: widget.basket),
                 const SizedBox(height: 18,),
