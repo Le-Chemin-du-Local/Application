@@ -1,5 +1,5 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
-import 'package:chemin_du_local/features/commands/commands_list/widgets/command_card_commerce.dart';
+import 'package:chemin_du_local/features/commands/commands_list_page/widgets/command_card_commerce.dart';
 import 'package:chemin_du_local/features/commands/commerce_command_details_page/commerce_command_details_page.dart';
 import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
 import 'package:flutter/material.dart';

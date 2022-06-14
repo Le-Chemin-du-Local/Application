@@ -68,6 +68,26 @@ class BasketController extends StateController<BasketState> {
     );
   }
 
+
+  Future removeBasketCommerce(BasketCommerce toRemove) async {
+    final List<BasketCommerce>? currentCommerces = state.basket.value?.commerces;
+
+    if (currentCommerces == null) return;
+
+    final Basket newBasket = Basket(
+      commerces: [
+        for (final commerce in currentCommerces)
+          if (commerce.commerce.id != toRemove.commerce.id)
+            commerce
+      ] 
+    );
+
+    await _saveBasket(newBasket);
+    state = state.copyWith(
+      basket: AsyncValue.data(newBasket)
+    );
+  }
+
   Future updateSchedule(String commerceID, DateTime schedule) async {
     final List<BasketCommerce>? currentCommerces = state.basket.value?.commerces;
     if (currentCommerces == null) return;

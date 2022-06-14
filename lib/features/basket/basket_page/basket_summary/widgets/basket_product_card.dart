@@ -123,14 +123,21 @@ class BasketProductCard extends ConsumerWidget {
   }
 
   Future _removeProduct(WidgetRef ref) async {
-    ref.read(basketControllerProvider.notifier).updateBasketCommerce(
-      commerce.copyWith(
-        products: [
-          for (final basketProduct in commerce.products)
-            if (basketProduct.product.id != product.product.id)
-              basketProduct
-        ]
-      )
-    );
+    if (commerce.products.length == 1) {
+      ref.read(basketControllerProvider.notifier).removeBasketCommerce(
+        commerce
+      );
+    }
+    else {
+      ref.read(basketControllerProvider.notifier).updateBasketCommerce(
+        commerce.copyWith(
+          products: [
+            for (final basketProduct in commerce.products)
+              if (basketProduct.product.id != product.product.id)
+                basketProduct
+          ]
+        )
+      );
+    }
   }
 }
