@@ -28,6 +28,7 @@ class PlaceAPIProvider {
       Uri.parse("$kRESTApiBaseUrl/maps/autocomplete"),
       headers: {
         HttpHeaders.contentTypeHeader: "application/json",
+        HttpHeaders.acceptCharsetHeader: "utf-8"
       },
       body: jsonEncode({
         "input": Uri.parse(input).toString(),
@@ -36,7 +37,7 @@ class PlaceAPIProvider {
     );
 
     if (response.statusCode == 200) {
-      final result = json.decode(response.body) as Map<String, dynamic>;
+      final result = json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
       if (result["status"] == "OK") {
         final List<Suggestion> suggestions = [];
         final List<Map<String, dynamic>> suggestionsMaps = (result["predictions"] as List<dynamic>).cast<Map<String, dynamic>>();
