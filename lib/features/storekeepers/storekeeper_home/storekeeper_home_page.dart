@@ -74,7 +74,7 @@ class StoreKeeperHomePage extends StatelessWidget {
   List<Widget> _buildServicesView(BuildContext context) {
     return [
       SliverToBoxAdapter(
-        child: Text("Mes services", style: Theme.of(context).textTheme.headline2,),
+        child: Text("Mes services", style: Theme.of(context).textTheme.headlineMedium,),
       ),
       const SliverToBoxAdapter(child: SizedBox(height: 16,)),
       SliverGrid(

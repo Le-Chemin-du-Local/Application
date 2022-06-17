@@ -68,7 +68,7 @@ class BusinessHoursCard extends StatelessWidget {
         children: [
           SizedBox(
             width: 152,
-            child: Text(day, style: const TextStyle(fontWeight: FontWeight.bold),),
+            child: Text(day),
           ),
           Flexible(child: Text(hoursString.replaceAll(":", "h")),)
         ],

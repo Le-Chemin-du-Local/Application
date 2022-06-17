@@ -65,7 +65,7 @@ class ProductsList extends ConsumerWidget {
                     if (products.isEmpty) 
                       for (int i = 0; i < 4; ++i)
                         ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 200),
+                          constraints: const BoxConstraints(maxWidth: 182),
                           child: Padding(
                             padding: const EdgeInsets.only(right: 12),
                             child: ClCard(
@@ -77,7 +77,7 @@ class ProductsList extends ConsumerWidget {
                     else 
                       for (final product in products) 
                         ConstrainedBox(
-                          constraints: const BoxConstraints(maxWidth: 200),
+                          constraints: const BoxConstraints(maxWidth: 182),
                           child: Padding(
                             padding: const EdgeInsets.only(right: 12),
                             child: ProductCard(

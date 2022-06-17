@@ -76,7 +76,12 @@ class HeaderImage extends StatelessWidget {
 
                       // Le mot en lui même 
                       Flexible(
-                        child: Text(storekeeperWord, style: const TextStyle(color: Palette.colorWhite),),
+                        child: Text(
+                          storekeeperWord, 
+                          style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                            color: Palette.colorWhite
+                          )
+                        ),
                       )
                     ],
                   ),

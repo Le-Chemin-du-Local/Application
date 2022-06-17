@@ -6,14 +6,12 @@ class MenuDrawer extends StatelessWidget {
   const MenuDrawer({
     Key? key, 
     required this.onSelectedPage, 
-    required this.shouldPop,
     required this.currentPageIndex, 
     required this.pageItems,
     this.isMinimified = false
   }) : super(key: key);
 
   final Function(PageItem) onSelectedPage;
-  final bool shouldPop;
   final int currentPageIndex;
 
   final List<PageItem> pageItems;
@@ -78,9 +76,7 @@ class MenuDrawer extends StatelessWidget {
                   return InkWell(
                     onTap: () {
                       onSelectedPage(pageItems[index]);
-                      if (shouldPop) {
-                        Navigator.of(context).pop();
-                      }
+                      Navigator.of(context).pop();
                     },
                     child: MenuDrawerItem(
                       item: pageItems[index],

@@ -67,11 +67,25 @@ class AddressCard extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Flexible(child: Text("Coordonnées", style: TextStyle(fontWeight: FontWeight.bold),)),
+                        Flexible(child: Text("Coordonnées", style: Theme.of(context).textTheme.titleMedium,)),
                         const SizedBox(height: 4,),
-                        Flexible(child: Text(phone)),
+                        Flexible(
+                          child: Text(
+                            phone, 
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.w300
+                            ),
+                          )
+                        ),
                         const SizedBox(height: 4,),
-                        Flexible(child: Text(email))
+                        Flexible(
+                          child: Text(
+                            email, 
+                            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.w300
+                            ),
+                          )
+                        ),
                       ],
                     ),
                   ),
@@ -84,9 +98,16 @@ class AddressCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Flexible(child: Text("Adresse", style: TextStyle(fontWeight: FontWeight.bold),)),
+                      Flexible(child: Text("Adresse", style: Theme.of(context).textTheme.titleMedium,)),
                       const SizedBox(height: 4,),
-                      Flexible(child: Text(address))
+                      Flexible(
+                        child: Text(
+                          address,
+                          style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontWeight: FontWeight.w300
+                          ),
+                        )
+                      )
                     ], 
                   )
                 )

@@ -54,6 +54,16 @@ class DashboardCard extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               child: ElevatedButton(
                 onPressed: onClick,
+                style: ElevatedButton.styleFrom(
+                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  elevation: 0,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  primary: Theme.of(context).colorScheme.primary,
+                  onPrimary: Theme.of(context).colorScheme.onPrimary,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(64.0)
+                  )
+                ),
                 child: Row(
                   children: [
                     Expanded(child: Text(title,)),

@@ -51,6 +51,7 @@ class MainPageState extends State<MainPage> {
       child: LayoutBuilder(
         builder: (context, constraints) {
           bool useBigLayout = constraints.maxWidth >= ScreenHelper.breakpointPC;
+          // bool useBigLayout = false;
 
           final List<Color> gradient = [
             Theme.of(context).colorScheme.background,
@@ -87,7 +88,6 @@ class MainPageState extends State<MainPage> {
                       pageItems: widget.pageItems,
                       currentPageIndex: _currentIndex,
                       onSelectedPage: selectedPage,
-                      shouldPop: false,
                     )
                   : null,
                 bottomNavigationBar: useBigLayout ? null : custom.BottomAppBar(

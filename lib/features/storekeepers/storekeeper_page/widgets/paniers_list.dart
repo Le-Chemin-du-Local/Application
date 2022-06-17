@@ -39,9 +39,9 @@ class PaniersList extends ConsumerWidget {
         Flexible(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
-            child: const Text(
-              "Sinon laissez vous tenter par nos paniers", 
-              style: TextStyle(fontWeight: FontWeight.bold),
+            child: Text(
+              "Nos paniers",
+              style: Theme.of(context).textTheme.titleMedium,
             ),
           ),
         ),
@@ -109,7 +109,7 @@ class PaniersList extends ConsumerWidget {
               if (paniers.isEmpty) 
                 for (int i = 0; i < 4; ++i)
                   ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 720),
+                    constraints: const BoxConstraints(maxWidth: 524),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 12),
                       child: ClCard(
@@ -121,7 +121,7 @@ class PaniersList extends ConsumerWidget {
               else 
                 for (final panier in paniers) 
                   ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 720),
+                    constraints: const BoxConstraints(maxWidth: 524),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 12),
                       child: PanierCard(

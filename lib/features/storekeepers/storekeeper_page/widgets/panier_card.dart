@@ -19,28 +19,31 @@ class PanierCard extends StatelessWidget {
     return ClCard(
       child: LayoutBuilder(
         builder: (context, constraints) {
-          final bool isBig = constraints.maxWidth >= 400;
+          final bool isBig = constraints.maxWidth >= 300;
 
           List<Widget> children = [
             // L'image
             Flexible(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxHeight: isBig ? double.infinity : 300),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12.0),
-                  child: Image.network(
-                    "$kImagesBaseUrl/paniers/${panier.id ?? ""}.jpg",
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                          : null,
+              child: AspectRatio(
+                aspectRatio: isBig ? 0.66 : 1.52,
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(maxHeight: isBig ? double.infinity : 300),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.0),
+                    child: Image.network(
+                      "$kImagesBaseUrl/paniers/${panier.id ?? ""}.jpg",
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                            : null,
+                        ),
                       ),
+                      errorBuilder: (context, error, stackTrace) {
+                        return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
+                      },
                     ),
-                    errorBuilder: (context, error, stackTrace) {
-                      return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
-                    },
                   ),
                 ),
               ),
@@ -54,8 +57,8 @@ class PanierCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // Le titre
-                  Text(panier.name, style: const TextStyle(fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 12,),
+                  Text(panier.name, style: const TextStyle(fontWeight: FontWeight.w500),),
+                  const SizedBox(height: 8,),
 
                   // Les petits badges
                   Flexible(
@@ -64,21 +67,21 @@ class PanierCard extends StatelessWidget {
                       runSpacing: 4,
                       children: [
                         Badge(
-                          child: Text("${panier.quantity} restants"),
+                          child: Text("${panier.quantity} restants", style: const TextStyle(fontSize: 9.0),),
                         ),
                         Badge(
-                          child: Text("${panier.price}€"),
+                          child: Text("${panier.price}€", style: const TextStyle(fontSize: 9.0),),
                         )
                       ],
                     ),
                   ),
-                  const SizedBox(height: 12,),
+                  const SizedBox(height: 8,),
 
                   // La description
                   Expanded(
                     child: Text(panier.description),
                   ),
-                  const SizedBox(height: 12,),
+                  const SizedBox(height: 8,),
 
                   // Le temps restant
                   if (panier.type == PanierType.temporary && panier.endingDate!= null) ...{

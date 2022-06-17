@@ -34,7 +34,7 @@ class ProductCard extends StatelessWidget {
         children: [
           // The image of the product
           AspectRatio(
-            aspectRatio: 0.9,
+            aspectRatio: 0.90,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12.0),
               child: _buildImageWithPrice(context),

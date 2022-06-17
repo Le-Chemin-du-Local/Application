@@ -67,18 +67,23 @@ class LayoutSmall extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox(height: 10,),
+        const SizedBox(height: 8,),
 
         // La description
         Padding(
           padding: EdgeInsets.symmetric(
             horizontal: ScreenHelper.instance.horizontalPadding,
-            vertical: 5
+            vertical: 8
           ),
           child: ClCard(
             child: Opacity(
               opacity: (commerce?.description ?? "").isEmpty ? 0.4 : 1.0,
-              child: Text(commerce?.description ?? "Pas de description"),
+              child: Text(
+                commerce?.description ?? "Pas de description",
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w300
+                ),
+              ),
             ),
           ),
         ),
@@ -86,9 +91,9 @@ class LayoutSmall extends StatelessWidget {
         // La liste des produits
         Flexible(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 5),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxHeight: 300),
+              constraints: const BoxConstraints(maxHeight: 316),
               child: ProductsList(
                 commerce: commerce,
                 products: products, 
@@ -105,7 +110,7 @@ class LayoutSmall extends StatelessWidget {
         // La liste des paniers
         Flexible(
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 450),
+            constraints: const BoxConstraints(maxHeight: 618),
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 5
