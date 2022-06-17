@@ -23,7 +23,6 @@ class Commerce with _$Commerce {
     @Default(<Product>[]) List<Product> productsAvailableForClickAndCollect,
     String? storekeeperWord,
     String? description,
-    @JsonKey(name: "addressDetailed")
     Address? address,
     String? phone,
     String? email,

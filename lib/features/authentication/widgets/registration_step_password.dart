@@ -1,8 +1,9 @@
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
+import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
-class RegistrationStepPassword extends StatelessWidget {
+class RegistrationStepPassword extends StatefulWidget {
   const RegistrationStepPassword({
     Key? key,
     required this.formKey,
@@ -24,9 +25,14 @@ class RegistrationStepPassword extends StatelessWidget {
   final Function() onNext;
 
   @override
+  State<RegistrationStepPassword> createState() => _RegistrationStepPasswordState();
+}
+
+class _RegistrationStepPasswordState extends State<RegistrationStepPassword> {
+  @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: SingleChildScrollView(
         controller: ScrollController(),
         child: Column(
@@ -34,38 +40,77 @@ class RegistrationStepPassword extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             ClTextInput(
-              controller: passwordTextController,
+              controller: widget.passwordTextController,
               obscureText: true,
               labelText: "Mon mot de passe",
               hintText: "**********",
               validator: (value) {
                 if (value.isEmpty) return "Vous devez choisir un mot de passe";
+                if (!RegExp(r"(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])\w+").hasMatch(value)) {
+                  return "Les critères ne sont pas respéctés";
+                }
                 return null;
+              },
+              onChanged: (value) {
+                setState(() {});
               },
             ),
             const SizedBox(height: 10,),
       
             ClTextInput(
-              controller: passwordConfirmTextController,
+              controller: widget.passwordConfirmTextController,
               obscureText: true,
               labelText: "Confirmer mon mot de passe",
               hintText: "**********",
               validator: (value) {
-                if (value != passwordTextController.text) return "Le mot de passe et la confirmation ne correspondent pas";
+                if (value != widget.passwordTextController.text) return "Le mot de passe et la confirmation ne correspondent pas";
                 return null;
               } 
             ),
-            const SizedBox(height: 10,),
-      
-            ClCheckBox(
-              text: "En cliquant sur J’accepte, je suis d’accord avec la Politique de confidentialité et les Termes de services",
-              onChanged: onConditionAcceptationChanged,
-              value: hasAcceptedConditions,
+            const SizedBox(height: 20,),
+
+            // La liste des confirmations
+            Text(
+              "Au moins 8 caractères",
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: widget.passwordTextController.text.length >= 8 
+                  ? Palette.colorSuccess 
+                  : Theme.of(context).colorScheme.onBackground
+              ),
             ),
             const SizedBox(height: 10,),
+            
+            Text(
+              "Au moins 1 lettre majuscule",
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: RegExp(r"(?=.*[A-Z])\w+").hasMatch(widget.passwordTextController.text) 
+                  ? Palette.colorSuccess 
+                  : Theme.of(context).colorScheme.onBackground
+              ),
+            ),
+            const SizedBox(height: 10,),
+
+            Text(
+              "Au moins 1 chiffre",
+              style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                color: RegExp(r"(?=.*[0-9])\w+").hasMatch(widget.passwordTextController.text) 
+                  ? Palette.colorSuccess 
+                  : Theme.of(context).colorScheme.onBackground
+              ),
+            ),
+            const SizedBox(height: 20,),
       
+            // La case de politique de confidentialitée
+            ClCheckBox(
+              text: "En cliquant sur J’accepte, je suis d’accord avec la Politique de confidentialité et les Termes de services",
+              onChanged: widget.onConditionAcceptationChanged,
+              value: widget.hasAcceptedConditions,
+            ),
+            const SizedBox(height: 20,),
+      
+            // Le bouton de validation
             ElevatedButton(
-              onPressed: onNext,
+              onPressed: widget.onNext,
               child: const Text("Créer mon compte",)
             ),
             const SizedBox(height: 20,),

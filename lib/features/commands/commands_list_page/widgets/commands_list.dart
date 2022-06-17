@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/commands/command_details_page/command_details_page.dart';

@@ -20,7 +20,7 @@ query getCommerces(
         name
         latitude
         longitude
-        addressDetailed {
+        address {
           number
           route
           optionalRoute
@@ -48,7 +48,7 @@ mutation createCommerce(
     userID: $userID
     input: {
       name: $name,
-      addressDetailed: $address,
+      address: $address,
       latitude: $latitude,
       longitude: $longitude,
       phone: $phone,

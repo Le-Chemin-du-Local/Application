@@ -12,17 +12,9 @@ mutation login(
 
 const String mutRegisterUser = r'''
 mutation register(
-  $email: String!
-  $password: String!
-  $firstName: String!
-  $lastName: String!
+  $newUser: NewUser!
 ) {
-  createUser(input: {
-    email: $email
-    password: $password
-    firstName: $firstName
-    lastName: $lastName
-  }) {
+  createUser(input: $newUser) {
     id
     firstName
   }

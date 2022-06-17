@@ -1,5 +1,7 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/core/widgets/steps_indicator.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/authentication/authentication_graphql.dart';
 import 'package:chemin_du_local/features/authentication/widgets/login_form.dart';
@@ -18,9 +20,10 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
+  final GlobalKey<RegistrationFormState> _registrationFormKey = GlobalKey<RegistrationFormState>();
   bool _isRegistering = false;
-
-  String _statusMessage = "";
+  String _registrationType = RegistrationType.client;
+  int _currentStep = 0;
 
   MutationOptions<dynamic> _loginMutationOptions(WidgetRef ref) {
     return MutationOptions<dynamic>(
@@ -49,7 +52,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       extendBodyBehindAppBar: true,
       body: Container(
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.secondary,
+          color: Theme.of(context).colorScheme.background,
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -57,26 +60,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               children: [
                 // The content
                 Positioned(
-                  top: 230,
+                  top: 157,
                   left: 0,
                   right: 0,
-                  bottom: 0,
+                  bottom: -10,
                   // width: constraints.maxWidth,
-                  child: Center(
-                    child: Container(
-                      width: constraints.maxWidth > maxFormWidth ? maxFormWidth : constraints.maxWidth,
-                      height: double.infinity,
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: ClCard(
+                      width: constraints.maxWidth > maxFormWidth ? maxFormWidth : constraints.maxWidth - ScreenHelper.instance.horizontalPadding * 2,
                       padding: EdgeInsets.only(
                         top: 20,
                         left: ScreenHelper.instance.horizontalPadding,
                         right: ScreenHelper.instance.horizontalPadding,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
-                        ),
-                        color: Theme.of(context).colorScheme.background
                       ),
                       child: Mutation<dynamic>(
                         options: _loginMutationOptions(ref),
@@ -99,24 +95,24 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                 const SizedBox(height: 20,)
                               },
 
-                              if (_statusMessage.isNotEmpty) ...{
-                               Align(
-                                  alignment: Alignment.topCenter,
-                                  child: ClStatusMessage(
-                                    type: ClStatusMessageType.success,
-                                    message: _statusMessage,
-                                  ),
-                                ),
-                                const SizedBox(height: 20,)
-                              },
-
                               if (_isRegistering) 
                                 Flexible( 
                                   child: RegistrationForm(
+                                    key: _registrationFormKey,
                                     onRegistred: () {
                                       setState(() {
                                         _isRegistering = false;
-                                        _statusMessage = "Vous avez bien été inscrit ! Allez regarder vos mails avant de vous connecter.";
+                                        _currentStep = 0;
+                                      });
+                                    },
+                                    onStepChanged: (step) {
+                                      setState(() {
+                                        _currentStep = step;
+                                      });
+                                    },
+                                    onTypeChanged: (type) {
+                                      setState(() {
+                                        _registrationType = type;
                                       });
                                     },
                                   )
@@ -142,7 +138,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                 // The Logo
                 Positioned(
-                  top: 123.2,
+                  top: 50.2,
                   width: constraints.maxWidth,
                   child: Center(
                     child: Image.asset(
@@ -150,7 +146,36 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       height: 130,
                     ),
                   ),
-                )
+                ),
+
+                // L'indication des étapes
+                if (_isRegistering)
+                  Positioned(
+                    top: 8,
+                    left: 50,
+                    right: 50,
+                    child: Center(
+                      child: StepsIndicator(
+                        currentStep: _currentStep,
+                        onStepClicked: (step) {
+                          setState(() {
+                            _currentStep = step;
+                          });
+                          if (_registrationFormKey.currentState != null) {
+                            _registrationFormKey.currentState!.goOnStep(step);
+                          }
+                        },
+                        stepsTitle: [
+                          if (_registrationType == RegistrationType.storekeeper) 
+                            "",
+                          "", 
+                          "", 
+                          "", 
+                          ""
+                        ],
+                      ),
+                    ),
+                  )
               ],
             );
           }

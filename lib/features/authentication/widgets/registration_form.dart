@@ -4,8 +4,9 @@ import 'package:chemin_du_local/features/authentication/widgets/registration_ste
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_2.dart';
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_3.dart';
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_password.dart';
-import 'package:chemin_du_local/features/commerces/commerces_graphql.dart';
+import 'package:chemin_du_local/features/authentication/widgets/registration_step_welcome.dart';
 import 'package:chemin_du_local/place/place_service.dart';
+import 'package:chemin_du_local/place/widgets/address_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:latlng/latlng.dart';
@@ -19,34 +20,47 @@ class RegistrationForm extends StatefulWidget {
   const RegistrationForm({
     Key? key,
     required this.onRegistred,
+    required this.onStepChanged,
+    required this.onTypeChanged,
   }) : super(key: key);
 
   final Function() onRegistred;
 
+  final Function(int) onStepChanged;
+  final Function(String) onTypeChanged;
+
   @override
-  State<RegistrationForm> createState() => _RegistrationFormState();
+  State<RegistrationForm> createState() => RegistrationFormState();
 }
 
-class _RegistrationFormState extends State<RegistrationForm> {
+class RegistrationFormState extends State<RegistrationForm> {
+  bool _success = false;
+
   final PageController _pageController = PageController();
   final GlobalKey<FormState> _step1FormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _step2FormKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _step3FormKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _passwordFormKey = GlobalKey<FormState>();
 
   String _registrationType = "";
 
   // Controllers étape 1
-  final TextEditingController _firstNameTextController = TextEditingController();
-  final TextEditingController _lastNameTextController = TextEditingController();
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _phoneTextController = TextEditingController();
-
-  DateTime? _birthdate;
+  final TextEditingController _storeNameTextController = TextEditingController();
+  final TextEditingController _storeSiretTextController = TextEditingController();
 
   // Controllers étape 2
-  final TextEditingController _storeNameTextController = TextEditingController();
-  final TextEditingController _addressTextController = TextEditingController();
-  LatLng? _addressCoordinates;
+  final AddressController _addressController = AddressController();
+  final TextEditingController _firstNameTextController = TextEditingController();
+  final TextEditingController _lastNameTextController = TextEditingController();
+
+  DateTime? _birthdate;
+  String _gender = "";
+
+  // Controllers étape de commerce
+  final AddressController _storeAddressController = AddressController();
+  final TextEditingController _storePhoneTextController = TextEditingController();
   
   String _storeType = "";
   
@@ -56,42 +70,15 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
   bool _hasAcceptedConditions = false;
 
-  RunMutation? _createCommerceRunMutation;
-
   MutationOptions _registerUserMutationOptions() {
     return MutationOptions<dynamic>(
       document: gql(mutRegisterUser),
       onCompleted: (dynamic data) {
         if (data == null) return;
-        if (_registrationType == RegistrationType.client) {
-          widget.onRegistred();
-          return;
-        }
-
-        final String? userID = data["createUser"]["id"] as String?;
-
-        if (userID == null || _createCommerceRunMutation == null) {
-          return;
-        }
-
-        _createCommerceRunMutation!(<String, dynamic>{
-          "userID": userID,
-          "name": _storeNameTextController.text,
-          "address": _addressTextController.text,
-          "latitude": _addressCoordinates!.latitude,
-          "longitude": _addressCoordinates!.longitude,
-          "phone": _phoneTextController.text,
-          "email": _emailTextController.text,
-        });
-      }
-    );
-  }
-
-  MutationOptions _createCommerceMutationOptions() {
-    return MutationOptions<dynamic>(
-      document: gql(mutCreateCommerce),
-      onCompleted: (dynamic data) {
-        if (data != null) widget.onRegistred();
+        
+        final int offset = _registrationType == RegistrationType.storekeeper ? 1 : 0;
+        widget.onStepChanged(3 + offset);
+        _success = true;
       }
     );
   }
@@ -99,103 +86,109 @@ class _RegistrationFormState extends State<RegistrationForm> {
   @override
   Widget build(BuildContext context) {
     return Mutation<dynamic>(
-      options: _createCommerceMutationOptions(),
-      builder: (runCreateCommerceMutation, createCommerceMutationResult) {
-        _createCommerceRunMutation = runCreateCommerceMutation;
+      options: _registerUserMutationOptions(),
+      builder: (runRegisterMutation, registerMutationResult) {
+        if (registerMutationResult?.isLoading ?? false) {
+          return const Center(child: CircularProgressIndicator(),);
+        }
 
-        return Mutation<dynamic>(
-          options: _registerUserMutationOptions(),
-          builder: (runRegisterMutation, registerMutationResult) {
-            if ((registerMutationResult?.isLoading ?? false) || 
-                (createCommerceMutationResult?.isLoading ?? false)) {
-              return const Center(child: CircularProgressIndicator(),);
-            }
+        if (_success) {
+          return RegistrationStepWelcome(onStartNavigation: widget.onRegistred);
+        }
 
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                if ((registerMutationResult?.hasException ?? false) ||
-                    (createCommerceMutationResult?.hasException ?? false)) ...{
-                  const Align(
-                    alignment: Alignment.topCenter,
-                    child: ClStatusMessage(
-                      message: "Nous n'avons pas réussi à vous inscrire...",
-                    )
-                  )
-                },
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (registerMutationResult?.hasException ?? false) 
+              const Align(
+                alignment: Alignment.topCenter,
+                child: ClStatusMessage(
+                  message: "Nous n'avons pas réussi à vous inscrire...",
+                )
+              ),
 
-                Flexible(
-                  child: PageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: _pageController,
-                    children: [
-                      // Le choix commerçant/client
-                      RegistrationStep1(
-                        onTypeChoosed: (type) {
-                          setState(() {
-                            _registrationType = type;
-                          });
-                          _animateScroll(1);
-                        }
-                      ),
-                      
-                      // Les infos basiques
-                      RegistrationStep2(
-                        formKey: _step1FormKey,
-                        firstNameTextController: _firstNameTextController, 
-                        lastNameTextController: _lastNameTextController,
-                        emailTextController: _emailTextController,
-                        phoneTextController: _phoneTextController,
-                        initialDate: _birthdate,
-                        onBirthdateChange: (newDate) {
-                          setState(() {
-                            _birthdate = DateTime.tryParse(newDate ?? "");
-                          });
-                        },
-                        onNext: _goOnStep2,
-                      ),
-                
-                      // Les infos du commerce
-                      if (_registrationType == RegistrationType.storekeeper)
-                        RegistrationStep3(
-                          formKey: _step2FormKey,
-                          storeNameController: _storeNameTextController,
-                          addressTextController: _addressTextController,
-                          storeType: _storeType,
-                          onStoreTypeChanged: (value) {
-                            setState(() {
-                              _storeType = value ?? "";
-                            });
-                          },
-                          onNext: _goOnPassword,
-                        ),
-                      
-                      // Le mot de passe et consentement
-                      RegistrationStepPassword(
-                        formKey: _passwordFormKey,
-                        hasAcceptedConditions: _hasAcceptedConditions,
-                        passwordTextController: _passwordTextEditingController,
-                        passwordConfirmTextController: _passwordConfirmTextController,
-                        onConditionAcceptationChanged: (value) {
-                          setState(() {
-                            _hasAcceptedConditions = value ?? false;
-                          });
-                        },
-                        onNext: () => _register(
-                          registerRunMutation: runRegisterMutation
-                        ),
-                      )
-                
-                    ],
+            Flexible(
+              child: PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: _pageController,
+                children: [
+                  // Les infos de base
+                  RegistrationStep1(
+                    formKey: _step1FormKey,
+                    emailTextController: _emailTextController,
+                    phoneTextController: _phoneTextController,
+                    storeNameTextController: _storeNameTextController,
+                    storeSiretTextController: _storeSiretTextController,
+                    onCompleted: _goOnStep2
                   ),
-                ),
-              ],
-            );
-          }
+                  
+                  // Les infos complémentaires
+                  RegistrationStep2(
+                    formKey: _step2FormKey,
+                    firstNameTextController: _firstNameTextController, 
+                    lastNameTextController: _lastNameTextController,
+                    addressController: _addressController,
+                    gender: _gender,
+                    onGenderChanged: (newGender) {
+                      setState(() {
+                        _gender = newGender ?? "";
+                      });
+                    },
+                    initialDate: _birthdate,
+                    onBirthdateChange: (newDate) {
+                      setState(() {
+                        _birthdate = DateTime.tryParse(newDate ?? "");
+                      });
+                    },
+                    onNext: () => _goOnStep3(),
+                  ),
+            
+                  // Les infos du commerce
+                  if (_registrationType == RegistrationType.storekeeper)
+                    RegistrationStep3(
+                      formKey: _step3FormKey,
+                      addressController: _storeAddressController,
+                      phoneTextController: _storePhoneTextController,
+                      storeType: _storeType,
+                      onStoreTypeChanged: (value) {
+                        setState(() {
+                          _storeType = value ?? "";
+                        });
+                      },
+                      onNext: _goOnPassword,
+                    ),
+                  
+                  // Le mot de passe et consentement
+                  RegistrationStepPassword(
+                    formKey: _passwordFormKey,
+                    hasAcceptedConditions: _hasAcceptedConditions,
+                    passwordTextController: _passwordTextEditingController,
+                    passwordConfirmTextController: _passwordConfirmTextController,
+                    onConditionAcceptationChanged: (value) {
+                      setState(() {
+                        _hasAcceptedConditions = value ?? false;
+                      });
+                    },
+                    onNext: () => _register(
+                      registerRunMutation: runRegisterMutation
+                    ),
+                  ),
+
+            
+                ],
+              ),
+            ),
+          ],
         );
       }
     );
+  }
+
+  void goOnStep(int index) {
+    if (_success) return;
+
+    _animateScroll(index);
   }
 
   Future _animateScroll(int page) async {
@@ -206,16 +199,30 @@ class _RegistrationFormState extends State<RegistrationForm> {
     );
   }
 
-  Future _goOnStep2() async {
+  Future _goOnStep2(String type) async {
     if (!(_step1FormKey.currentState?.validate() ?? false)) return;
 
+    setState(() {
+      _registrationType = type;
+    });
+
+    _animateScroll(1);
+    widget.onStepChanged(1);
+    widget.onTypeChanged(type);
+  }
+  
+  Future _goOnStep3() async {
+    if(!(_step2FormKey.currentState?.validate() ?? false)) return;
+    
     _animateScroll(2);
+    widget.onStepChanged(2);
   }
 
   Future _goOnPassword() async {
-    if(!(_step2FormKey.currentState?.validate() ?? false)) return;
+    if(!(_step3FormKey.currentState?.validate() ?? false)) return;
 
     _animateScroll(3);
+    widget.onStepChanged(3);
   }
 
   Future _register({
@@ -224,9 +231,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
     if (!(_passwordFormKey.currentState?.validate() ?? false)) return;
     if (!_hasAcceptedConditions) return;
 
+    LatLng? storeAddressCoordinates;
     if (_registrationType == RegistrationType.storekeeper) {
-      _addressCoordinates = await PlaceAPIProvider.instance.latLgnForAddress(_addressTextController.text);
-      if (_addressCoordinates == null) {
+      storeAddressCoordinates = await PlaceAPIProvider.instance.latLgnForAddress(_storeAddressController.address.detailled);
+      if (storeAddressCoordinates == null) {
         // TODO: show error message
         return;
       }
@@ -234,10 +242,26 @@ class _RegistrationFormState extends State<RegistrationForm> {
 
     if (registerRunMutation != null) {
       registerRunMutation(<String, dynamic>{
-        "email": _emailTextController.text,
-        "password": _passwordTextEditingController.text,
-        "firstName": _firstNameTextController.text,
-        "lastName": _lastNameTextController.text,
+        "newUser": <String, dynamic>{
+          "email": _emailTextController.text,
+          "phone": _phoneTextController.text,
+          "password": _passwordTextEditingController.text,
+          "gender": _gender,
+          "firstName": _firstNameTextController.text,
+          "lastName": _lastNameTextController.text,
+          "birthdate": _birthdate!.toUtc().toIso8601String(),
+          "address": _addressController.address,
+          if (_registrationType == RegistrationType.storekeeper) 
+            "commerce": <String, dynamic>{
+              "name": _storeNameTextController.text,
+              "siret": _storeSiretTextController.text,
+              "address": _storeAddressController.address,
+              "latitude": storeAddressCoordinates!.latitude,
+              "longitude": storeAddressCoordinates.longitude,
+              "phone": _storePhoneTextController.text,
+              "email": _emailTextController.text,
+            }
+        }
       });
     }
   }

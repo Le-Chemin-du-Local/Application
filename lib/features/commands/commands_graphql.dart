@@ -11,7 +11,7 @@ query getCommands(
         commerces {
           commerce {
             name
-            addressDetailed {
+            address {
               number
               route
               optionalRoute
@@ -40,7 +40,7 @@ query getCommand(
       commerce {
         id
         name
-        addressDetailed {
+        address {
           number
           route
           optionalRoute

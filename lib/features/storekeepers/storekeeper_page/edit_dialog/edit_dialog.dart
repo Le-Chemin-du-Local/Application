@@ -363,7 +363,7 @@ class _EditDialogState extends State<EditDialog> {
       "changes": <String, dynamic>{
         "storekeeperWord": _storekeeperWordController.text,
         "description": _descriptionController.text,
-        "addressDetailed": _addressController.address.toJson(),
+        "address": _addressController.address.toJson(),
         "latitude": commerceLatLgn!.latitude,
         "longitude": commerceLatLgn.longitude,
         "phone": _phoneController.text,

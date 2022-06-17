@@ -29,7 +29,6 @@ mixin _$Commerce {
       throw _privateConstructorUsedError;
   String? get storekeeperWord => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
-  @JsonKey(name: "addressDetailed")
   Address? get address => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
@@ -60,7 +59,7 @@ abstract class $CommerceCopyWith<$Res> {
       List<Product> productsAvailableForClickAndCollect,
       String? storekeeperWord,
       String? description,
-      @JsonKey(name: "addressDetailed") Address? address,
+      Address? address,
       String? phone,
       String? email,
       String? facebook,
@@ -243,7 +242,7 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       List<Product> productsAvailableForClickAndCollect,
       String? storekeeperWord,
       String? description,
-      @JsonKey(name: "addressDetailed") Address? address,
+      Address? address,
       String? phone,
       String? email,
       String? facebook,
@@ -385,7 +384,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
           const <Product>[],
       this.storekeeperWord,
       this.description,
-      @JsonKey(name: "addressDetailed") this.address,
+      this.address,
       this.phone,
       this.email,
       this.facebook,
@@ -438,7 +437,6 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   @override
   final String? description;
   @override
-  @JsonKey(name: "addressDetailed")
   final Address? address;
   @override
   final String? phone;
@@ -566,7 +564,7 @@ abstract class _Commerce implements Commerce {
       final List<Product> productsAvailableForClickAndCollect,
       final String? storekeeperWord,
       final String? description,
-      @JsonKey(name: "addressDetailed") final Address? address,
+      final Address? address,
       final String? phone,
       final String? email,
       final String? facebook,
@@ -597,7 +595,6 @@ abstract class _Commerce implements Commerce {
   @override
   String? get description => throw _privateConstructorUsedError;
   @override
-  @JsonKey(name: "addressDetailed")
   Address? get address => throw _privateConstructorUsedError;
   @override
   String? get phone => throw _privateConstructorUsedError;

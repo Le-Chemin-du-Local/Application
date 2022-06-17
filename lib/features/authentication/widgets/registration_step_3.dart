@@ -1,14 +1,15 @@
-import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
-import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
+import 'package:chemin_du_local/core/widgets/inputs/cl_phone_input.dart';
+import 'package:chemin_du_local/place/widgets/address_controller.dart';
+import 'package:chemin_du_local/place/widgets/address_form.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationStep3 extends StatelessWidget {
   const RegistrationStep3({
     Key? key, 
     required this.formKey,
-    required this.storeNameController,
-    required this.addressTextController, 
+    required this.addressController,
+    required this.phoneTextController,
     required this.onStoreTypeChanged,
     required this.storeType,
     required this.onNext,
@@ -16,8 +17,8 @@ class RegistrationStep3 extends StatelessWidget {
 
   final GlobalKey<FormState> formKey;
 
-  final TextEditingController storeNameController;
-  final TextEditingController addressTextController;
+  final AddressController addressController;
+  final TextEditingController phoneTextController;
   
   final Function(String?) onStoreTypeChanged;
   final String storeType;
@@ -34,18 +35,6 @@ class RegistrationStep3 extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Le nom du commerce
-            ClTextInput(
-              controller: storeNameController,
-              labelText: "Le nom de mon commerce",
-              hintText: "La Bizhh",
-              validator: (value) {
-                if (value.isEmpty) return "Vous devez rentrer le nom de votre commerce";
-                return null;
-              },
-            ),
-            const SizedBox(height: 10,),
-      
             // Le type du commerce
             ClDropdown<String>(
               currentValue: storeType,
@@ -55,7 +44,6 @@ class RegistrationStep3 extends StatelessWidget {
                 "Epicerie": "Epicerie",
                 "Brasserie": "Brasserie",
                 "Ostriculture": "Ostriculture",
-                "Autre": "Autre",
               },
               onChanged: onStoreTypeChanged,
               validator: (value) {
@@ -64,11 +52,27 @@ class RegistrationStep3 extends StatelessWidget {
               },
             ),
             const SizedBox(height: 10,),
+            InkWell(
+              onTap: () {}, // TODO: afficher un message
+              child: Text(
+                "Mon commerce n'est pas dans la liste, que faire ?",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+              ),
+            ),
+            const SizedBox(height: 10,),
       
             // l'adresse
-            ClAddressInput(
-              addressTextController: addressTextController,
-              onSelected: (value) {},
+            AddressForm(
+              addressController: addressController,
+            ),
+            const SizedBox(height: 10,),
+
+            // Le numéro de téléphone
+            ClPhoneInput(
+              controller: phoneTextController, 
+              labelText: "Numéro de téléphone de mon commerce",
+              hintText: "0652809335",
             ),
             const SizedBox(height: 10,),
       

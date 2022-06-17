@@ -27,9 +27,9 @@ _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
               const <Product>[],
       storekeeperWord: json['storekeeperWord'] as String?,
       description: json['description'] as String?,
-      address: json['addressDetailed'] == null
+      address: json['address'] == null
           ? null
-          : Address.fromJson(json['addressDetailed'] as Map<String, dynamic>),
+          : Address.fromJson(json['address'] as Map<String, dynamic>),
       phone: json['phone'] as String?,
       email: json['email'] as String?,
       facebook: json['facebook'] as String?,
@@ -58,7 +58,7 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
           instance.productsAvailableForClickAndCollect,
       'storekeeperWord': instance.storekeeperWord,
       'description': instance.description,
-      'addressDetailed': instance.address,
+      'address': instance.address,
       'phone': instance.phone,
       'email': instance.email,
       'facebook': instance.facebook,

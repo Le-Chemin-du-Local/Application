@@ -10,7 +10,7 @@ query GetStoreKeeperCommerce(
       name
       description
       storekeeperWord
-      addressDetailed {
+      address {
         number
         route
         optionalRoute

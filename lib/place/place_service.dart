@@ -113,7 +113,7 @@ class PlaceAPIProvider {
     );
 
     if (response.statusCode == 200) {
-      final result = json.decode(response.body) as Map<String, dynamic>;
+      final result = json.decode(utf8.decode(response.bodyBytes)) as Map<String, dynamic>;
       if (result["status"] == "OK") {
         final List<Map<String, dynamic>> components = (result["result"]["address_components"] as List<dynamic>).cast<Map<String, dynamic>>();
 
