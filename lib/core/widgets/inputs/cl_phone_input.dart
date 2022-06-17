@@ -40,8 +40,8 @@ class ClPhoneInput extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(labelText, style: const TextStyle(fontSize: 14),),
-        const SizedBox(height: 10.0,),
+        Text(labelText, style: Theme.of(context).textTheme.titleMedium),
+        const SizedBox(height: 4.0,),
         ClCard(
           padding: EdgeInsets.zero,
           child: TextFormField(

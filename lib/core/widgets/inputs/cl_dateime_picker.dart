@@ -13,6 +13,7 @@ class ClDateTimePicker extends StatelessWidget {
     required this.onChanged,
     this.validator,
     this.label,
+    this.dateMask = 'dd/MM/yyyy hh:mm',
   }) : super(key: key);
 
   final DateTimePickerType type;
@@ -23,6 +24,7 @@ class ClDateTimePicker extends StatelessWidget {
   final DateTime? lastDate;
 
   final String? label;
+  final String dateMask;
 
   final Function(String?) onChanged;
   final String? Function(String?)? validator;
@@ -35,7 +37,7 @@ class ClDateTimePicker extends StatelessWidget {
       children: [
         if (label != null) ...{
           // Text(label!.toUpperCase(), style: const TextStyle(color: Colors.black54, fontSize: 12),),
-          Text(label!, style: const TextStyle(fontSize: 12),),
+          Text(label!, style: Theme.of(context).textTheme.titleMedium),
           const SizedBox(height: 10.0,),
         },
         ClCard(
@@ -44,7 +46,7 @@ class ClDateTimePicker extends StatelessWidget {
             type: type,
             initialDate: initialDate,
             initialValue: initialValue,
-            dateMask: 'dd/MM/yyyy hh:mm',
+            dateMask: dateMask,
             firstDate: firstDate,
             lastDate: lastDate,
             dateLabelText: "Date",

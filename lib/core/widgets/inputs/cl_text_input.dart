@@ -70,8 +70,8 @@ class _ClTextInput extends State<ClTextInput> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(widget.labelText, style: Theme.of(context).textTheme.caption,),
-        const SizedBox(height: 10.0,),
+        Text(widget.labelText, style: Theme.of(context).textTheme.titleMedium,),
+        const SizedBox(height: 4.0,),
         ClCard(
           padding: EdgeInsets.zero,
           child: TextFormField(

@@ -17,6 +17,7 @@ class ClCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Checkbox(
           value: value,
