@@ -49,6 +49,7 @@ query getCommand(
         }
         phone
       }
+      price
       cccommands {
         id
         products {

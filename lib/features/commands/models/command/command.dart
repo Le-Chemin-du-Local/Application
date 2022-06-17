@@ -25,16 +25,7 @@ class Command with _$Command {
 
     for (final commerceCommand in commerces) {
       // On commence avec les produits
-      for (final cccommand in commerceCommand.cccommands) {
-        for (final product in cccommand.products) {
-          result += product.product.price ?? 0 * product.quantity;
-        }
-      }
-
-      // Ensuite les paniers
-      for (final panierCommand in commerceCommand.panierCommands) {
-        result += panierCommand.panier.price;
-      }
+      result += commerceCommand.price ?? 0;
     }
 
     return result;

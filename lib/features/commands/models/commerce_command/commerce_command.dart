@@ -35,6 +35,7 @@ class CommerceCommand with _$CommerceCommand {
     DateTime? pickupDate,
     Commerce? commerce,
     User? user,
+    double? price,
     @Default(<CCCommand>[]) List<CCCommand> cccommands,
     @Default(<PanierCommand>[]) List<PanierCommand> panierCommands,
   }) = _CommerceCommand;

@@ -25,6 +25,7 @@ mixin _$CommerceCommand {
   DateTime? get pickupDate => throw _privateConstructorUsedError;
   Commerce? get commerce => throw _privateConstructorUsedError;
   User? get user => throw _privateConstructorUsedError;
+  double? get price => throw _privateConstructorUsedError;
   List<CCCommand> get cccommands => throw _privateConstructorUsedError;
   List<PanierCommand> get panierCommands => throw _privateConstructorUsedError;
 
@@ -45,6 +46,7 @@ abstract class $CommerceCommandCopyWith<$Res> {
       DateTime? pickupDate,
       Commerce? commerce,
       User? user,
+      double? price,
       List<CCCommand> cccommands,
       List<PanierCommand> panierCommands});
 
@@ -68,6 +70,7 @@ class _$CommerceCommandCopyWithImpl<$Res>
     Object? pickupDate = freezed,
     Object? commerce = freezed,
     Object? user = freezed,
+    Object? price = freezed,
     Object? cccommands = freezed,
     Object? panierCommands = freezed,
   }) {
@@ -92,6 +95,10 @@ class _$CommerceCommandCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double?,
       cccommands: cccommands == freezed
           ? _value.cccommands
           : cccommands // ignore: cast_nullable_to_non_nullable
@@ -139,6 +146,7 @@ abstract class _$$_CommerceCommandCopyWith<$Res>
       DateTime? pickupDate,
       Commerce? commerce,
       User? user,
+      double? price,
       List<CCCommand> cccommands,
       List<PanierCommand> panierCommands});
 
@@ -166,6 +174,7 @@ class __$$_CommerceCommandCopyWithImpl<$Res>
     Object? pickupDate = freezed,
     Object? commerce = freezed,
     Object? user = freezed,
+    Object? price = freezed,
     Object? cccommands = freezed,
     Object? panierCommands = freezed,
   }) {
@@ -190,6 +199,10 @@ class __$$_CommerceCommandCopyWithImpl<$Res>
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as User?,
+      price: price == freezed
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as double?,
       cccommands: cccommands == freezed
           ? _value._cccommands
           : cccommands // ignore: cast_nullable_to_non_nullable
@@ -212,6 +225,7 @@ class _$_CommerceCommand
       this.pickupDate,
       this.commerce,
       this.user,
+      this.price,
       final List<CCCommand> cccommands = const <CCCommand>[],
       final List<PanierCommand> panierCommands = const <PanierCommand>[]})
       : _cccommands = cccommands,
@@ -230,6 +244,8 @@ class _$_CommerceCommand
   final Commerce? commerce;
   @override
   final User? user;
+  @override
+  final double? price;
   final List<CCCommand> _cccommands;
   @override
   @JsonKey()
@@ -248,7 +264,7 @@ class _$_CommerceCommand
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'CommerceCommand(id: $id, status: $status, pickupDate: $pickupDate, commerce: $commerce, user: $user, cccommands: $cccommands, panierCommands: $panierCommands)';
+    return 'CommerceCommand(id: $id, status: $status, pickupDate: $pickupDate, commerce: $commerce, user: $user, price: $price, cccommands: $cccommands, panierCommands: $panierCommands)';
   }
 
   @override
@@ -261,6 +277,7 @@ class _$_CommerceCommand
       ..add(DiagnosticsProperty('pickupDate', pickupDate))
       ..add(DiagnosticsProperty('commerce', commerce))
       ..add(DiagnosticsProperty('user', user))
+      ..add(DiagnosticsProperty('price', price))
       ..add(DiagnosticsProperty('cccommands', cccommands))
       ..add(DiagnosticsProperty('panierCommands', panierCommands));
   }
@@ -276,6 +293,7 @@ class _$_CommerceCommand
                 .equals(other.pickupDate, pickupDate) &&
             const DeepCollectionEquality().equals(other.commerce, commerce) &&
             const DeepCollectionEquality().equals(other.user, user) &&
+            const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality()
                 .equals(other._cccommands, _cccommands) &&
             const DeepCollectionEquality()
@@ -291,6 +309,7 @@ class _$_CommerceCommand
       const DeepCollectionEquality().hash(pickupDate),
       const DeepCollectionEquality().hash(commerce),
       const DeepCollectionEquality().hash(user),
+      const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(_cccommands),
       const DeepCollectionEquality().hash(_panierCommands));
 
@@ -311,6 +330,7 @@ abstract class _CommerceCommand implements CommerceCommand {
       final DateTime? pickupDate,
       final Commerce? commerce,
       final User? user,
+      final double? price,
       final List<CCCommand> cccommands,
       final List<PanierCommand> panierCommands}) = _$_CommerceCommand;
 
@@ -327,6 +347,8 @@ abstract class _CommerceCommand implements CommerceCommand {
   Commerce? get commerce => throw _privateConstructorUsedError;
   @override
   User? get user => throw _privateConstructorUsedError;
+  @override
+  double? get price => throw _privateConstructorUsedError;
   @override
   List<CCCommand> get cccommands => throw _privateConstructorUsedError;
   @override

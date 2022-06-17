@@ -35,7 +35,7 @@ class CommandSummaryCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Sous total (${command.totalCount} articles)"),
-                Text("${command.totalPrice}€")
+                Text("${command.totalPrice.toStringAsFixed(2)}€")
               ],
             ),
           ),
