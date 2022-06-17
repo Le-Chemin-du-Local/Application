@@ -19,18 +19,21 @@ class ServicesProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: isSelected ? 1.0 : 0.5,
-      child: ProductCard(
-        borderColor: isSelected ? Theme.of(context).colorScheme.primary :  Theme.of(context).colorScheme.surface,
-        product: product,
-        quantity: quantity ?? 0,
-        showQuantityPicker: onQuantityChanged != null,
-        onQuantityUpdated: (value) {
-          if (onQuantityChanged != null) {
-            onQuantityChanged!(product, value);
-          }
-        },
+    return ConstrainedBox(
+      constraints: const BoxConstraints(maxWidth: 182),
+      child: Opacity(
+        opacity: isSelected ? 1.0 : 0.5,
+        child: ProductCard(
+          borderColor: isSelected ? Theme.of(context).colorScheme.primary :  Theme.of(context).colorScheme.surface,
+          product: product,
+          quantity: quantity ?? 0,
+          showQuantityPicker: onQuantityChanged != null,
+          onQuantityUpdated: (value) {
+            if (onQuantityChanged != null) {
+              onQuantityChanged!(product, value);
+            }
+          },
+        ),
       ),
     );
   }
