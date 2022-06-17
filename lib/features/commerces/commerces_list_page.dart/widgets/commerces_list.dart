@@ -95,7 +95,7 @@ class CommercesList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,    
                     children: [
                       // Le titre
-                      Text("10 commerces", style: Theme.of(context).textTheme.headline2,),
+                      Text("10 commerces", style: Theme.of(context).textTheme.headlineMedium,),
                       const SizedBox(height: 12,),
                             
                       // La carte (affiché uniquement sur petit écran)
