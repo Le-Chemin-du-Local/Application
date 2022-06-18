@@ -26,11 +26,11 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+    return Stack(
       children: [
-        Expanded(
+        Positioned(
+          top: 0, left: 0, right: 0,
+          bottom: 64,
           child: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(
@@ -69,19 +69,21 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
                     ),
                   ),
                   const SizedBox(height: 8,),
-
-                  Flexible(
-                    child: ElevatedButton(
-                      onPressed: _onDateChoosed,
-                      child: const Text("Continuer"),
-                    ),
-                  )
                 ],
               ),
             ),
           ),
         ),
-
+        Positioned(
+          left: 0, right: 0, bottom: 12,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
+            child: ElevatedButton(
+              onPressed: _onDateChoosed,
+              child: const Text("Continuer"),
+            ),
+          ),
+        )
       ],
     );
   }
