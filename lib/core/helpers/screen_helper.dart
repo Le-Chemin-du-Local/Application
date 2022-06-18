@@ -11,9 +11,7 @@ class ScreenHelper {
   static const double breakpointTablet = 481;
   static const double maxContainerWidth = 900;
   
-  void setValues(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
-
+  void setValues(double width) {
     if (width > breakpointPC) {
       horizontalPadding = 32;
     }
