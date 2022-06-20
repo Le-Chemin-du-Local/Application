@@ -24,6 +24,7 @@ mixin _$Product {
   String get name => throw _privateConstructorUsedError;
   List<String> get categories => throw _privateConstructorUsedError;
   List<String> get tags => throw _privateConstructorUsedError;
+  List<String> get allergens => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   String? get unit => throw _privateConstructorUsedError;
@@ -44,6 +45,7 @@ abstract class $ProductCopyWith<$Res> {
       String name,
       List<String> categories,
       List<String> tags,
+      List<String> allergens,
       String? description,
       double? price,
       String? unit,
@@ -65,6 +67,7 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
     Object? name = freezed,
     Object? categories = freezed,
     Object? tags = freezed,
+    Object? allergens = freezed,
     Object? description = freezed,
     Object? price = freezed,
     Object? unit = freezed,
@@ -87,6 +90,10 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      allergens: allergens == freezed
+          ? _value.allergens
+          : allergens // ignore: cast_nullable_to_non_nullable
               as List<String>,
       description: description == freezed
           ? _value.description
@@ -123,6 +130,7 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String name,
       List<String> categories,
       List<String> tags,
+      List<String> allergens,
       String? description,
       double? price,
       String? unit,
@@ -145,6 +153,7 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
     Object? name = freezed,
     Object? categories = freezed,
     Object? tags = freezed,
+    Object? allergens = freezed,
     Object? description = freezed,
     Object? price = freezed,
     Object? unit = freezed,
@@ -161,12 +170,16 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       categories: categories == freezed
-          ? _value._categories
+          ? _value.categories
           : categories // ignore: cast_nullable_to_non_nullable
               as List<String>,
       tags: tags == freezed
-          ? _value._tags
+          ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
+              as List<String>,
+      allergens: allergens == freezed
+          ? _value.allergens
+          : allergens // ignore: cast_nullable_to_non_nullable
               as List<String>,
       description: description == freezed
           ? _value.description
@@ -197,15 +210,14 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
 class _$_Product with DiagnosticableTreeMixin implements _Product {
   const _$_Product(this.id,
       {required this.name,
-      final List<String> categories = const <String>[],
-      final List<String> tags = const <String>[],
+      this.categories = const <String>[],
+      this.tags = const <String>[],
+      this.allergens = const <String>[],
       this.description,
       this.price,
       this.unit,
       this.tva,
-      this.isBreton})
-      : _categories = categories,
-        _tags = tags;
+      this.isBreton});
 
   factory _$_Product.fromJson(Map<String, dynamic> json) =>
       _$$_ProductFromJson(json);
@@ -214,22 +226,15 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
   final String? id;
   @override
   final String name;
-  final List<String> _categories;
   @override
   @JsonKey()
-  List<String> get categories {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_categories);
-  }
-
-  final List<String> _tags;
+  final List<String> categories;
   @override
   @JsonKey()
-  List<String> get tags {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tags);
-  }
-
+  final List<String> tags;
+  @override
+  @JsonKey()
+  final List<String> allergens;
   @override
   final String? description;
   @override
@@ -243,7 +248,7 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Product(id: $id, name: $name, categories: $categories, tags: $tags, description: $description, price: $price, unit: $unit, tva: $tva, isBreton: $isBreton)';
+    return 'Product(id: $id, name: $name, categories: $categories, tags: $tags, allergens: $allergens, description: $description, price: $price, unit: $unit, tva: $tva, isBreton: $isBreton)';
   }
 
   @override
@@ -255,6 +260,7 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('categories', categories))
       ..add(DiagnosticsProperty('tags', tags))
+      ..add(DiagnosticsProperty('allergens', allergens))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('price', price))
       ..add(DiagnosticsProperty('unit', unit))
@@ -270,8 +276,9 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality()
-                .equals(other._categories, _categories) &&
-            const DeepCollectionEquality().equals(other._tags, _tags) &&
+                .equals(other.categories, categories) &&
+            const DeepCollectionEquality().equals(other.tags, tags) &&
+            const DeepCollectionEquality().equals(other.allergens, allergens) &&
             const DeepCollectionEquality()
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.price, price) &&
@@ -286,8 +293,9 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(_categories),
-      const DeepCollectionEquality().hash(_tags),
+      const DeepCollectionEquality().hash(categories),
+      const DeepCollectionEquality().hash(tags),
+      const DeepCollectionEquality().hash(allergens),
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(unit),
@@ -310,6 +318,7 @@ abstract class _Product implements Product {
       {required final String name,
       final List<String> categories,
       final List<String> tags,
+      final List<String> allergens,
       final String? description,
       final double? price,
       final String? unit,
@@ -326,6 +335,8 @@ abstract class _Product implements Product {
   List<String> get categories => throw _privateConstructorUsedError;
   @override
   List<String> get tags => throw _privateConstructorUsedError;
+  @override
+  List<String> get allergens => throw _privateConstructorUsedError;
   @override
   String? get description => throw _privateConstructorUsedError;
   @override

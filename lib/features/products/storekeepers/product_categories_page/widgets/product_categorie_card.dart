@@ -19,25 +19,44 @@ class ProductCategoryCard extends StatelessWidget {
     return InkWell(
       onTap: onClick,
       child: ClCard(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
+        padding: EdgeInsets.zero,
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Expanded(
-              child: Icon(
-                kCategorieLogo[categoryName] ?? Icons.error,
-                size: 54,
-                color: Palette.colorWhite,
+            // L'icone de la catégorie
+            Flexible(
+              // height: 120,
+              flex: 66,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondaryContainer,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(12),
+                    topRight: Radius.circular(12)
+                  )
+                ),
+                child: Center(
+                  child: Icon(
+                    kCategorieLogo[categoryName] ?? Icons.error,
+                    size: 90,
+                    color: Theme.of(context).colorScheme.secondary
+                  ),
+                ),
               ),
             ),
-            const SizedBox(height: 32,),
+            const SizedBox(height: 8,),
+
             Flexible(
+              flex: 33,
               child: Text(
                 categoryName, 
                 textAlign: TextAlign.center,
-                style: const TextStyle(color: Palette.colorWhite)
+                style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: Theme.of(context).colorScheme.secondary
+                )
               ),
             )
           ],

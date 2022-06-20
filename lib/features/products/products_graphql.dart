@@ -50,6 +50,7 @@ query getDetailledProduct(
     description,
     categories,
     tags,
+    allergens,
     description,
     isBreton,
     price,
@@ -61,25 +62,9 @@ query getDetailledProduct(
 
 const String mutCreateProduct = r'''
 mutation createProduct(
-  $name: String!,
-  $description: String!,
-  $price: Float!,
-  $unit: String!,
-  $tva: Float!,
-  $isBreton: Boolean!,
-  $categories: [String!]!
-  $image: Upload
+  $input: NewProduct!
 ) {
-  createProduct(input: {
-    name: $name,
-    description: $description,
-    price: $price,
-    unit: $unit,
-    tva: $tva,
-    isBreton: $isBreton,
-    categories: $categories,
-    image: $image,
-  }) {
+  createProduct(input: $input) {
     id, 
     name
   }
@@ -100,25 +85,9 @@ mutation createProducts(
 const String mutUpdateProduct = r'''
 mutation updateProduct(
   $id: ID!,
-  $name: String,
-  $description: String,
-  $price: Float,
-  $unit: String,
-  $tva: Float,
-  $isBreton: Boolean,
-  $categories: [String!],
-  $image: Upload
+  $changes: ChangesProduct!
 ) {
-  updateProduct(id: $id, changes: {
-    name: $name,
-    description: $description,
-    price: $price,
-    unit: $unit,
-    tva: $tva,
-    isBreton: $isBreton,
-    categories: $categories,
-    image: $image,
-  }) {
+  updateProduct(id: $id, changes: $changes) {
     id, 
     name
   }

@@ -21,7 +21,7 @@ class ProductCategoriesPicker extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Text("Catégories", style: TextStyle(fontSize: 14)),  
+        Text("Catégories", style: Theme.of(context).textTheme.titleMedium),
         const SizedBox(height: 12,),
         Flexible(
           child: GridView(

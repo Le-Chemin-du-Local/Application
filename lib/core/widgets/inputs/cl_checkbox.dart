@@ -17,16 +17,19 @@ class ClCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Checkbox(
           value: value,
           onChanged: onChanged,
           activeColor: Theme.of(context).colorScheme.primary,
         ),
-        GestureDetector(
-          onTap: () => onChanged(!value),
-          child: Flexible(child: Text(text, style: Theme.of(context).textTheme.caption)),
+        Flexible(
+          child: GestureDetector(
+            onTap: () => onChanged(!value),
+            child: Text(text, style: Theme.of(context).textTheme.titleMedium),
+          ),
         )
       ],
     );

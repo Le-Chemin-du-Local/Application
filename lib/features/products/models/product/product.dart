@@ -40,13 +40,20 @@ const Map<String, IconData> kCategorieLogo = {
   "Spécialitées sucrées": CLIcons.specialitessucrees,
 };
 
-@freezed
+// La liste des allèrgenes 
+const kAllergensList = [
+  "Crustacés", "Oeufs", "Poissons", "Volaille", "Arachides", "Moutarde", "Lupin",
+  "Fruits à coques", "Soja", "Céleri", "Lait"
+];
+
+@Freezed(makeCollectionsUnmodifiable: false)
 @immutable
 class Product with _$Product {
   const factory Product(String? id, {
     required String name,
     @Default(<String>[]) List<String> categories,
     @Default(<String>[]) List<String> tags,
+    @Default(<String>[]) List<String> allergens,
     String? description,
     double? price,
     String? unit,
