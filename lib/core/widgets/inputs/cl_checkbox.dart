@@ -24,7 +24,10 @@ class ClCheckBox extends StatelessWidget {
           onChanged: onChanged,
           activeColor: Theme.of(context).colorScheme.primary,
         ),
-        Flexible(child: Text(text, style: Theme.of(context).textTheme.caption)),
+        GestureDetector(
+          onTap: () => onChanged(!value),
+          child: Flexible(child: Text(text, style: Theme.of(context).textTheme.caption)),
+        )
       ],
     );
   }
