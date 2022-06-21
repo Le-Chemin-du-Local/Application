@@ -61,53 +61,63 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String? token = ref.watch(appUserControllerProvider).token;
     
-    return GraphQLProvider(
-      client: graphQLClient(token),
-      child: MaterialApp(
-        title: 'Le Chemin du Local',
-        navigatorKey: AppManager.instance.appNavigatorKey,
-        theme: ClTheme.theme(context),
-        home: LayoutBuilder(
-          builder: (context, constraints) {
-            return GraphQLConsumer(
-              builder: (client) => FutureBuilder<dynamic>(
-                future: Init.instance.initialize(client, ref),
-                builder: (context, snapshot) {
-                  ScreenHelper.instance.setValues(constraints.maxWidth);
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const SplashScreen();
-                  }
-            
-                  token = ref.read(appUserControllerProvider).token;
-            
-                  if (token != null) {
-                    // We need the user role
-                    return Query<dynamic>(
-                      options: QueryOptions<dynamic>(
-                        document: gql(qGetLoggedUser),
-                      ),
-                      builder: (result, {fetchMore, refetch}) {
-                        final User appUser = User.fromJson(result.data?["user"] as Map<String, dynamic>? ?? <String, dynamic>{});
-                
-                
-                        if (appUser.role == UserRoles.storeKeeper) {
-                          return StoreKeepersMainPage(
-                            storekeeper: appUser,
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: GraphQLProvider(
+        client: graphQLClient(token),
+        child: MaterialApp(
+          title: 'Le Chemin du Local',
+          navigatorKey: AppManager.instance.appNavigatorKey,
+          theme: ClTheme.theme(context),
+          home: LayoutBuilder(
+            builder: (context, constraints) {
+              return GraphQLConsumer(
+                builder: (client) => FutureBuilder<dynamic>(
+                  future: Init.instance.initialize(client, ref),
+                  builder: (context, snapshot) {
+                    ScreenHelper.instance.setValues(constraints.maxWidth);
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const SplashScreen();
+                    }
+              
+                    token = ref.read(appUserControllerProvider).token;
+              
+                    if (token != null) {
+                      // We need the user role
+                      return Query<dynamic>(
+                        options: QueryOptions<dynamic>(
+                          document: gql(qGetLoggedUser),
+                        ),
+                        builder: (result, {fetchMore, refetch}) {
+                          final User appUser = User.fromJson(result.data?["user"] as Map<String, dynamic>? ?? <String, dynamic>{});
+                  
+                  
+                          if (appUser.role == UserRoles.storeKeeper) {
+                            return StoreKeepersMainPage(
+                              storekeeper: appUser,
+                            );
+                          }
+              
+                          return ClientsMainPage(
+                            returnToBasketPayment: ref.watch(appUserControllerProvider).goBackToBasketPayment,
                           );
-                        }
-            
-                        return ClientsMainPage(
-                          returnToBasketPayment: ref.watch(appUserControllerProvider).goBackToBasketPayment,
-                        );
-                      },
-                    );
+                        },
+                      );
+                    }
+              
+                    return const ClientsMainPage();
                   }
-            
-                  return const ClientsMainPage();
-                }
-              ),
-            );
-          }
+                ),
+              );
+            }
+          ),
         ),
       ),
     );
