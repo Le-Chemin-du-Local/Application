@@ -34,19 +34,15 @@ class ClosableDialog extends StatelessWidget {
               const SizedBox(height: 12,),
 
               // The content
-              Flexible(
-                child: SingleChildScrollView(
-                  child: child,
-                )
+              Expanded(
+                child: child,
               ),
               const SizedBox(height: 20,),
 
               // The actions
-              Flexible(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: actions,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: actions,
               )
             ],
           ),

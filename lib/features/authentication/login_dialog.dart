@@ -40,31 +40,30 @@ class LoginDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return SingleChildScrollView(
-      child: ClosableDialog( 
-        title: title,
-        child: Mutation<dynamic>(
-          options: _loginMutationOptions(context, ref),
-          builder: (loginRunMutation, mutationResult) {
-            if (mutationResult?.isLoading ?? false) {
-              return const Center(child: CircularProgressIndicator(),);
-            }
-    
-            return Column(
-              children: [
-                if (mutationResult?.hasException ?? false) ...{
-                  const ClStatusMessage(message: "Nous n'avons pas réussi à vous connecter",),
-                  const SizedBox(height: 12),
-                },
-    
-                LoginForm(
-                  onLogin: (info) => _onConnect(info, loginRunMutation),
-                  onRegister: () {},
-                ),
-              ],
-            );
+    return ClosableDialog( 
+      title: title,
+      child: Mutation<dynamic>(
+        options: _loginMutationOptions(context, ref),
+        builder: (loginRunMutation, mutationResult) {
+          if (mutationResult?.isLoading ?? false) {
+            return const Center(child: CircularProgressIndicator(),);
           }
-        ),
+    
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (mutationResult?.hasException ?? false) ...{
+                const ClStatusMessage(message: "Nous n'avons pas réussi à vous connecter",),
+                const SizedBox(height: 12),
+              },
+    
+              LoginForm(
+                onLogin: (info) => _onConnect(info, loginRunMutation),
+                onRegister: () {},
+              ),
+            ],
+          );
+        }
       ),
     );
   }
