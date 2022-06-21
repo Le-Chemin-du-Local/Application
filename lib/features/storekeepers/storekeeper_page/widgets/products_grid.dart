@@ -52,49 +52,50 @@ class ProductsGrid extends ConsumerWidget {
       // Sinon on met les vrai produits
       else 
         for (final product in products) 
-          ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 300, maxWidth: 200),
-            child: ProductCard(
+          ProductCard(
             product: product,
             showQuantityPicker: availableForClickAndCollect.contains(product.id),
             quantity: _productForID(basketCommerce, product.id ?? "")?.quantity ?? 0,
             onQuantityUpdated: (value) => _updateProductOnBasket(ref, product, value),
           )
-      )
     ];
 
     return Opacity(
       opacity: products.isEmpty ? 0.4 : 1.0,
       child: Stack(
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              GridView(
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 270,
-                  mainAxisExtent: 273,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16
+          Align(
+            alignment: Alignment.topCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                GridView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 307,
+                    mainAxisExtent: 316,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16
+                  ),
+                  shrinkWrap: true,
+                  primary: false,
+                  children: content,
                 ),
-                shrinkWrap: true,
-                primary: false,
-                children: content,
-              ),
-              const SizedBox(height: 12,),
-    
-              // The view products button
-              Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    if (!enableButton) return;
-                  },
-                  child: const Text("Voir tous les produits"),
+                const SizedBox(height: 12,),
+              
+                // The view products button
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      if (!enableButton) return;
+                    },
+                    child: const Text("Voir tous les produits"),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           if (products.isEmpty)
             const Positioned(

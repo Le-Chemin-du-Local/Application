@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/cl_file.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
@@ -154,7 +155,12 @@ class _EditDialogState extends State<EditDialog> {
                       },
 
                       // La photo de profil
-                      Text("Logo du commerce", style: Theme.of(context).textTheme.caption,),
+                      Text(
+                        "Logo du commerce",
+                        style: ScreenHelper.instance.isMobile 
+                          ? Theme.of(context).textTheme.titleMedium
+                          : Theme.of(context).textTheme.headlineSmall
+                      ),
                       const SizedBox(height: 8,),
                       Center(
                         child: ClImagePicker(
@@ -167,7 +173,12 @@ class _EditDialogState extends State<EditDialog> {
                       const SizedBox(height: 22,),
 
                       // La photo de couverture
-                      Text("Photo de couverture du commerce", style: Theme.of(context).textTheme.caption,),
+                      Text(
+                        "Photo de couverture du commerce", 
+                        style: ScreenHelper.instance.isMobile 
+                          ? Theme.of(context).textTheme.titleMedium
+                          : Theme.of(context).textTheme.headlineSmall
+                      ),
                       const SizedBox(height: 8,),
                       Center(
                         child: ClImagePickerBig(
@@ -205,7 +216,12 @@ class _EditDialogState extends State<EditDialog> {
                       const SizedBox(height: 22,),
 
                       // Les horaires d'ouverture
-                      Text("Horaires d'ouverture du commerce", style: Theme.of(context).textTheme.caption,),
+                      Text(
+                        "Horaires d'ouverture du commerce", 
+                        style: ScreenHelper.instance.isMobile 
+                          ? Theme.of(context).textTheme.titleMedium
+                          : Theme.of(context).textTheme.headlineSmall
+                      ),
                       ScheduleForm(
                         mondayController: _mondayController,
                         tuesdayController: _tuesdayController,
@@ -218,7 +234,12 @@ class _EditDialogState extends State<EditDialog> {
                       const SizedBox(height: 22),
 
                       // Les horaires de click and collect
-                      Text("Gestion des créneaux de Click&Collect", style: Theme.of(context).textTheme.caption,),
+                      Text(
+                        "Gestion des créneaux de Click&Collect", 
+                        style: ScreenHelper.instance.isMobile 
+                          ? Theme.of(context).textTheme.titleMedium
+                          : Theme.of(context).textTheme.headlineSmall
+                      ),
                       ScheduleForm(
                         mondayController: _ccMondayController,
                         tuesdayController: _ccTuesdayController,

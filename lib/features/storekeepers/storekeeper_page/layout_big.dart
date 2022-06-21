@@ -57,7 +57,7 @@ class LayoutBig extends StatelessWidget {
                         child: Text(commerce?.description ?? "Pas de description"),
                       ),
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(height: 20,),
               
                     // Les produits
                     Flexible(

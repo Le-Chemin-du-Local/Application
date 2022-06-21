@@ -45,7 +45,7 @@ class ClPhoneInput extends StatelessWidget {
           labelText, 
           style: ScreenHelper.instance.isMobile 
             ? Theme.of(context).textTheme.titleMedium
-            : Theme.of(context).textTheme.headlineMedium
+            : Theme.of(context).textTheme.headlineSmall
         ),
         const SizedBox(height: 4.0,),
         ClCard(

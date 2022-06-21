@@ -26,7 +26,7 @@ class ProductCategoriesPicker extends StatelessWidget {
           "Catégories", 
           style: ScreenHelper.instance.isMobile 
             ? Theme.of(context).textTheme.titleMedium
-            : Theme.of(context).textTheme.headlineMedium
+            : Theme.of(context).textTheme.headlineSmall
         ),
         const SizedBox(height: 12,),
         Flexible(
