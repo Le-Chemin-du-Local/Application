@@ -58,68 +58,90 @@ class _AddressFormState extends State<AddressForm> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Flexible(
-          child: RawAutocomplete<String>(
-            textEditingController: _addressTextController,
-            focusNode: _focusNode,
-            onSelected: (value) async {
-              final Address? address = await PlaceAPIProvider.instance.detailsForAddress(value);
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              return RawAutocomplete<String>(
+                textEditingController: _addressTextController,
+                focusNode: _focusNode,
+                onSelected: (value) async {
+                  final Address? address = await PlaceAPIProvider.instance.detailsForAddress(value);
         
-              if (address != null) {
-                if (widget.onSelected != null) {
-                  widget.onSelected!(address);
-                }
+                  if (address != null) {
+                    if (widget.onSelected != null) {
+                      widget.onSelected!(address);
+                    }
 
-                widget.addressController.address = address;
+                    widget.addressController.address = address;
         
-                _addressTextController.text = "${address.number ?? ""} ${address.route ?? ""}";
-                _optionalRouteTextController.text = "";
-                _postalCodeTextController.text = address.postalCode ?? "";
-                _cityTextController.text = address.city ?? "";
-                _focusNode.unfocus();
-              }
-            },
-            optionsBuilder: (textEditingValue) async {
-              final List<Suggestion> suggestions = await PlaceAPIProvider.instance.fetchSuggestions(textEditingValue.text, "fr", _sessionToken);
+                    _addressTextController.text = "${address.number ?? ""} ${address.route ?? ""}";
+                    _optionalRouteTextController.text = "";
+                    _postalCodeTextController.text = address.postalCode ?? "";
+                    _cityTextController.text = address.city ?? "";
+                    _focusNode.unfocus();
+                  }
+                },
+                optionsBuilder: (textEditingValue) async {
+                  final List<Suggestion> suggestions = await PlaceAPIProvider.instance.fetchSuggestions(textEditingValue.text, "fr", _sessionToken);
         
-              final List<String> result = [
-                for (final suggestion in suggestions)
-                  suggestion.description
-              ];
+                  final List<String> result = [
+                    for (final suggestion in suggestions)
+                      suggestion.description
+                  ];
         
-              return result;
-            },
-            optionsViewBuilder: (BuildContext context, AutocompleteOnSelected<String> onSelected, Iterable<String> options) {
-              return Material(
-                elevation: 4.0,
-                child: ListView(
-                  children: [
-                    for (final option in options)
-                      InkWell(
-                        onTap: () => onSelected(option),
-                        child: ListTile(
-                          title: Text(option),
+                  return result;
+                },
+                optionsViewBuilder: (BuildContext context, AutocompleteOnSelected<String> onSelected, Iterable<String> options) {
+                  return Align(
+                    alignment: Alignment.topLeft,
+                    child: Material(
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(bottom: Radius.circular(12.0)),
+                        side: BorderSide(
+                          color: Colors.grey
+                        )
+                      ),
+                      color: Theme.of(context).colorScheme.surface,
+                      elevation: 6,
+                      child: SizedBox(
+                        height: 52.0 * options.length,
+                        width: constraints.biggest.width, // <-- Right here !
+                        child: ListView.builder(
+                          padding: EdgeInsets.zero,
+                          itemCount: options.length,
+                          shrinkWrap: false,
+                          itemBuilder: (BuildContext context, int index) {
+                            final String option = options.elementAt(index);
+                            return InkWell(
+                              onTap: () => onSelected(option),
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Text(option),
+                              ),
+                            );
+                          },
                         ),
-                      )
-                  ],
-                ),
-              );
-            },
-            fieldViewBuilder: (context, textEditingController, focusNode, onFieldSubmitted) {
-              return ClTextInput(
-                controller: textEditingController,
-                focusNode: focusNode, 
-                labelText: "Adresse",
-                hintText: "Rentrer une adresse",
-                onTap: () {
-                  _sessionToken = const Uuid().v4();
+                      ),
+                    )
+                  );
                 },
-                validator: (value) {
-                  if (value.isEmpty) return "Vous devez rentrer une adresse";
+                fieldViewBuilder: (context, textEditingController, focusNode, onFieldSubmitted) {
+                  return ClTextInput(
+                    controller: textEditingController,
+                    focusNode: focusNode, 
+                    labelText: "Adresse",
+                    hintText: "Rentrer une adresse",
+                    onTap: () {
+                      _sessionToken = const Uuid().v4();
+                    },
+                    validator: (value) {
+                      if (value.isEmpty) return "Vous devez rentrer une adresse";
         
-                  return null;
+                      return null;
+                    },
+                  );
                 },
               );
-            },
+            }
           ),
         ),
         const SizedBox(height: 18,),
