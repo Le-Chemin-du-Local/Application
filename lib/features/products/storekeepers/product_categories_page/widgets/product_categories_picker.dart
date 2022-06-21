@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_categories_page/widgets/picker_category_button.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,12 @@ class ProductCategoriesPicker extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text("Catégories", style: Theme.of(context).textTheme.titleMedium),
+        Text(
+          "Catégories", 
+          style: ScreenHelper.instance.isMobile 
+            ? Theme.of(context).textTheme.titleMedium
+            : Theme.of(context).textTheme.headlineMedium
+        ),
         const SizedBox(height: 12,),
         Flexible(
           child: GridView(

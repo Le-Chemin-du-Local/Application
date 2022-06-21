@@ -206,7 +206,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
           
                                       // La TVA
                                       ConstrainedBox(
-                                        constraints: const BoxConstraints(maxWidth: 110),
+                                        constraints: const BoxConstraints(maxWidth: 150),
                                         child: ClDropdown<double>(
                                           items: {
                                             0: "0%",

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/dialog/closable_dialog.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,12 @@ class ProductTagsPicker extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text("Tags spécifiques", style: Theme.of(context).textTheme.titleMedium,),
+        Text(
+          "Tags spécifiques", 
+          style: ScreenHelper.instance.isMobile 
+            ? Theme.of(context).textTheme.titleMedium
+            : Theme.of(context).textTheme.headlineMedium
+        ),
         const SizedBox(height: 10,),
 
         Flexible(

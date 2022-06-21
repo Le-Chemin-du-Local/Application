@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,12 @@ class ProductAllergensPicker extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text("Allergènes", style: Theme.of(context).textTheme.titleMedium),
+        Text(
+          "Allergènes", 
+          style: ScreenHelper.instance.isMobile 
+            ? Theme.of(context).textTheme.titleMedium
+            : Theme.of(context).textTheme.headlineMedium
+        ),
         const SizedBox(height: 8),
 
         Wrap(
@@ -29,7 +35,7 @@ class ProductAllergensPicker extends StatelessWidget {
           children: [
             for (final allergen in kAllergensList) 
               SizedBox(
-                width: 175,
+                width: 200,
                 child: ClCheckBox(
                   value: allergens.contains(allergen),
                   text: allergen,

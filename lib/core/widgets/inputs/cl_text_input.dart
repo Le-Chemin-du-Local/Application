@@ -1,4 +1,5 @@
 
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:flutter/material.dart';
 
@@ -70,7 +71,12 @@ class _ClTextInput extends State<ClTextInput> {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(widget.labelText, style: Theme.of(context).textTheme.titleMedium,),
+        Text(
+          widget.labelText,
+          style: ScreenHelper.instance.isMobile 
+            ? Theme.of(context).textTheme.titleMedium
+            : Theme.of(context).textTheme.headlineMedium
+        ),
         const SizedBox(height: 4.0,),
         ClCard(
           padding: EdgeInsets.zero,

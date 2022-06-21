@@ -6,6 +6,7 @@ class ScreenHelper {
   static final ScreenHelper instance = ScreenHelper._();
 
   double horizontalPadding = 18;
+  bool isMobile = true;
 
   static const double breakpointPC = 768;
   static const double breakpointTablet = 481;
@@ -14,9 +15,11 @@ class ScreenHelper {
   void setValues(double width) {
     if (width > breakpointPC) {
       horizontalPadding = 32;
+      isMobile = false;
     }
     else if (width > breakpointTablet) {
       horizontalPadding = 24;
+      isMobile = false;
     }
   }
 }

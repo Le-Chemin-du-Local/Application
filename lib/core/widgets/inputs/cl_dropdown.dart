@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +28,12 @@ class ClDropdown<T> extends StatelessWidget {
       children: [
         if (label != null) ...{
           // Text(label!.toUpperCase(), style: const TextStyle(color: Colors.black54, fontSize: 12),),
-          Text(label!, style: Theme.of(context).textTheme.titleMedium,),
+          Text(
+            label!, 
+            style: ScreenHelper.instance.isMobile 
+              ? Theme.of(context).textTheme.titleMedium
+              : Theme.of(context).textTheme.headlineMedium
+          ),
           const SizedBox(height: 4.0,),
         },
         ClCard(
