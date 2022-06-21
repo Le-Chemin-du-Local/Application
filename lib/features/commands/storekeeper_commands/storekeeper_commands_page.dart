@@ -8,6 +8,9 @@ class StoreKeeperCommandsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<CommandsListState> inProgressKey = GlobalKey<CommandsListState>();
+    final GlobalKey<CommandsListState> readyKey = GlobalKey<CommandsListState>();
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
@@ -25,22 +28,26 @@ class StoreKeeperCommandsPage extends StatelessWidget {
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: constraints.maxWidth >= ScreenHelper.breakpointTablet ? 2 : 1,
                     ),
-                    children: const [
+                    children:[
                       // La liste des commandes à venir
                       Padding(
-                        padding: EdgeInsets.only(right: 13),
+                        padding: const EdgeInsets.only(right: 13),
                         child: CommandsList(
+                          key: inProgressKey,
                           status: CommandStatus.inProgress,
                           title: "Commandes à effectuer",
+                          onMustRefetch: () => _refetch(inProgressKey, readyKey),
                         ),
                       ),
 
                       // La list des commandes prêtes
                       Padding(
-                        padding: EdgeInsets.only(left: 13),
+                        padding: const EdgeInsets.only(left: 13),
                         child: CommandsList(
+                          key: readyKey,
                           status: CommandStatus.ready,
                           title: "Commande à distribuer",
+                          onMustRefetch: () => _refetch(inProgressKey, readyKey),
                         ),
                       )
                     ],
@@ -52,5 +59,10 @@ class StoreKeeperCommandsPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _refetch(GlobalKey<CommandsListState> inProgressKey, GlobalKey<CommandsListState> readyKey) {
+    inProgressKey.currentState!.stateRefetch!();
+    readyKey.currentState!.stateRefetch!();
   }
 }

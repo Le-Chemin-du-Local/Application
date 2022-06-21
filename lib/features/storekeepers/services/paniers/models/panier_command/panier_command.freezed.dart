@@ -21,10 +21,7 @@ PanierCommand _$PanierCommandFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PanierCommand {
   String? get id => throw _privateConstructorUsedError;
-  String get status => throw _privateConstructorUsedError;
-  DateTime get pickupDate => throw _privateConstructorUsedError;
   Panier get panier => throw _privateConstructorUsedError;
-  User? get user => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,15 +34,9 @@ abstract class $PanierCommandCopyWith<$Res> {
   factory $PanierCommandCopyWith(
           PanierCommand value, $Res Function(PanierCommand) then) =
       _$PanierCommandCopyWithImpl<$Res>;
-  $Res call(
-      {String? id,
-      String status,
-      DateTime pickupDate,
-      Panier panier,
-      User? user});
+  $Res call({String? id, Panier panier});
 
   $PanierCopyWith<$Res> get panier;
-  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -60,32 +51,17 @@ class _$PanierCommandCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? status = freezed,
-    Object? pickupDate = freezed,
     Object? panier = freezed,
-    Object? user = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      pickupDate: pickupDate == freezed
-          ? _value.pickupDate
-          : pickupDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       panier: panier == freezed
           ? _value.panier
           : panier // ignore: cast_nullable_to_non_nullable
               as Panier,
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
     ));
   }
 
@@ -93,17 +69,6 @@ class _$PanierCommandCopyWithImpl<$Res>
   $PanierCopyWith<$Res> get panier {
     return $PanierCopyWith<$Res>(_value.panier, (value) {
       return _then(_value.copyWith(panier: value));
-    });
-  }
-
-  @override
-  $UserCopyWith<$Res>? get user {
-    if (_value.user == null) {
-      return null;
-    }
-
-    return $UserCopyWith<$Res>(_value.user!, (value) {
-      return _then(_value.copyWith(user: value));
     });
   }
 }
@@ -115,17 +80,10 @@ abstract class _$$_PanierCommandCopyWith<$Res>
           _$_PanierCommand value, $Res Function(_$_PanierCommand) then) =
       __$$_PanierCommandCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String? id,
-      String status,
-      DateTime pickupDate,
-      Panier panier,
-      User? user});
+  $Res call({String? id, Panier panier});
 
   @override
   $PanierCopyWith<$Res> get panier;
-  @override
-  $UserCopyWith<$Res>? get user;
 }
 
 /// @nodoc
@@ -142,32 +100,17 @@ class __$$_PanierCommandCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? status = freezed,
-    Object? pickupDate = freezed,
     Object? panier = freezed,
-    Object? user = freezed,
   }) {
     return _then(_$_PanierCommand(
       id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      status: status == freezed
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as String,
-      pickupDate: pickupDate == freezed
-          ? _value.pickupDate
-          : pickupDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       panier: panier == freezed
           ? _value.panier
           : panier // ignore: cast_nullable_to_non_nullable
               as Panier,
-      user: user == freezed
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
     ));
   }
 }
@@ -175,11 +118,7 @@ class __$$_PanierCommandCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
-  const _$_PanierCommand(this.id,
-      {required this.status,
-      required this.pickupDate,
-      required this.panier,
-      this.user});
+  const _$_PanierCommand(this.id, {required this.panier});
 
   factory _$_PanierCommand.fromJson(Map<String, dynamic> json) =>
       _$$_PanierCommandFromJson(json);
@@ -187,17 +126,11 @@ class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
   @override
   final String? id;
   @override
-  final String status;
-  @override
-  final DateTime pickupDate;
-  @override
   final Panier panier;
-  @override
-  final User? user;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PanierCommand(id: $id, status: $status, pickupDate: $pickupDate, panier: $panier, user: $user)';
+    return 'PanierCommand(id: $id, panier: $panier)';
   }
 
   @override
@@ -206,10 +139,7 @@ class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
     properties
       ..add(DiagnosticsProperty('type', 'PanierCommand'))
       ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('status', status))
-      ..add(DiagnosticsProperty('pickupDate', pickupDate))
-      ..add(DiagnosticsProperty('panier', panier))
-      ..add(DiagnosticsProperty('user', user));
+      ..add(DiagnosticsProperty('panier', panier));
   }
 
   @override
@@ -218,11 +148,7 @@ class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
         (other.runtimeType == runtimeType &&
             other is _$_PanierCommand &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.status, status) &&
-            const DeepCollectionEquality()
-                .equals(other.pickupDate, pickupDate) &&
-            const DeepCollectionEquality().equals(other.panier, panier) &&
-            const DeepCollectionEquality().equals(other.user, user));
+            const DeepCollectionEquality().equals(other.panier, panier));
   }
 
   @JsonKey(ignore: true)
@@ -230,10 +156,7 @@ class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(status),
-      const DeepCollectionEquality().hash(pickupDate),
-      const DeepCollectionEquality().hash(panier),
-      const DeepCollectionEquality().hash(user));
+      const DeepCollectionEquality().hash(panier));
 
   @JsonKey(ignore: true)
   @override
@@ -248,10 +171,7 @@ class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
 
 abstract class _PanierCommand implements PanierCommand {
   const factory _PanierCommand(final String? id,
-      {required final String status,
-      required final DateTime pickupDate,
-      required final Panier panier,
-      final User? user}) = _$_PanierCommand;
+      {required final Panier panier}) = _$_PanierCommand;
 
   factory _PanierCommand.fromJson(Map<String, dynamic> json) =
       _$_PanierCommand.fromJson;
@@ -259,13 +179,7 @@ abstract class _PanierCommand implements PanierCommand {
   @override
   String? get id => throw _privateConstructorUsedError;
   @override
-  String get status => throw _privateConstructorUsedError;
-  @override
-  DateTime get pickupDate => throw _privateConstructorUsedError;
-  @override
   Panier get panier => throw _privateConstructorUsedError;
-  @override
-  User? get user => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_PanierCommandCopyWith<_$_PanierCommand> get copyWith =>

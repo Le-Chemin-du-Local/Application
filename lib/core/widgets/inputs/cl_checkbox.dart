@@ -20,10 +20,14 @@ class ClCheckBox extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Checkbox(
-          value: value,
-          onChanged: onChanged,
-          activeColor: Theme.of(context).colorScheme.primary,
+        SizedBox(
+          width: 24, height: 24,
+          child: Checkbox(
+            value: value,
+            onChanged: onChanged,
+            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            activeColor: Theme.of(context).colorScheme.primary,
+          ),
         ),
         Flexible(
           child: GestureDetector(

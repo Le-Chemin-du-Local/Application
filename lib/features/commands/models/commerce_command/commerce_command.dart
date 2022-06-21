@@ -37,6 +37,7 @@ class CommerceCommand with _$CommerceCommand {
     User? user,
     double? price,
     @Default(<CCCommand>[]) List<CCCommand> cccommands,
+    @JsonKey(name: "paniers")
     @Default(<PanierCommand>[]) List<PanierCommand> panierCommands,
   }) = _CommerceCommand;
 

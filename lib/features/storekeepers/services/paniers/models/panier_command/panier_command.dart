@@ -16,10 +16,7 @@ mixin PanierCommandStatus {
 @immutable
 class PanierCommand with _$PanierCommand {
   const factory PanierCommand(String? id, {
-    required String status,
-    required DateTime pickupDate,
     required Panier panier,
-    User? user,
   }) = _PanierCommand;
 
   factory PanierCommand.fromJson(Map<String, dynamic> json) => _$PanierCommandFromJson(json);

@@ -1,19 +1,30 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commands/commands_graphql.dart';
 import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
+import 'package:chemin_du_local/features/commands/storekeeper_commands/command_details_page/command_details_page.dart';
 import 'package:chemin_du_local/features/commands/storekeeper_commands/widgets/command_card.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
-class CommandsList extends StatelessWidget {
+class CommandsList extends StatefulWidget {
   const CommandsList({
     Key? key,
     required this.status,
     required this.title,
+    required this.onMustRefetch,
   }) : super(key: key);
 
   final String status;
   final String title;
+
+  final Function() onMustRefetch;
+
+  @override
+  State<CommandsList> createState() => CommandsListState();
+}
+
+class CommandsListState extends State<CommandsList> {
+  Refetch? stateRefetch;
 
   QueryOptions getCommandsQueryOptions() {
     return QueryOptions<dynamic>(
@@ -21,7 +32,7 @@ class CommandsList extends StatelessWidget {
       variables: <String, dynamic>{
         "filter": <String, dynamic>{
           "status": [
-            status
+            widget.status
           ]
         }
       }
@@ -36,7 +47,7 @@ class CommandsList extends StatelessWidget {
       children: [
         // Le titre
         Flexible(
-          child: Text(title, style: Theme.of(context).textTheme.headlineMedium,),
+          child: Text(widget.title, style: Theme.of(context).textTheme.headlineMedium,),
         ),
         const SizedBox(height: 20,),
 
@@ -45,6 +56,8 @@ class CommandsList extends StatelessWidget {
           child: Query<dynamic>(
             options: getCommandsQueryOptions(), 
             builder: (result, {fetchMore, refetch}) {
+              stateRefetch = refetch;
+
               if (result.isLoading) {
                 return const Center(child: CircularProgressIndicator(),);
               }
@@ -75,7 +88,7 @@ class CommandsList extends StatelessWidget {
                 );
               }
         
-              return _buildContent(commands: commands);
+              return _buildContent(context, commands: commands, refetch: refetch);
             }
           ),
         ),
@@ -83,8 +96,9 @@ class CommandsList extends StatelessWidget {
     );
   }
 
-  Widget _buildContent({
-    required List<CommerceCommand> commands
+  Widget _buildContent(BuildContext context, {
+    required List<CommerceCommand> commands,
+    Refetch? refetch,
   }) {
     return ListView(
       shrinkWrap: true,
@@ -92,11 +106,26 @@ class CommandsList extends StatelessWidget {
         for (final command in commands) ...{ 
           ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 130),
-            child: CommandCard(command: command),
+            child: InkWell(
+              onTap: () => _onOpenCommandDetails(context, command),
+              child: CommandCard(command: command)
+            ),
           ),
           const SizedBox(height: 21,)
         }
       ],
     );
+  }
+
+  Future _onOpenCommandDetails(BuildContext context, CommerceCommand command) async {
+    final bool shouldRefetch = await Navigator.of(context).push<bool?>(
+      MaterialPageRoute<bool?>(
+       builder: (context) => CommandDetailsPage(command: command)
+      )
+    ) ?? false;
+
+    if (shouldRefetch) {
+      widget.onMustRefetch();
+    }
   }
 }

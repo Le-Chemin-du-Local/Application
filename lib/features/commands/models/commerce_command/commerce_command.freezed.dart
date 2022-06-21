@@ -27,6 +27,7 @@ mixin _$CommerceCommand {
   User? get user => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   List<CCCommand> get cccommands => throw _privateConstructorUsedError;
+  @JsonKey(name: "paniers")
   List<PanierCommand> get panierCommands => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,7 +49,7 @@ abstract class $CommerceCommandCopyWith<$Res> {
       User? user,
       double? price,
       List<CCCommand> cccommands,
-      List<PanierCommand> panierCommands});
+      @JsonKey(name: "paniers") List<PanierCommand> panierCommands});
 
   $CommerceCopyWith<$Res>? get commerce;
   $UserCopyWith<$Res>? get user;
@@ -148,7 +149,7 @@ abstract class _$$_CommerceCommandCopyWith<$Res>
       User? user,
       double? price,
       List<CCCommand> cccommands,
-      List<PanierCommand> panierCommands});
+      @JsonKey(name: "paniers") List<PanierCommand> panierCommands});
 
   @override
   $CommerceCopyWith<$Res>? get commerce;
@@ -220,14 +221,16 @@ class __$$_CommerceCommandCopyWithImpl<$Res>
 class _$_CommerceCommand
     with DiagnosticableTreeMixin
     implements _CommerceCommand {
-  const _$_CommerceCommand(this.id,
+  const _$_CommerceCommand(
+      this.id,
       {required this.status,
       this.pickupDate,
       this.commerce,
       this.user,
       this.price,
       final List<CCCommand> cccommands = const <CCCommand>[],
-      final List<PanierCommand> panierCommands = const <PanierCommand>[]})
+      @JsonKey(name: "paniers")
+          final List<PanierCommand> panierCommands = const <PanierCommand>[]})
       : _cccommands = cccommands,
         _panierCommands = panierCommands;
 
@@ -256,7 +259,7 @@ class _$_CommerceCommand
 
   final List<PanierCommand> _panierCommands;
   @override
-  @JsonKey()
+  @JsonKey(name: "paniers")
   List<PanierCommand> get panierCommands {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_panierCommands);
@@ -326,13 +329,14 @@ class _$_CommerceCommand
 
 abstract class _CommerceCommand implements CommerceCommand {
   const factory _CommerceCommand(final String? id,
-      {required final String status,
-      final DateTime? pickupDate,
-      final Commerce? commerce,
-      final User? user,
-      final double? price,
-      final List<CCCommand> cccommands,
-      final List<PanierCommand> panierCommands}) = _$_CommerceCommand;
+          {required final String status,
+          final DateTime? pickupDate,
+          final Commerce? commerce,
+          final User? user,
+          final double? price,
+          final List<CCCommand> cccommands,
+          @JsonKey(name: "paniers") final List<PanierCommand> panierCommands}) =
+      _$_CommerceCommand;
 
   factory _CommerceCommand.fromJson(Map<String, dynamic> json) =
       _$_CommerceCommand.fromJson;
@@ -352,6 +356,7 @@ abstract class _CommerceCommand implements CommerceCommand {
   @override
   List<CCCommand> get cccommands => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: "paniers")
   List<PanierCommand> get panierCommands => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

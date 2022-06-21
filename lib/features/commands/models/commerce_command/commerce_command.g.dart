@@ -24,7 +24,7 @@ _$_CommerceCommand _$$_CommerceCommandFromJson(Map<String, dynamic> json) =>
               ?.map((e) => CCCommand.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <CCCommand>[],
-      panierCommands: (json['panierCommands'] as List<dynamic>?)
+      panierCommands: (json['paniers'] as List<dynamic>?)
               ?.map((e) => PanierCommand.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const <PanierCommand>[],
@@ -39,5 +39,5 @@ Map<String, dynamic> _$$_CommerceCommandToJson(_$_CommerceCommand instance) =>
       'user': instance.user,
       'price': instance.price,
       'cccommands': instance.cccommands,
-      'panierCommands': instance.panierCommands,
+      'paniers': instance.panierCommands,
     };

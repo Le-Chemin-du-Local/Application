@@ -23,6 +23,7 @@ mixin _$User {
   String? get id => throw _privateConstructorUsedError;
   String get role => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
+  String? get phone => throw _privateConstructorUsedError;
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $UserCopyWith<$Res> {
       {String? id,
       String role,
       String email,
+      String? phone,
       String? firstName,
       String? lastName,
       DateTime? createdAt,
@@ -69,6 +71,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? id = freezed,
     Object? role = freezed,
     Object? email = freezed,
+    Object? phone = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? createdAt = freezed,
@@ -89,6 +92,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      phone: phone == freezed
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -149,6 +156,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       {String? id,
       String role,
       String email,
+      String? phone,
       String? firstName,
       String? lastName,
       DateTime? createdAt,
@@ -176,6 +184,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? id = freezed,
     Object? role = freezed,
     Object? email = freezed,
+    Object? phone = freezed,
     Object? firstName = freezed,
     Object? lastName = freezed,
     Object? createdAt = freezed,
@@ -196,6 +205,10 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
+      phone: phone == freezed
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as String?,
       firstName: firstName == freezed
           ? _value.firstName
           : firstName // ignore: cast_nullable_to_non_nullable
@@ -230,6 +243,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   const _$_User(this.id,
       {required this.role,
       required this.email,
+      this.phone,
       this.firstName,
       this.lastName,
       this.createdAt,
@@ -247,6 +261,8 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   final String role;
   @override
   final String email;
+  @override
+  final String? phone;
   @override
   final String? firstName;
   @override
@@ -268,7 +284,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'User(id: $id, role: $role, email: $email, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, commerce: $commerce, registeredPaymentMethods: $registeredPaymentMethods, defaultPaymentMethod: $defaultPaymentMethod)';
+    return 'User(id: $id, role: $role, email: $email, phone: $phone, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, commerce: $commerce, registeredPaymentMethods: $registeredPaymentMethods, defaultPaymentMethod: $defaultPaymentMethod)';
   }
 
   @override
@@ -279,6 +295,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('role', role))
       ..add(DiagnosticsProperty('email', email))
+      ..add(DiagnosticsProperty('phone', phone))
       ..add(DiagnosticsProperty('firstName', firstName))
       ..add(DiagnosticsProperty('lastName', lastName))
       ..add(DiagnosticsProperty('createdAt', createdAt))
@@ -296,6 +313,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.role, role) &&
             const DeepCollectionEquality().equals(other.email, email) &&
+            const DeepCollectionEquality().equals(other.phone, phone) &&
             const DeepCollectionEquality().equals(other.firstName, firstName) &&
             const DeepCollectionEquality().equals(other.lastName, lastName) &&
             const DeepCollectionEquality().equals(other.createdAt, createdAt) &&
@@ -313,6 +331,7 @@ class _$_User with DiagnosticableTreeMixin implements _User {
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(role),
       const DeepCollectionEquality().hash(email),
+      const DeepCollectionEquality().hash(phone),
       const DeepCollectionEquality().hash(firstName),
       const DeepCollectionEquality().hash(lastName),
       const DeepCollectionEquality().hash(createdAt),
@@ -335,6 +354,7 @@ abstract class _User implements User {
   const factory _User(final String? id,
       {required final String role,
       required final String email,
+      final String? phone,
       final String? firstName,
       final String? lastName,
       final DateTime? createdAt,
@@ -350,6 +370,8 @@ abstract class _User implements User {
   String get role => throw _privateConstructorUsedError;
   @override
   String get email => throw _privateConstructorUsedError;
+  @override
+  String? get phone => throw _privateConstructorUsedError;
   @override
   String? get firstName => throw _privateConstructorUsedError;
   @override

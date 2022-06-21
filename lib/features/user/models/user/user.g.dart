@@ -10,6 +10,7 @@ _$_User _$$_UserFromJson(Map<String, dynamic> json) => _$_User(
       json['id'] as String?,
       role: json['role'] as String,
       email: json['email'] as String,
+      phone: json['phone'] as String?,
       firstName: json['firstName'] as String?,
       lastName: json['lastName'] as String?,
       createdAt: json['createdAt'] == null
@@ -33,6 +34,7 @@ Map<String, dynamic> _$$_UserToJson(_$_User instance) => <String, dynamic>{
       'id': instance.id,
       'role': instance.role,
       'email': instance.email,
+      'phone': instance.phone,
       'firstName': instance.firstName,
       'lastName': instance.lastName,
       'createdAt': instance.createdAt?.toIso8601String(),

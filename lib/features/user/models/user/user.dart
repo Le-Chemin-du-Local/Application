@@ -18,6 +18,7 @@ class User with _$User {
   const factory User(String? id, {
     required String role,
     required String email,
+    String? phone,
     String? firstName,
     String? lastName,
     DateTime? createdAt,
