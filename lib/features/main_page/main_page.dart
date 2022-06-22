@@ -73,27 +73,30 @@ class MainPageState extends State<MainPage> {
               ),
             ),
             child: SafeArea(
-              child: Scaffold(
-                appBar:AppBar(
-                  title: Text(widget.pageItems[_currentIndex].title),
-                ),
-                body: Theme(
-                  data: Theme.of(context).copyWith(
-                    appBarTheme: ClTheme.themeSecondAppBar(context)
+              child: GestureDetector(
+                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+                child: Scaffold(
+                  appBar:AppBar(
+                    title: Text(widget.pageItems[_currentIndex].title),
                   ),
-                  child: widget.pages[_currentIndex]
-                ),
-                drawer: useBigLayout 
-                  ? MenuDrawer(
-                      pageItems: widget.pageItems,
-                      currentPageIndex: _currentIndex,
-                      onSelectedPage: selectedPage,
-                    )
-                  : null,
-                bottomNavigationBar: useBigLayout ? null : custom.BottomAppBar(
-                  currentPageIndex: _currentIndex,
-                  onSelectedPage: selectedPage,
-                  pageItems: widget.pageItems,
+                  body: Theme(
+                    data: Theme.of(context).copyWith(
+                      appBarTheme: ClTheme.themeSecondAppBar(context)
+                    ),
+                    child: widget.pages[_currentIndex]
+                  ),
+                  drawer: useBigLayout 
+                    ? MenuDrawer(
+                        pageItems: widget.pageItems,
+                        currentPageIndex: _currentIndex,
+                        onSelectedPage: selectedPage,
+                      )
+                    : null,
+                  bottomNavigationBar: useBigLayout ? null : custom.BottomAppBar(
+                    currentPageIndex: _currentIndex,
+                    onSelectedPage: selectedPage,
+                    pageItems: widget.pageItems,
+                  ),
                 ),
               ),
             ),
