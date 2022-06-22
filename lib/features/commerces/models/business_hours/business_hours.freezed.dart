@@ -174,7 +174,7 @@ class __$$_BusinessHoursCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BusinessHours with DiagnosticableTreeMixin implements _BusinessHours {
+class _$_BusinessHours extends _BusinessHours with DiagnosticableTreeMixin {
   const _$_BusinessHours(
       {this.monday,
       this.tuesday,
@@ -182,7 +182,8 @@ class _$_BusinessHours with DiagnosticableTreeMixin implements _BusinessHours {
       this.thursday,
       this.friday,
       this.saturday,
-      this.sunday});
+      this.sunday})
+      : super._();
 
   factory _$_BusinessHours.fromJson(Map<String, dynamic> json) =>
       _$$_BusinessHoursFromJson(json);
@@ -258,7 +259,7 @@ class _$_BusinessHours with DiagnosticableTreeMixin implements _BusinessHours {
   }
 }
 
-abstract class _BusinessHours implements BusinessHours {
+abstract class _BusinessHours extends BusinessHours {
   const factory _BusinessHours(
       {final List<Schedule>? monday,
       final List<Schedule>? tuesday,
@@ -267,6 +268,7 @@ abstract class _BusinessHours implements BusinessHours {
       final List<Schedule>? friday,
       final List<Schedule>? saturday,
       final List<Schedule>? sunday}) = _$_BusinessHours;
+  const _BusinessHours._() : super._();
 
   factory _BusinessHours.fromJson(Map<String, dynamic> json) =
       _$_BusinessHours.fromJson;

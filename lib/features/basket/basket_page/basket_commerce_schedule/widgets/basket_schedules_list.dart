@@ -18,7 +18,7 @@ class BasketSchedulesList extends StatelessWidget {
 
   final DateTime day;
 
-  final Function(int) onIndexChanged;
+  final Function(int,DateTime) onIndexChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +92,7 @@ class BasketSchedulesList extends StatelessWidget {
       for (int i = 0; i < hours.length - 1; ++i)
         Flexible(
           child: GestureDetector(
-            onTap: () => onIndexChanged(i),
+            onTap: () => onIndexChanged(i,hours[i]),
             child: Container(
               decoration: BoxDecoration(
                 color: i == currentDateIndex ? Theme.of(context).colorScheme.secondaryContainer :  Theme.of(context).colorScheme.surface,

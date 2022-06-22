@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/dates_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_commerce_schedule/widgets/basket_schedules_list.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:flutter/material.dart';
@@ -21,11 +22,47 @@ class BasketCommerceSchedule extends StatefulWidget {
 }
 
 class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
-  DateTime _day = DateTime.now();
+  late DateTime _day;
+  late DateTime _firstOpennedDate;
+
   int _timeIndex = -1;
+  DateTime? _dateChoosed;
+
+
+  @override
+  void initState() {
+    super.initState();
+
+    _day = DateTime.now();
+
+    if (!(widget.commerce.clickAndCollectHours?.isEmpty ?? true)) {
+      bool isOpen = false;
+      do {
+        _day = _day.add(const Duration(days: 1));
+        
+        isOpen = widget.commerce.businessHours?.isOpen(_day.weekday) ?? false;
+      } 
+      while (!isOpen);
+
+      _firstOpennedDate = _day;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.commerce.clickAndCollectHours?.isEmpty ?? true) {
+      return Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: ScreenHelper.instance.horizontalPadding,
+          vertical: 12,
+        ),
+        child: const ClStatusMessage(
+          type: ClStatusMessageType.info,
+          message: "Ce commerce n'est pas encore ouvert pour le Click and collect...",
+        )
+      );
+    }
+
     return Stack(
       children: [
         Positioned(
@@ -61,9 +98,10 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
                       commerce: widget.commerce,
                       currentDateIndex: _timeIndex,
                       day: _day,
-                      onIndexChanged: (index) {
+                      onIndexChanged: (index,date) {
                         setState(() {
                           _timeIndex = index;
+                          _dateChoosed = date;
                         });
                       },
                     ),
@@ -122,13 +160,21 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
   }
 
   Widget _buildBackDayButton() {
-    bool isEnabled = !_day.isSameDate(DateTime.now());
+    bool isEnabled = !_day.isSameDate(_firstOpennedDate);
 
     return InkWell(
       onTap: !isEnabled ? null : () {
         setState(() {
-          _day = _day.subtract(const Duration(days: 1));
+           bool isOpen = false;
           _timeIndex = -1;
+          _dateChoosed = null;
+
+          do {
+            _day = _day.subtract(const Duration(days: 1));
+            
+            isOpen = widget.commerce.clickAndCollectHours?.isOpen(_day.weekday) ?? false;
+          } 
+          while (!isOpen);
         });
       },
       child: Container(
@@ -156,8 +202,16 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
     return InkWell(
       onTap: () {
         setState(() {
-          _day = _day.add(const Duration(days: 1));
+          bool isOpen = false;
           _timeIndex = -1;
+          _dateChoosed = null;
+
+          do {
+            _day = _day.add(const Duration(days: 1));
+            
+            isOpen = widget.commerce.clickAndCollectHours?.isOpen(_day.weekday) ?? false;
+          } 
+          while (!isOpen);
         });
       },
       child: Container(
@@ -182,28 +236,10 @@ class _BasketCommerceScheduleState extends State<BasketCommerceSchedule> {
   }
 
   void _onDateChoosed() {
-    final List<TimeOfDay> times = [
-      const TimeOfDay(hour: 9, minute: 30),
-      const TimeOfDay(hour: 10, minute: 30),
-      const TimeOfDay(hour: 11, minute: 30),
-      const TimeOfDay(hour: 12, minute: 30),
-      const TimeOfDay(hour: 13, minute: 30),
-      const TimeOfDay(hour: 14, minute: 30),
-      const TimeOfDay(hour: 15, minute: 30),
-      const TimeOfDay(hour: 16, minute: 30),
-      const TimeOfDay(hour: 17, minute: 30),
-    ];
-
-    if (_timeIndex < 0) return;
+    if (_timeIndex < 0 || _dateChoosed == null) return;
 
     widget.onDateChoosed(
-      DateTime(
-        _day.year,
-        _day.month,
-        _day.day,
-        times[_timeIndex].hour,
-        times[_timeIndex].minute,
-      )
+      _dateChoosed!
     );
   }
 }
