@@ -36,6 +36,7 @@ class ClTheme {
       appBarTheme: const AppBarTheme(
         centerTitle: false,
         backgroundColor: Palette.colorScaffold,
+        toolbarHeight: 26,
         elevation: 0,
         foregroundColor: Palette.colorDark,
         systemOverlayStyle: SystemUiOverlayStyle.light,
