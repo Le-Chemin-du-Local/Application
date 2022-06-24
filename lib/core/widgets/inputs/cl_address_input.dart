@@ -6,9 +6,14 @@ import 'package:uuid/uuid.dart';
 class ClAddressInput extends StatefulWidget {
   const ClAddressInput({
     Key? key,
+    required this.label,
+    required this.hint,
     required this.addressTextController,
     this.onSelected
   }) : super(key: key);
+
+  final String label;
+  final String hint;
 
   final TextEditingController addressTextController;
   final Function(String)? onSelected;
@@ -78,8 +83,8 @@ class _ClAddressInputState extends State<ClAddressInput> {
             return ClTextInput(
               controller: textEditingController,
               focusNode: focusNode, 
-              labelText: "Adresse de votre commerce",
-              hintText: "Rentrer une adresse",
+              labelText: widget.label,
+              hintText: widget.hint,
               onTap: () {
                 _sessionToken = const Uuid().v4();
               },
