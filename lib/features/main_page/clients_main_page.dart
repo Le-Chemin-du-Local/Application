@@ -30,7 +30,15 @@ class ClientsMainPage extends StatelessWidget {
           ),
         )
       ),
-      const ClientHomePage(),
+      ClipRect(
+        child: Navigator(
+          key: AppManager.instance.homePageKey,
+          onGenerateRoute: (route) => MaterialPageRoute<void>(
+            settings: route,
+            builder: (context) => const ClientHomePage()
+          ),
+        )
+      ),
       const FidelityPage(),
       ClipRect(
         child: Navigator(
@@ -75,7 +83,8 @@ class ClientsMainPage extends StatelessWidget {
         index: 3,
         title: "Paniers",
         appBarTitle: "Votre paniers",
-        icon: CLIcons.clickandcollect
+        icon: CLIcons.clickandcollect,
+        isBasket: true
       ),
 
       // Account

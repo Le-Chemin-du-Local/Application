@@ -8,6 +8,7 @@ class AppManager {
   final GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
   // CLIENTS KEYS
+  final GlobalKey<NavigatorState> homePageKey = GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> commercesListPageKey = GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> basketPageKey = GlobalKey<NavigatorState>();
 
@@ -20,6 +21,11 @@ class AppManager {
   int basketPageIndex = 0;
 
   Future<bool?> showCloseAppConfirmation(BuildContext context) async {
+    if (homePageKey.currentState?.canPop() ?? false) {
+      commercesListPageKey.currentState!.pop();
+      return false;
+    }
+
     if (commercesListPageKey.currentState?.canPop() ?? false) {
       commercesListPageKey.currentState!.pop();
       return false;
