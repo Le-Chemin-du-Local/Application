@@ -21,7 +21,7 @@ mixin _$PageItem {
   String get appBarTitle => throw _privateConstructorUsedError;
   bool get showOnMobile => throw _privateConstructorUsedError;
   IconData? get icon => throw _privateConstructorUsedError;
-  Widget? get suffixWidget => throw _privateConstructorUsedError;
+  bool get isBasket => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PageItemCopyWith<PageItem> get copyWith =>
@@ -38,7 +38,7 @@ abstract class $PageItemCopyWith<$Res> {
       String appBarTitle,
       bool showOnMobile,
       IconData? icon,
-      Widget? suffixWidget});
+      bool isBasket});
 }
 
 /// @nodoc
@@ -56,7 +56,7 @@ class _$PageItemCopyWithImpl<$Res> implements $PageItemCopyWith<$Res> {
     Object? appBarTitle = freezed,
     Object? showOnMobile = freezed,
     Object? icon = freezed,
-    Object? suffixWidget = freezed,
+    Object? isBasket = freezed,
   }) {
     return _then(_value.copyWith(
       index: index == freezed
@@ -79,10 +79,10 @@ class _$PageItemCopyWithImpl<$Res> implements $PageItemCopyWith<$Res> {
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as IconData?,
-      suffixWidget: suffixWidget == freezed
-          ? _value.suffixWidget
-          : suffixWidget // ignore: cast_nullable_to_non_nullable
-              as Widget?,
+      isBasket: isBasket == freezed
+          ? _value.isBasket
+          : isBasket // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -99,7 +99,7 @@ abstract class _$$_PageItemCopyWith<$Res> implements $PageItemCopyWith<$Res> {
       String appBarTitle,
       bool showOnMobile,
       IconData? icon,
-      Widget? suffixWidget});
+      bool isBasket});
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ class __$$_PageItemCopyWithImpl<$Res> extends _$PageItemCopyWithImpl<$Res>
     Object? appBarTitle = freezed,
     Object? showOnMobile = freezed,
     Object? icon = freezed,
-    Object? suffixWidget = freezed,
+    Object? isBasket = freezed,
   }) {
     return _then(_$_PageItem(
       index: index == freezed
@@ -142,10 +142,10 @@ class __$$_PageItemCopyWithImpl<$Res> extends _$PageItemCopyWithImpl<$Res>
           ? _value.icon
           : icon // ignore: cast_nullable_to_non_nullable
               as IconData?,
-      suffixWidget: suffixWidget == freezed
-          ? _value.suffixWidget
-          : suffixWidget // ignore: cast_nullable_to_non_nullable
-              as Widget?,
+      isBasket: isBasket == freezed
+          ? _value.isBasket
+          : isBasket // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -159,7 +159,7 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
       required this.appBarTitle,
       this.showOnMobile = true,
       this.icon,
-      this.suffixWidget});
+      this.isBasket = false});
 
   @override
   final int index;
@@ -173,11 +173,12 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
   @override
   final IconData? icon;
   @override
-  final Widget? suffixWidget;
+  @JsonKey()
+  final bool isBasket;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PageItem(index: $index, title: $title, appBarTitle: $appBarTitle, showOnMobile: $showOnMobile, icon: $icon, suffixWidget: $suffixWidget)';
+    return 'PageItem(index: $index, title: $title, appBarTitle: $appBarTitle, showOnMobile: $showOnMobile, icon: $icon, isBasket: $isBasket)';
   }
 
   @override
@@ -190,7 +191,7 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
       ..add(DiagnosticsProperty('appBarTitle', appBarTitle))
       ..add(DiagnosticsProperty('showOnMobile', showOnMobile))
       ..add(DiagnosticsProperty('icon', icon))
-      ..add(DiagnosticsProperty('suffixWidget', suffixWidget));
+      ..add(DiagnosticsProperty('isBasket', isBasket));
   }
 
   @override
@@ -205,8 +206,7 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
             const DeepCollectionEquality()
                 .equals(other.showOnMobile, showOnMobile) &&
             const DeepCollectionEquality().equals(other.icon, icon) &&
-            const DeepCollectionEquality()
-                .equals(other.suffixWidget, suffixWidget));
+            const DeepCollectionEquality().equals(other.isBasket, isBasket));
   }
 
   @override
@@ -217,7 +217,7 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
       const DeepCollectionEquality().hash(appBarTitle),
       const DeepCollectionEquality().hash(showOnMobile),
       const DeepCollectionEquality().hash(icon),
-      const DeepCollectionEquality().hash(suffixWidget));
+      const DeepCollectionEquality().hash(isBasket));
 
   @JsonKey(ignore: true)
   @override
@@ -232,7 +232,7 @@ abstract class _PageItem implements PageItem {
       required final String appBarTitle,
       final bool showOnMobile,
       final IconData? icon,
-      final Widget? suffixWidget}) = _$_PageItem;
+      final bool isBasket}) = _$_PageItem;
 
   @override
   int get index => throw _privateConstructorUsedError;
@@ -245,7 +245,7 @@ abstract class _PageItem implements PageItem {
   @override
   IconData? get icon => throw _privateConstructorUsedError;
   @override
-  Widget? get suffixWidget => throw _privateConstructorUsedError;
+  bool get isBasket => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_PageItemCopyWith<_$_PageItem> get copyWith =>

@@ -87,10 +87,11 @@ class __$$_BasketCopyWithImpl<$Res> extends _$BasketCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Basket with DiagnosticableTreeMixin implements _Basket {
+class _$_Basket extends _Basket with DiagnosticableTreeMixin {
   const _$_Basket(
       {final List<BasketCommerce> commerces = const <BasketCommerce>[]})
-      : _commerces = commerces;
+      : _commerces = commerces,
+        super._();
 
   factory _$_Basket.fromJson(Map<String, dynamic> json) =>
       _$$_BasketFromJson(json);
@@ -141,8 +142,9 @@ class _$_Basket with DiagnosticableTreeMixin implements _Basket {
   }
 }
 
-abstract class _Basket implements Basket {
+abstract class _Basket extends Basket {
   const factory _Basket({final List<BasketCommerce> commerces}) = _$_Basket;
+  const _Basket._() : super._();
 
   factory _Basket.fromJson(Map<String, dynamic> json) = _$_Basket.fromJson;
 

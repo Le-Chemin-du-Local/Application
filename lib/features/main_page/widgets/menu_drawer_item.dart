@@ -1,7 +1,9 @@
+import 'package:chemin_du_local/features/basket/riverpod/basket_controller.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MenuDrawerItem extends StatelessWidget {
+class MenuDrawerItem extends ConsumerWidget {
   const MenuDrawerItem({
     Key? key,
     required this.item, 
@@ -14,7 +16,7 @@ class MenuDrawerItem extends StatelessWidget {
   final bool isMinimified;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Stack(
       children: [
         Container(
@@ -48,16 +50,16 @@ class MenuDrawerItem extends StatelessWidget {
                     flex: 8,
                     child: Text(item.title, style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),),
                   ),
-                  if (item.suffixWidget != null) 
+                  if (item.isBasket) 
                     Expanded(
-                      child: item.suffixWidget!,
+                      child: _buildBasketCount(context, ref)
                     )
                 }
               ],
             ),
           ),
         ),
-        if (isMinimified && item.suffixWidget != null)
+        if (isMinimified && item.isBasket)
           Positioned(
             top: 5,
             right: 5,
@@ -71,12 +73,32 @@ class MenuDrawerItem extends StatelessWidget {
               child: Center(
                 child: DefaultTextStyle(
                   style: const TextStyle(color: Colors.white, fontSize: 12),
-                  child: item.suffixWidget!,
+                  child: _buildBasketCount(context, ref),
                 ),
               ),
             ),
           )
       ],
+    );
+  }
+
+  Widget _buildBasketCount(BuildContext context, WidgetRef ref) {
+    return ref.watch(basketControllerProvider).basket.when(
+      data: (data) => data.count <= 0 ? Container() : Container(
+        width: 18, height: 18,
+        decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(9.0),
+        ),
+        child: Center(
+              child: Text(
+                data.count.toString(),
+                style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSecondary),
+              ),
+        ),
+      ),
+      loading: () => Container(),
+      error: (error, stackTrace) => Container()
     );
   }
 }

@@ -13,7 +13,6 @@ class PageItem with _$PageItem {
     required String appBarTitle,
     @Default(true) bool showOnMobile,
     IconData? icon,
-    Widget? suffixWidget,
-
+    @Default(false) bool isBasket,
   }) = _PageItem;
 }

@@ -1,10 +1,7 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/features/clients/client_home/widgets/commerces_list.dart';
-import 'package:chemin_du_local/place/place_service.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:latlng/latlng.dart';
 
 class ClientHomePage extends StatefulWidget {
   const ClientHomePage({Key? key}) : super(key: key);
