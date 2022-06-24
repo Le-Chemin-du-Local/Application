@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/dialog/closable_dialog.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';

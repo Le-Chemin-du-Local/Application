@@ -1,6 +1,5 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
-import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 class ProductCategoryCard extends StatelessWidget {
