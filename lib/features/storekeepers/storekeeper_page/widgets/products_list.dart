@@ -7,6 +7,7 @@ import 'package:chemin_du_local/features/basket/models/basket_product/basket_pro
 import 'package:chemin_du_local/features/basket/riverpod/basket_controller.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
+import 'package:chemin_du_local/features/products/storekeepers/products_main_page/products_main_page.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_page/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -30,7 +31,7 @@ class ProductsList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(basketControllerProvider).basket.when(
-      data: (data) => _buildContent(ref, data),
+      data: (data) => _buildContent(context, ref, data),
       loading: () => const Center(child: CircularProgressIndicator(),),
       error: (error, stackTrace) => const Align(
         alignment: Alignment.topCenter,
@@ -41,7 +42,7 @@ class ProductsList extends ConsumerWidget {
     );
   }
 
-  Widget _buildContent(WidgetRef ref, Basket basket) {
+  Widget _buildContent(BuildContext context, WidgetRef ref, Basket basket) {
     final BasketCommerce? basketCommerce = _commerceForID(basket, commerce?.id ?? "");
 
     return Opacity(
@@ -96,8 +97,9 @@ class ProductsList extends ConsumerWidget {
               // Le bouton
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (!enableButton) return;
+                    await _onViewAllProducts(context);
                   },
                   child: const Text("Voir tous les produits"),
                 ),
@@ -114,6 +116,16 @@ class ProductsList extends ConsumerWidget {
             )
         ],
       ),
+    );
+  }
+
+  Future _onViewAllProducts(BuildContext context) async {
+    await Navigator.of(context).push<dynamic>(
+      MaterialPageRoute<dynamic>(
+        builder: (context) => ProductsMainPage(
+          commerceID: commerce?.id
+        )
+      )
     );
   }
 

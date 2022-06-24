@@ -11,12 +11,15 @@ class ProductsPage extends StatelessWidget {
     Key? key,
     required this.category,
     required this.onProductAdded(),
-    this.commerceID,
+    required this.commerceID,
+    this.isStoreKeeper = false,
     this.showAppBar = true,
   }) : super(key: key);
 
   final String? commerceID;
   final String category;
+
+  final bool isStoreKeeper;
 
   final Function() onProductAdded;
 
@@ -94,24 +97,26 @@ class ProductsPage extends StatelessWidget {
         children: [
           for (final product in products) 
             InkWell(
-              onTap: () => _openProductEditPage(context, product: product, refetch: refetch),
+              onTap: () => _openProductPage(context, product: product, refetch: refetch),
               child: ProductCard(
                 product: product
               )
             )
         ]
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _openProductEditPage(context, refetch: refetch),
+      floatingActionButton: !isStoreKeeper ? null : FloatingActionButton(
+        onPressed: () => _openProductPage(context, refetch: refetch),
         child: const Icon(Icons.add),
       ),
     );
   }
 
-  Future _openProductEditPage(BuildContext context, {
+  Future _openProductPage(BuildContext context, {
     Refetch? refetch,
     Product? product
   }) async {
+    if (!isStoreKeeper) return;
+
     final bool haveProductUpdate = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
         builder: (context) => ProductPage(

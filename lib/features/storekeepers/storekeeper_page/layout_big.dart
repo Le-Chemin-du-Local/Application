@@ -14,12 +14,15 @@ class LayoutBig extends StatelessWidget {
     Key? key,
     required this.commerce,
     required this.products,
-    required this.productsAvailableForClickAndCollect
+    required this.productsAvailableForClickAndCollect,
+    required this.enableAllProductsButton,
   }) : super(key: key);
 
   final Commerce? commerce;
   final List<Product> products;
   final List<Product> productsAvailableForClickAndCollect;
+
+  final bool enableAllProductsButton;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +65,7 @@ class LayoutBig extends StatelessWidget {
                     // Les produits
                     Flexible(
                       child: ProductsGrid(
-                        enableButton: false,
+                        enableButton: enableAllProductsButton,
                         commerce: commerce,
                         products: products,
                         availableForClickAndCollect: [

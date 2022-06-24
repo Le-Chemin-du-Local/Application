@@ -10,7 +10,14 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ProductsMainPage extends StatefulWidget {
-  const ProductsMainPage({Key? key}) : super(key: key);
+  const ProductsMainPage({
+    Key? key,
+    this.isStorekeeper = false,
+    this.commerceID,
+  }) : super(key: key);
+
+  final bool isStorekeeper;
+  final String? commerceID;
 
   @override
   State<ProductsMainPage> createState() => _ProductsMainPageState();
@@ -22,44 +29,53 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
   QueryOptions<dynamic> _categoriesQueryOptions() {
     return QueryOptions<dynamic>(
       document: gql(qCategories),
+      variables: <String, dynamic>{
+        if (widget.commerceID != null)
+          "commerceID": widget.commerceID
+      }
     );
   }
 
   @override 
   Widget build(BuildContext context) {
-    return Query<dynamic>(
-      options: _categoriesQueryOptions(),
-      builder: (categoriesQueryResult, {fetchMore, refetch}) {
-        // We show the loading progress if needed
-        if (categoriesQueryResult.isLoading) {
-          return const Center(child: CircularProgressIndicator(),);
+    return Scaffold(
+      appBar: widget.isStorekeeper ? null : AppBar(
+        title: const Text("Tous les produits"),
+      ),
+      body: Query<dynamic>(
+        options: _categoriesQueryOptions(),
+        builder: (categoriesQueryResult, {fetchMore, refetch}) {
+          // We show the loading progress if needed
+          if (categoriesQueryResult.isLoading) {
+            return const Center(child: CircularProgressIndicator(),);
+          }
+    
+          // We show error if any
+          if (categoriesQueryResult.hasException) {
+            return const Align(
+              alignment: Alignment.topCenter,
+              child: ClStatusMessage(
+                message: "Nous n'arrivons pas à charger les produits du commerces...",
+              ),
+            );
+          }
+    
+          // We show a message if there is no commerce
+          if (categoriesQueryResult.data == null) {
+            return const Align(
+              alignment: Alignment.topCenter,
+              child: ClStatusMessage(
+                type: ClStatusMessageType.info,
+                message: "Le commerce n'existe pas encore. Vérifiez que vous l'avez bien créé",
+              ),
+            );
+          }
+    
+          final Commerce commerce = Commerce.fromJson(categoriesQueryResult.data!["commerce"] as Map<String, dynamic>);
+    
+          return _buildContent(commerce: commerce, refetch: refetch);        
         }
-
-        // We show error if any
-        if (categoriesQueryResult.hasException) {
-          return const Align(
-            alignment: Alignment.topCenter,
-            child: ClStatusMessage(
-              message: "Nous n'arrivons pas à charger les produits du commerces...",
-            ),
-          );
-        }
-
-        // We show a message if there is no commerce
-        if (categoriesQueryResult.data == null) {
-          return const Align(
-            alignment: Alignment.topCenter,
-            child: ClStatusMessage(
-              type: ClStatusMessageType.info,
-              message: "Le commerce n'existe pas encore. Vérifiez que vous l'avez bien créé",
-            ),
-          );
-        }
-
-        final Commerce commerce = Commerce.fromJson(categoriesQueryResult.data!["commerce"] as Map<String, dynamic>);
-
-        return _buildContent(commerce: commerce, refetch: refetch);        
-      }
+      ),
     );
   }
   
@@ -69,12 +85,15 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
   }) {
     if (commerce.categories.isEmpty) {
        return EmptyProductsPage(
+          isStoreKeeper: widget.isStorekeeper,
           onProductsAdded: () => _onProductAdded(refetch), 
           onAddProduct: () => _openProductCreationPage(refetch)
         );
     }
     if (commerce.categories.length == 1) {
       return ProductsPage(
+        isStoreKeeper: widget.isStorekeeper,
+        commerceID: commerce.id,
         category: commerce.categories.first, 
         showAppBar: false,
         onProductAdded: () => _onProductAdded(refetch)
@@ -98,6 +117,7 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
                   currentCategory: _currentCategory,
                   onCategorySelected: (category) => _onCategorySelected(category, isBigLayout: isBigLayout, refetch: refetch),
                   onProductUpdated: () => _onProductUpdated(refetch),
+                  isStoreKeeper: widget.isStorekeeper,
                   showAddButton: !isBigLayout,
                 ),
               ),
@@ -109,6 +129,8 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
                   Expanded(
                     flex: 70,
                     child: ProductsPage(
+                      isStoreKeeper: widget.isStorekeeper,
+                      commerceID: commerce.id,
                       category: _currentCategory, 
                       showAppBar: false,
                       onProductAdded: () => _onProductAdded(refetch)
@@ -121,7 +143,7 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
                       body: const Center(
                         child: Text("Veuillez selectionner une catégorie"),
                       ),
-                      floatingActionButton: FloatingActionButton(
+                      floatingActionButton: !widget.isStorekeeper ? null : FloatingActionButton(
                         onPressed: () => _openProductCreationPage(refetch),
                         child: const Icon(Icons.add)
                       ),
@@ -151,6 +173,8 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
       await Navigator.of(context).push<dynamic>(
         MaterialPageRoute<dynamic>(
           builder: (context) => ProductsPage(
+            commerceID: widget.commerceID,
+            isStoreKeeper: widget.isStorekeeper,
             category: category,
             onProductAdded: () => _onProductAdded(refetch),
           )

@@ -121,6 +121,7 @@ class StoreKeeperPage extends StatelessWidget {
                         commerce: commerce, 
                         products: products,
                         productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
+                        enableAllProductsButton: !canEdit,
                       );
                     }
       
@@ -128,6 +129,7 @@ class StoreKeeperPage extends StatelessWidget {
                       commerce: commerce,
                       products: products,
                       productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
+                      enableAllProductsButton: !canEdit,
                     );
                   },
                 ),

@@ -98,7 +98,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
           key: AppManager.instance.productsPageKey,
           onGenerateRoute: (route) => MaterialPageRoute<void>(
             settings: route,
-            builder: (context) => const ProductsMainPage()
+            builder: (context) => const ProductsMainPage(isStorekeeper: true,)
           ),
         )
       ),

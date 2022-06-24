@@ -10,6 +10,7 @@ class ProductCategoriesPage extends StatelessWidget {
     required this.onProductUpdated,
     required this.currentCategory,
     required this.commerce,
+    this.isStoreKeeper = false,
     this.showAddButton = false,
   }) : super(key: key);
 
@@ -17,6 +18,7 @@ class ProductCategoriesPage extends StatelessWidget {
   final Commerce commerce;
 
   final bool showAddButton;
+  final bool isStoreKeeper;
 
   final Function(String) onCategorySelected;
   final Function() onProductUpdated;
@@ -40,7 +42,7 @@ class ProductCategoriesPage extends StatelessWidget {
             )
         ],
       ),
-      floatingActionButton: !showAddButton ? null : FloatingActionButton(
+      floatingActionButton: (!showAddButton || !isStoreKeeper) ? null : FloatingActionButton(
         onPressed: () => _openProductCreationPage(context),
         child: const Icon(Icons.add),
       ),

@@ -14,10 +14,13 @@ class EmptyProductsPage extends StatefulWidget {
     Key? key,
     required this.onProductsAdded,
     required this.onAddProduct,
+    this.isStoreKeeper = false,
   }) : super(key: key);
 
   final Function() onProductsAdded;
   final Function() onAddProduct;
+
+  final bool isStoreKeeper;
 
   @override
   State<EmptyProductsPage> createState() => _EmptyProductsPageState();
@@ -49,6 +52,13 @@ class _EmptyProductsPageState extends State<EmptyProductsPage> {
         child: Mutation<dynamic>(
           options: _createProductMutationOptions(),
           builder: (runMutation, mutationResult) {
+            if (!widget.isStoreKeeper) {
+              return const ClStatusMessage(
+                type: ClStatusMessageType.info,
+                message: "Ce commerce n'a pas encore de produit !",
+              );
+            }
+
             if (mutationResult?.isLoading ?? false) {
               return const Center(child: CircularProgressIndicator(),);
             }
