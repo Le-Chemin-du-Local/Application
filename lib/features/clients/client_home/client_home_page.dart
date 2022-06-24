@@ -33,6 +33,8 @@ class _ClientHomePageState extends State<ClientHomePage> {
             children: [
               // La barre d'adresse
               ClAddressInput(
+                label: "",
+                hint: "Où êtes vous en ce moment ?",
                 addressTextController: _addressTextController,
                 onSelected: _onAddressSelected,
               ),

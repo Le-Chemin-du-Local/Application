@@ -29,6 +29,8 @@ class _CommercesListPageState extends State<CommercesListPage> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
             child: ClAddressInput(
+              label: "",
+              hint: "Où êtes vous en ce moment ?",
               addressTextController: _addressTextController,
               onSelected: _onAddressSelected,
             ),
