@@ -1,5 +1,7 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
+import 'package:chemin_du_local/features/products/product_details_page/product_details_page.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/product_edit_page.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_page/widgets/product_card.dart';
@@ -11,12 +13,12 @@ class ProductsPage extends StatelessWidget {
     Key? key,
     required this.category,
     required this.onProductAdded(),
-    required this.commerceID,
+    required this.commerce,
     this.isStoreKeeper = false,
     this.showAppBar = true,
   }) : super(key: key);
 
-  final String? commerceID;
+  final Commerce? commerce;
   final String category;
 
   final bool isStoreKeeper;
@@ -29,7 +31,7 @@ class ProductsPage extends StatelessWidget {
     return QueryOptions<dynamic>(
       document: gql(qMiniProductsForCategory),
       variables: <String, dynamic>{
-        "commerceID": commerceID,
+        "commerceID": commerce?.id,
         "category": category
       }
     );
@@ -115,22 +117,32 @@ class ProductsPage extends StatelessWidget {
     Refetch? refetch,
     Product? product
   }) async {
-    if (!isStoreKeeper) return;
-
-    final bool haveProductUpdate = await Navigator.of(context).push<bool?>(
-      MaterialPageRoute<bool?>(
-        builder: (context) => ProductPage(
-          productID: product?.id,
+    if (!isStoreKeeper) {
+      await Navigator.of(context).push<dynamic>(
+        MaterialPageRoute<dynamic>(
+          builder: (context) => ProductDetailsPage(
+            commerce: commerce!,
+            productID: product?.id ?? ""
+          )
         )
-      )
-    ) ?? false;
+      );
+    }
+    else {
+      final bool haveProductUpdate = await Navigator.of(context).push<bool?>(
+        MaterialPageRoute<bool?>(
+          builder: (context) => ProductPage(
+            productID: product?.id,
+          )
+        )
+      ) ?? false;
 
-    if (haveProductUpdate) {
-      if (refetch != null) {
-        refetch();
+      if (haveProductUpdate) {
+        if (refetch != null) {
+          refetch();
+        }
+
+        onProductAdded();
       }
-
-      onProductAdded();
     }
   } 
 }

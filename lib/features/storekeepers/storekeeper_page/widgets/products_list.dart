@@ -7,6 +7,7 @@ import 'package:chemin_du_local/features/basket/models/basket_product/basket_pro
 import 'package:chemin_du_local/features/basket/riverpod/basket_controller.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
+import 'package:chemin_du_local/features/products/product_details_page/product_details_page.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/products_main_page.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_page/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -81,11 +82,14 @@ class ProductsList extends ConsumerWidget {
                           constraints: const BoxConstraints(maxWidth: 182),
                           child: Padding(
                             padding: const EdgeInsets.only(right: 12),
-                            child: ProductCard(
-                              product: product,
-                              showQuantityPicker: availableForClickAndCollect.contains(product.id),
-                              quantity: _productForID(basketCommerce, product.id ?? "")?.quantity ?? 0,
-                              onQuantityUpdated: (value) => _updateProductOnBasket(ref, product, value),
+                            child: InkWell(
+                              onTap: () => _onViewProduct(context, product.id ?? ""),
+                              child: ProductCard(
+                                product: product,
+                                showQuantityPicker: availableForClickAndCollect.contains(product.id),
+                                quantity: _productForID(basketCommerce, product.id ?? "")?.quantity ?? 0,
+                                onQuantityUpdated: (value) => _updateProductOnBasket(ref, product, value),
+                              ),
                             ),
                           ),
                         )
@@ -123,7 +127,19 @@ class ProductsList extends ConsumerWidget {
     await Navigator.of(context).push<dynamic>(
       MaterialPageRoute<dynamic>(
         builder: (context) => ProductsMainPage(
-          commerceID: commerce?.id
+          commerce: commerce
+        )
+      )
+    );
+  }
+
+
+  Future _onViewProduct(BuildContext context, String productID) async {
+    await Navigator.of(context).push<dynamic>(
+      MaterialPageRoute<dynamic>(
+        builder: (context) => ProductDetailsPage(
+          productID: productID,
+          commerce: commerce!,
         )
       )
     );

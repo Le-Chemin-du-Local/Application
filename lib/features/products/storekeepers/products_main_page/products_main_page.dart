@@ -13,11 +13,11 @@ class ProductsMainPage extends StatefulWidget {
   const ProductsMainPage({
     Key? key,
     this.isStorekeeper = false,
-    this.commerceID,
+    this.commerce,
   }) : super(key: key);
 
   final bool isStorekeeper;
-  final String? commerceID;
+  final Commerce? commerce;
 
   @override
   State<ProductsMainPage> createState() => _ProductsMainPageState();
@@ -30,8 +30,8 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
     return QueryOptions<dynamic>(
       document: gql(qCategories),
       variables: <String, dynamic>{
-        if (widget.commerceID != null)
-          "commerceID": widget.commerceID
+        if (widget.commerce != null)
+          "commerceID": widget.commerce!.id
       }
     );
   }
@@ -93,7 +93,7 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
     if (commerce.categories.length == 1) {
       return ProductsPage(
         isStoreKeeper: widget.isStorekeeper,
-        commerceID: commerce.id,
+        commerce: commerce,
         category: commerce.categories.first, 
         showAppBar: false,
         onProductAdded: () => _onProductAdded(refetch)
@@ -130,7 +130,7 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
                     flex: 70,
                     child: ProductsPage(
                       isStoreKeeper: widget.isStorekeeper,
-                      commerceID: commerce.id,
+                      commerce: commerce,
                       category: _currentCategory, 
                       showAppBar: false,
                       onProductAdded: () => _onProductAdded(refetch)
@@ -173,7 +173,7 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
       await Navigator.of(context).push<dynamic>(
         MaterialPageRoute<dynamic>(
           builder: (context) => ProductsPage(
-            commerceID: widget.commerceID,
+            commerce: widget.commerce,
             isStoreKeeper: widget.isStorekeeper,
             category: category,
             onProductAdded: () => _onProductAdded(refetch),

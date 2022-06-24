@@ -165,7 +165,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
                               Flexible(
                                 flex: isBig ? 3 : 44 ,
                                 child: ConstrainedBox(
-                                  constraints: const BoxConstraints(maxWidth: 363),
+                                  constraints: const BoxConstraints(maxHeight: 560),
                                   child: AspectRatio(
                                     aspectRatio: 0.65,
                                     child: ClipRRect(
