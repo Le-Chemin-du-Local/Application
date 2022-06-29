@@ -37,7 +37,7 @@ class BasketController extends StateController<BasketState> {
     final Basket newBasket = Basket(
       commerces: [
         for (final commerce in currentCommerces)
-          if (commerce.commerce.id == updated.commerce.id) 
+          if (commerce.commerceID == updated.commerceID) 
             updated
           else 
             commerce
@@ -77,7 +77,7 @@ class BasketController extends StateController<BasketState> {
     final Basket newBasket = Basket(
       commerces: [
         for (final commerce in currentCommerces)
-          if (commerce.commerce.id != toRemove.commerce.id)
+          if (commerce.commerceID != toRemove.commerceID)
             commerce
       ] 
     );
@@ -95,7 +95,7 @@ class BasketController extends StateController<BasketState> {
     final Basket newBasket = Basket(
       commerces: [
         for (final commerce in currentCommerces)
-          if (commerce.commerce.id == commerceID) 
+          if (commerce.commerceID == commerceID) 
             commerce.copyWith(
               pickupDate: schedule
             )

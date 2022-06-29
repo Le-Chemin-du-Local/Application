@@ -34,6 +34,32 @@ query getCommerces(
 }
 ''';
 
+const String qCommerceMini = r'''
+query getCommerceMini(
+  $id: ID
+) {
+  commerce(id: $id) {
+    id
+    storekeeper {
+      id
+      role
+      email
+    }
+    name
+    latitude
+    longitude
+    address {
+      number
+      route
+      optionalRoute
+      postalCode
+      city
+    }
+    services
+  }
+}
+''';
+
 const String mutCreateCommerce = r'''
 mutation createCommerce(
   $userID: ID!

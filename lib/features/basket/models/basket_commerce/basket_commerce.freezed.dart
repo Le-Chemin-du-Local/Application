@@ -20,7 +20,7 @@ BasketCommerce _$BasketCommerceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BasketCommerce {
-  Commerce get commerce => throw _privateConstructorUsedError;
+  String get commerceID => throw _privateConstructorUsedError;
   List<BasketProduct> get products => throw _privateConstructorUsedError;
   List<Panier> get paniers => throw _privateConstructorUsedError;
   DateTime? get pickupDate => throw _privateConstructorUsedError;
@@ -37,12 +37,10 @@ abstract class $BasketCommerceCopyWith<$Res> {
           BasketCommerce value, $Res Function(BasketCommerce) then) =
       _$BasketCommerceCopyWithImpl<$Res>;
   $Res call(
-      {Commerce commerce,
+      {String commerceID,
       List<BasketProduct> products,
       List<Panier> paniers,
       DateTime? pickupDate});
-
-  $CommerceCopyWith<$Res> get commerce;
 }
 
 /// @nodoc
@@ -56,16 +54,16 @@ class _$BasketCommerceCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? commerce = freezed,
+    Object? commerceID = freezed,
     Object? products = freezed,
     Object? paniers = freezed,
     Object? pickupDate = freezed,
   }) {
     return _then(_value.copyWith(
-      commerce: commerce == freezed
-          ? _value.commerce
-          : commerce // ignore: cast_nullable_to_non_nullable
-              as Commerce,
+      commerceID: commerceID == freezed
+          ? _value.commerceID
+          : commerceID // ignore: cast_nullable_to_non_nullable
+              as String,
       products: products == freezed
           ? _value.products
           : products // ignore: cast_nullable_to_non_nullable
@@ -80,13 +78,6 @@ class _$BasketCommerceCopyWithImpl<$Res>
               as DateTime?,
     ));
   }
-
-  @override
-  $CommerceCopyWith<$Res> get commerce {
-    return $CommerceCopyWith<$Res>(_value.commerce, (value) {
-      return _then(_value.copyWith(commerce: value));
-    });
-  }
 }
 
 /// @nodoc
@@ -97,13 +88,10 @@ abstract class _$$_BasketCommerceCopyWith<$Res>
       __$$_BasketCommerceCopyWithImpl<$Res>;
   @override
   $Res call(
-      {Commerce commerce,
+      {String commerceID,
       List<BasketProduct> products,
       List<Panier> paniers,
       DateTime? pickupDate});
-
-  @override
-  $CommerceCopyWith<$Res> get commerce;
 }
 
 /// @nodoc
@@ -119,16 +107,16 @@ class __$$_BasketCommerceCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? commerce = freezed,
+    Object? commerceID = freezed,
     Object? products = freezed,
     Object? paniers = freezed,
     Object? pickupDate = freezed,
   }) {
     return _then(_$_BasketCommerce(
-      commerce: commerce == freezed
-          ? _value.commerce
-          : commerce // ignore: cast_nullable_to_non_nullable
-              as Commerce,
+      commerceID: commerceID == freezed
+          ? _value.commerceID
+          : commerceID // ignore: cast_nullable_to_non_nullable
+              as String,
       products: products == freezed
           ? _value._products
           : products // ignore: cast_nullable_to_non_nullable
@@ -151,7 +139,7 @@ class _$_BasketCommerce
     with DiagnosticableTreeMixin
     implements _BasketCommerce {
   const _$_BasketCommerce(
-      {required this.commerce,
+      {required this.commerceID,
       final List<BasketProduct> products = const <BasketProduct>[],
       final List<Panier> paniers = const <Panier>[],
       this.pickupDate})
@@ -162,7 +150,7 @@ class _$_BasketCommerce
       _$$_BasketCommerceFromJson(json);
 
   @override
-  final Commerce commerce;
+  final String commerceID;
   final List<BasketProduct> _products;
   @override
   @JsonKey()
@@ -184,7 +172,7 @@ class _$_BasketCommerce
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BasketCommerce(commerce: $commerce, products: $products, paniers: $paniers, pickupDate: $pickupDate)';
+    return 'BasketCommerce(commerceID: $commerceID, products: $products, paniers: $paniers, pickupDate: $pickupDate)';
   }
 
   @override
@@ -192,7 +180,7 @@ class _$_BasketCommerce
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'BasketCommerce'))
-      ..add(DiagnosticsProperty('commerce', commerce))
+      ..add(DiagnosticsProperty('commerceID', commerceID))
       ..add(DiagnosticsProperty('products', products))
       ..add(DiagnosticsProperty('paniers', paniers))
       ..add(DiagnosticsProperty('pickupDate', pickupDate));
@@ -203,7 +191,8 @@ class _$_BasketCommerce
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_BasketCommerce &&
-            const DeepCollectionEquality().equals(other.commerce, commerce) &&
+            const DeepCollectionEquality()
+                .equals(other.commerceID, commerceID) &&
             const DeepCollectionEquality().equals(other._products, _products) &&
             const DeepCollectionEquality().equals(other._paniers, _paniers) &&
             const DeepCollectionEquality()
@@ -214,7 +203,7 @@ class _$_BasketCommerce
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(commerce),
+      const DeepCollectionEquality().hash(commerceID),
       const DeepCollectionEquality().hash(_products),
       const DeepCollectionEquality().hash(_paniers),
       const DeepCollectionEquality().hash(pickupDate));
@@ -232,7 +221,7 @@ class _$_BasketCommerce
 
 abstract class _BasketCommerce implements BasketCommerce {
   const factory _BasketCommerce(
-      {required final Commerce commerce,
+      {required final String commerceID,
       final List<BasketProduct> products,
       final List<Panier> paniers,
       final DateTime? pickupDate}) = _$_BasketCommerce;
@@ -241,7 +230,7 @@ abstract class _BasketCommerce implements BasketCommerce {
       _$_BasketCommerce.fromJson;
 
   @override
-  Commerce get commerce => throw _privateConstructorUsedError;
+  String get commerceID => throw _privateConstructorUsedError;
   @override
   List<BasketProduct> get products => throw _privateConstructorUsedError;
   @override

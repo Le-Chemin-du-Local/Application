@@ -107,9 +107,9 @@ class _BasketPageState extends ConsumerState<BasketPage> {
                     onPay: _onProceedToPayment,
                   ),
                   for (final commerce in basket.commerces) 
-                    BasketCommerceSchedule(
-                      commerce: commerce.commerce,
-                      onDateChoosed: (date) => _onScheduleChoosed(basket, commerce.commerce.id!, date),
+                    BasketCommerceSchedules(
+                      commerceID: commerce.commerceID,
+                      onDateChoosed: (date) => _onScheduleChoosed(basket, commerce.commerceID, date),
                     ),
                   BasketPayment(
                     basket: basket,

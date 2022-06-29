@@ -60,6 +60,22 @@ query getDetailledProduct(
 }
 '''; 
 
+
+const String qMiniProduct = r'''
+query getDetailledProduct(
+  $id: ID!
+) {
+  product(id: $id) {
+    id,
+    name,
+    isBreton,
+    price,
+    unit,
+    tva,
+  }
+}
+'''; 
+
 const String mutCreateProduct = r'''
 mutation createProduct(
   $input: NewProduct!

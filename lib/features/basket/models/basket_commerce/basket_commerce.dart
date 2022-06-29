@@ -11,7 +11,7 @@ part 'basket_commerce.g.dart';
 @immutable
 class BasketCommerce with _$BasketCommerce {
   const factory BasketCommerce({
-    required Commerce commerce,
+    required String commerceID,
     @Default(<BasketProduct>[]) List<BasketProduct> products,
     @Default(<Panier>[]) List<Panier> paniers,
     DateTime? pickupDate,

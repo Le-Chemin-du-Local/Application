@@ -170,7 +170,7 @@ class PaniersList extends ConsumerWidget {
     if (basketCommerce == null) {
       await ref.read(basketControllerProvider.notifier).addBasketCommerce(
         BasketCommerce(
-          commerce: commerce!,
+          commerceID: commerce?.id ?? "",
           paniers: [
             toAdd
           ]
@@ -193,7 +193,7 @@ class PaniersList extends ConsumerWidget {
     if (basket == null) return null;
 
     for (final commerce in basket.commerces) {
-      if (commerce.commerce.id == id) return commerce;
+      if (commerce.commerceID == id) return commerce;
     }
 
     return null;

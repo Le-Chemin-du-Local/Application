@@ -1,8 +1,11 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_summary/widgets/basket_product_card.dart';
 import 'package:chemin_du_local/features/basket/models/basket_commerce/basket_commerce.dart';
+import 'package:chemin_du_local/features/commerces/commerces_graphql.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 
 class BasketCommerceCard extends ConsumerWidget {
   const BasketCommerceCard({
@@ -27,12 +30,37 @@ class BasketCommerceCard extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(
-                  commerce.commerce.name,
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                    fontWeight: FontWeight.w500
-                  )
-                ),
+                child: Query<dynamic>(
+                  options: QueryOptions<dynamic>(
+                    document: gql(qCommerceMini),
+                    variables: <String, dynamic>{
+                      "id": commerce.commerceID
+                    }
+                  ),
+                  builder: (result, {fetchMore, refetch}) {
+                    if (result.isLoading) {
+                      return const LinearProgressIndicator();
+                    }
+
+                    if (result.hasException) {
+                      Text(
+                        "Nom inconnue...",
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontWeight: FontWeight.w500
+                        )
+                      );
+                    }
+                    
+                    final Commerce commerce = Commerce.fromJson(result.data!["commerce"] as Map<String, dynamic>);
+
+                    return Text(
+                      commerce.name,
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        fontWeight: FontWeight.w500
+                      )
+                    );
+                  },
+                )
               ),
 
               Container(
@@ -62,7 +90,7 @@ class BasketCommerceCard extends ConsumerWidget {
                 for (final product in commerce.products)
                   BasketProductCard(
                     commerce: commerce,
-                    product: product,
+                    product: product, 
                   ),
                 if (commerce.paniers.isNotEmpty)... {
                   const Divider(),

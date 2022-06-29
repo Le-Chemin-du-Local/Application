@@ -28,7 +28,7 @@ class StripeService {
         "basket": <String, dynamic>{
           "commerces": <Map<String, dynamic>>[
             for (final commerce in basket.commerces) <String, dynamic>{
-              "commerceID": commerce.commerce.id,
+              "commerceID": commerce.commerceID,
               "pickupDate": commerce.pickupDate?.toUtc().toIso8601String(),
               "products": <Map<String, dynamic>>[
                 for (final product in commerce.products) <String, dynamic>{

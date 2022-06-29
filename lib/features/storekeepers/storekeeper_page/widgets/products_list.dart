@@ -149,7 +149,7 @@ class ProductsList extends ConsumerWidget {
     if (commerce == null) return;
 
     final BasketCommerce basketCommerce = _commerceForID(ref.read(basketControllerProvider).basket.value, commerce!.id!) ?? BasketCommerce(
-      commerce: commerce!,
+      commerceID: commerce?.id ?? "",
       products: const []
     );
 
@@ -173,7 +173,7 @@ class ProductsList extends ConsumerWidget {
     if (quantity == 1 && _commerceForID(ref.read(basketControllerProvider).basket.value, commerce!.id!) == null) {
       await ref.read(basketControllerProvider.notifier).addBasketCommerce(
         BasketCommerce(
-          commerce: commerce!,
+          commerceID: commerce?.id ?? "",
           products: [
             BasketProduct(product: updated, quantity: quantity)
           ]
@@ -208,7 +208,7 @@ class ProductsList extends ConsumerWidget {
     if (basket == null) return null;
 
     for (final commerce in basket.commerces) {
-      if (commerce.commerce.id == id) return commerce;
+      if (commerce.commerceID == id) return commerce;
     }
 
     return null;

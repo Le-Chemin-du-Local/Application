@@ -8,7 +8,7 @@ part of 'basket_commerce.dart';
 
 _$_BasketCommerce _$$_BasketCommerceFromJson(Map<String, dynamic> json) =>
     _$_BasketCommerce(
-      commerce: Commerce.fromJson(json['commerce'] as Map<String, dynamic>),
+      commerceID: json['commerceID'] as String,
       products: (json['products'] as List<dynamic>?)
               ?.map((e) => BasketProduct.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -24,7 +24,7 @@ _$_BasketCommerce _$$_BasketCommerceFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_BasketCommerceToJson(_$_BasketCommerce instance) =>
     <String, dynamic>{
-      'commerce': instance.commerce,
+      'commerceID': instance.commerceID,
       'products': instance.products,
       'paniers': instance.paniers,
       'pickupDate': instance.pickupDate?.toIso8601String(),
