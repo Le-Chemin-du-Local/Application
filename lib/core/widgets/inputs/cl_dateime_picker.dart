@@ -11,6 +11,7 @@ class ClDateTimePicker extends StatelessWidget {
     this.initialValue,
     this.firstDate,
     this.lastDate,
+    this.initialDatePickerMode,
     required this.onChanged,
     this.validator,
     this.label,
@@ -23,6 +24,8 @@ class ClDateTimePicker extends StatelessWidget {
   final String? initialValue;
   final DateTime? firstDate;
   final DateTime? lastDate;
+
+  final DatePickerMode? initialDatePickerMode;
 
   final String? label;
   final String dateMask;
@@ -57,6 +60,7 @@ class ClDateTimePicker extends StatelessWidget {
             lastDate: lastDate,
             dateLabelText: "Date",
             timeLabelText: "Heure",
+            initialDatePickerMode: initialDatePickerMode,
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               fillColor: Theme.of(context).colorScheme.surface,

@@ -93,6 +93,7 @@ class RegistrationStep2 extends StatelessWidget {
                dateMask: "dd/MM/yyyy",
                firstDate: DateTime(1900),
                lastDate: DateTime.now(),
+               initialDatePickerMode: DatePickerMode.year,
                onChanged: onBirthdateChange,
             ),
             const SizedBox(height: 10,),
