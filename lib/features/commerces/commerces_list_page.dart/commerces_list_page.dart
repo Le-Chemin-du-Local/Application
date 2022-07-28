@@ -2,7 +2,7 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/features/commerces/commerces_list_page.dart/widgets/commerces_list.dart';
-import 'package:chemin_du_local/place/place_service.dart';
+import 'package:chemin_du_local/features/place/place_service.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlng/latlng.dart';

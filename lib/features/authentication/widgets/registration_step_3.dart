@@ -1,7 +1,7 @@
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_phone_input.dart';
-import 'package:chemin_du_local/place/widgets/address_controller.dart';
-import 'package:chemin_du_local/place/widgets/address_form.dart';
+import 'package:chemin_du_local/features/place/widgets/address_controller.dart';
+import 'package:chemin_du_local/features/place/widgets/address_form.dart';
 import 'package:flutter/material.dart';
 
 class RegistrationStep3 extends StatelessWidget {

@@ -1,7 +1,7 @@
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
-import 'package:chemin_du_local/place/models/address/address.dart';
-import 'package:chemin_du_local/place/place_service.dart';
-import 'package:chemin_du_local/place/widgets/address_controller.dart';
+import 'package:chemin_du_local/features/place/models/address/address.dart';
+import 'package:chemin_du_local/features/place/place_service.dart';
+import 'package:chemin_du_local/features/place/widgets/address_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 

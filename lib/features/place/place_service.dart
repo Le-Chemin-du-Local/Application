@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:chemin_du_local/core/utils/constants.dart';
-import 'package:chemin_du_local/place/models/address/address.dart';
+import 'package:chemin_du_local/features/place/models/address/address.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlng/latlng.dart';

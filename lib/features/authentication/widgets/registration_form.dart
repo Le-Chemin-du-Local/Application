@@ -5,8 +5,8 @@ import 'package:chemin_du_local/features/authentication/widgets/registration_ste
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_3.dart';
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_password.dart';
 import 'package:chemin_du_local/features/authentication/widgets/registration_step_welcome.dart';
-import 'package:chemin_du_local/place/place_service.dart';
-import 'package:chemin_du_local/place/widgets/address_controller.dart';
+import 'package:chemin_du_local/features/place/place_service.dart';
+import 'package:chemin_du_local/features/place/widgets/address_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:latlng/latlng.dart';
