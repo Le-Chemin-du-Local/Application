@@ -33,10 +33,8 @@ class _PaniersPageState extends State<PaniersPage> {
     return Scaffold(
       appBar: AppBar(title: const Text("Paniers")),
       body: Padding(
-        padding: EdgeInsets.only(
+        padding: const EdgeInsets.only(
           top: 20,
-          left: ScreenHelper.instance.horizontalPadding,
-          right: ScreenHelper.instance.horizontalPadding
         ),
         child: SingleChildScrollView(
           child: Column(
@@ -63,10 +61,17 @@ class _PaniersPageState extends State<PaniersPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Le titre
-        if (type == PanierType.permanent) 
-          Text("Paniers en cours permanent", style: Theme.of(context).textTheme.headline2,),
         if (type == PanierType.temporary) 
-          Text("Paniers en cours temporaire", style: Theme.of(context).textTheme.headline2,),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
+            child: Text("En cours flash", style: Theme.of(context).textTheme.titleMedium,),
+          ),
+        if (type == PanierType.permanent) 
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
+            child: Text("En cours permanent", style: Theme.of(context).textTheme.titleMedium,),
+          ),
+        const SizedBox(height: 12,),
 
         // Les paniers
         Query<dynamic>(
@@ -86,8 +91,11 @@ class _PaniersPageState extends State<PaniersPage> {
             }
 
             if (result.hasException) {
-              return const ClStatusMessage(
-                message: "Nous ne parvenons pas à charger les paniers...",
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
+                child: const ClStatusMessage(
+                  message: "Nous ne parvenons pas à charger les paniers...",
+                ),
               );
             }
 
@@ -99,25 +107,37 @@ class _PaniersPageState extends State<PaniersPage> {
             }
 
             if (paniers.isEmpty) {
-              return const ClStatusMessage(
-                type: ClStatusMessageType.info,
-                message: "Aucun panier n'a été créé pour le moment. Pour en rajouter un, utiliser le \"+\" en bas à droite.",
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
+                child: const ClStatusMessage(
+                  type: ClStatusMessageType.info,
+                  message: "Aucun panier n'a été créé pour le moment. Pour en rajouter un, utiliser le \"+\" en bas à droite.",
+                ),
               );
             }
 
-            return Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              children: [
-                for (final panier in paniers) 
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 600, maxHeight: 240),
-                    child: PanierCard(
-                      panier: panier, 
-                      onOpen: () => _onOpenPanier(context, panier)
-                                  ),
-                  ),
-              ]
+            return ConstrainedBox(
+              constraints: const BoxConstraints(maxHeight: 266),
+              child: ListView(
+                controller: ScrollController(),
+                shrinkWrap: true,
+                scrollDirection: Axis.horizontal,
+                children: [
+                  SizedBox(width: ScreenHelper.instance.horizontalPadding,),
+                  for (final panier in paniers) 
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 524),
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 12),
+                        child: PanierCard(
+                          panier: panier, 
+                          onOpen: () {},
+                          onView: () => _onViewPanier(context, panier),
+                        ),
+                      ),
+                    ),
+                ]
+              ),
             );
           },
         ),
@@ -150,7 +170,7 @@ class _PaniersPageState extends State<PaniersPage> {
     }
   }
 
-  Future _onOpenPanier(BuildContext context, Panier panier) async {
+  Future _onViewPanier(BuildContext context, Panier panier) async {
     bool shouldRefetch = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
         builder: (context) => PanierEditPage(panierID: panier.id, panierType: panier.type,)
