@@ -24,8 +24,7 @@ class BottomAppBarItem extends ConsumerWidget {
 
     return Material(
       color: Colors.transparent,
-      child: InkWell(
-        customBorder: const CircleBorder(),
+      child: GestureDetector(
         onTap: () {
           if (pageItem != null) {
             onSelectedPage(pageItem!);
