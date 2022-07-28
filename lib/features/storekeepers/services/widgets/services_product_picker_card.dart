@@ -20,7 +20,7 @@ class ServicesProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxWidth: 182),
+      constraints: const BoxConstraints(maxWidth: 205),
       child: Opacity(
         opacity: isSelected ? 1.0 : 0.5,
         child: ProductCard(

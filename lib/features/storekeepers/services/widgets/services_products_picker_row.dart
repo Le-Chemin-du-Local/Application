@@ -67,8 +67,8 @@ class _ServicesProductsPickerRowState extends State<ServicesProductsPickerRow> {
             firstChild: GridView(
               shrinkWrap: true,
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 270,
-                mainAxisExtent: 273,
+                maxCrossAxisExtent: 205,
+                mainAxisExtent: 316,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16
               ),
