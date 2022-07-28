@@ -36,8 +36,11 @@ class ClTheme {
       appBarTheme: const AppBarTheme(
         centerTitle: false,
         backgroundColor: Palette.colorScaffold,
+        surfaceTintColor: Palette.colorScaffold,
+        shadowColor: Palette.colorScaffold,
         toolbarHeight: 26,
         elevation: 0,
+        scrolledUnderElevation: 0,
         foregroundColor: Palette.colorDark,
         systemOverlayStyle: SystemUiOverlayStyle.light,
         titleTextStyle: TextStyle(fontSize: 24, color: Palette.colorDark), 
@@ -99,7 +102,10 @@ class ClTheme {
     return const AppBarTheme(
       centerTitle: false,
       backgroundColor: Palette.colorScaffold,
+      surfaceTintColor: Palette.colorScaffold,
+      shadowColor: Palette.colorScaffold,
       elevation: 0,
+      scrolledUnderElevation: 0,
       foregroundColor: Palette.colorDark,
       systemOverlayStyle: SystemUiOverlayStyle.light,
       titleTextStyle: TextStyle(fontSize: 24, color: Palette.colorDark), 
