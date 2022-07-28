@@ -295,29 +295,49 @@ class PanierEditFormState extends State<PanierEditForm> {
 
   Widget _buildInfos() {
     return Container(
-      decoration: const BoxDecoration(
-        color: Color(0xfffff6e5)
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.secondaryContainer,
       ),
       padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding, vertical: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text("Produits du panier", style: TextStyle(fontWeight: FontWeight.bold),),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final bool isBig = constraints.maxWidth >= ScreenHelper.breakpointTablet;
 
-          Flexible(
-            child: Wrap(
-              spacing: 16,
-              runSpacing: 16,
-              // crossAxisAlignment: WrapCrossAlignment.center,
-              children: [
-                _buildInfoSection("Votre panier contient", "${_selectedProductsIDs.length} produit(s)"),
-                _buildInfoSection("Prix total", "$_price€"),
-                _buildInfoSection("Prix avec rabais", "${_price * ((100-_reductionPercentage) / 100)}€")
-              ],
+          final List<Widget> children = [
+            Text("Produits du panier", style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              fontWeight: FontWeight.w500
+            )),
+            if (!isBig) 
+              const SizedBox(height: 30,),
+
+            Flexible(
+              child: Wrap(
+                spacing: 16,
+                runSpacing: 16,
+                // crossAxisAlignment: WrapCrossAlignment.center,
+                children: [
+                  _buildInfoSection("Votre panier contient", "${_selectedProductsIDs.length} produit(s)"),
+                  _buildInfoSection("Prix total", "$_price€"),
+                  _buildInfoSection("Prix avec rabais", "${_price * ((100-_reductionPercentage) / 100)}€")
+                ],
+              ),
             ),
-          ),
-        ],
+          ];
+
+          if (isBig) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: children
+            );
+          }
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: children,
+          );
+        }
       ),
     );
   }
@@ -326,9 +346,24 @@ class PanierEditFormState extends State<PanierEditForm> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(title),
-        const SizedBox(width: 4,),
-        Badge(child: Text(badgeText))
+        Flexible(child: Text(title, style: Theme.of(context).textTheme.headlineSmall,)),
+        const SizedBox(width: 20,),
+        Flexible(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondary,
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: Text(
+              badgeText,
+              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                fontWeight: FontWeight.w500,
+                color: Theme.of(context).colorScheme.onSecondary
+              ),
+            ),
+          ),
+        )
       ],
     );
   }
