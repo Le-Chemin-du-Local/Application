@@ -25,6 +25,7 @@ class BottomAppBarItem extends ConsumerWidget {
     return Material(
       color: Colors.transparent,
       child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
         onTap: () {
           if (pageItem != null) {
             onSelectedPage(pageItem!);
@@ -59,7 +60,7 @@ class BottomAppBarItem extends ConsumerWidget {
                 ]
               ),
             ),
-
+        
             if (pageItem?.isBasket ?? false)
             Positioned(
               top: 0, right: 0,
