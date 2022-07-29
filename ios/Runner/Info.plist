@@ -32,6 +32,8 @@
 	<string>This app needs access to location when open to show local stores.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>There is need of pictures for user content or store content</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>We use calendar to add the Click and collect scheduled dates</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
