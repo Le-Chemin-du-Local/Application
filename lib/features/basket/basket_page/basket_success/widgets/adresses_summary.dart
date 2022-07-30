@@ -100,4 +100,24 @@ class AddressesSummary extends StatelessWidget {
       ),
     );
   }
+
+  void _addPickupsToCalendar() {
+    // for (final basketCommerce in basket.commerces) {
+    //   final Event event = Event(
+    //     title: 'Récupération',
+    //     description: 'Event description',
+    //     location: 'Event location',
+    //     startDate: DateTime(/* Some date here */),
+    //     endDate: DateTime(/* Some date here */),
+    //     iosParams: IOSParams( 
+    //       reminder: Duration(/* Ex. hours:1 */), // on iOS, you can set alarm notification after your event.
+    //     ),
+    //     androidParams: AndroidParams( 
+    //       emailInvites: [], // on Android, you can add invite emails to your event.
+    //     ),
+    //   );
+      
+    //   // Add2Calendar.addEvent2Cal(event);
+    // }
+  }
 }
