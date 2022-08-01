@@ -120,7 +120,7 @@ class AddressesSummary extends StatelessWidget {
   void _addPickupToCalendar(BasketCommerce basketCommerce, Commerce commerce) {
     final Event event = Event(
       title: 'Commande ${commerce.name}',
-      description: 'Récupération de la commande chew ${commerce.name}',
+      description: 'Récupération de la commande chez ${commerce.name}',
       location: commerce.address?.detailled ?? "Iconnue",
       startDate: basketCommerce.pickupDate ?? DateTime.now(),
       endDate: (basketCommerce.pickupDate ?? DateTime.now()).add(const Duration(minutes: 30)),
