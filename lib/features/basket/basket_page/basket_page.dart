@@ -45,9 +45,6 @@ class _BasketPageState extends ConsumerState<BasketPage> {
   }
 
   Widget _buildContent(Basket basket) {
-    // TODO: remove DEBUG
-    // _successBasket = basket;
-
     return WillPopScope(
       onWillPop: () async {
         if (_successBasket != null) {
@@ -93,7 +90,7 @@ class _BasketPageState extends ConsumerState<BasketPage> {
               child: StepsIndicator(
                 currentStep: _currentStep, 
                 stepsTitle: const [
-                  "Panier", "Crénaux", "Coordonnées", "Confirmation",
+                  "Panier", "Créneaux", "Coordonnées", "Confirmation",
                 ], 
                 onStepClicked: _selectStep
               ),

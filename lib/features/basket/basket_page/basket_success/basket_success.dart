@@ -27,7 +27,7 @@ class BasketSuccess extends StatelessWidget {
           child: StepsIndicator(
             currentStep: 3, 
             stepsTitle: const [
-              "Panier", "Crénaux", "Coordonnées", "Confirmation",
+              "Panier", "Créneaux", "Coordonnées", "Confirmation",
             ], 
             onStepClicked: (step) {}
           ),
@@ -76,7 +76,7 @@ class BasketSuccess extends StatelessWidget {
 
                   // Les adresses
                   AddressesSummary(basket: basket),
-                  
+
                 ],
               ),
             ),
