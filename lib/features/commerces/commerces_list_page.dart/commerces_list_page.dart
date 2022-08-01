@@ -25,6 +25,7 @@ class _CommercesListPageState extends State<CommercesListPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch, 
         children: [
+          const SizedBox(height: 24,),
           // La bar de recherche
           Padding(
             padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),

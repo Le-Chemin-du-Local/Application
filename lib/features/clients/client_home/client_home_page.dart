@@ -45,7 +45,7 @@ class _ClientHomePageState extends ConsumerState<ClientHomePage> {
         child: Padding(
           padding: EdgeInsets.symmetric(
             horizontal: ScreenHelper.instance.horizontalPadding,
-            vertical: 12,
+            vertical: 24,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,

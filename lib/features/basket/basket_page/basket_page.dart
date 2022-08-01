@@ -83,6 +83,7 @@ class _BasketPageState extends ConsumerState<BasketPage> {
           // mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(height: 24,),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: 54 - ScreenHelper.instance.horizontalPadding,
