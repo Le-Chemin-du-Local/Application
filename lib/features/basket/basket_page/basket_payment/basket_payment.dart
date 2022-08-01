@@ -2,6 +2,7 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_payment/basket_payment_graphql.dart';
+import 'package:chemin_du_local/features/basket/basket_page/basket_payment/cancel_page/cancel_page.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_payment/cards_list/cards_list.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_payment/widgets/payment_method_card.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_payment/widgets/summary_card.dart';
@@ -146,6 +147,14 @@ class _BasketPaymentState extends ConsumerState<BasketPayment> {
   }
 
   Future _onPay() async {
+    bool shouldCancel = await Navigator.of(context).push<bool?>(
+      MaterialPageRoute<bool?>(
+        builder: (context) => CancelPage(basket: widget.basket)
+      )
+    ) ?? false;
+
+    if (shouldCancel) return;
+
     try {
       setState(() {
         _isLoading = true;
