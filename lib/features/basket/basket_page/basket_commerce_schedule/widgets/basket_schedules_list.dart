@@ -134,8 +134,10 @@ class BasketSchedulesList extends StatelessWidget {
   }
 
   List<DateTime> _halfHours(Schedule schedule) {
-    final DateTime openingDate = DateTime.tryParse("19700101T${schedule.opening}") ?? DateTime.now();
-    final DateTime closingDate = DateTime.tryParse("19700101T${schedule.closing}") ?? DateTime.now();
+    final String daystring = DateFormat("yyyyMMdd").format(day);
+
+    final DateTime openingDate = DateTime.tryParse("${daystring}T${schedule.opening}") ?? DateTime.now();
+    final DateTime closingDate = DateTime.tryParse("${daystring}T${schedule.closing}") ?? DateTime.now();
     final List<DateTime> result = [];
 
     while((result.isNotEmpty ? result.last : openingDate).isBefore(closingDate)) {
