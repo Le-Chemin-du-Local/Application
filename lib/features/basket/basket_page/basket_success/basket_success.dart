@@ -2,7 +2,6 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/steps_indicator.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_payment/widgets/summary_card.dart';
 import 'package:chemin_du_local/features/basket/basket_page/basket_success/widgets/adresses_summary.dart';
-import 'package:chemin_du_local/features/basket/basket_page/basket_summary/basket_summary.dart';
 import 'package:chemin_du_local/features/basket/models/basket/basket.dart';
 import 'package:flutter/material.dart';
 
