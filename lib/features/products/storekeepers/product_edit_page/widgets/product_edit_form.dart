@@ -198,6 +198,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                           labelText: "Nom du produit",
                                           validator: (value) {
                                             if (value.isEmpty) return "Vous devez rentrer un nom";
+                                            if (value.length >= 18) return "La taille du nom ne doit pas dépasser 18 caratères";
                                             return null;
                                           }, 
                                         ),
