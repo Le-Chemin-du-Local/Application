@@ -39,31 +39,25 @@ class CommerceCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // La localisation
-                  Flexible(
-                    child: _buildLocationRow(context)
-                  ),
+                  _buildLocationRow(context),
                   // const SizedBox(height: 8,),
 
                   // Le service de click and collect
                   if (commerce.services.contains(CommerceServices.clickAndCollect)) ...{
-                    Flexible(
-                      child: _buildIconRow(
-                        context, 
-                        icon: Icons.check, 
-                        child: const Text("Click and collect")
-                      ),
+                    _buildIconRow(
+                      context, 
+                      icon: Icons.check, 
+                      child: const Text("Click and collect")
                     ),
                     // const SizedBox(height: 8,)
                   },
 
-                  // Le service de click and collect
+                  // Le service de Paniers
                   if (commerce.services.contains(Services.paniers)) ...{
-                    Flexible(
-                      child: _buildIconRow(
-                        context, 
-                        icon: Icons.check, 
-                        child: const Text("Paniers")
-                      ),
+                    _buildIconRow(
+                      context, 
+                      icon: Icons.check, 
+                      child: const Text("Paniers")
                     ),
                     // const SizedBox(height: 8,)
                   },
@@ -125,7 +119,6 @@ class CommerceCard extends StatelessWidget {
       children: [
         // L'adresse
         Expanded(
-          flex: 7,
           child: _buildIconRow(
             context,
             icon: Icons.location_on,

@@ -154,7 +154,7 @@ class CommercesList extends StatelessWidget {
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 500,
-        mainAxisExtent: 348,
+        mainAxisExtent: 364,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
       ),
