@@ -11,6 +11,7 @@ import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_categories_page/widgets/product_categories_picker.dart';
+import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/widgets/exit_dialog.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/widgets/product_allergens.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/widgets/product_tags_picker.dart';
 import 'package:flutter/material.dart';
@@ -133,235 +134,249 @@ class _ProductEditFormState extends State<ProductEditForm> {
     required RunMutation runCreateMutation,
     required RunMutation runUpdateMutation,
   }) {
-    return Stack(
-      children: [
-        Positioned.fill(
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: ScreenHelper.instance.horizontalPadding,
-                ),
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    final bool isBig = constraints.maxWidth >= ScreenHelper.breakpointTablet;
-          
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        if (hasException) ...{
-                          const ClStatusMessage(
-                            message: "Le produit n'a pas pu être envoyé...",
-                          ),
-                          const SizedBox(height: 20,)
-                        },
-          
-                        // Le container principale
-                        Flexible(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // L'image
-                              Flexible(
-                                flex: isBig ? 3 : 44 ,
-                                child: ConstrainedBox(
-                                  constraints: const BoxConstraints(maxHeight: 560),
-                                  child: AspectRatio(
-                                    aspectRatio: 0.65,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(12),
-                                      child: ClImagePickerBig(
-                                        imageURL: "$kImagesBaseUrl/products/${widget.product?.id ?? ""}.jpg",
-                                        onImageSelected: (image) {
-                                          setState(() {
-                                            _currentImage = image;
-                                          });
-                                        },
-                                        imageData: _currentImage,
+    return WillPopScope(
+      onWillPop: () async {
+        bool shouldSave = await showDialog<bool?>(
+          context: context, 
+          barrierDismissible: false,
+          builder: (context) => const ExitDialog()
+        ) ?? false;
+
+        if (!shouldSave) return true;
+
+        _onSave(runCreateMutation: runCreateMutation, runUpdateMutation: runUpdateMutation);
+        return false;
+      },
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Form(
+              key: _formKey,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: ScreenHelper.instance.horizontalPadding,
+                  ),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      final bool isBig = constraints.maxWidth >= ScreenHelper.breakpointTablet;
+            
+                      return Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          if (hasException) ...{
+                            const ClStatusMessage(
+                              message: "Le produit n'a pas pu être envoyé...",
+                            ),
+                            const SizedBox(height: 20,)
+                          },
+            
+                          // Le container principale
+                          Flexible(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // L'image
+                                Flexible(
+                                  flex: isBig ? 3 : 44 ,
+                                  child: ConstrainedBox(
+                                    constraints: const BoxConstraints(maxHeight: 560),
+                                    child: AspectRatio(
+                                      aspectRatio: 0.65,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: ClImagePickerBig(
+                                          imageURL: "$kImagesBaseUrl/products/${widget.product?.id ?? ""}.jpg",
+                                          onImageSelected: (image) {
+                                            setState(() {
+                                              _currentImage = image;
+                                            });
+                                          },
+                                          imageData: _currentImage,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(width: 12,),
-          
-                              // La ligne d'informations basiques
-                              Expanded(
-                                flex: isBig ? 6 : 56,
-                                child: Builder(
-                                  builder: (context) {
-                                    final List<Widget> children = [
-                                      // Le nom du produit
-                                      Flexible(
-                                        child: ClTextInput(
-                                          controller: _nameTextController, 
-                                          labelText: "Nom du produit",
-                                          validator: (value) {
-                                            if (value.isEmpty) return "Vous devez rentrer un nom";
-                                            if (value.length >= 18) return "La taille du nom ne doit pas dépasser 18 caratères";
-                                            return null;
-                                          }, 
+                                const SizedBox(width: 12,),
+            
+                                // La ligne d'informations basiques
+                                Expanded(
+                                  flex: isBig ? 6 : 56,
+                                  child: Builder(
+                                    builder: (context) {
+                                      final List<Widget> children = [
+                                        // Le nom du produit
+                                        Flexible(
+                                          child: ClTextInput(
+                                            controller: _nameTextController, 
+                                            labelText: "Nom du produit",
+                                            validator: (value) {
+                                              if (value.isEmpty) return "Vous devez rentrer un nom";
+                                              if (value.length >= 18) return "La taille du nom ne doit pas dépasser 18 caratères";
+                                              return null;
+                                            }, 
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 6, width: 20,),
-          
-                                      // La TVA
-                                      ConstrainedBox(
-                                        constraints: const BoxConstraints(maxWidth: 150),
-                                        child: ClDropdown<double>(
-                                          items: {
-                                            0: "0%",
-                                            5.5: "5,5%",
-                                            10: "10%",
-                                            20: "20%",
-                                          },
-                                          currentValue: _currentTVA,
-                                          label: "% de TVA",
-                                          onChanged: (value) {
-                                            setState(() {
-                                              _currentTVA = value ?? 20;
-                                            });
-                                          },
-                                          validator: null,
+                                        const SizedBox(height: 6, width: 20,),
+            
+                                        // La TVA
+                                        ConstrainedBox(
+                                          constraints: const BoxConstraints(maxWidth: 150),
+                                          child: ClDropdown<double>(
+                                            items: {
+                                              0: "0%",
+                                              5.5: "5,5%",
+                                              10: "10%",
+                                              20: "20%",
+                                            },
+                                            currentValue: _currentTVA,
+                                            label: "% de TVA",
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _currentTVA = value ?? 20;
+                                              });
+                                            },
+                                            validator: null,
+                                          ),
                                         ),
-                                      ),
-                                      const SizedBox(height: 6, width: 20,),
-          
-                                      // Le prix et son unité
-                                      Flexible(
-                                        child: Row(
+                                        const SizedBox(height: 6, width: 20,),
+            
+                                        // Le prix et son unité
+                                        Flexible(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              // Prix
+                                              Flexible(
+                                                flex: 2,
+                                                child: ClTextInput(
+                                                  controller: _priceTextController,
+                                                  inputType: const TextInputType.numberWithOptions(decimal: true),
+                                                  labelText: "Prix",
+                                                  hintText: "Ex : 5,00",
+                                                  validator: (price) {
+                                                    if (double.tryParse(price) == null) return "Vous devez rentrer un nombre valide";
+                                          
+                                                    return null;
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 12,),
+                                          
+                                              // Unitée
+                                              Flexible(
+                                                flex: 3,
+                                                child: ClDropdown<String>(
+                                                  currentValue: _currentUnit,
+                                                  items: const {
+                                                    "": "unitée",
+                                                    "unit": "Unité",
+                                                    "gramme": "Gramme"
+                                                  },
+                                                  label: "",
+                                                  validator: (value) {
+                                                    if ((value ?? '').isEmpty) return "Vous devez choisir une unité.";
+                                          
+                                                    return null;
+                                                  },
+                                                  onChanged: (newValue) {
+                                                    setState(() {
+                                                      _currentUnit = newValue ?? '';
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ];
+            
+                                      if (constraints.maxWidth >= ScreenHelper.breakpointPC) {
+                                        return Column(
                                           mainAxisSize: MainAxisSize.min,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.stretch,
                                           children: [
-                                            // Prix
                                             Flexible(
-                                              flex: 2,
-                                              child: ClTextInput(
-                                                controller: _priceTextController,
-                                                inputType: const TextInputType.numberWithOptions(decimal: true),
-                                                labelText: "Prix",
-                                                hintText: "Ex : 5,00",
-                                                validator: (price) {
-                                                  if (double.tryParse(price) == null) return "Vous devez rentrer un nombre valide";
-                                        
-                                                  return null;
-                                                },
+                                              child: Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: children,
                                               ),
                                             ),
-                                            const SizedBox(width: 12,),
-                                        
-                                            // Unitée
-                                            Flexible(
-                                              flex: 3,
-                                              child: ClDropdown<String>(
-                                                currentValue: _currentUnit,
-                                                items: const {
-                                                  "": "unitée",
-                                                  "unit": "Unité",
-                                                  "gramme": "Gramme"
-                                                },
-                                                label: "",
-                                                validator: (value) {
-                                                  if ((value ?? '').isEmpty) return "Vous devez choisir une unité.";
-                                        
-                                                  return null;
-                                                },
-                                                onChanged: (newValue) {
-                                                  setState(() {
-                                                    _currentUnit = newValue ?? '';
-                                                  });
-                                                },
-                                              ),
-                                            ),
+                                            const SizedBox(height: 6,),
+            
+                                            ..._columnAdaptivePart(isBig: true)
                                           ],
-                                        ),
-                                      )
-                                    ];
-          
-                                    if (constraints.maxWidth >= ScreenHelper.breakpointPC) {
+                                        );
+                                      }
+            
                                       return Column(
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                                        children: [
-                                          Flexible(
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.start,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: children,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 6,),
-          
-                                          ..._columnAdaptivePart(isBig: true)
-                                        ],
+                                        children: children,
                                       );
                                     }
-          
-                                    return Column(
-                                      mainAxisSize: MainAxisSize.min,
-                                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                                      children: children,
-                                    );
-                                  }
-                                ),
-                              )
-                            ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-          
-                        if (!isBig)
-                          ..._columnAdaptivePart(),
-                        const SizedBox(height: 10,),
-          
-                        Flexible(
-                          child: ProductAllergensPicker(
-                            allergens: _productAllergens,
-                            onAllergenAdded: (allergen) {
-                              setState(() {
-                                _productAllergens.add(allergen);
-                              });
-                            },
-                            onAllergenRemoved: (allergen) {
-                              setState(() {
-                                _productAllergens.remove(allergen);
-                              });
-                            },
+            
+                          if (!isBig)
+                            ..._columnAdaptivePart(),
+                          const SizedBox(height: 10,),
+            
+                          Flexible(
+                            child: ProductAllergensPicker(
+                              allergens: _productAllergens,
+                              onAllergenAdded: (allergen) {
+                                setState(() {
+                                  _productAllergens.add(allergen);
+                                });
+                              },
+                              onAllergenRemoved: (allergen) {
+                                setState(() {
+                                  _productAllergens.remove(allergen);
+                                });
+                              },
+                            )
+                          ),
+                          const SizedBox(height: 10,),
+            
+                          Flexible(
+                            child: ProductCategoriesPicker(
+                              initialCategories: _productCategories,
+                              onAddCategory: (category) => _productCategories.add(category),
+                              onRemoveCategory: (category) => _productCategories.remove(category),
+                            ),
                           )
-                        ),
-                        const SizedBox(height: 10,),
-          
-                        Flexible(
-                          child: ProductCategoriesPicker(
-                            initialCategories: _productCategories,
-                            onAddCategory: (category) => _productCategories.add(category),
-                            onRemoveCategory: (category) => _productCategories.remove(category),
-                          ),
-                        )
-                      ],
-                    );
-                  }
+                        ],
+                      );
+                    }
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-
-        Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: ElevatedButton(
-              onPressed: () => _onSave(
-                runCreateMutation: runCreateMutation,
-                runUpdateMutation: runUpdateMutation,
+    
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: ElevatedButton(
+                onPressed: () => _onSave(
+                  runCreateMutation: runCreateMutation,
+                  runUpdateMutation: runUpdateMutation,
+                ),
+                child: Text(widget.product == null ? "Ajouter mon produit" : "Modifier mon produit"),
               ),
-              child: Text(widget.product == null ? "Ajouter mon produit" : "Modifier mon produit"),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 
