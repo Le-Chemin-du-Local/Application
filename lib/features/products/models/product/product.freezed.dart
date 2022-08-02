@@ -30,6 +30,7 @@ mixin _$Product {
   String? get unit => throw _privateConstructorUsedError;
   double? get tva => throw _privateConstructorUsedError;
   bool? get isBreton => throw _privateConstructorUsedError;
+  bool? get hasGluten => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -50,7 +51,8 @@ abstract class $ProductCopyWith<$Res> {
       double? price,
       String? unit,
       double? tva,
-      bool? isBreton});
+      bool? isBreton,
+      bool? hasGluten});
 }
 
 /// @nodoc
@@ -73,6 +75,7 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
     Object? unit = freezed,
     Object? tva = freezed,
     Object? isBreton = freezed,
+    Object? hasGluten = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -115,6 +118,10 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
           ? _value.isBreton
           : isBreton // ignore: cast_nullable_to_non_nullable
               as bool?,
+      hasGluten: hasGluten == freezed
+          ? _value.hasGluten
+          : hasGluten // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -135,7 +142,8 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
       double? price,
       String? unit,
       double? tva,
-      bool? isBreton});
+      bool? isBreton,
+      bool? hasGluten});
 }
 
 /// @nodoc
@@ -159,6 +167,7 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
     Object? unit = freezed,
     Object? tva = freezed,
     Object? isBreton = freezed,
+    Object? hasGluten = freezed,
   }) {
     return _then(_$_Product(
       id == freezed
@@ -201,6 +210,10 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
           ? _value.isBreton
           : isBreton // ignore: cast_nullable_to_non_nullable
               as bool?,
+      hasGluten: hasGluten == freezed
+          ? _value.hasGluten
+          : hasGluten // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -217,7 +230,8 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
       this.price,
       this.unit,
       this.tva,
-      this.isBreton});
+      this.isBreton,
+      this.hasGluten});
 
   factory _$_Product.fromJson(Map<String, dynamic> json) =>
       _$$_ProductFromJson(json);
@@ -245,10 +259,12 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
   final double? tva;
   @override
   final bool? isBreton;
+  @override
+  final bool? hasGluten;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Product(id: $id, name: $name, categories: $categories, tags: $tags, allergens: $allergens, description: $description, price: $price, unit: $unit, tva: $tva, isBreton: $isBreton)';
+    return 'Product(id: $id, name: $name, categories: $categories, tags: $tags, allergens: $allergens, description: $description, price: $price, unit: $unit, tva: $tva, isBreton: $isBreton, hasGluten: $hasGluten)';
   }
 
   @override
@@ -265,7 +281,8 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
       ..add(DiagnosticsProperty('price', price))
       ..add(DiagnosticsProperty('unit', unit))
       ..add(DiagnosticsProperty('tva', tva))
-      ..add(DiagnosticsProperty('isBreton', isBreton));
+      ..add(DiagnosticsProperty('isBreton', isBreton))
+      ..add(DiagnosticsProperty('hasGluten', hasGluten));
   }
 
   @override
@@ -284,7 +301,8 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
             const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality().equals(other.unit, unit) &&
             const DeepCollectionEquality().equals(other.tva, tva) &&
-            const DeepCollectionEquality().equals(other.isBreton, isBreton));
+            const DeepCollectionEquality().equals(other.isBreton, isBreton) &&
+            const DeepCollectionEquality().equals(other.hasGluten, hasGluten));
   }
 
   @JsonKey(ignore: true)
@@ -300,7 +318,8 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
       const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(unit),
       const DeepCollectionEquality().hash(tva),
-      const DeepCollectionEquality().hash(isBreton));
+      const DeepCollectionEquality().hash(isBreton),
+      const DeepCollectionEquality().hash(hasGluten));
 
   @JsonKey(ignore: true)
   @override
@@ -323,7 +342,8 @@ abstract class _Product implements Product {
       final double? price,
       final String? unit,
       final double? tva,
-      final bool? isBreton}) = _$_Product;
+      final bool? isBreton,
+      final bool? hasGluten}) = _$_Product;
 
   factory _Product.fromJson(Map<String, dynamic> json) = _$_Product.fromJson;
 
@@ -347,6 +367,8 @@ abstract class _Product implements Product {
   double? get tva => throw _privateConstructorUsedError;
   @override
   bool? get isBreton => throw _privateConstructorUsedError;
+  @override
+  bool? get hasGluten => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_ProductCopyWith<_$_Product> get copyWith =>

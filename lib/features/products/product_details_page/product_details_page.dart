@@ -120,7 +120,7 @@ class ProductDetailsPage extends ConsumerWidget {
                               const SizedBox(height: 12,),
                           
                               // Si il est breton, on l'indique
-                              if (product.isBreton ?? false)
+                              if (product.isBreton ?? false) ...{
                                 Flexible(
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -133,7 +133,26 @@ class ProductDetailsPage extends ConsumerWidget {
                                       )
                                     ],
                                   ),
-                                )
+                                ),
+                                const SizedBox(height: 12,),
+                              },
+
+                              // Si le produit est sans Gluten, on l'indique
+                              if (!(product.hasGluten ?? true)) 
+                                Flexible(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(Icons.eco_outlined, size: 24,),
+                                      const SizedBox(width: 5,),
+                                                    
+                                      Flexible(
+                                        child: Text("Produit sans gluten", style: Theme.of(context).textTheme.titleMedium,),
+                                      )
+                                    ],
+                                  ),
+                                ),
+
                             ],
                           ),
                           const SizedBox(width: 20, height: 20,),

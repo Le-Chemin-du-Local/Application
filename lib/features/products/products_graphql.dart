@@ -27,7 +27,8 @@ query getMiniProductsForCategory(
           name,
           price,
           unit,
-          isBreton
+          isBreton,
+          hasGluten,
         }
       },
       pageInfo {
@@ -53,6 +54,7 @@ query getDetailledProduct(
     allergens,
     description,
     isBreton,
+    hasGluten,
     price,
     unit,
     tva,
@@ -69,6 +71,7 @@ query getDetailledProduct(
     id,
     name,
     isBreton,
+    hasGluten,
     price,
     unit,
     tva,

@@ -59,6 +59,7 @@ class Product with _$Product {
     String? unit,
     double? tva,
     bool? isBreton,
+    bool? hasGluten,
   }) = _Product;
 
   factory Product.fromJson(Map<String, dynamic> json) => _$ProductFromJson(json);

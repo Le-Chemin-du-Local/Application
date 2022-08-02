@@ -43,6 +43,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
   String _currentUnit = '';
   double _currentTVA = 20;
   bool _isBreton = false;
+  bool _hasGluten = true;
   ClFile? _currentImage;
 
   MutationOptions<dynamic> _createProductMutationOptions(BuildContext context) {
@@ -81,6 +82,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
       _productCategories = widget.product!.categories.toList();
       
       _isBreton = widget.product!.isBreton ?? false;
+      _hasGluten = widget.product!.hasGluten ?? true;
     }
   }
 
@@ -367,14 +369,29 @@ class _ProductEditFormState extends State<ProductEditForm> {
     return [
       // Checkbox du produit Breton
       Flexible(
-        child: ClCheckBox(
-          value: _isBreton, 
-          text: "Ce produit est Breton",
-          onChanged: (value) {
-            setState(() {
-              _isBreton = value ?? false;
-            });
-          },
+        child: Wrap(
+          spacing: 8, runSpacing: 8,
+          children: [
+            ClCheckBox(
+              value: _isBreton, 
+              text: "Ce produit est Breton",
+              onChanged: (value) {
+                setState(() {
+                  _isBreton = value ?? false;
+                });
+              },
+            ),
+
+            ClCheckBox(
+              value: !_hasGluten, 
+              text: "Ce produit est sans Glutten",
+              onChanged: (value) {
+                setState(() {
+                  _hasGluten = !(value ?? false);
+                });
+              }, 
+            )
+          ],
         ),
       ),
       const SizedBox(height: 6,),
