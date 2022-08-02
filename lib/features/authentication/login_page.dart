@@ -68,7 +68,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   child: Align(
                     alignment: Alignment.topCenter,
                     child: ClCard(
-                      width: constraints.maxWidth > maxFormWidth ? maxFormWidth : constraints.maxWidth - ScreenHelper.instance.horizontalPadding * 2,
+                      width: constraints.maxWidth > maxFormWidth ? maxFormWidth : constraints.maxWidth,
                       padding: EdgeInsets.only(
                         top: 20,
                         left: ScreenHelper.instance.horizontalPadding,
