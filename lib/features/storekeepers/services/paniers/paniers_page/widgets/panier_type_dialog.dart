@@ -31,7 +31,7 @@ class PanierTypeDialog extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: const [
                         Icon(
-                          CLIcons.clickandcollect,
+                          CLIcons.clickAndCollect,
                           size: 92,
                           color: Palette.colorWhite,
                         ),
@@ -61,7 +61,7 @@ class PanierTypeDialog extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: const [
                         Icon(
-                          CLIcons.clickandcollect,
+                          CLIcons.clickAndCollect,
                           size: 92,
                           color: Palette.colorWhite,
                         ),

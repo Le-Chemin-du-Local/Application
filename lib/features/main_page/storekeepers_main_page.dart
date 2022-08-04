@@ -39,7 +39,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
         index: 0, 
         title: "Ma Page",
         appBarTitle: "Ma Page",
-        icon: CLIcons.mapage,
+        icon: CLIcons.maPage,
       ),
 
       // Home page
@@ -55,7 +55,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
         index: 2,
         title: "Mes Produits",
         appBarTitle: "Mes Produtis",
-        icon: CLIcons.mesproduits
+        icon: CLIcons.mesProduits
       ),
 
       // Click and collect if need
@@ -64,7 +64,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
           index: 3, 
           title: "Mes commandes", 
           appBarTitle: "Mes commandes",
-          icon: CLIcons.clickandcollect,
+          icon: CLIcons.clickAndCollect,
         ),
 
       // Basket
@@ -72,7 +72,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
         index: 3 + clickAndCollectOffset,
         title: "Mes Servives",
         appBarTitle: "Mes Services",
-        icon: CLIcons.messervices
+        icon: CLIcons.mesServices
       ),
 
       // Account

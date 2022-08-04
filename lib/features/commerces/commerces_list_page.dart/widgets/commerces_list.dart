@@ -114,7 +114,7 @@ class CommercesList extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Icon(CLIcons.mapage, color: Theme.of(context).colorScheme.primary),
+                            Icon(CLIcons.maPage, color: Theme.of(context).colorScheme.primary),
                             const SizedBox(width: 4,),
                             const Text("Découvrez nos commerces de proximité")
                           ],

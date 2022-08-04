@@ -25,19 +25,19 @@ const List<String> kCategories = [
 
 const Map<String, IconData> kCategorieLogo = {
   "Bio": CLIcons.bio,
-  "Bières & cidres": CLIcons.bierescidres,
-  "Boissons sans alcool": CLIcons.boissonssansalcool,
-  "Vins & spiritueux": CLIcons.vinsspiritueux,
-  "Pains & boulangerie": CLIcons.boulangeriepain,
-  "Produits laitiers": CLIcons.produitslaitiers,
-  "Epicerie": CLIcons.epicescondiments,
+  "Bières & cidres": CLIcons.bieresCidres,
+  "Boissons sans alcool": CLIcons.boissonsSansAlcool,
+  "Vins & spiritueux": CLIcons.vinsSpiritueux,
+  "Pains & boulangerie": CLIcons.boulangeriePain,
+  "Produits laitiers": CLIcons.produitsLaitiers,
+  "Epicerie": CLIcons.epicerie,
   "Fruits": CLIcons.fruits,
   "Légumes": CLIcons.legumes,
   "Horticulture": CLIcons.horticulture,
-  "Produits de la mer": CLIcons.produitsmer,
+  "Produits de la mer": CLIcons.produitsMer,
   "Viandes": CLIcons.viandes,
-  "Spécialitées salées": CLIcons.specialitessalees,
-  "Spécialitées sucrées": CLIcons.specialitessucrees,
+  "Spécialitées salées": CLIcons.specialitesSalees,
+  "Spécialitées sucrées": CLIcons.specialitesSucrees,
 };
 
 // La liste des allèrgenes 

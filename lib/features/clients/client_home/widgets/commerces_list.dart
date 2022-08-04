@@ -37,7 +37,7 @@ class CommercesList extends StatelessWidget {
         Row(
           children: [
             Icon(
-              CLIcons.mapage,
+              CLIcons.maPage,
               size: 30,
               color: Theme.of(context).colorScheme.primary,
             ),

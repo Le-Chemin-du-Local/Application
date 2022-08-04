@@ -29,7 +29,7 @@ class DashboardServicesCard extends StatelessWidget {
                 const Expanded(
                   child: Center(
                     child: Icon(
-                      CLIcons.messervices, 
+                      CLIcons.mesServices, 
                       size: 121,
                       color: Palette.colorWhite,
                     )

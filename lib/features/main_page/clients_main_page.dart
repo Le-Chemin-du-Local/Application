@@ -59,7 +59,7 @@ class ClientsMainPage extends StatelessWidget {
         index: 0, 
         title: "Les commerces",
         appBarTitle: "Les commerces",
-        icon: CLIcons.mapage,
+        icon: CLIcons.maPage,
       ),
 
       // Home page
@@ -75,7 +75,7 @@ class ClientsMainPage extends StatelessWidget {
         index: 2,
         title: "Fidélité",
         appBarTitle: "Votre fidélité",
-        icon: Icons.storage
+        icon: CLIcons.coin
       ),
 
       // Basket
@@ -83,7 +83,7 @@ class ClientsMainPage extends StatelessWidget {
         index: 3,
         title: "Paniers",
         appBarTitle: "Votre paniers",
-        icon: CLIcons.clickandcollect,
+        icon: CLIcons.clickAndCollect,
         isBasket: true
       ),
 
@@ -92,7 +92,7 @@ class ClientsMainPage extends StatelessWidget {
         index: 4,
         title: "Mon compte",
         appBarTitle: "Mon Compte",
-        icon: Icons.account_circle 
+        icon: CLIcons.hermine
       )
     ];
 
