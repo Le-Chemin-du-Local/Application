@@ -44,7 +44,7 @@ class BottomAppBar extends StatelessWidget {
               height: size.width * 0.17,
               child: FloatingActionButton(
                 onPressed: () => onSelectedPage(pageItems[0]),
-                child: const Icon(CLIcons.maPage, size: 32),
+                child: Icon(pageItems[0].icon, size: 32),
               )
             ),
           ),

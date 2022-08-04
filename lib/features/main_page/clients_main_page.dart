@@ -59,7 +59,7 @@ class ClientsMainPage extends StatelessWidget {
         index: 0, 
         title: "Les commerces",
         appBarTitle: "Les commerces",
-        icon: CLIcons.maPage,
+        icon: CLIcons.rechercheCommerces,
       ),
 
       // Home page
