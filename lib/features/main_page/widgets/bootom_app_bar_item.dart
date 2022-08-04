@@ -38,19 +38,21 @@ class BottomAppBarItem extends ConsumerWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Flexible(
+                  SizedBox(
+                    height: 40, width: 40,
                     child: Icon(
                       icon,
-                      size: 26,
+                      size: 32,
                       color: isCurrentItem ? Theme.of(context).colorScheme.secondary : Palette.colorDarkGrey,
                     ),
                   ),
                   const SizedBox(
-                    height: 8,
+                    height: 2,
                   ),
                   Flexible(
                     child: Text(
                       text,
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: isCurrentItem ? Theme.of(context).colorScheme.secondary : Palette.colorDarkGrey,
                         fontSize: 9

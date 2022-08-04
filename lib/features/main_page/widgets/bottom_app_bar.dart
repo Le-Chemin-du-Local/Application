@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/main_page/widgets/bootom_app_bar_item.dart';
 import 'package:chemin_du_local/features/main_page/widgets/bottom_app_bar_painter.dart';
@@ -20,7 +22,7 @@ class BottomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
-    const double height = 70;
+    final double height = Platform.isIOS ? 100 : 80;
 
     return Container(
       width: size.width,
@@ -42,7 +44,7 @@ class BottomAppBar extends StatelessWidget {
               height: size.width * 0.17,
               child: FloatingActionButton(
                 onPressed: () => onSelectedPage(pageItems[0]),
-                child: const Icon(CLIcons.mapage),
+                child: const Icon(CLIcons.maPage, size: 32),
               )
             ),
           ),
@@ -50,7 +52,7 @@ class BottomAppBar extends StatelessWidget {
           // The other items
           SizedBox(
             width: size.width,
-            height: height,
+            height: height - (Platform.isIOS ? 20 : 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

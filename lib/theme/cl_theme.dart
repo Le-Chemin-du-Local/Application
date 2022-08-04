@@ -42,7 +42,8 @@ class ClTheme {
         elevation: 0,
         scrolledUnderElevation: 0,
         foregroundColor: Palette.colorDark,
-        systemOverlayStyle: SystemUiOverlayStyle.light,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        
         titleTextStyle: TextStyle(fontSize: 24, color: Palette.colorDark), 
       ),
 

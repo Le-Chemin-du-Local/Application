@@ -12,6 +12,7 @@ class Init {
     await ref.read(appUserControllerProvider.notifier).initializeUser(client);
     await ref.read(basketControllerProvider.notifier).syncBasket(client);
 
+    // TODO: discuss the delay
     await Future<void>.delayed(const Duration(milliseconds: 2500));
   }
 }

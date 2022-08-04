@@ -3,6 +3,7 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/main_page/widgets/menu_drawer.dart';
 import 'package:chemin_du_local/theme/cl_theme.dart';
+import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chemin_du_local/features/main_page/widgets/bottom_app_bar.dart' as custom;
@@ -56,8 +57,8 @@ class MainPageState extends State<MainPage> {
           final List<Color> gradient = [
             Theme.of(context).colorScheme.background,
             Theme.of(context).colorScheme.background,
-            Colors.black,
-            Colors.black,
+            Colors.white,
+            Colors.white,
           ];
           const double fillPercent = 50; // fills 56.23% for container from bottom
           const double fillStop = (100 - fillPercent) / 100;
@@ -72,31 +73,29 @@ class MainPageState extends State<MainPage> {
                 begin: Alignment.topCenter,
               ),
             ),
-            child: SafeArea(
-              child: GestureDetector(
-                onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-                child: Scaffold(
-                  appBar:AppBar(
-                    title: Text(widget.pageItems[_currentIndex].title),
+            child: GestureDetector(
+              onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+              child: Scaffold(
+                appBar:AppBar(
+                  title: Text(widget.pageItems[_currentIndex].title),
+                ),
+                body: Theme(
+                  data: Theme.of(context).copyWith(
+                    appBarTheme: ClTheme.themeSecondAppBar(context)
                   ),
-                  body: Theme(
-                    data: Theme.of(context).copyWith(
-                      appBarTheme: ClTheme.themeSecondAppBar(context)
-                    ),
-                    child: widget.pages[_currentIndex]
-                  ),
-                  drawer: useBigLayout 
-                    ? MenuDrawer(
-                        pageItems: widget.pageItems,
-                        currentPageIndex: _currentIndex,
-                        onSelectedPage: selectedPage,
-                      )
-                    : null,
-                  bottomNavigationBar: useBigLayout ? null : custom.BottomAppBar(
-                    currentPageIndex: _currentIndex,
-                    onSelectedPage: selectedPage,
-                    pageItems: widget.pageItems,
-                  ),
+                  child: widget.pages[_currentIndex]
+                ),
+                drawer: useBigLayout 
+                  ? MenuDrawer(
+                      pageItems: widget.pageItems,
+                      currentPageIndex: _currentIndex,
+                      onSelectedPage: selectedPage,
+                    )
+                  : null,
+                bottomNavigationBar: useBigLayout ? null : custom.BottomAppBar(
+                  currentPageIndex: _currentIndex,
+                  onSelectedPage: selectedPage,
+                  pageItems: widget.pageItems,
                 ),
               ),
             ),
