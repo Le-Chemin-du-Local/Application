@@ -86,7 +86,10 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
 
     // The pages
     final List<Widget> pages = [
-      const StoreKeeperPage(canEdit: true),
+      StoreKeeperPage(
+        canEdit: true,
+        onShowProducts: () => _mainPageKey.currentState!.selectedPage(pageItems[2]),
+      ),
       StoreKeeperHomePage(
         onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),
         commerceID: widget.storekeeper.commerce?.id ?? "",

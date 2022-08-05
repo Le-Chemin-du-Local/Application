@@ -16,6 +16,7 @@ class LayoutBig extends StatelessWidget {
     required this.products,
     required this.productsAvailableForClickAndCollect,
     required this.enableAllProductsButton,
+    required this.onShowProducts,
   }) : super(key: key);
 
   final Commerce? commerce;
@@ -23,6 +24,8 @@ class LayoutBig extends StatelessWidget {
   final List<Product> productsAvailableForClickAndCollect;
 
   final bool enableAllProductsButton;
+
+  final Function() onShowProducts;
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +75,8 @@ class LayoutBig extends StatelessWidget {
                           for (final product in productsAvailableForClickAndCollect)
                               product.id!
                           ],
+
+                        onShowProducts: onShowProducts,
                       ),
                     ),
                   ],

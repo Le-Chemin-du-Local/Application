@@ -19,6 +19,7 @@ class ProductsGrid extends ConsumerWidget {
     required this.products,
     required this.commerce,
     required this.availableForClickAndCollect,
+    required this.onShowProducts,
   }) : super(key: key);
 
   final bool enableButton;
@@ -28,6 +29,7 @@ class ProductsGrid extends ConsumerWidget {
   final List<Product> products;
   final List<String> availableForClickAndCollect;
 
+  final Function() onShowProducts; 
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,11 +67,11 @@ class ProductsGrid extends ConsumerWidget {
           )
     ];
 
-    return Opacity(
-      opacity: products.isEmpty ? 0.4 : 1.0,
-      child: Stack(
-        children: [
-          Align(
+    return Stack(
+      children: [
+        Opacity(
+          opacity: products.isEmpty ? 0.4 : 1.0,
+          child: Align(
             alignment: Alignment.topCenter,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -94,7 +96,11 @@ class ProductsGrid extends ConsumerWidget {
                 Center(
                   child: ElevatedButton(
                     onPressed: () async {
-                      if (!enableButton) return;
+                      if (!enableButton) {
+                        onShowProducts();
+                        return;
+                      }
+        
                       await _onViewAllProducts(context);
                     },
                     child: const Text("Voir tous les produits"),
@@ -103,15 +109,28 @@ class ProductsGrid extends ConsumerWidget {
               ],
             ),
           ),
-          if (products.isEmpty)
-            const Positioned(
-              top: 0, bottom: 0, left: 0, right: 0,
-              child: Center(
-                child: Text("Vous n'avez pas de produts ! Créez des fiches dans Mes produits"),
-              )
+        ),
+        if (products.isEmpty)
+          Positioned(
+            top: 0, bottom: 0, left: 0, right: 0,
+            child: Center(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Vous n'avez pas de produts ! Créez des fiches dans Mes produits",
+                    textAlign: TextAlign.center,
+                  ),
+                  ElevatedButton(
+                    onPressed: onShowProducts, 
+                    child: const Text("Mes Produits")
+                  )
+                ],
+              ),
             )
-        ],
-      ),
+          )
+      ],
     );
   }
 

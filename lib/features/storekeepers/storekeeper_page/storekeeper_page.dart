@@ -16,11 +16,14 @@ class StoreKeeperPage extends StatelessWidget {
   const StoreKeeperPage({
     Key? key,
     this.storekeeperID,
-    this.canEdit = false
+    this.canEdit = false,
+    this.onShowProducts,
   }) : super(key: key);
 
   final String? storekeeperID;
   final bool canEdit;
+
+  final Function()? onShowProducts; 
 
   QueryOptions _commerceQueryOptions() {
     return QueryOptions<dynamic>(
@@ -122,6 +125,7 @@ class StoreKeeperPage extends StatelessWidget {
                         products: products,
                         productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
                         enableAllProductsButton: !canEdit,
+                        onShowProducts: onShowProducts ?? () {}
                       );
                     }
       
@@ -130,6 +134,7 @@ class StoreKeeperPage extends StatelessWidget {
                       products: products,
                       productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
                       enableAllProductsButton: !canEdit,
+                      onShowProducts: onShowProducts ?? () {},
                     );
                   },
                 ),
