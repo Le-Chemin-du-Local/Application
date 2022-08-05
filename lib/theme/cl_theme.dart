@@ -38,7 +38,7 @@ class ClTheme {
         backgroundColor: Palette.colorScaffold,
         surfaceTintColor: Palette.colorScaffold,
         shadowColor: Palette.colorScaffold,
-        toolbarHeight: 26,
+        toolbarHeight: 48,
         elevation: 0,
         scrolledUnderElevation: 0,
         foregroundColor: Palette.colorDark,
