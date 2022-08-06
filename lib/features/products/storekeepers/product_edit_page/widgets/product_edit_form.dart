@@ -274,7 +274,8 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                                   items: const {
                                                     "": "unitée",
                                                     "unit": "Unité",
-                                                    "gramme": "Gramme"
+                                                    "gramme": "Gramme",
+                                                    "pack": "Pack"
                                                   },
                                                   label: "",
                                                   validator: (value) {
