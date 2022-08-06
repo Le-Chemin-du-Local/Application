@@ -56,7 +56,7 @@ class ProductCard extends StatelessWidget {
                   Flexible(
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Image.asset("assets/images/drapeau_breton.png")
+                      child: Image.asset("assets/images/drapeau_breton.png", width: 40,)
                     )
                   )
                 else 
