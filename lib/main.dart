@@ -14,7 +14,6 @@ import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/theme/cl_theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';

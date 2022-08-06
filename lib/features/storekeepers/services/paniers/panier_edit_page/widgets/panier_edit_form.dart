@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/cl_file.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
-import 'package:chemin_du_local/core/widgets/badge.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dateime_picker.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker_big.dart';

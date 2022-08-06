@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/main_page/widgets/bootom_app_bar_item.dart';
 import 'package:chemin_du_local/features/main_page/widgets/bottom_app_bar_painter.dart';
-import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
 import 'package:flutter/material.dart';
 
 class BottomAppBar extends StatelessWidget {
