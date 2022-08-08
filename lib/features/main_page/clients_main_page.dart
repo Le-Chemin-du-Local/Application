@@ -33,7 +33,9 @@ class _ClientsMainPageState extends State<ClientsMainPage> {
           key: AppManager.instance.commercesListPageKey,
           onGenerateRoute: (route) => MaterialPageRoute<void>(
             settings: route,
-            builder: (context) => const CommercesListPage()
+            builder: (context) => CommercesListPage(
+              onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
+            )
           ),
         )
       ),
@@ -62,8 +64,16 @@ class _ClientsMainPageState extends State<ClientsMainPage> {
           ),
         )
       ),
-      ClientAccountPage(
-        onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
+      ClipRRect(
+        child: Navigator(
+          key: AppManager.instance.loginPageKey,
+          onGenerateRoute: (route) => MaterialPageRoute<void>(
+            settings: route,
+            builder: (context) => ClientAccountPage(
+              onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
+            )
+          ),
+        ),
       )
     ];
 

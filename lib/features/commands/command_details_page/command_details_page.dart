@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commands/command_details_page/widgets/command_commerces_list.dart';
 import 'package:chemin_du_local/features/commands/command_details_page/widgets/command_summary_card.dart';
@@ -29,7 +30,8 @@ class CommandDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: ClAppBar(
+        canPop: Navigator.of(context).canPop(),
         title: Text("commande du $commandDateString"),
       ),
       body: Query<dynamic>(

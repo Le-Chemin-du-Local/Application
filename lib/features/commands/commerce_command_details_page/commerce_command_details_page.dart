@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
 import 'package:chemin_du_local/features/commands/commerce_command_details_page/widgets/commerce_command_summary_card.dart';
@@ -29,7 +30,8 @@ class _CommerceCommandDetailsPageState extends ConsumerState<CommerceCommandDeta
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: ClAppBar(
+        canPop: Navigator.of(context).canPop(),
         title: Text(widget.commerceCommand.commerce?.name ?? "Nom inconnue")
       ),
       body: _isLoading ? const Center(child: CircularProgressIndicator()) : Stack(

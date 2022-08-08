@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
 import 'package:chemin_du_local/features/commands/storekeeper_commands/widgets/commands_list.dart';
 import 'package:flutter/material.dart';
@@ -17,19 +18,9 @@ class StoreKeeperCommandsPage extends StatelessWidget {
     final GlobalKey<CommandsListState> readyKey = GlobalKey<CommandsListState>();
 
     return Scaffold(
-      appBar: AppBar(
-        leading: ScreenHelper.instance.isMobile ? null : Padding(
-          padding: EdgeInsets.only(
-            left: ScreenHelper.instance.horizontalPadding,
-          ),
-          child: IconButton(
-            onPressed: () {
-              onShowDrawer();
-            },
-            icon: const Icon(Icons.menu)
-          ),
-        ),
-        leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+      appBar: ClAppBar(
+        canPop: Navigator.of(context).canPop(),
+        onShowDrawer: onShowDrawer,
         title: const Text("Mes commandes"),
       ),
       body: Padding(

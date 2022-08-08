@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/ccproducts_page/ccproducts_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_page/paniers_page.dart';
@@ -28,19 +29,9 @@ class ServicesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: ScreenHelper.instance.isMobile ? null : Padding(
-          padding: EdgeInsets.only(
-            left: ScreenHelper.instance.horizontalPadding,
-          ),
-          child: IconButton(
-            onPressed: () {
-              onShowDrawer();
-            },
-            icon: const Icon(Icons.menu)
-          ),
-        ),
-        leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+      appBar: ClAppBar(
+        onShowDrawer: onShowDrawer,
+        canPop: false,
         title: const Text("Mes services"),
       ),
       body: Query<dynamic>(

@@ -41,7 +41,7 @@ class ClTheme {
         backgroundColor: Palette.colorScaffold,
         surfaceTintColor: Palette.colorScaffold,
         shadowColor: Palette.colorScaffold,
-        toolbarHeight: 48,
+        toolbarHeight: 100,
         elevation: 0,
         scrolledUnderElevation: 0,
         foregroundColor: Palette.colorDark,
@@ -102,19 +102,7 @@ class ClTheme {
     );
   }
 
-  static AppBarTheme themeSecondAppBar(BuildContext context) {
-    return const AppBarTheme(
-      centerTitle: false,
-      backgroundColor: Palette.colorScaffold,
-      surfaceTintColor: Palette.colorScaffold,
-      shadowColor: Palette.colorScaffold,
-      elevation: 0,
-      scrolledUnderElevation: 0,
-      foregroundColor: Palette.colorDark,
-      systemOverlayStyle: SystemUiOverlayStyle.light,
-      titleTextStyle: TextStyle(fontSize: 24, color: Palette.colorDark), 
-    );
-  }
+  
 
   static MaterialColor colorSwatch(int value) {
     final color50 = Color(value).withOpacity(0.1);

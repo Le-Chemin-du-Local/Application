@@ -89,6 +89,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
       StoreKeeperPage(
         canEdit: true,
         onShowProducts: () => _mainPageKey.currentState!.selectedPage(pageItems[2]),
+        onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
       ),
       StoreKeeperHomePage(
         onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),

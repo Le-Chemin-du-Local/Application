@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:flutter/material.dart';
 
 class StoreKeeperSettingsPage extends StatelessWidget {
@@ -12,22 +13,12 @@ class StoreKeeperSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: ScreenHelper.instance.isMobile ? null : Padding(
-          padding: EdgeInsets.only(
-            left: ScreenHelper.instance.horizontalPadding,
-          ),
-          child: IconButton(
-            onPressed: () {
-              onShowDrawer();
-            },
-            icon: const Icon(Icons.menu)
-          ),
-        ),
-        leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+      appBar: ClAppBar(
+        canPop: false,
+        onShowDrawer: onShowDrawer,
         title: const Text("Bienvenue, Victor 👋"),
       ),
-      body: Center(child: Text("Hello StoreKeeper Settings Page")),
+      body: const Center(child: Text("Hello StoreKeeper Settings Page")),
     );
   }
 }

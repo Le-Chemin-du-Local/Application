@@ -23,7 +23,7 @@ class HeaderImage extends StatelessWidget {
 
     return SliverAppBar(
       pinned: false,
-      expandedHeight: height - (canEdit ? 90 : 0) - 48, // On doit compenser l'appbar et la bar de notif
+      expandedHeight: height - (canEdit ? 90 : 0), // On doit compenser l'appbar et la bar de notif
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           color: Theme.of(context).disabledColor,

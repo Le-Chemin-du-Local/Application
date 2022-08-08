@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/steps_indicator.dart';
@@ -16,7 +17,7 @@ class LoginPage extends ConsumerStatefulWidget {
     required this.onShowDrawer,
   }) : super(key: key);
 
-  final Function onShowDrawer;
+  final Function() onShowDrawer;
 
   @override
   ConsumerState<LoginPage> createState() => _LoginPageState();
@@ -58,25 +59,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           _registrationFormKey.currentState!.goOnStep(_currentStep);
           return false;
         }
+        else if (_isRegistering) {
+          setState(() {
+            _isRegistering = false;
+          });
+          return false;
+        }
 
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(
-          leading: ScreenHelper.instance.isMobile 
-          ? _currentStep == 0 ? null : const BackButton() 
-          : _currentStep != 0 ? const BackButton() : Padding(
-              padding: EdgeInsets.only(
-                left: ScreenHelper.instance.horizontalPadding,
-              ),
-              child: IconButton(
-                onPressed: () {
-                  widget.onShowDrawer();
-                },
-                icon: const Icon(Icons.menu)
-              ),
-            ),
-          leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+        appBar: ClAppBar(
+          canPop: _isRegistering,
+          onShowDrawer: widget.onShowDrawer,
           title: Text(
             _isRegistering ? "Inscription" : "Connexion/Inscription"
           ),

@@ -81,7 +81,7 @@ class ProductsGrid extends ConsumerWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.zero,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 307,
+                    maxCrossAxisExtent: 205,
                     mainAxisExtent: 316,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16

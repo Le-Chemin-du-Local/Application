@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/models/panier/panier.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/panier_edit_page/widgets/panier_edit_form.dart';
@@ -93,7 +94,8 @@ class _PanierEditPageState extends State<PanierEditPage> {
 
   Widget _buildContent(Panier? panier, RunMutation? runMutation) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: ClAppBar(
+        canPop: Navigator.of(context).canPop(),
         title: Text(
           widget.panierID != null ? "Modifier le panier" : "Créer un panier"
         ),

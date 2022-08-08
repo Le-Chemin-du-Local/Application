@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commands/commands_graphql.dart';
@@ -30,7 +31,8 @@ class CommandDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: ClAppBar(
+        canPop: Navigator.of(context).canPop(),
         title: const Text("Détails de la commande"),
       ),
       body: SingleChildScrollView(

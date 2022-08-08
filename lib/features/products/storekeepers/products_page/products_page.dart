@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
@@ -40,7 +41,8 @@ class ProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar ? AppBar(
+      appBar: showAppBar ? ClAppBar(
+        canPop: Navigator.of(context).canPop(),
         title: Text(category),
       ) : null,
       body: Query<dynamic>(

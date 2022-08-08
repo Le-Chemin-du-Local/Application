@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
@@ -18,12 +19,15 @@ class StoreKeeperPage extends StatelessWidget {
     this.storekeeperID,
     this.canEdit = false,
     this.onShowProducts,
+    this.onShowDrawer
   }) : super(key: key);
 
   final String? storekeeperID;
   final bool canEdit;
 
   final Function()? onShowProducts; 
+
+  final Function()? onShowDrawer;
 
   QueryOptions _commerceQueryOptions() {
     return QueryOptions<dynamic>(
@@ -87,9 +91,11 @@ class StoreKeeperPage extends StatelessWidget {
     required Refetch? refetch,
   }) {
     return Scaffold(
-      appBar: !canEdit ? null : AppBar(
+      appBar: !canEdit ? null : ClAppBar(
+        canPop: false,
+        onShowDrawer: onShowDrawer,
+        height: 90,
         backgroundColor: Colors.transparent,
-        toolbarHeight: 90,
         actions: [
           if (canEdit)
             Padding(

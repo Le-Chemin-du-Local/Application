@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/steps_indicator.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
@@ -84,22 +85,10 @@ class _BasketPageState extends ConsumerState<BasketPage> {
         return true;
       },
       child: Scaffold(
-        appBar: AppBar(
-          leading: ScreenHelper.instance.isMobile 
-          ?  _currentIndex == 0 ? null : const BackButton()
-          :  _currentIndex != 0 ? const BackButton() : Padding(
-              padding: EdgeInsets.only(
-                left: ScreenHelper.instance.horizontalPadding,
-              ),
-              child: IconButton(
-                onPressed: () {
-                  widget.onShowDrawer();
-                },
-                icon: const Icon(Icons.menu)
-              ),
-            ),
-          leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
-          title: const Text("Mion Panier"),
+        appBar: ClAppBar(
+          canPop: _currentIndex > 0,
+          onShowDrawer: widget.onShowDrawer,
+          title: const Text("Mon Panier"),
         ),
         body: _successBasket != null ? BasketSuccess(basket: _successBasket!) : Column(
           // mainAxisSize: MainAxisSize.min,

@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/storekeepers/empty_products_page/empty_products_page.dart';
@@ -42,25 +43,11 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.isStorekeeper 
-      ? AppBar(
-        leading: ScreenHelper.instance.isMobile ? null : Padding(
-          padding: EdgeInsets.only(
-            left: ScreenHelper.instance.horizontalPadding,
-          ),
-          child: IconButton(
-            onPressed: () {
-              widget.onShowDrawer!();
-            },
-            icon: const Icon(Icons.menu)
-          ),
-        ),
-        leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
-        title: const Text("Mes produits"),
-      ) 
-      : AppBar(
-        title: const Text("Tous les produits"),
-      ),
+      appBar: ClAppBar(
+        canPop: Navigator.of(context).canPop(),
+        onShowDrawer: widget.isStorekeeper ? widget.onShowDrawer : null,
+        title: Text(widget.isStorekeeper ? "Mes produits" : "Tous les produits"),
+      ), 
       body: Query<dynamic>(
         options: _categoriesQueryOptions(),
         builder: (categoriesQueryResult, {fetchMore, refetch}) {

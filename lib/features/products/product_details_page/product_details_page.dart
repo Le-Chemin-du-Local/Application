@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_quantity_picker.dart';
@@ -35,230 +36,234 @@ class ProductDetailsPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: ScreenHelper.instance.horizontalPadding,
-        vertical: 12
-      ),
-      child: Query<dynamic>(
-        options: _detailledProductQueryOptions(),
-        builder: (result, {fetchMore, refetch}) {
-          if (result.isLoading) {
-            return Scaffold(
-              appBar: AppBar(),
-              body: const Center(child: CircularProgressIndicator()),
-            );
-          }
+    return Query<dynamic>(
+      options: _detailledProductQueryOptions(),
+      builder: (result, {fetchMore, refetch}) {
+        if (result.isLoading) {
+          return Scaffold(
+            appBar: AppBar(),
+            body: const Center(child: CircularProgressIndicator()),
+          );
+        }
 
-          if (result.hasException) {
-            return Scaffold(
-              appBar: AppBar(),
-              body: const Align(
-                alignment: Alignment.topCenter,
-                child: ClStatusMessage(
-                  message: "Le produit n'a pas pu être chargé...",
-                ),
+        if (result.hasException) {
+          return Scaffold(
+            appBar: AppBar(),
+            body: const Align(
+              alignment: Alignment.topCenter,
+              child: ClStatusMessage(
+                message: "Le produit n'a pas pu être chargé...",
               ),
-            );
-          }
+            ),
+          );
+        }
 
-          final Product product = Product.fromJson(result.data!["product"] as Map<String, dynamic>);
+        final Product product = Product.fromJson(result.data!["product"] as Map<String, dynamic>);
 
-          return _buildContent(context, ref, product); 
-        },
-      ),
+        return _buildContent(context, ref, product); 
+      },
     );
   }
 
   Widget _buildContent(BuildContext context, WidgetRef ref, Product product) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: ClAppBar(
+        canPop: Navigator.of(context).canPop(),
         title: Text(product.name),
       ),
-      body: Stack(
-        children: [
-          Positioned.fill(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // La première partie
-                  Flexible(
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        final bool isBig = constraints.maxWidth >= ScreenHelper.breakpointTablet;
-                        final List<Widget> children = [
-                          // L'image du produit
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              ConstrainedBox(
-                                constraints: BoxConstraints(maxWidth: isBig ? 300 : double.infinity),
-                                child: AspectRatio(
-                                  aspectRatio: isBig ? 0.65 : 1.65,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    child: Image.network(
-                                      "$kImagesBaseUrl/products/${product.id ?? ""}.jpg",
-                                      fit: BoxFit.cover,
-                                      loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
-                                        child: CircularProgressIndicator(
-                                          value: loadingProgress.expectedTotalBytes != null
-                                            ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                                            : null,
-                                        ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: ScreenHelper.instance.horizontalPadding,
+          vertical: 12
+        ),
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // La première partie
+                    Flexible(
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          final bool isBig = constraints.maxWidth >= ScreenHelper.breakpointTablet;
+                          final List<Widget> children = [
+                            // L'image du produit
+                            ConstrainedBox(
+                              constraints: BoxConstraints(maxWidth: isBig ? 300 : double.infinity),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  ConstrainedBox(
+                                    constraints: BoxConstraints(maxWidth: isBig ? 300 : double.infinity),
+                                    child: AspectRatio(
+                                      aspectRatio: isBig ? 0.65 : 1.65,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12.0),
+                                        child: Image.network(
+                                          "$kImagesBaseUrl/products/${product.id ?? ""}.jpg",
+                                          fit: BoxFit.cover,
+                                          loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
+                                            child: CircularProgressIndicator(
+                                              value: loadingProgress.expectedTotalBytes != null
+                                                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                                : null,
+                                            ),
+                                          ),
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
+                                          },
+                                        )
                                       ),
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
-                                      },
+                                    ),
+                                  ),
+                                  const SizedBox(height: 12,),
+                              
+                                  // Si il est breton, on l'indique
+                                  if (product.isBreton ?? false) ...{
+                                    Flexible(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset("assets/images/drapeau_breton.png", width: 25,),
+                                          const SizedBox(width: 5,),
+                                                        
+                                          Flexible(
+                                            child: Text("Produit 100% de chez vous", style: Theme.of(context).textTheme.titleMedium,),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(height: 12,),
+                                  },
+                                  
+                                  // Si le produit est sans Gluten, on l'indique
+                                  if (!(product.hasGluten ?? true)) 
+                                    Flexible(
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(Icons.eco_outlined, size: 24,),
+                                          const SizedBox(width: 5,),
+                                                        
+                                          Flexible(
+                                            child: Text("Produit sans gluten", style: Theme.of(context).textTheme.titleMedium,),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 20, height: 20,),
+                
+                            // La description et allergène
+                            Flexible(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  // La description
+                                  Text(
+                                    "Decription", 
+                                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: Theme.of(context).colorScheme.secondary    
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2,),
+                                  Text(
+                                    product.description ?? "Pas de description",
+                                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      fontWeight: FontWeight.w300
                                     )
                                   ),
-                                ),
+                                  const SizedBox(height: 10,),
+            
+                                  // La description
+                                  Text(
+                                    "Allergène", 
+                                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                                      fontWeight: FontWeight.w500,
+                                      color: Theme.of(context).colorScheme.secondary    
+                                    ),
+                                  ),
+                                  const SizedBox(height: 2,),
+                                  Text(
+                                    _productAllergens(product),
+                                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                                      fontWeight: FontWeight.w300
+                                    )
+                                  )
+                            
+                                ],
                               ),
-                              const SizedBox(height: 12,),
-                          
-                              // Si il est breton, on l'indique
-                              if (product.isBreton ?? false) ...{
-                                Flexible(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Image.asset("assets/images/drapeau_breton.png", width: 25,),
-                                      const SizedBox(width: 5,),
-                                                    
-                                      Flexible(
-                                        child: Text("Produit 100% de chez vous", style: Theme.of(context).textTheme.titleMedium,),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(height: 12,),
-                              },
-
-                              // Si le produit est sans Gluten, on l'indique
-                              if (!(product.hasGluten ?? true)) 
-                                Flexible(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Icon(Icons.eco_outlined, size: 24,),
-                                      const SizedBox(width: 5,),
-                                                    
-                                      Flexible(
-                                        child: Text("Produit sans gluten", style: Theme.of(context).textTheme.titleMedium,),
-                                      )
-                                    ],
-                                  ),
-                                ),
-
-                            ],
-                          ),
-                          const SizedBox(width: 20, height: 20,),
-              
-                          // La description et allergène
-                          Flexible(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                // La description
-                                Text(
-                                  "Decription", 
-                                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: Theme.of(context).colorScheme.secondary    
-                                  ),
-                                ),
-                                const SizedBox(height: 2,),
-                                Text(
-                                  product.description ?? "Pas de description",
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontWeight: FontWeight.w300
-                                  )
-                                ),
-                                const SizedBox(height: 10,),
-          
-                                // La description
-                                Text(
-                                  "Allergène", 
-                                  style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                                    fontWeight: FontWeight.w500,
-                                    color: Theme.of(context).colorScheme.secondary    
-                                  ),
-                                ),
-                                const SizedBox(height: 2,),
-                                Text(
-                                  _productAllergens(product),
-                                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                                    fontWeight: FontWeight.w300
-                                  )
-                                )
-                          
-                              ],
-                            ),
-                          )
-                        ];
-              
-                        if (isBig) {
-                          return Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            )
+                          ];
+                
+                          if (isBig) {
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: children,
+                            );
+                          }
+                
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: children,
                           );
                         }
-              
-                        return Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: children,
-                        );
-                      }
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
-
-          // Le bouton d'ajout au panier
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
-              child: ClCard(
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                        text: "${product.price}€",
-                        style: Theme.of(context).textTheme.bodyMedium,
-                        children: const [
-                          TextSpan(text: "/pièce", style: TextStyle(fontSize: 12.0))
-                        ]
                       ),
-                    ),
-                    const SizedBox(width: 10,),
-
-                    Flexible(
-                      child: ref.watch(basketControllerProvider).basket.when(
-                        data: (data) => _buildBasketButton(context, ref, data, product),
-                        loading: () => const Center(child: CircularProgressIndicator(),),
-                        error: (error, stackTrace) => const Align(
-                          alignment: Alignment.topCenter,
-                          child: ClStatusMessage(
-                            message: "Quelque chose c'est mal passé...",
-                          ),
-                        )
-                      )
                     )
                   ],
                 ),
               ),
             ),
-          ),
-        ],
+      
+            // Le bouton d'ajout au panier
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 16.0),
+                child: ClCard(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                          text: "${product.price}€",
+                          style: Theme.of(context).textTheme.bodyMedium,
+                          children: const [
+                            TextSpan(text: "/pièce", style: TextStyle(fontSize: 12.0))
+                          ]
+                        ),
+                      ),
+                      const SizedBox(width: 10,),
+      
+                      Flexible(
+                        child: ref.watch(basketControllerProvider).basket.when(
+                          data: (data) => _buildBasketButton(context, ref, data, product),
+                          loading: () => const Center(child: CircularProgressIndicator(),),
+                          error: (error, stackTrace) => const Align(
+                            alignment: Alignment.topCenter,
+                            child: ClStatusMessage(
+                              message: "Quelque chose c'est mal passé...",
+                            ),
+                          )
+                        )
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

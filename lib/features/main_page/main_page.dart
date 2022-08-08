@@ -81,12 +81,7 @@ class MainPageState extends State<MainPage> {
                 //   title: Text(widget.pageItems[_currentIndex].title),
                 // ),
                 key: _scaffoldKey,
-                body: Theme(
-                  data: Theme.of(context).copyWith(
-                    appBarTheme: ClTheme.themeSecondAppBar(context)
-                  ),
-                  child: widget.pages[_currentIndex]
-                ),
+                body: widget.pages[_currentIndex],
                 drawer: useBigLayout 
                   ? MenuDrawer(
                       pageItems: widget.pageItems,

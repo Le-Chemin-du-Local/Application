@@ -17,6 +17,8 @@ class AppManager {
   final GlobalKey<NavigatorState> clickAndCollectPageKey = GlobalKey<NavigatorState>();
   final GlobalKey<NavigatorState> serviesPageKey = GlobalKey<NavigatorState>();
 
+  final GlobalKey<NavigatorState> loginPageKey = GlobalKey<NavigatorState>();
+
   // BASKET
   int basketPageIndex = 0;
 
@@ -49,6 +51,11 @@ class AppManager {
 
     if (serviesPageKey.currentState?.canPop() ?? false) {
       serviesPageKey.currentState!.pop();
+      return false;
+    }
+
+    if (appNavigatorKey.currentState?.canPop() ?? false) {
+      appNavigatorKey.currentState!.pop();
       return false;
     }
 

@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/features/commerces/commerces_list_page.dart/widgets/commerces_list.dart';
@@ -8,7 +9,12 @@ import 'package:geolocator/geolocator.dart';
 import 'package:latlng/latlng.dart';
 
 class CommercesListPage extends StatefulWidget {
-  const CommercesListPage({Key? key}) : super(key: key);
+  const CommercesListPage({
+    Key? key,
+    required this.onShowDrawer,
+  }) : super(key: key);
+
+  final Function() onShowDrawer;
 
   @override
   State<CommercesListPage> createState() => _CommercesListPageState();
@@ -22,7 +28,9 @@ class _CommercesListPageState extends State<CommercesListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: ClAppBar(
+        canPop: false,
+        onShowDrawer: widget.onShowDrawer,
         title: const Text("Bienvenue, Victor 👋"),
       ),
       body: Column(

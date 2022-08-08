@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
@@ -55,7 +56,8 @@ class _CCProductsPageState extends State<CCProductsPage> {
       options: _updateProductsClickAndCollect(),
       builder: (runMutation, mutationResult) {
         return Scaffold(
-          appBar: AppBar(
+          appBar: ClAppBar(
+            canPop: Navigator.of(context).canPop(),
             title: const Text("Gérer mes produits click and collect"),
           ),
           body: Padding(

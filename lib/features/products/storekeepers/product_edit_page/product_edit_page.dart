@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
@@ -26,7 +27,7 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     // First case, it's a new product
     if (productID == null) {
-      return _buildContent(null);
+      return _buildContent(context, null);
     }
 
     return Query<dynamic>(
@@ -49,14 +50,15 @@ class ProductPage extends StatelessWidget {
 
         final Product product = Product.fromJson(detailledProductResult.data!["product"] as Map<String, dynamic>);
 
-        return _buildContent(product);        
+        return _buildContent(context, product);        
       },
     );
   }
 
-  Widget _buildContent(Product? product) {
+  Widget _buildContent(BuildContext context, Product? product) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: ClAppBar(
+        canPop: Navigator.of(context).canPop(),
         title: Text(
           productID != null ? "Modifier un produit" : "Ajouter un produit"
         ),
