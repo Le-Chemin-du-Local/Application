@@ -33,6 +33,9 @@ class ClTheme {
 
       brightness: Brightness.light,
 
+      primaryColor: Palette.colorPrimary,
+      primarySwatch: colorSwatch(Palette.colorSecondary.value),
+
       appBarTheme: const AppBarTheme(
         centerTitle: false,
         backgroundColor: Palette.colorScaffold,
@@ -119,10 +122,10 @@ class ClTheme {
     final color200 = Color(value).withOpacity(0.3);
     final color300 = Color(value).withOpacity(0.4);
     final color400 = Color(value).withOpacity(0.5);
-    final color500 = Color(value).withOpacity(0.6);
-    final color600 = Color(value).withOpacity(0.7);
-    final color700 = Color(value).withOpacity(0.8);
-    final color800 = Color(value).withOpacity(0.8);
+    final color500 = Color(value).withOpacity(1);
+    final color600 = Color(value).withOpacity(1);
+    final color700 = Color(value).withOpacity(1);
+    final color800 = Color(value).withOpacity(1);
     final color900 = Color(value).withOpacity(1);
 
     return MaterialColor(value, <int, Color>{

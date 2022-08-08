@@ -87,7 +87,7 @@ class StoreKeeperPage extends StatelessWidget {
     required Refetch? refetch,
   }) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: !canEdit ? null : AppBar(
         backgroundColor: Colors.transparent,
         toolbarHeight: 90,
         actions: [

@@ -41,9 +41,15 @@ class RegistrationStep3 extends StatelessWidget {
               label: "Le type",
               items: const {
                 "": "",
-                "Epicerie": "Epicerie",
+                "Apiculture": "Apiculture",
+                "Boulangerie - Patiserie": "Boulangerie - Patiserie",
+                "Boucherie": "Boucherie",
                 "Brasserie": "Brasserie",
-                "Ostriculture": "Ostriculture",
+                "Épicerie": "Épicerie",
+                "Maraicher": "Maraicher",
+                "Micro-brasserie": "Micro-brasserie",
+                "Ostréiculture": "Ostréiculture",
+                "Primeur": "Primeur",
               },
               onChanged: onStoreTypeChanged,
               validator: (value) {

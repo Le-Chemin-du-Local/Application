@@ -2,6 +2,7 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ClTextInput extends StatefulWidget {
   const ClTextInput({
@@ -21,6 +22,8 @@ class ClTextInput extends StatefulWidget {
     this.onTap,
     this.readOnly = false,
     this.invisibleReadOnly = false,
+    this.maxLenght,
+    this.maxLengthEnforcement,
   }) : super(key: key);
 
   final Key? formKey;
@@ -33,6 +36,9 @@ class ClTextInput extends StatefulWidget {
   final Function()? onTap;
 
   final FocusNode? focusNode;
+
+  final int? maxLenght;
+  final MaxLengthEnforcement? maxLengthEnforcement;
 
   final IconData? suffixIcon;
   final String? hintText;
@@ -91,6 +97,8 @@ class _ClTextInput extends State<ClTextInput> {
             obscureText: _obscureText,
             controller: widget.controller,
             keyboardType: widget.inputType,
+            maxLength: widget.maxLenght,
+            maxLengthEnforcement: widget.maxLengthEnforcement,
             maxLines: widget.maxLines,
             decoration: InputDecoration(
               hintText: widget.hintText,
