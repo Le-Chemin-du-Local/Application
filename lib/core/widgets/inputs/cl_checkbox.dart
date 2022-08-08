@@ -18,7 +18,7 @@ class ClCheckBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
@@ -30,6 +30,8 @@ class ClCheckBox extends StatelessWidget {
             activeColor: Theme.of(context).colorScheme.primary,
           ),
         ),
+        const SizedBox(width: 4,),
+
         Flexible(
           child: GestureDetector(
             onTap: () => onChanged(!value),
