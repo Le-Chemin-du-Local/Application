@@ -49,34 +49,31 @@ class ClDateTimePicker extends StatelessWidget {
           ),
           const SizedBox(height: 10.0,),
         },
-        ClCard(
-          padding: EdgeInsets.zero,
-          child: DateTimePicker(
-            type: type,
-            initialDate: initialDate,
-            initialValue: initialValue,
-            dateMask: dateMask,
-            firstDate: firstDate,
-            lastDate: lastDate,
-            dateLabelText: "Date",
-            timeLabelText: "Heure",
-            initialDatePickerMode: initialDatePickerMode,
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              fillColor: Theme.of(context).colorScheme.surface,
-              filled: true,
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
+        DateTimePicker(
+          type: type,
+          initialDate: initialDate,
+          initialValue: initialValue,
+          dateMask: dateMask,
+          firstDate: firstDate,
+          lastDate: lastDate,
+          dateLabelText: "Date",
+          timeLabelText: "Heure",
+          initialDatePickerMode: initialDatePickerMode,
+          decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            fillColor: Theme.of(context).colorScheme.surface,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
+              borderRadius: BorderRadius.circular(12.0),
             ),
-            onChanged: onChanged,
-            validator: validator,
-          )
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Theme.of(context).colorScheme.outline),
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+          ),
+          onChanged: onChanged,
+          validator: validator,
         ),
       ],
     );

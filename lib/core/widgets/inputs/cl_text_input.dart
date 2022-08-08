@@ -86,50 +86,47 @@ class _ClTextInput extends State<ClTextInput> {
           ),
           const SizedBox(height: 4.0,),
         },
-        ClCard(
-          padding: EdgeInsets.zero,
-          child: TextFormField(
-            focusNode: widget.focusNode,
-            readOnly: widget.readOnly,
-            enabled: !widget.readOnly,
-            key: widget.formKey,
-            onTap: widget.onTap,
-            obscureText: _obscureText,
-            controller: widget.controller,
-            keyboardType: widget.inputType,
-            maxLength: widget.maxLenght,
-            maxLengthEnforcement: widget.maxLengthEnforcement,
-            maxLines: widget.maxLines,
-            decoration: InputDecoration(
-              hintText: widget.hintText,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              fillColor: (widget.readOnly && !widget.invisibleReadOnly) ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.surface,
-              filled: true,
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.outline
-                ),
-                borderRadius: BorderRadius.circular(12.0),
+        TextFormField(
+          focusNode: widget.focusNode,
+          readOnly: widget.readOnly,
+          enabled: !widget.readOnly,
+          key: widget.formKey,
+          onTap: widget.onTap,
+          obscureText: _obscureText,
+          controller: widget.controller,
+          keyboardType: widget.inputType,
+          maxLength: widget.maxLenght,
+          maxLengthEnforcement: widget.maxLengthEnforcement,
+          maxLines: widget.maxLines,
+          decoration: InputDecoration(
+            hintText: widget.hintText,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+            fillColor: (widget.readOnly && !widget.invisibleReadOnly) ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.surface,
+            filled: true,
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.outline
               ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.outline
-                ),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              suffixIcon: widget.suffixIcon != null ? Icon(widget.suffixIcon) : !widget.obscureText ? null : InkWell(
-                onTap: _textVisibilityUpdated,
-                child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
-              )
+              borderRadius: BorderRadius.circular(12.0),
             ),
-            validator: widget.validator == null ? null : (value) => widget.validator!(value ?? ""),
-            onSaved: widget.onSaved != null ? (value) => widget.onSaved!(value ?? "") : null,
-            onChanged: (value) {
-              if (widget.onChanged != null) {
-                widget.onChanged!(value);
-              }
-            }
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).colorScheme.outline
+              ),
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            suffixIcon: widget.suffixIcon != null ? Icon(widget.suffixIcon) : !widget.obscureText ? null : InkWell(
+              onTap: _textVisibilityUpdated,
+              child: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+            )
           ),
+          validator: widget.validator == null ? null : (value) => widget.validator!(value ?? ""),
+          onSaved: widget.onSaved != null ? (value) => widget.onSaved!(value ?? "") : null,
+          onChanged: (value) {
+            if (widget.onChanged != null) {
+              widget.onChanged!(value);
+            }
+          }
         ),
       ],
     );
