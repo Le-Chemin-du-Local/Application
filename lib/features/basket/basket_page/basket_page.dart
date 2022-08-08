@@ -14,7 +14,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class BasketPage extends ConsumerStatefulWidget {
-  const BasketPage({Key? key}) : super(key: key);
+  const BasketPage({
+    Key? key,
+    required this.onShowDrawer,
+  }) : super(key: key);
+
+  final Function() onShowDrawer;
 
   @override
   ConsumerState<BasketPage> createState() => _BasketPageState();
@@ -79,6 +84,23 @@ class _BasketPageState extends ConsumerState<BasketPage> {
         return true;
       },
       child: Scaffold(
+        appBar: AppBar(
+          leading: ScreenHelper.instance.isMobile 
+          ?  _currentIndex == 0 ? null : const BackButton()
+          :  _currentIndex != 0 ? const BackButton() : Padding(
+              padding: EdgeInsets.only(
+                left: ScreenHelper.instance.horizontalPadding,
+              ),
+              child: IconButton(
+                onPressed: () {
+                  widget.onShowDrawer();
+                },
+                icon: const Icon(Icons.menu)
+              ),
+            ),
+          leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+          title: const Text("Mion Panier"),
+        ),
         body: _successBasket != null ? BasketSuccess(basket: _successBasket!) : Column(
           // mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,

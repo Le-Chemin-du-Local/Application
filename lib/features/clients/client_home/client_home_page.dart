@@ -12,7 +12,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class ClientHomePage extends ConsumerStatefulWidget {
-  const ClientHomePage({Key? key}) : super(key: key);
+  const ClientHomePage({
+    Key? key,
+    required this.onShowDrawer,
+  }) : super(key: key);
+
+  final Function() onShowDrawer;
 
   @override
   ConsumerState<ClientHomePage> createState() => _ClientHomePageState();
@@ -41,6 +46,21 @@ class _ClientHomePageState extends ConsumerState<ClientHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: ScreenHelper.instance.isMobile ? null : Padding(
+          padding: EdgeInsets.only(
+            left: ScreenHelper.instance.horizontalPadding,
+          ),
+          child: IconButton(
+            onPressed: () {
+              widget.onShowDrawer();
+            },
+            icon: const Icon(Icons.menu)
+          ),
+        ),
+        leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+        title: const Text("Bienvenue, Victor 👋"),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(

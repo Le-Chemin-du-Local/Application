@@ -13,9 +13,11 @@ class ServicesPage extends StatelessWidget {
   const ServicesPage({
     Key? key,
     required this.onPageChanged,
+    required this.onShowDrawer,
   }) : super(key: key);
 
   final Function(int) onPageChanged;
+  final Function() onShowDrawer;
 
   QueryOptions _commerceServicesQueryOption() {
     return QueryOptions<dynamic>(
@@ -26,6 +28,21 @@ class ServicesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: ScreenHelper.instance.isMobile ? null : Padding(
+          padding: EdgeInsets.only(
+            left: ScreenHelper.instance.horizontalPadding,
+          ),
+          child: IconButton(
+            onPressed: () {
+              onShowDrawer();
+            },
+            icon: const Icon(Icons.menu)
+          ),
+        ),
+        leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+        title: const Text("Mes services"),
+      ),
       body: Query<dynamic>(
         options: _commerceServicesQueryOption(),
         builder: (result, {fetchMore, refetch}) {

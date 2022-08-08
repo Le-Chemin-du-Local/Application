@@ -11,12 +11,14 @@ class StoreKeeperHomePage extends StatelessWidget {
   const StoreKeeperHomePage({
     Key? key,
     required this.onPageChanged,
+    required this.onShowDrawer,
     required this.commerceID,
     this.servicesOffset = 0,
     this.services = const [],
   }) : super(key: key);
 
   final Function(int) onPageChanged;
+  final Function() onShowDrawer;
   final int servicesOffset;
 
   final List<String> services;
@@ -25,15 +27,34 @@ class StoreKeeperHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: ScreenHelper.instance.horizontalPadding, left: ScreenHelper.instance.horizontalPadding, right: ScreenHelper.instance.horizontalPadding),
-      child: CustomScrollView(
-        controller: ScrollController(),
-        slivers: [
-          _buildMainView(),
-          const SliverToBoxAdapter(child: SizedBox(height: 32,)),
-          ..._buildServicesView(context)
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        leading: ScreenHelper.instance.isMobile ? null : Padding(
+          padding: EdgeInsets.only(
+            left: ScreenHelper.instance.horizontalPadding,
+          ),
+          child: IconButton(
+            onPressed: () {
+              onShowDrawer();
+            },
+            icon: const Icon(Icons.menu)
+          ),
+        ),
+        leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+        title: const Text("Bienvenue, Guillaume 👋"),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: ScreenHelper.instance.horizontalPadding,
+        ),
+        child: CustomScrollView(
+          controller: ScrollController(),
+          slivers: [
+            _buildMainView(),
+            const SliverToBoxAdapter(child: SizedBox(height: 32,)),
+            ..._buildServicesView(context)
+          ],
+        ),
       ),
     );
   }

@@ -40,7 +40,9 @@ class ProductsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: showAppBar ? AppBar() : null,
+      appBar: showAppBar ? AppBar(
+        title: Text(category),
+      ) : null,
       body: Query<dynamic>(
         options: _procutsQueryOption(),
         builder: (productsResult, {fetchMore, refetch}) {

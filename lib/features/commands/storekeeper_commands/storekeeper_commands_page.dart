@@ -4,7 +4,12 @@ import 'package:chemin_du_local/features/commands/storekeeper_commands/widgets/c
 import 'package:flutter/material.dart';
 
 class StoreKeeperCommandsPage extends StatelessWidget {
-  const StoreKeeperCommandsPage({Key? key}) : super(key: key);
+  const StoreKeeperCommandsPage({
+    Key? key,
+    required this.onShowDrawer,
+  }) : super(key: key);
+
+  final Function() onShowDrawer;
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +17,21 @@ class StoreKeeperCommandsPage extends StatelessWidget {
     final GlobalKey<CommandsListState> readyKey = GlobalKey<CommandsListState>();
 
     return Scaffold(
+      appBar: AppBar(
+        leading: ScreenHelper.instance.isMobile ? null : Padding(
+          padding: EdgeInsets.only(
+            left: ScreenHelper.instance.horizontalPadding,
+          ),
+          child: IconButton(
+            onPressed: () {
+              onShowDrawer();
+            },
+            icon: const Icon(Icons.menu)
+          ),
+        ),
+        leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+        title: const Text("Mes commandes"),
+      ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
         child: Column(

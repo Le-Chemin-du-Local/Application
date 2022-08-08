@@ -22,6 +22,9 @@ class _CommercesListPageState extends State<CommercesListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Bienvenue, Victor 👋"),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch, 
         children: [

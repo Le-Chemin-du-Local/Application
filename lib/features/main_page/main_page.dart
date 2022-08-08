@@ -27,6 +27,8 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   int _currentIndex = 1;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -48,9 +50,9 @@ class MainPageState extends State<MainPage> {
         // On affiche la confirmation
         return (await AppManager.instance.showCloseAppConfirmation(context)) ?? false;
       },
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          bool useBigLayout = constraints.maxWidth >= ScreenHelper.breakpointPC;
+      child: Builder(
+        builder: (context) {
+          bool useBigLayout = !ScreenHelper.instance.isMobile;
           // bool useBigLayout = false;
 
           final List<Color> gradient = [
@@ -75,9 +77,10 @@ class MainPageState extends State<MainPage> {
             child: GestureDetector(
               onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
               child: Scaffold(
-                appBar:AppBar(
-                  title: Text(widget.pageItems[_currentIndex].title),
-                ),
+                // appBar:AppBar(
+                //   title: Text(widget.pageItems[_currentIndex].title),
+                // ),
+                key: _scaffoldKey,
                 body: Theme(
                   data: Theme.of(context).copyWith(
                     appBarTheme: ClTheme.themeSecondAppBar(context)
@@ -108,5 +111,9 @@ class MainPageState extends State<MainPage> {
     setState(() {
       _currentIndex = pageItem.index;
     });
+  }
+
+  void showDrawer() {
+    _scaffoldKey.currentState!.openDrawer();
   }
 }

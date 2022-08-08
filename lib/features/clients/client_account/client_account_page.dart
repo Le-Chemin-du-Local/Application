@@ -4,14 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ClientAccountPage extends ConsumerWidget {
-  const ClientAccountPage({Key? key}) : super(key: key);
+  const ClientAccountPage({
+    Key? key,
+    required this.onShowDrawer,
+  }) : super(key: key);
+
+  final Function() onShowDrawer;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bool isLooged = ref.watch(appUserControllerProvider).token != null;
 
     if (!isLooged) {
-      return const LoginPage();
+      return LoginPage(
+        onShowDrawer: onShowDrawer,
+      );
     }
 
     return const Scaffold(

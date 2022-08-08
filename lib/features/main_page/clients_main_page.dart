@@ -9,13 +9,20 @@ import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
 import 'package:flutter/material.dart';
 
-class ClientsMainPage extends StatelessWidget {
+class ClientsMainPage extends StatefulWidget {
   const ClientsMainPage({
     Key? key,
     this.returnToBasketPayment = false,
   }) : super(key: key);
 
   final bool returnToBasketPayment;
+
+  @override
+  State<ClientsMainPage> createState() => _ClientsMainPageState();
+}
+
+class _ClientsMainPageState extends State<ClientsMainPage> {
+  final GlobalKey<MainPageState> _mainPageKey = GlobalKey<MainPageState>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,21 +42,29 @@ class ClientsMainPage extends StatelessWidget {
           key: AppManager.instance.homePageKey,
           onGenerateRoute: (route) => MaterialPageRoute<void>(
             settings: route,
-            builder: (context) => const ClientHomePage()
+            builder: (context) => ClientHomePage(
+              onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
+            )
           ),
         )
       ),
-      const FidelityPage(),
+      FidelityPage(
+        onShowDrawer: () => _mainPageKey.currentState!.showDrawer()
+      ),
       ClipRect(
         child: Navigator(
           key: AppManager.instance.basketPageKey,
           onGenerateRoute: (route) => MaterialPageRoute<void>(
             settings: route,
-            builder: (context) => const BasketPage()
+            builder: (context) => BasketPage(
+              onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
+            )
           ),
         )
       ),
-      const ClientAccountPage()
+      ClientAccountPage(
+        onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
+      )
     ];
 
     // The menu items
@@ -97,9 +112,10 @@ class ClientsMainPage extends StatelessWidget {
     ];
 
     return MainPage(
+      key: _mainPageKey,
       pageItems: pageItems, 
       pages: pages,
-      overrideStartIndex: returnToBasketPayment ? 3 : 1,
+      overrideStartIndex: widget.returnToBasketPayment ? 3 : 1,
     );
   }
 }

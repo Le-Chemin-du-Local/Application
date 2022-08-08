@@ -92,6 +92,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
       ),
       StoreKeeperHomePage(
         onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),
+        onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
         commerceID: widget.storekeeper.commerce?.id ?? "",
         servicesOffset: clickAndCollectOffset,
         services: widget.storekeeper.commerce?.services ?? [],
@@ -101,7 +102,10 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
           key: AppManager.instance.productsPageKey,
           onGenerateRoute: (route) => MaterialPageRoute<void>(
             settings: route,
-            builder: (context) => const ProductsMainPage(isStorekeeper: true,)
+            builder: (context) => ProductsMainPage(
+              isStorekeeper: true,
+              onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
+            )
           ),
         )
       ),
@@ -111,7 +115,9 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
             key: AppManager.instance.clickAndCollectPageKey,
             onGenerateRoute: (route) => MaterialPageRoute<void>(
               settings: route,
-              builder: (context) => const StoreKeeperCommandsPage()
+              builder: (context) => StoreKeeperCommandsPage(
+                onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
+              )
             ),
           )
         ),
@@ -122,11 +128,14 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
             settings: route,
             builder: (context) => ServicesPage(
               onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),
+              onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
             )
           ),
         )
       ),
-      const StoreKeeperSettingsPage()
+      StoreKeeperSettingsPage(
+        onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
+      )
     ];
 
     return MainPage(

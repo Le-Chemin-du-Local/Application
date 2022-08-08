@@ -14,10 +14,13 @@ class ProductsMainPage extends StatefulWidget {
     Key? key,
     this.isStorekeeper = false,
     this.commerce,
+    this.onShowDrawer,
   }) : super(key: key);
 
   final bool isStorekeeper;
   final Commerce? commerce;
+
+  final Function()? onShowDrawer;
 
   @override
   State<ProductsMainPage> createState() => _ProductsMainPageState();
@@ -39,7 +42,23 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: widget.isStorekeeper ? null : AppBar(
+      appBar: widget.isStorekeeper 
+      ? AppBar(
+        leading: ScreenHelper.instance.isMobile ? null : Padding(
+          padding: EdgeInsets.only(
+            left: ScreenHelper.instance.horizontalPadding,
+          ),
+          child: IconButton(
+            onPressed: () {
+              widget.onShowDrawer!();
+            },
+            icon: const Icon(Icons.menu)
+          ),
+        ),
+        leadingWidth: 32 + ScreenHelper.instance.horizontalPadding,
+        title: const Text("Mes produits"),
+      ) 
+      : AppBar(
         title: const Text("Tous les produits"),
       ),
       body: Query<dynamic>(

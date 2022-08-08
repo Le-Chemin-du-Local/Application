@@ -23,7 +23,7 @@ class HeaderImage extends StatelessWidget {
 
     return SliverAppBar(
       pinned: false,
-      expandedHeight: height - 90, // On doit enlever 90 pour compenser l'appbar
+      expandedHeight: height - (canEdit ? 90 : 0) - 48, // On doit compenser l'appbar et la bar de notif
       flexibleSpace: FlexibleSpaceBar(
         background: Container(
           color: Theme.of(context).disabledColor,
@@ -59,7 +59,7 @@ class HeaderImage extends StatelessWidget {
 
               // Le mot du commerçant
               Positioned(
-                bottom: 70,
+                bottom: 50,
                 left: 0,
                 right: 0,
                 child: Padding(
