@@ -15,6 +15,7 @@ import 'package:chemin_du_local/features/products/storekeepers/product_edit_page
 import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/widgets/product_allergens.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/widgets/product_tags_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart';
 
@@ -41,7 +42,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
   List<String> _productTags = [];
   List<String> _productAllergens = [];
 
-  String _currentUnit = '';
+  String _currentUnit = 'unit';
   double _currentTVA = 20;
   bool _isBreton = false;
   bool _hasGluten = true;
@@ -76,7 +77,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
       _descriptionTextController.text = widget.product!.description ?? "";
 
       _currentTVA = widget.product!.tva ?? 20;
-      _currentUnit = widget.product!.unit ?? "";
+      _currentUnit = widget.product!.unit ?? "unit";
 
       _productTags = widget.product!.tags.toList();
       _productAllergens = widget.product!.allergens.toList();
@@ -212,6 +213,8 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                           child: ClTextInput(
                                             controller: _nameTextController, 
                                             labelText: "Nom du produit",
+                                            maxLenght: 18,
+                                            maxLengthEnforcement: MaxLengthEnforcement.enforced,
                                             validator: (value) {
                                               if (value.isEmpty) return "Vous devez rentrer un nom";
                                               if (value.length >= 18) return "La taille du nom ne doit pas dépasser 18 caratères";
@@ -255,7 +258,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                                 child: ClTextInput(
                                                   controller: _priceTextController,
                                                   inputType: const TextInputType.numberWithOptions(decimal: true),
-                                                  labelText: "Prix",
+                                                  labelText: "Prix TTC",
                                                   hintText: "Ex : 5,00",
                                                   validator: (price) {
                                                     if (double.tryParse(price) == null) return "Vous devez rentrer un nombre valide";
@@ -272,7 +275,6 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                                 child: ClDropdown<String>(
                                                   currentValue: _currentUnit,
                                                   items: const {
-                                                    "": "unitée",
                                                     "unit": "Unité",
                                                     "gramme": "Gramme",
                                                     "pack": "Pack"
@@ -285,7 +287,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                                   },
                                                   onChanged: (newValue) {
                                                     setState(() {
-                                                      _currentUnit = newValue ?? '';
+                                                      _currentUnit = newValue ?? 'unit';
                                                     });
                                                   },
                                                 ),
@@ -464,6 +466,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
       "unit": _currentUnit,
       "tva": _currentTVA,
       "isBreton": _isBreton,
+      "hasGluten": _hasGluten,
       "tags": _productTags,
       "allergens": _productAllergens,
       "categories": _productCategories,
