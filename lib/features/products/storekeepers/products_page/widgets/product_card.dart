@@ -2,6 +2,7 @@ import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_quantity_picker.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
+import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 
@@ -53,10 +54,10 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (product.isBreton ?? false)
-                  Flexible(
+                  const Flexible(
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Image.asset("assets/images/drapeau_breton.png", width: 40,)
+                      child: Icon(CLIcons.drapeauBreton, size: 40,),
                     )
                   )
                 else 

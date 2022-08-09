@@ -50,4 +50,5 @@ class CLIcons {
   static const IconData hermine = IconData(0xe81a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData coin = IconData(0xe81b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData rechercheCommerces = IconData(0xe81c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData drapeauBreton = IconData(0xe81d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

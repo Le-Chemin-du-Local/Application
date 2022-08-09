@@ -11,6 +11,7 @@ import 'package:chemin_du_local/features/basket/riverpod/basket_controller.dart'
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
 import 'package:chemin_du_local/features/products/products_graphql.dart';
+import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
@@ -128,7 +129,7 @@ class ProductDetailsPage extends ConsumerWidget {
                                       child: Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Image.asset("assets/images/drapeau_breton.png", width: 25,),
+                                          const Icon(CLIcons.drapeauBreton, size: 25,),
                                           const SizedBox(width: 5,),
                                                         
                                           Flexible(
