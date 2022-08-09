@@ -90,64 +90,66 @@ class StoreKeeperPage extends StatelessWidget {
     required List<Product> productsAvailableForClickAndCollect,
     required Refetch? refetch,
   }) {
-    return Scaffold(
-      appBar: !canEdit ? null : ClAppBar(
-        canPop: false,
-        onShowDrawer: onShowDrawer,
-        height: 90,
-        backgroundColor: Colors.transparent,
-        actions: [
-          if (canEdit)
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: ElevatedButton.icon(
-                onPressed: () => _editPage(context, refetch, commerce), 
-                icon: const Icon(Icons.edit),
-                label: const Text("Modifier la page"),
-              ),
-            )
-        ],
-      ),
-      extendBodyBehindAppBar: true,
-      body: CustomScrollView(
-        controller: ScrollController(),
-        slivers: [
-          SliverStack(
-            children: [
-              // Le header de la page
-              HeaderImage(
-                storekeeperWord: commerce?.storekeeperWord ?? "Un petit mot", 
-                commerceID: commerce?.id,
-                canEdit: canEdit,
-              ),
-    
-              // Le contenue de la page
-              SliverToBoxAdapter(
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    if (constraints.maxWidth >= ScreenHelper.breakpointPC) {
-                      return LayoutBig(
-                        commerce: commerce, 
+    return SafeArea(
+      child: Scaffold(
+        appBar: !canEdit ? null : ClAppBar(
+          canPop: false,
+          onShowDrawer: onShowDrawer,
+          height: 90,
+          backgroundColor: Colors.transparent,
+          actions: [
+            if (canEdit)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: ElevatedButton.icon(
+                  onPressed: () => _editPage(context, refetch, commerce), 
+                  icon: const Icon(Icons.edit),
+                  label: const Text("Modifier la page"),
+                ),
+              )
+          ],
+        ),
+        extendBodyBehindAppBar: true,
+        body: CustomScrollView(
+          controller: ScrollController(),
+          slivers: [
+            SliverStack(
+              children: [
+                // Le header de la page
+                HeaderImage(
+                  storekeeperWord: commerce?.storekeeperWord ?? "Un petit mot", 
+                  commerceID: commerce?.id,
+                  canEdit: canEdit,
+                ),
+      
+                // Le contenue de la page
+                SliverToBoxAdapter(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      if (constraints.maxWidth >= ScreenHelper.breakpointPC) {
+                        return LayoutBig(
+                          commerce: commerce, 
+                          products: products,
+                          productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
+                          enableAllProductsButton: !canEdit,
+                          onShowProducts: onShowProducts ?? () {}
+                        );
+                      }
+        
+                      return LayoutSmall(
+                        commerce: commerce,
                         products: products,
                         productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
                         enableAllProductsButton: !canEdit,
-                        onShowProducts: onShowProducts ?? () {}
+                        onShowProducts: onShowProducts ?? () {},
                       );
-                    }
-      
-                    return LayoutSmall(
-                      commerce: commerce,
-                      products: products,
-                      productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
-                      enableAllProductsButton: !canEdit,
-                      onShowProducts: onShowProducts ?? () {},
-                    );
-                  },
+                    },
+                  ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

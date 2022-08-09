@@ -59,7 +59,7 @@ class HeaderImage extends StatelessWidget {
 
               // Le mot du commerçant
               Positioned(
-                bottom: 50,
+                bottom: 70,
                 left: 0,
                 right: 0,
                 child: Padding(
