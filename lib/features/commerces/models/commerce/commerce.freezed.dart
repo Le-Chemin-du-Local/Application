@@ -39,6 +39,8 @@ mixin _$Commerce {
   BusinessHours? get clickAndCollectHours => throw _privateConstructorUsedError;
   double? get latitude => throw _privateConstructorUsedError;
   double? get longitude => throw _privateConstructorUsedError;
+  double? get dueBalance => throw _privateConstructorUsedError;
+  DateTime? get firstBillingDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,7 +70,9 @@ abstract class $CommerceCopyWith<$Res> {
       BusinessHours? businessHours,
       BusinessHours? clickAndCollectHours,
       double? latitude,
-      double? longitude});
+      double? longitude,
+      double? dueBalance,
+      DateTime? firstBillingDate});
 
   $UserCopyWith<$Res>? get storekeeper;
   $AddressCopyWith<$Res>? get address;
@@ -104,6 +108,8 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? clickAndCollectHours = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? dueBalance = freezed,
+    Object? firstBillingDate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -179,6 +185,14 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
+      dueBalance: dueBalance == freezed
+          ? _value.dueBalance
+          : dueBalance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      firstBillingDate: firstBillingDate == freezed
+          ? _value.firstBillingDate
+          : firstBillingDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 
@@ -251,7 +265,9 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       BusinessHours? businessHours,
       BusinessHours? clickAndCollectHours,
       double? latitude,
-      double? longitude});
+      double? longitude,
+      double? dueBalance,
+      DateTime? firstBillingDate});
 
   @override
   $UserCopyWith<$Res>? get storekeeper;
@@ -293,6 +309,8 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? clickAndCollectHours = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? dueBalance = freezed,
+    Object? firstBillingDate = freezed,
   }) {
     return _then(_$_Commerce(
       id == freezed
@@ -368,6 +386,14 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
+      dueBalance: dueBalance == freezed
+          ? _value.dueBalance
+          : dueBalance // ignore: cast_nullable_to_non_nullable
+              as double?,
+      firstBillingDate: firstBillingDate == freezed
+          ? _value.firstBillingDate
+          : firstBillingDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -393,7 +419,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       this.businessHours,
       this.clickAndCollectHours,
       this.latitude,
-      this.longitude})
+      this.longitude,
+      this.dueBalance,
+      this.firstBillingDate})
       : _categories = categories,
         _services = services,
         _productsAvailableForClickAndCollect =
@@ -456,10 +484,14 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   final double? latitude;
   @override
   final double? longitude;
+  @override
+  final double? dueBalance;
+  @override
+  final DateTime? firstBillingDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude)';
+    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, dueBalance: $dueBalance, firstBillingDate: $firstBillingDate)';
   }
 
   @override
@@ -485,7 +517,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('businessHours', businessHours))
       ..add(DiagnosticsProperty('clickAndCollectHours', clickAndCollectHours))
       ..add(DiagnosticsProperty('latitude', latitude))
-      ..add(DiagnosticsProperty('longitude', longitude));
+      ..add(DiagnosticsProperty('longitude', longitude))
+      ..add(DiagnosticsProperty('dueBalance', dueBalance))
+      ..add(DiagnosticsProperty('firstBillingDate', firstBillingDate));
   }
 
   @override
@@ -518,31 +552,39 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality()
                 .equals(other.clickAndCollectHours, clickAndCollectHours) &&
             const DeepCollectionEquality().equals(other.latitude, latitude) &&
-            const DeepCollectionEquality().equals(other.longitude, longitude));
+            const DeepCollectionEquality().equals(other.longitude, longitude) &&
+            const DeepCollectionEquality()
+                .equals(other.dueBalance, dueBalance) &&
+            const DeepCollectionEquality()
+                .equals(other.firstBillingDate, firstBillingDate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(storekeeper),
-      const DeepCollectionEquality().hash(_categories),
-      const DeepCollectionEquality().hash(_services),
-      const DeepCollectionEquality().hash(_productsAvailableForClickAndCollect),
-      const DeepCollectionEquality().hash(storekeeperWord),
-      const DeepCollectionEquality().hash(description),
-      const DeepCollectionEquality().hash(address),
-      const DeepCollectionEquality().hash(phone),
-      const DeepCollectionEquality().hash(email),
-      const DeepCollectionEquality().hash(facebook),
-      const DeepCollectionEquality().hash(twitter),
-      const DeepCollectionEquality().hash(instagram),
-      const DeepCollectionEquality().hash(businessHours),
-      const DeepCollectionEquality().hash(clickAndCollectHours),
-      const DeepCollectionEquality().hash(latitude),
-      const DeepCollectionEquality().hash(longitude));
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        const DeepCollectionEquality().hash(id),
+        const DeepCollectionEquality().hash(name),
+        const DeepCollectionEquality().hash(storekeeper),
+        const DeepCollectionEquality().hash(_categories),
+        const DeepCollectionEquality().hash(_services),
+        const DeepCollectionEquality()
+            .hash(_productsAvailableForClickAndCollect),
+        const DeepCollectionEquality().hash(storekeeperWord),
+        const DeepCollectionEquality().hash(description),
+        const DeepCollectionEquality().hash(address),
+        const DeepCollectionEquality().hash(phone),
+        const DeepCollectionEquality().hash(email),
+        const DeepCollectionEquality().hash(facebook),
+        const DeepCollectionEquality().hash(twitter),
+        const DeepCollectionEquality().hash(instagram),
+        const DeepCollectionEquality().hash(businessHours),
+        const DeepCollectionEquality().hash(clickAndCollectHours),
+        const DeepCollectionEquality().hash(latitude),
+        const DeepCollectionEquality().hash(longitude),
+        const DeepCollectionEquality().hash(dueBalance),
+        const DeepCollectionEquality().hash(firstBillingDate)
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -573,7 +615,9 @@ abstract class _Commerce implements Commerce {
       final BusinessHours? businessHours,
       final BusinessHours? clickAndCollectHours,
       final double? latitude,
-      final double? longitude}) = _$_Commerce;
+      final double? longitude,
+      final double? dueBalance,
+      final DateTime? firstBillingDate}) = _$_Commerce;
 
   factory _Commerce.fromJson(Map<String, dynamic> json) = _$_Commerce.fromJson;
 
@@ -614,6 +658,10 @@ abstract class _Commerce implements Commerce {
   double? get latitude => throw _privateConstructorUsedError;
   @override
   double? get longitude => throw _privateConstructorUsedError;
+  @override
+  double? get dueBalance => throw _privateConstructorUsedError;
+  @override
+  DateTime? get firstBillingDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_CommerceCopyWith<_$_Commerce> get copyWith =>

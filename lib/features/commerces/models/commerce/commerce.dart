@@ -33,6 +33,8 @@ class Commerce with _$Commerce {
     BusinessHours? clickAndCollectHours,
     double? latitude,
     double? longitude,
+    double? dueBalance,
+    DateTime? firstBillingDate,
   }) = _Commerce;
 
   factory Commerce.fromJson(Map<String, dynamic> json) => _$CommerceFromJson(json);

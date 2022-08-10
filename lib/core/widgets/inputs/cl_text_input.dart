@@ -16,6 +16,7 @@ class ClTextInput extends StatefulWidget {
     this.focusNode,
     this.suffixIcon,
     this.hintText,
+    this.suffixText,
     this.maxLines = 1,
     this.onSaved,
     this.onChanged,
@@ -42,6 +43,7 @@ class ClTextInput extends StatefulWidget {
 
   final IconData? suffixIcon;
   final String? hintText;
+  final String? suffixText;
   final String labelText;
 
   final TextInputType inputType;
@@ -103,6 +105,7 @@ class _ClTextInput extends State<ClTextInput> {
             contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             fillColor: (widget.readOnly && !widget.invisibleReadOnly) ? Theme.of(context).disabledColor : Theme.of(context).colorScheme.surface,
             filled: true,
+            suffixText: widget.suffixText,
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: Theme.of(context).colorScheme.outline
