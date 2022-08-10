@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:flutter/material.dart';
 

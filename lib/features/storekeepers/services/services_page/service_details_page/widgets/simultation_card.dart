@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
-import 'package:chemin_du_local/features/storekeepers/services/models/service_info.dart';
+import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
 import 'package:flutter/material.dart';
 
 class SimulationCard extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/buttons_tabbar.dart';
-import 'package:chemin_du_local/features/storekeepers/services/models/service_info.dart';
+import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/service_details_page/widgets/simultation_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/service_details_page/widgets/tarif_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/why_us.dart';

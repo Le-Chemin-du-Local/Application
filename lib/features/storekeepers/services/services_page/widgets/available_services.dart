@@ -1,6 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
-import 'package:chemin_du_local/features/storekeepers/services/models/service_info.dart';
+import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/service_details_page/service_details_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/service_info_card.dart';

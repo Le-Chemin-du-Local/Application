@@ -2,7 +2,6 @@ import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/main_page/widgets/menu_drawer.dart';
-import 'package:chemin_du_local/theme/cl_theme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chemin_du_local/features/main_page/widgets/bottom_app_bar.dart' as custom;

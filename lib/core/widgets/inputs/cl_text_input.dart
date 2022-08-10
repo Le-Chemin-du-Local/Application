@@ -1,6 +1,5 @@
 
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
