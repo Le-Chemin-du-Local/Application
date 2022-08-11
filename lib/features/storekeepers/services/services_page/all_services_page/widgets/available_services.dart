@@ -11,10 +11,13 @@ class AvailableServices extends StatelessWidget {
     Key? key,
     required this.commerceID,
     required this.alreadySubscribedServices,
+    required this.shouldRefetch,
   }) : super(key: key);
 
   final String commerceID; 
   final List<String> alreadySubscribedServices;
+
+  final Function() shouldRefetch;
 
   QueryOptions _allServicesInfoQueryOptions() {
     return QueryOptions<dynamic>(
@@ -96,14 +99,16 @@ class AvailableServices extends StatelessWidget {
           ServiceInfoCard(
             serviceInfo: serviceInfo,
             onButtonClick: () async {
-              await Navigator.of(context).push<dynamic>(
-                MaterialPageRoute<dynamic>(
+              bool success = await Navigator.of(context).push<bool?>(
+                MaterialPageRoute<bool?>(
                   builder: (context) => ServiceDetailsPage(
                     serviceInfo: serviceInfo,
                     commerceID: commerceID,
                   )
                 )
-              );
+              ) ?? false;
+
+              if (success) shouldRefetch();
             },
           )
       ],

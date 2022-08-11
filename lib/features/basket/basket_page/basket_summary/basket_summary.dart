@@ -25,7 +25,7 @@ class BasketSummary extends ConsumerWidget {
   QueryOptions<dynamic> _commandsQueryOptions() {
     return QueryOptions<dynamic>(
       document: gql(qGetCommandsMini),
-      variables: <String, dynamic>{
+      variables: const <String, dynamic>{
         "filter": {
           "status": [
             CommandStatus.inProgress,

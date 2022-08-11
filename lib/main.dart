@@ -45,7 +45,7 @@ void main() async {
   }
 
   await initHiveForFlutter(); // For GraphQL cache
-  await HiveStore.openBox<dynamic>(HiveStore.defaultBoxName);
+  await HiveStore.openBox(HiveStore.defaultBoxName);
 
   // TODO: DEBUG ONLY
   // const storage = FlutterSecureStorage();

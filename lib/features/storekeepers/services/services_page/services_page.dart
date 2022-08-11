@@ -91,6 +91,7 @@ class _ServicesPageState extends State<ServicesPage> {
 
   Widget _buildContent(BuildContext context, {
     required Commerce commerce,
+    Refetch? refetch,
   }) {
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -136,6 +137,9 @@ class _ServicesPageState extends State<ServicesPage> {
                     setState(() {
                       _currentTab = Tab.subscription;
                     });
+                  },
+                  shouldRefetch: () {
+                    if (refetch != null) refetch;
                   },
                 );
               },

@@ -260,11 +260,6 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
           paymentMethodData: PaymentMethodData()
         ));
 
-        setState(() {
-          _isLoading = false;
-          _errorMessage = "";
-        });
-
         return true;
       }
 

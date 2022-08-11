@@ -33,7 +33,7 @@ class _ClientHomePageState extends ConsumerState<ClientHomePage> {
   QueryOptions<dynamic> _commandsQueryOptions() {
     return QueryOptions<dynamic>(
       document: gql(qGetCommandsMini),
-      variables: <String, dynamic>{
+      variables: const <String, dynamic>{
         "filter": {
           "status": [
             CommandStatus.inProgress,

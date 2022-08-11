@@ -8,13 +8,16 @@ class AllServicesPage extends StatelessWidget {
     Key? key,
     required this.commerce,
     required this.onCancel,
-    required this.onSubscribe
+    required this.onSubscribe,
+    required this.shouldRefetch,
   }) : super(key: key);
   
   final Commerce commerce;
 
   final Function() onSubscribe;
   final Function() onCancel;
+
+  final Function() shouldRefetch;
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +67,8 @@ class AllServicesPage extends StatelessWidget {
                 Flexible(
                   child: AvailableServices(
                     commerceID: commerce.id!,
-                    alreadySubscribedServices: commerce.services
+                    alreadySubscribedServices: commerce.services,
+                    shouldRefetch: shouldRefetch,
                   ),
                 ),
               ],
