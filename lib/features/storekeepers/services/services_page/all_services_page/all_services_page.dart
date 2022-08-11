@@ -1,6 +1,7 @@
 import 'package:chemin_du_local/core/widgets/buttons_tabbar.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/all_services_page/widgets/available_services.dart';
+import 'package:chemin_du_local/features/storekeepers/services/services_page/all_services_page/widgets/subscibed_services.dart';
 import 'package:flutter/material.dart';
 
 class AllServicesPage extends StatelessWidget {
@@ -57,13 +58,24 @@ class AllServicesPage extends StatelessWidget {
         ),
         const SizedBox(height: 16,),
 
-        // Les services pouvant être souscrits
         Flexible(
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                // Les services déjà souscrits
+                if (commerce.services.isNotEmpty) ...{
+                  Flexible(
+                    child: SubscribedServices(
+                      commerceID: commerce.id!,
+                      subscribedServices: commerce.services,
+                    ),
+                  ),
+                  const SizedBox(height: 16,),
+                },
+
+                // Les services pouvant être souscrits
                 Flexible(
                   child: AvailableServices(
                     commerceID: commerce.id!,
