@@ -34,7 +34,7 @@ class Commerce with _$Commerce {
     double? latitude,
     double? longitude,
     double? dueBalance,
-    DateTime? firstBillingDate,
+    DateTime? lastBilledDate,
   }) = _Commerce;
 
   factory Commerce.fromJson(Map<String, dynamic> json) => _$CommerceFromJson(json);

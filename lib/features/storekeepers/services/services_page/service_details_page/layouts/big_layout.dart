@@ -8,10 +8,13 @@ import 'package:flutter/material.dart';
 class BigLayout extends StatelessWidget {
   const BigLayout({
     Key? key,
-    required this.serviceInfo
+    required this.serviceInfo,
+    required this.onSubscribe,
   }) : super(key: key);
 
   final ServiceInfo serviceInfo;
+
+  final Function(ServiceInfo, ServiceType) onSubscribe;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +58,7 @@ class BigLayout extends StatelessWidget {
                             child: TarifCard(
                               serviceInfo: serviceInfo, 
                               serviceType: ServiceType.monthly,
-                              onSubscribe: () {}
+                              onSubscribe: () => onSubscribe(serviceInfo, ServiceType.monthly)
                             ),
                           ),
                         ),
@@ -66,7 +69,7 @@ class BigLayout extends StatelessWidget {
                             child: TarifCard(
                               serviceInfo: serviceInfo, 
                               serviceType: ServiceType.transactions, 
-                              onSubscribe: () {}
+                              onSubscribe: () => onSubscribe(serviceInfo, ServiceType.transactions)
                             ),
                           ),
                         )

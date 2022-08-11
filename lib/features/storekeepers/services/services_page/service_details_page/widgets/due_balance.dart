@@ -10,11 +10,11 @@ class DueBalance extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isBilledToday = commerce.firstBillingDate == null ? false : DateTime.now().isSameDate(
+    final bool isBilledToday = commerce.lastBilledDate == null ? false : DateTime.now().isSameDate(
       DateTime(
         DateTime.now().year,
         DateTime.now().month,
-        commerce.firstBillingDate!.day
+        commerce.lastBilledDate!.day
       )
     );
 
@@ -50,7 +50,7 @@ class DueBalance extends StatelessWidget {
                     DateTime(
                       DateTime.now().year,
                       DateTime.now().month,
-                      commerce.firstBillingDate!.day
+                      commerce.lastBilledDate!.day
                     )
                   )
               )

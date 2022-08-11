@@ -9,8 +9,11 @@ class ServiceInfoCard extends StatefulWidget {
     required this.serviceInfo,
     this.buttonText = "En savoir plus",
     this.onButtonClick,
-    this.showBorders = false,
     this.initialServiceType,
+    this.isSelected = false,
+    this.forceHideBorder = false,
+    this.onTypeChanged,
+    this.onSelect
   }) : super(key: key);
 
   final ServiceInfo serviceInfo;
@@ -18,7 +21,11 @@ class ServiceInfoCard extends StatefulWidget {
   final String buttonText;
   final Function()? onButtonClick;
 
-  final bool showBorders;
+  final bool isSelected;
+  final bool forceHideBorder;
+  final Function(bool)? onSelect;
+
+  final Function(ServiceType)? onTypeChanged;
 
   final ServiceType? initialServiceType;
 
@@ -49,100 +56,109 @@ class _ServiceInfoCardState extends State<ServiceInfoCard> {
 
   @override
   Widget build(BuildContext context) {
-    return ClCard(
-      padding: const EdgeInsets.all(12),
-      borderColor: widget.showBorders ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.surface,
-      child: DefaultTextStyle(
-        style: Theme.of(context).textTheme.titleMedium!,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // L'image et le bouton
-            AspectRatio(
-              aspectRatio: 0.64,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // L'image
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: Image.network(
-                        "$kImagesBaseUrl/services/${widget.serviceInfo.id}.png",
-                        fit: BoxFit.cover,
-                        loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
-                          child: CircularProgressIndicator(
-                            value: loadingProgress.expectedTotalBytes != null
-                              ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                              : null,
+    return InkWell(
+      onTap: widget.onSelect == null ? null : () => widget.onSelect!(!widget.isSelected),
+      child: Opacity(
+        opacity: !widget.isSelected && widget.onSelect != null ? 0.4 : 1,
+        child: ClCard(
+          padding: const EdgeInsets.all(12),
+          borderColor: (widget.isSelected || widget.onSelect != null) && !widget.forceHideBorder 
+            ? Theme.of(context).colorScheme.primary 
+            : Theme.of(context).colorScheme.surface,
+          child: DefaultTextStyle(
+            style: Theme.of(context).textTheme.titleMedium!,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // L'image et le bouton
+                AspectRatio(
+                  aspectRatio: 0.64,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // L'image
+                      Expanded(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Image.network(
+                            "$kImagesBaseUrl/services/${widget.serviceInfo.id}.png",
+                            fit: BoxFit.cover,
+                            loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
+                              child: CircularProgressIndicator(
+                                value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                  : null,
+                              ),
+                            ),
+                            errorBuilder: (context, error, stackTrace) {
+                              return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
+                            },
                           ),
                         ),
-                        errorBuilder: (context, error, stackTrace) {
-                          return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
-                        },
                       ),
-                    ),
-                  ),
-                  const SizedBox(height: 4,),
-      
-                  if (widget.onButtonClick != null) 
-                    ElevatedButton(
-                      onPressed: widget.onButtonClick,
-                      child: Text(widget.buttonText),
-                    )
-                ],
-              ),
-            ),
-            const SizedBox(width: 10,),
-      
-            // Le reste
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // Le titre
-                  Text(widget.serviceInfo.name, style: Theme.of(context).textTheme.headlineMedium,),
-                  const SizedBox(height: 4,),
-      
-                  // La description
-                  Text(widget.serviceInfo.shortDescription),
-                  const SizedBox(height: 4,),
-      
-                  // Le prix
-                  RichText(
-                    text: TextSpan(
-                      style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                      text: _serviceType == ServiceType.monthly 
-                        ? "${widget.serviceInfo.monthPrice}€"
-                        : "${widget.serviceInfo.transactionPercentage}%",
-                      children: [
-                        TextSpan(
-                          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                          text: _serviceType == ServiceType.monthly 
-                            ? " /mois"
-                            : " /transactions"
+                      const SizedBox(height: 4,),
+          
+                      if (widget.onButtonClick != null) 
+                        ElevatedButton(
+                          onPressed: widget.onButtonClick,
+                          child: Text(widget.buttonText),
                         )
-                      ]
-                    ),
+                    ],
                   ),
-      
-                  // Le switch
-                  Expanded(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: _buildSwitch(),
-                    ),
-                  )
-      
-                ],
-              ),
-            )
-            
-          ],
+                ),
+                const SizedBox(width: 10,),
+          
+                // Le reste
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Le titre
+                      Text(widget.serviceInfo.name, style: Theme.of(context).textTheme.headlineMedium,),
+                      const SizedBox(height: 4,),
+          
+                      // La description
+                      Text(widget.serviceInfo.shortDescription),
+                      const SizedBox(height: 4,),
+          
+                      // Le prix
+                      RichText(
+                        text: TextSpan(
+                          style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: Theme.of(context).colorScheme.secondary,
+                          ),
+                          text: _serviceType == ServiceType.monthly 
+                            ? "${widget.serviceInfo.monthPrice}€*"
+                            : "${widget.serviceInfo.transactionPercentage}%",
+                          children: [
+                            TextSpan(
+                              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                              text: _serviceType == ServiceType.monthly 
+                                ? " /mois"
+                                : " /transactions"
+                            )
+                          ]
+                        ),
+                      ),
+          
+                      // Le switch
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: _buildSwitch(),
+                        ),
+                      )
+          
+                    ],
+                  ),
+                )
+                
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -155,6 +171,8 @@ class _ServiceInfoCardState extends State<ServiceInfoCard> {
         Switch(
           value: _serviceType == ServiceType.transactions, 
           onChanged: (value) {
+            if (!widget.isSelected && widget.onSelect != null) return;
+
             if (value) {
               setState(() {
                 _serviceType = ServiceType.transactions;
@@ -165,6 +183,8 @@ class _ServiceInfoCardState extends State<ServiceInfoCard> {
                 _serviceType = ServiceType.monthly;
               });
             }
+
+            if (widget.onTypeChanged != null) widget.onTypeChanged!(_serviceType);
           },
           activeColor: Theme.of(context).colorScheme.secondary,
           inactiveThumbColor: Theme.of(context).colorScheme.secondary,

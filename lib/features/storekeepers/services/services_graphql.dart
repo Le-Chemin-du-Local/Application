@@ -9,7 +9,7 @@ query GetServicesForStoreKeeper {
       name
       services
       dueBalance
-      firstBillingDate
+      lastBilledDate
     }
   }
 }
@@ -29,6 +29,23 @@ query GetAllServicesInfo {
     monthAugmentationPerRangePercentage
     transactionPercentage
     transactionAdvantages
+  }
+}
+''';
+
+const String mutUpdateServices = r'''
+mutation updateCommerceServices(
+  $commerceID: ID!,
+  $services: [ChangesService!]
+) {
+  updateCommerce(
+    id: $commerceID,
+    changes: {
+      services: $services
+    }
+  ) {
+    id
+    name
   }
 }
 ''';

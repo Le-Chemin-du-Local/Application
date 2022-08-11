@@ -40,7 +40,7 @@ mixin _$Commerce {
   double? get latitude => throw _privateConstructorUsedError;
   double? get longitude => throw _privateConstructorUsedError;
   double? get dueBalance => throw _privateConstructorUsedError;
-  DateTime? get firstBillingDate => throw _privateConstructorUsedError;
+  DateTime? get lastBilledDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -72,7 +72,7 @@ abstract class $CommerceCopyWith<$Res> {
       double? latitude,
       double? longitude,
       double? dueBalance,
-      DateTime? firstBillingDate});
+      DateTime? lastBilledDate});
 
   $UserCopyWith<$Res>? get storekeeper;
   $AddressCopyWith<$Res>? get address;
@@ -109,7 +109,7 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? dueBalance = freezed,
-    Object? firstBillingDate = freezed,
+    Object? lastBilledDate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -189,9 +189,9 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
           ? _value.dueBalance
           : dueBalance // ignore: cast_nullable_to_non_nullable
               as double?,
-      firstBillingDate: firstBillingDate == freezed
-          ? _value.firstBillingDate
-          : firstBillingDate // ignore: cast_nullable_to_non_nullable
+      lastBilledDate: lastBilledDate == freezed
+          ? _value.lastBilledDate
+          : lastBilledDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -267,7 +267,7 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       double? latitude,
       double? longitude,
       double? dueBalance,
-      DateTime? firstBillingDate});
+      DateTime? lastBilledDate});
 
   @override
   $UserCopyWith<$Res>? get storekeeper;
@@ -310,7 +310,7 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? dueBalance = freezed,
-    Object? firstBillingDate = freezed,
+    Object? lastBilledDate = freezed,
   }) {
     return _then(_$_Commerce(
       id == freezed
@@ -390,9 +390,9 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value.dueBalance
           : dueBalance // ignore: cast_nullable_to_non_nullable
               as double?,
-      firstBillingDate: firstBillingDate == freezed
-          ? _value.firstBillingDate
-          : firstBillingDate // ignore: cast_nullable_to_non_nullable
+      lastBilledDate: lastBilledDate == freezed
+          ? _value.lastBilledDate
+          : lastBilledDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
     ));
   }
@@ -421,7 +421,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       this.latitude,
       this.longitude,
       this.dueBalance,
-      this.firstBillingDate})
+      this.lastBilledDate})
       : _categories = categories,
         _services = services,
         _productsAvailableForClickAndCollect =
@@ -487,11 +487,11 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   @override
   final double? dueBalance;
   @override
-  final DateTime? firstBillingDate;
+  final DateTime? lastBilledDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, dueBalance: $dueBalance, firstBillingDate: $firstBillingDate)';
+    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, dueBalance: $dueBalance, lastBilledDate: $lastBilledDate)';
   }
 
   @override
@@ -519,7 +519,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('latitude', latitude))
       ..add(DiagnosticsProperty('longitude', longitude))
       ..add(DiagnosticsProperty('dueBalance', dueBalance))
-      ..add(DiagnosticsProperty('firstBillingDate', firstBillingDate));
+      ..add(DiagnosticsProperty('lastBilledDate', lastBilledDate));
   }
 
   @override
@@ -556,7 +556,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality()
                 .equals(other.dueBalance, dueBalance) &&
             const DeepCollectionEquality()
-                .equals(other.firstBillingDate, firstBillingDate));
+                .equals(other.lastBilledDate, lastBilledDate));
   }
 
   @JsonKey(ignore: true)
@@ -583,7 +583,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
         const DeepCollectionEquality().hash(latitude),
         const DeepCollectionEquality().hash(longitude),
         const DeepCollectionEquality().hash(dueBalance),
-        const DeepCollectionEquality().hash(firstBillingDate)
+        const DeepCollectionEquality().hash(lastBilledDate)
       ]);
 
   @JsonKey(ignore: true)
@@ -617,7 +617,7 @@ abstract class _Commerce implements Commerce {
       final double? latitude,
       final double? longitude,
       final double? dueBalance,
-      final DateTime? firstBillingDate}) = _$_Commerce;
+      final DateTime? lastBilledDate}) = _$_Commerce;
 
   factory _Commerce.fromJson(Map<String, dynamic> json) = _$_Commerce.fromJson;
 
@@ -661,7 +661,7 @@ abstract class _Commerce implements Commerce {
   @override
   double? get dueBalance => throw _privateConstructorUsedError;
   @override
-  DateTime? get firstBillingDate => throw _privateConstructorUsedError;
+  DateTime? get lastBilledDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_CommerceCopyWith<_$_Commerce> get copyWith =>

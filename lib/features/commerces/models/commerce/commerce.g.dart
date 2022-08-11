@@ -46,9 +46,9 @@ _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
       dueBalance: (json['dueBalance'] as num?)?.toDouble(),
-      firstBillingDate: json['firstBillingDate'] == null
+      lastBilledDate: json['lastBilledDate'] == null
           ? null
-          : DateTime.parse(json['firstBillingDate'] as String),
+          : DateTime.parse(json['lastBilledDate'] as String),
     );
 
 Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
@@ -73,5 +73,5 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'dueBalance': instance.dueBalance,
-      'firstBillingDate': instance.firstBillingDate?.toIso8601String(),
+      'lastBilledDate': instance.lastBilledDate?.toIso8601String(),
     };

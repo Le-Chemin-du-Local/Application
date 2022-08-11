@@ -81,6 +81,7 @@ class StripeService {
 
   Future<Map<String, dynamic>> handleSetupIntent({
     required String authorizationHeader,
+    bool isForCommerce = false,
     String? paymentMethodId,
     String? setupIntentId,
   }) async {
@@ -91,6 +92,7 @@ class StripeService {
         HttpHeaders.contentTypeHeader: "application/json",
       },
       body: json.encode({
+        "isForCommerce": isForCommerce,
         if (paymentMethodId != null)
           "paymentMethodId": paymentMethodId, 
       })

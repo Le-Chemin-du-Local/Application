@@ -9,10 +9,13 @@ import 'package:flutter/material.dart';
 class SmallLayout extends StatefulWidget {
   const SmallLayout({
     Key? key,
-    required this.serviceInfo
+    required this.serviceInfo,
+    required this.onSubscribe,
   }) : super(key: key);
 
   final ServiceInfo serviceInfo;
+
+  final Function(ServiceInfo, ServiceType) onSubscribe;
 
   @override
   State<SmallLayout> createState() => _SmallLayoutState();
@@ -66,12 +69,12 @@ class _SmallLayoutState extends State<SmallLayout> {
               TarifCard(
                 serviceInfo: widget.serviceInfo, 
                 serviceType: ServiceType.monthly, 
-                onSubscribe: () {}
+                onSubscribe: () => widget.onSubscribe(widget.serviceInfo, ServiceType.monthly)
               ),
               TarifCard(
                 serviceInfo: widget.serviceInfo, 
                 serviceType: ServiceType.transactions, 
-                onSubscribe: () {}
+                onSubscribe: () => widget.onSubscribe(widget.serviceInfo, ServiceType.transactions)
               )
             ][_currentIndex],
             const SizedBox(height: 12,),

@@ -16,7 +16,7 @@ class ButtonsTabBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ConstrainedBox(
-      constraints: const BoxConstraints(maxHeight: 54),
+      constraints: const BoxConstraints(maxHeight: 48),
       child: ListView.separated(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
