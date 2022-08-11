@@ -5,6 +5,7 @@ import 'package:chemin_du_local/features/storekeepers/services/services_page/ser
 import 'package:chemin_du_local/features/storekeepers/services/widgets/service_info_card.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:tuple/tuple.dart';
 
 class AvailableServices extends StatelessWidget {
   const AvailableServices({
@@ -53,7 +54,7 @@ class AvailableServices extends StatelessWidget {
               }
 
               final List mapServices = result.data!["allServicesInfo"] as List;
-              final List<ServiceInfo> servicesInfo = [];
+              final List<Tuple2<ServiceInfo, ServiceType>> servicesInfo = [];
 
               for (final map in mapServices) {
                 final ServiceInfo serviceInfo = ServiceInfo.fromJson(map as Map<String, dynamic>);
@@ -61,7 +62,7 @@ class AvailableServices extends StatelessWidget {
                 if (
                   !alreadySubscribedServices.contains("${serviceInfo.id}_M") &&
                   !alreadySubscribedServices.contains("${serviceInfo.id}_T")) {
-                    servicesInfo.add(serviceInfo);
+                    servicesInfo.add(Tuple2(serviceInfo, ServiceType.monthly));
                   }
               }
 
@@ -82,36 +83,52 @@ class AvailableServices extends StatelessWidget {
     );
   }
 
-  Widget _buildContent(BuildContext context, List<ServiceInfo> services) {
-    return GridView(
-      primary: false,
-      physics: const NeverScrollableScrollPhysics(),
-      shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-        childAspectRatio: 1.8,
-        maxCrossAxisExtent: 423,
-        mainAxisExtent: 236,
-        mainAxisSpacing: 12,
-        crossAxisSpacing: 12,
-      ),
-      children: [
-        for (final serviceInfo in services)
-          ServiceInfoCard(
-            serviceInfo: serviceInfo,
-            onButtonClick: () async {
-              bool success = await Navigator.of(context).push<bool?>(
-                MaterialPageRoute<bool?>(
-                  builder: (context) => ServiceDetailsPage(
-                    serviceInfo: serviceInfo,
-                    commerceID: commerceID,
-                  )
-                )
-              ) ?? false;
+  Widget _buildContent(BuildContext context, List<Tuple2<ServiceInfo, ServiceType>> services) {
+    return StatefulBuilder(
+      builder: (context, setState) {
+        return GridView(
+          primary: false,
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            childAspectRatio: 1.8,
+            maxCrossAxisExtent: 423,
+            mainAxisExtent: 236,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+          ),
+          children: [
+            for (int i = 0; i < services.length; ++i) 
+              ServiceInfoCard(
+                serviceInfo: services[i].item1,
+                serviceType: services[i].item2,
+                onTypeChanged: (type) {
+                  setState(() {
+                    services = [
+                      for (int j = 0; j < services.length; ++j) 
+                        if (j == i)
+                          Tuple2(services[i].item1, type)
+                        else 
+                          services[i]
+                    ];
+                  });
+                },
+                onButtonClick: () async {
+                  bool success = await Navigator.of(context).push<bool?>(
+                    MaterialPageRoute<bool?>(
+                      builder: (context) => ServiceDetailsPage(
+                        serviceInfo: services[i].item1,
+                        commerceID: commerceID,
+                      )
+                    )
+                  ) ?? false;
 
-              if (success) shouldRefetch();
-            },
-          )
-      ],
+                  if (success) shouldRefetch();
+                },
+              )
+          ],
+        );
+      }
     );
   }
 }

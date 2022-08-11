@@ -36,16 +36,16 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
   MutationOptions _addServicesOption() {
     return MutationOptions<dynamic>(
       document: gql(mutUpdateServices),
+      onCompleted: (dynamic data) {
+        if (data == null) return;
+        ref.read(servicesBasketControllerProvider.notifier).clear();
+        Navigator.of(context).pop(true);
+      },
       onError: (error) {
         setState(() {
           _isLoading = false;
           _errorMessage = "Votre carte à bien été prise, mais vos services n'ont pas pu être souscrits...";
         });
-      },
-      onCompleted: (dynamic data) {
-        if (data == null) return;
-        ref.read(servicesBasketControllerProvider.notifier).clear();
-        Navigator.of(context).pop(true);
       }
     );
   }
@@ -101,7 +101,7 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
                                 constraints: const BoxConstraints(maxHeight: 236, maxWidth: 423),
                                 child: ServiceInfoCard(
                                   serviceInfo: service.item1,
-                                  initialServiceType: service.item2,
+                                  serviceType: service.item2,
                                   buttonText: "En savoir plus",
                                   onButtonClick: () {},
                                   isSelected: !_serviceToDelete.contains(service.item1.id),
@@ -257,7 +257,7 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
 
       if (clientSecret != null) {
         await Stripe.instance.confirmSetupIntent(clientSecret, const PaymentMethodParams.card(
-          paymentMethodData: PaymentMethodData()
+          paymentMethodData: PaymentMethodData(),
         ));
 
         return true;

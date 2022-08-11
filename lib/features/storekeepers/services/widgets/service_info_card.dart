@@ -3,16 +3,16 @@ import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
 import 'package:flutter/material.dart';
 
-class ServiceInfoCard extends StatefulWidget {
+class ServiceInfoCard extends StatelessWidget {
   const ServiceInfoCard({
     Key? key,
     required this.serviceInfo,
+    required this.serviceType,
+    required this.onTypeChanged,
     this.buttonText = "En savoir plus",
     this.onButtonClick,
-    this.initialServiceType,
     this.isSelected = false,
     this.forceHideBorder = false,
-    this.onTypeChanged,
     this.onSelect
   }) : super(key: key);
 
@@ -25,44 +25,18 @@ class ServiceInfoCard extends StatefulWidget {
   final bool forceHideBorder;
   final Function(bool)? onSelect;
 
-  final Function(ServiceType)? onTypeChanged;
-
-  final ServiceType? initialServiceType;
-
-  @override
-  State<ServiceInfoCard> createState() => _ServiceInfoCardState();
-}
-
-class _ServiceInfoCardState extends State<ServiceInfoCard> {
-  late ServiceType _serviceType;
-
-  void _initialize() {
-    _serviceType = widget.initialServiceType ?? ServiceType.monthly;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    _initialize();
-  }
-
-  @override
-  void didUpdateWidget(covariant ServiceInfoCard oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    _initialize();
-  }
+  final ServiceType? serviceType;
+  final Function(ServiceType) onTypeChanged;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onSelect == null ? null : () => widget.onSelect!(!widget.isSelected),
+      onTap: onSelect == null ? null : () => onSelect!(!isSelected),
       child: Opacity(
-        opacity: !widget.isSelected && widget.onSelect != null ? 0.4 : 1,
+        opacity: !isSelected && onSelect != null ? 0.4 : 1,
         child: ClCard(
           padding: const EdgeInsets.all(12),
-          borderColor: (widget.isSelected || widget.onSelect != null) && !widget.forceHideBorder 
+          borderColor: (isSelected || onSelect != null) && !forceHideBorder 
             ? Theme.of(context).colorScheme.primary 
             : Theme.of(context).colorScheme.surface,
           child: DefaultTextStyle(
@@ -83,7 +57,7 @@ class _ServiceInfoCardState extends State<ServiceInfoCard> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
-                            "$kImagesBaseUrl/services/${widget.serviceInfo.id}.png",
+                            "$kImagesBaseUrl/services/${serviceInfo.id}.png",
                             fit: BoxFit.cover,
                             loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
                               child: CircularProgressIndicator(
@@ -100,10 +74,10 @@ class _ServiceInfoCardState extends State<ServiceInfoCard> {
                       ),
                       const SizedBox(height: 4,),
           
-                      if (widget.onButtonClick != null) 
+                      if (onButtonClick != null) 
                         ElevatedButton(
-                          onPressed: widget.onButtonClick,
-                          child: Text(widget.buttonText),
+                          onPressed: onButtonClick,
+                          child: Text(buttonText),
                         )
                     ],
                   ),
@@ -116,11 +90,11 @@ class _ServiceInfoCardState extends State<ServiceInfoCard> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // Le titre
-                      Text(widget.serviceInfo.name, style: Theme.of(context).textTheme.headlineMedium,),
+                      Text(serviceInfo.name, style: Theme.of(context).textTheme.headlineMedium,),
                       const SizedBox(height: 4,),
           
                       // La description
-                      Text(widget.serviceInfo.shortDescription),
+                      Text(serviceInfo.shortDescription),
                       const SizedBox(height: 4,),
           
                       // Le prix
@@ -130,13 +104,13 @@ class _ServiceInfoCardState extends State<ServiceInfoCard> {
                             fontWeight: FontWeight.w600,
                             color: Theme.of(context).colorScheme.secondary,
                           ),
-                          text: _serviceType == ServiceType.monthly 
-                            ? "${widget.serviceInfo.monthPrice}€*"
-                            : "${widget.serviceInfo.transactionPercentage}%",
+                          text: serviceType == ServiceType.monthly 
+                            ? "${serviceInfo.monthPrice}€*"
+                            : "${serviceInfo.transactionPercentage}%",
                           children: [
                             TextSpan(
                               style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                              text: _serviceType == ServiceType.monthly 
+                              text: serviceType == ServiceType.monthly 
                                 ? " /mois"
                                 : " /transactions"
                             )
@@ -148,7 +122,7 @@ class _ServiceInfoCardState extends State<ServiceInfoCard> {
                       Expanded(
                         child: Align(
                           alignment: Alignment.bottomCenter,
-                          child: _buildSwitch(),
+                          child: _buildSwitch(context),
                         ),
                       )
           
@@ -164,27 +138,21 @@ class _ServiceInfoCardState extends State<ServiceInfoCard> {
     );
   }
 
-  Widget _buildSwitch() {
+  Widget _buildSwitch(BuildContext context) {
     return Row(
       children: [
         const Flexible(child: Text("Mensuelle")),
         Switch(
-          value: _serviceType == ServiceType.transactions, 
+          value: serviceType == ServiceType.transactions, 
           onChanged: (value) {
-            if (!widget.isSelected && widget.onSelect != null) return;
+            if (!isSelected && onSelect != null) return;
 
             if (value) {
-              setState(() {
-                _serviceType = ServiceType.transactions;
-              });
+              onTypeChanged(ServiceType.transactions);
             }
             else {
-              setState(() {
-                _serviceType = ServiceType.monthly;
-              });
+              onTypeChanged(ServiceType.monthly);
             }
-
-            if (widget.onTypeChanged != null) widget.onTypeChanged!(_serviceType);
           },
           activeColor: Theme.of(context).colorScheme.secondary,
           inactiveThumbColor: Theme.of(context).colorScheme.secondary,

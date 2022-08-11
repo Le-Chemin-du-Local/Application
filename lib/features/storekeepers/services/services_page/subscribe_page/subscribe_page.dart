@@ -125,7 +125,7 @@ class SubscribePage extends ConsumerWidget {
         for (final serviceInfo in services)
           ServiceInfoCard(
             serviceInfo: serviceInfo,
-            initialServiceType: ref.watch(servicesBasketControllerProvider).typeForService(serviceInfo),
+            serviceType: ref.watch(servicesBasketControllerProvider).typeForService(serviceInfo),
             onButtonClick: () async {
               await Navigator.of(context).push<dynamic>(
                 MaterialPageRoute<dynamic>(
