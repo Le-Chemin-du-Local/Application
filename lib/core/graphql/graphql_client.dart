@@ -12,7 +12,10 @@ ValueNotifier<GraphQLClient> graphQLClient(String? token) {
   return ValueNotifier(
     GraphQLClient(
       cache: GraphQLCache(store: HiveStore()),
-      link: link
+      link: link,
+      defaultPolicies: DefaultPolicies(
+        query: Policies(fetch: FetchPolicy.cacheAndNetwork)
+      )
     )
   );
 
