@@ -71,7 +71,7 @@ class AvailableServices extends StatelessWidget {
                 return const Center(
                   child: ClStatusMessage(
                     type: ClStatusMessageType.success,
-                    message: "Vous avez souscrit à tous les services !",
+                    message: "Vous avez souscrit à tous les services ! 🎉",
                   ),
                 );
               }

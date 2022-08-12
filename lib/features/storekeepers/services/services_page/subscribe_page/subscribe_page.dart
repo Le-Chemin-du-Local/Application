@@ -51,7 +51,7 @@ class SubscribePage extends ConsumerWidget {
             const SizedBox(width: 12,),
 
             ElevatedButton.icon(
-              onPressed: () => _onSubscribe(context),
+              onPressed: ref.watch(servicesBasketControllerProvider).services.isEmpty ? null : () => _onSubscribe(context, ref),
               icon: const Icon(Icons.arrow_forward),
               label: const Text("Souscrire aux services sélectionnés"),
             ),
@@ -89,16 +89,18 @@ class SubscribePage extends ConsumerWidget {
         
                 if (
                   !alreadySubscribedServices.contains("${serviceInfo.id}_M") &&
+                  !alreadySubscribedServices.contains("${serviceInfo.id}_M_UPDATE") &&
                   !alreadySubscribedServices.contains("${serviceInfo.id}_T")) {
                     servicesInfo.add(serviceInfo);
                   }
               }
         
               if (servicesInfo.isEmpty) {
-                return const Center(
+                return const Align(
+                  alignment: Alignment.topCenter,
                   child: ClStatusMessage(
                     type: ClStatusMessageType.success,
-                    message: "Vous avez souscrit à tous les services !",
+                    message: "Vous avez souscrit à tous les services ! 🎉",
                   ),
                 );
               }
@@ -153,7 +155,9 @@ class SubscribePage extends ConsumerWidget {
     );
   }
 
-  Future _onSubscribe(BuildContext context) async {
+  Future _onSubscribe(BuildContext context, WidgetRef ref) async {
+    if (ref.read(servicesBasketControllerProvider).services.isEmpty) return;
+
     bool success = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
         builder: (context) => ServicesBasketPage(
