@@ -82,7 +82,7 @@ class _ServicesPageState extends State<ServicesPage> {
               );
             }
     
-            return _buildContent(context, commerce: user.commerce!);
+            return _buildContent(context, commerce: user.commerce!, refetch: refetch);
           },
         ),
       ),
@@ -139,7 +139,7 @@ class _ServicesPageState extends State<ServicesPage> {
                     });
                   },
                   shouldRefetch: () {
-                    if (refetch != null) refetch;
+                    if (refetch != null) refetch();
                   },
                 );
               },

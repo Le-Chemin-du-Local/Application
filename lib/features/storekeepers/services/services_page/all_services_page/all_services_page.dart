@@ -102,8 +102,9 @@ class _AllServicesPageState extends State<AllServicesPage> {
                 if (widget.commerce.services.isNotEmpty && (_currentFilter == Filter.allServices || _currentFilter == Filter.subscribedServices)) ...{
                   Flexible(
                     child: SubscribedServices(
-                      commerceID: widget.commerce.id!,
+                      commerce: widget.commerce,
                       subscribedServices: widget.commerce.services,
+                      shouldRefetch: widget.shouldRefetch,
                     ),
                   ),
                   const SizedBox(height: 16,),
