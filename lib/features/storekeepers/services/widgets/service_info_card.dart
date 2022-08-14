@@ -10,6 +10,7 @@ class ServiceInfoCard extends StatelessWidget {
     required this.serviceType,
     required this.onTypeChanged,
     this.isMonthlyTransitioning = false,
+    this.isRemoved = false,
     this.buttonText = "En savoir plus",
     this.onButtonClick,
     this.isSelected = false,
@@ -29,6 +30,7 @@ class ServiceInfoCard extends StatelessWidget {
   final ServiceType? serviceType;
   final Function(ServiceType) onTypeChanged;
   final bool isMonthlyTransitioning;
+  final bool isRemoved;
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +146,11 @@ class ServiceInfoCard extends StatelessWidget {
                 if (isMonthlyTransitioning)
                   const Text(
                     "Ce changement prendra effet lors de la prochaine facture",
+                    style: TextStyle(fontSize: 12),
+                  )
+                else if (isRemoved)
+                  const Text(
+                    "Ce service sera supprimé lors de la prochaine facture",
                     style: TextStyle(fontSize: 12),
                   )
                 else 

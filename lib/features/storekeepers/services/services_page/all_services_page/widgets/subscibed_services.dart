@@ -119,6 +119,7 @@ class SubscribedServices extends StatelessWidget {
                                     serviceInfo: serviceInfo, 
                                     serviceType: serviceType, 
                                     isMonthlyTransitioning: splittedServiceString.length > 2 && splittedServiceString[2] == "UPDATE",
+                                    isRemoved: splittedServiceString.length > 2 && splittedServiceString[2] == "REMOVE",
                                     isSelected: true,
                                     onSelect: (value) {},
                                     buttonText: "Accéder",

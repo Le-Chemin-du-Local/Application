@@ -4,6 +4,7 @@ import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/all_services_page/all_services_page.dart';
+import 'package:chemin_du_local/features/storekeepers/services/services_page/remove_page/remove_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/widgets/due_balance.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/subscribe_page/subscribe_page.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
@@ -124,6 +125,26 @@ class _ServicesPageState extends State<ServicesPage> {
                         _currentTab = Tab.allServices;
                       });
                     }
+                  );
+                }
+
+                if (_currentTab == Tab.cancellation) {
+                  return RemovePage(
+                    commerce: commerce,
+                    subscribedServices: commerce.services,
+                    onCancel: () {
+                      setState(() {
+                        _currentTab = Tab.allServices;
+                      });
+                    },
+                    onSuccess: () {
+                      if (refetch != null) {
+                        refetch();
+                      }
+                      setState(() {
+                        _currentTab = Tab.allServices;
+                      });
+                    },
                   );
                 }
                 return AllServicesPage(
