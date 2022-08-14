@@ -43,7 +43,7 @@ class CommerceCard extends StatelessWidget {
                   // const SizedBox(height: 8,),
 
                   // Le service de click and collect
-                  if (commerce.services.contains(CommerceServices.clickAndCollect)) ...{
+                  if (commerce.services.contains(Services.clickAndCollect)) ...{
                     _buildIconRow(
                       context, 
                       icon: Icons.check, 

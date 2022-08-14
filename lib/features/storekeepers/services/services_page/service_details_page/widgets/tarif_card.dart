@@ -19,7 +19,7 @@ class TarifCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String priceString = serviceType == ServiceType.monthly
-      ? "${serviceInfo.monthPrice}€*"
+      ? "à partir de ${serviceInfo.monthPrice}€"
       : "${serviceInfo.transactionPercentage}%";
 
     final List<String> advantages = serviceType == ServiceType.monthly 
@@ -96,13 +96,6 @@ class TarifCard extends StatelessWidget {
               ],
             ),
 
-          if (serviceType == ServiceType.monthly) ...{
-            const SizedBox(height: 8,),
-            Text(
-              "* Augmente de ${serviceInfo.monthAugmentationPerRangePercentage.toStringAsFixed(2)}% par tranche de ${serviceInfo.monthRangePercentage.toStringAsFixed(2)}% de CA à partir de ${serviceInfo.monthMinimumAllowedCA.toStringAsFixed(2)}€ de CA généré (cf simulateur)",
-              style: Theme.of(context).textTheme.titleMedium,
-            )
-          }
         ],
       ),
     );

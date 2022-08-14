@@ -112,7 +112,7 @@ class ServiceInfoCard extends StatelessWidget {
                                   color: Theme.of(context).colorScheme.secondary,
                                 ),
                                 text: serviceType == ServiceType.monthly 
-                                  ? "${serviceInfo.monthPrice}€*"
+                                  ? "a partir de ${serviceInfo.monthPrice}€"
                                   : "${serviceInfo.transactionPercentage}%",
                                 children: [
                                   TextSpan(

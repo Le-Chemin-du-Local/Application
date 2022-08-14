@@ -93,7 +93,7 @@ class AvailableServices extends StatelessWidget {
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
             childAspectRatio: 1.8,
-            maxCrossAxisExtent: 423,
+            maxCrossAxisExtent: 563,
             mainAxisExtent: 236,
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,

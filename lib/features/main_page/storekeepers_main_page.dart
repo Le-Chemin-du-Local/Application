@@ -4,6 +4,7 @@ import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart
 import 'package:chemin_du_local/features/main_page/main_page.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/products_main_page.dart';
+import 'package:chemin_du_local/features/storekeepers/services/services.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/services_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_home/storekeeper_home_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/storekeeper_page.dart';
@@ -29,7 +30,16 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
 
   @override
   Widget build(BuildContext context) {
-    final bool hasClickAndCollect = (widget.storekeeper.commerce?.services ?? []).contains(CommerceServices.clickAndCollect);
+    final bool hasClickAndCollect = 
+      (widget.storekeeper.commerce?.services ?? []).contains(Services.clickAndCollect + "_M") ||
+      (widget.storekeeper.commerce?.services ?? []).contains(Services.clickAndCollect + "_M_UPDATE") ||
+      (widget.storekeeper.commerce?.services ?? []).contains(Services.clickAndCollect + "_M_REMOVE") ||
+      (widget.storekeeper.commerce?.services ?? []).contains(Services.clickAndCollect + "_T") ||
+      (widget.storekeeper.commerce?.services ?? []).contains(Services.paniers + "_M") ||
+      (widget.storekeeper.commerce?.services ?? []).contains(Services.paniers + "_M_UPDATE") ||
+      (widget.storekeeper.commerce?.services ?? []).contains(Services.paniers + "_M_REMOVE") ||
+      (widget.storekeeper.commerce?.services ?? []).contains(Services.paniers + "_T");
+
     final int clickAndCollectOffset = hasClickAndCollect ? 1 : 0;
 
     // The menu items

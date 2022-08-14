@@ -8,10 +8,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'commerce.freezed.dart';
 part 'commerce.g.dart';
 
-mixin CommerceServices {
-  static const String clickAndCollect = "CLICKANDCOLLECT";
-}
-
 @freezed
 @immutable
 class Commerce with _$Commerce {

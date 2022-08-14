@@ -98,7 +98,12 @@ class StoreKeeperHomePage extends StatelessWidget {
         ),
         delegate: SliverChildListDelegate([
           // Carte Click & Collect
-          if (services.contains(Services.clickAndCollect))
+          if (
+            services.contains(Services.clickAndCollect + "_M") ||
+            services.contains(Services.clickAndCollect + "_M_UPDATE") ||
+            services.contains(Services.clickAndCollect + "_M_REMOVE") ||
+            services.contains(Services.clickAndCollect + "_T")
+          )
             DashboardCard(
               onClick: () async { 
                 onPageChanged(3 + servicesOffset);
@@ -114,7 +119,12 @@ class StoreKeeperHomePage extends StatelessWidget {
             ),
 
           // Carte paniers
-          if (services.contains(Services.paniers))
+          if (
+            services.contains(Services.paniers + "_M") ||
+            services.contains(Services.paniers + "_M_UPDATE") ||
+            services.contains(Services.paniers + "_M_REMOVE") ||
+            services.contains(Services.paniers + "_T") 
+          )
             DashboardCard(
               onClick: () async {
                 onPageChanged(3 + servicesOffset);
