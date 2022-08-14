@@ -61,8 +61,9 @@ class AvailableServices extends StatelessWidget {
 
                 if (
                   !alreadySubscribedServices.contains("${serviceInfo.id}_M") &&
-                  !alreadySubscribedServices.contains("${serviceInfo.id}_T") && 
-                  !alreadySubscribedServices.contains("${serviceInfo.id}_M_UPDATE")) {
+                  !alreadySubscribedServices.contains("${serviceInfo.id}_M_UPDATE") && 
+                  !alreadySubscribedServices.contains("${serviceInfo.id}_M_REMOVE") && 
+                  !alreadySubscribedServices.contains("${serviceInfo.id}_T")) {
                     servicesInfo.add(Tuple2(serviceInfo, ServiceType.monthly));
                   }
               }

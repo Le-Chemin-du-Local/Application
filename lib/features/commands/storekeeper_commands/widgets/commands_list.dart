@@ -105,7 +105,7 @@ class CommandsListState extends State<CommandsList> {
       children: [
         for (final command in commands) ...{ 
           ConstrainedBox(
-            constraints: const BoxConstraints(maxHeight: 130),
+            constraints: const BoxConstraints(maxHeight: 138),
             child: InkWell(
               onTap: () => _onOpenCommandDetails(context, command),
               child: CommandCard(command: command)

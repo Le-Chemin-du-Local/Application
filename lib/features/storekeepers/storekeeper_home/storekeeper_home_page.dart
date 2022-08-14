@@ -1,6 +1,8 @@
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
+import 'package:chemin_du_local/features/commands/models/commerce_command/commerce_command.dart';
+import 'package:chemin_du_local/features/commands/storekeeper_commands/widgets/commands_list.dart';
 import 'package:chemin_du_local/features/storekeepers/services/click_and_collect/ccproducts_page/ccproducts_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/paniers/paniers_page/paniers_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services.dart';
@@ -38,13 +40,57 @@ class StoreKeeperHomePage extends StatelessWidget {
         padding: EdgeInsets.symmetric(
           horizontal: ScreenHelper.instance.horizontalPadding,
         ),
-        child: CustomScrollView(
-          controller: ScrollController(),
-          slivers: [
-            _buildMainView(),
-            const SliverToBoxAdapter(child: SizedBox(height: 32,)),
-            ..._buildServicesView(context)
-          ],
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (
+                  constraints.maxWidth >= ScreenHelper.breakpointTablet &&
+                  (Services.hasClickAndCollect(services) || Services.hasPaniers(services))
+                ) ...{
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 467),
+                    child: CommandsList(
+                      status: CommandStatus.inProgress, 
+                      title: "Commandes en cours", 
+                      onMustRefetch: () {}
+                    ),
+                  ),
+                  const SizedBox(width: 32,),
+                },
+
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (
+                        constraints.maxWidth < ScreenHelper.breakpointTablet && 
+                        (Services.hasClickAndCollect(services) || Services.hasPaniers(services))
+                      ) ...{
+                        ElevatedButton(
+                          onPressed: () => onPageChanged(3),
+                          child: const Text("Voir les commandes en cours"),
+                        ),
+                        const SizedBox(height: 12,),
+                      },
+                      Flexible(
+                        child: CustomScrollView(
+                          controller: ScrollController(),
+                          slivers: [
+                            _buildMainView(),
+                            const SliverToBoxAdapter(child: SizedBox(height: 32,)),
+                            ..._buildServicesView(context)
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          }
         ),
       ),
     );
@@ -98,12 +144,7 @@ class StoreKeeperHomePage extends StatelessWidget {
         ),
         delegate: SliverChildListDelegate([
           // Carte Click & Collect
-          if (
-            services.contains(Services.clickAndCollect + "_M") ||
-            services.contains(Services.clickAndCollect + "_M_UPDATE") ||
-            services.contains(Services.clickAndCollect + "_M_REMOVE") ||
-            services.contains(Services.clickAndCollect + "_T")
-          )
+          if (Services.hasClickAndCollect(services))
             DashboardCard(
               onClick: () async { 
                 onPageChanged(3 + servicesOffset);
@@ -119,12 +160,7 @@ class StoreKeeperHomePage extends StatelessWidget {
             ),
 
           // Carte paniers
-          if (
-            services.contains(Services.paniers + "_M") ||
-            services.contains(Services.paniers + "_M_UPDATE") ||
-            services.contains(Services.paniers + "_M_REMOVE") ||
-            services.contains(Services.paniers + "_T") 
-          )
+          if (Services.hasPaniers(services))
             DashboardCard(
               onClick: () async {
                 onPageChanged(3 + servicesOffset);

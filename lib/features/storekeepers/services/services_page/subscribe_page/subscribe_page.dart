@@ -90,6 +90,7 @@ class SubscribePage extends ConsumerWidget {
                 if (
                   !alreadySubscribedServices.contains("${serviceInfo.id}_M") &&
                   !alreadySubscribedServices.contains("${serviceInfo.id}_M_UPDATE") &&
+                  !alreadySubscribedServices.contains("${serviceInfo.id}_M_REMOVE") &&
                   !alreadySubscribedServices.contains("${serviceInfo.id}_T")) {
                     servicesInfo.add(serviceInfo);
                   }

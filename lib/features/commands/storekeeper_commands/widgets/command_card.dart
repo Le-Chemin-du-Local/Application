@@ -59,7 +59,7 @@ class CommandCard extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200,
-                mainAxisExtent: 50
+                mainAxisExtent: 30
               ),
               children: [
                 if (useBigLayout) ...{

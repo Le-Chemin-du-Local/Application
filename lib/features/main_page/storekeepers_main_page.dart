@@ -1,6 +1,5 @@
 import 'package:chemin_du_local/core/helpers/app_manager.dart';
 import 'package:chemin_du_local/features/commands/storekeeper_commands/storekeeper_commands_page.dart';
-import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/main_page/main_page.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/products_main_page.dart';
@@ -30,17 +29,9 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
 
   @override
   Widget build(BuildContext context) {
-    final bool hasClickAndCollect = 
-      (widget.storekeeper.commerce?.services ?? []).contains(Services.clickAndCollect + "_M") ||
-      (widget.storekeeper.commerce?.services ?? []).contains(Services.clickAndCollect + "_M_UPDATE") ||
-      (widget.storekeeper.commerce?.services ?? []).contains(Services.clickAndCollect + "_M_REMOVE") ||
-      (widget.storekeeper.commerce?.services ?? []).contains(Services.clickAndCollect + "_T") ||
-      (widget.storekeeper.commerce?.services ?? []).contains(Services.paniers + "_M") ||
-      (widget.storekeeper.commerce?.services ?? []).contains(Services.paniers + "_M_UPDATE") ||
-      (widget.storekeeper.commerce?.services ?? []).contains(Services.paniers + "_M_REMOVE") ||
-      (widget.storekeeper.commerce?.services ?? []).contains(Services.paniers + "_T");
+    final bool shouldShowCommands = Services.hasClickAndCollect(widget.storekeeper.commerce?.services ?? []) || Services.hasPaniers(widget.storekeeper.commerce?.services ?? []);
 
-    final int clickAndCollectOffset = hasClickAndCollect ? 1 : 0;
+    final int commandsOffset = shouldShowCommands ? 1 : 0;
 
     // The menu items
     List<PageItem> pageItems = [
@@ -69,7 +60,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
       ),
 
       // Click and collect if need
-      if (hasClickAndCollect) 
+      if (shouldShowCommands) 
         const PageItem(
           index: 3, 
           title: "Mes commandes", 
@@ -79,7 +70,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
 
       // Basket
       PageItem(
-        index: 3 + clickAndCollectOffset,
+        index: 3 + commandsOffset,
         title: "Mes Servives",
         appBarTitle: "Mes Services",
         icon: CLIcons.mesServices
@@ -87,7 +78,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
 
       // Account
       PageItem(
-        index: 4 + clickAndCollectOffset,
+        index: 4 + commandsOffset,
         title: "Paramètres",
         appBarTitle: "Paramètres",
         icon: CLIcons.parametres 
@@ -105,7 +96,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
         onPageChanged: (index) => _mainPageKey.currentState!.selectedPage(pageItems[index]),
         onShowDrawer: () => _mainPageKey.currentState!.showDrawer(),
         commerceID: widget.storekeeper.commerce?.id ?? "",
-        servicesOffset: clickAndCollectOffset,
+        servicesOffset: commandsOffset,
         services: widget.storekeeper.commerce?.services ?? [],
       ),
       ClipRect(
@@ -120,7 +111,7 @@ class _StoreKeepersMainPageState extends State<StoreKeepersMainPage> {
           ),
         )
       ),
-      if (hasClickAndCollect) 
+      if (shouldShowCommands) 
          ClipRect(
           child: Navigator(
             key: AppManager.instance.clickAndCollectPageKey,
