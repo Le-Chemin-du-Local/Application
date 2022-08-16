@@ -45,6 +45,10 @@ _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
               json['clickAndCollectHours'] as Map<String, dynamic>),
       latitude: (json['latitude'] as num?)?.toDouble(),
       longitude: (json['longitude'] as num?)?.toDouble(),
+      defaultPaymentMethod: json['defaultPaymentMethod'] == null
+          ? null
+          : ClPaymentMethod.fromJson(
+              json['defaultPaymentMethod'] as Map<String, dynamic>),
       dueBalance: (json['dueBalance'] as num?)?.toDouble(),
       lastBilledDate: json['lastBilledDate'] == null
           ? null
@@ -72,6 +76,7 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
       'clickAndCollectHours': instance.clickAndCollectHours,
       'latitude': instance.latitude,
       'longitude': instance.longitude,
+      'defaultPaymentMethod': instance.defaultPaymentMethod,
       'dueBalance': instance.dueBalance,
       'lastBilledDate': instance.lastBilledDate?.toIso8601String(),
     };

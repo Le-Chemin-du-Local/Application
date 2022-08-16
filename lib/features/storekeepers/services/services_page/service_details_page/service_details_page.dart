@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_basket_controller.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/service_details_page/layouts/big_layout.dart';
@@ -11,11 +12,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class ServiceDetailsPage extends ConsumerWidget {
   const ServiceDetailsPage({
     Key? key,
-    required this.commerceID,
+    required this.commerce,
     required this.serviceInfo,
   }) : super(key: key);
 
-  final String commerceID;
+  final Commerce commerce;
   final ServiceInfo serviceInfo;
 
   @override
@@ -66,7 +67,7 @@ class ServiceDetailsPage extends ConsumerWidget {
 
     bool success = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
-        builder: (context) => ServicesBasketPage(commerceID: commerceID,)
+        builder: (context) => ServicesBasketPage(commerce: commerce,)
       )
     ) ?? false;
 

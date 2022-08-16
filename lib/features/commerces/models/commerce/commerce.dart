@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/features/commerces/models/business_hours/business_hours.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
+import 'package:chemin_du_local/features/user/models/cl_payment_method/cl_payment_method.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/features/place/models/address/address.dart';
 import 'package:flutter/foundation.dart';
@@ -29,6 +30,7 @@ class Commerce with _$Commerce {
     BusinessHours? clickAndCollectHours,
     double? latitude,
     double? longitude,
+    ClPaymentMethod? defaultPaymentMethod,
     double? dueBalance,
     DateTime? lastBilledDate,
   }) = _Commerce;

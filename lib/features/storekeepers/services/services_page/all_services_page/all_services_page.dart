@@ -131,7 +131,7 @@ class _AllServicesPageState extends State<AllServicesPage> {
                       if (_currentFilter == Filter.allServices || _currentFilter == Filter.availableServices) ...{
                         Flexible(
                           child: AvailableServices(
-                            commerceID: widget.commerce.id!,
+                            commerce: widget.commerce,
                             alreadySubscribedServices: widget.commerce.services,
                             shouldRefetch: widget.shouldRefetch,
                           ),

@@ -1,4 +1,5 @@
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_graphql.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/service_details_page/service_details_page.dart';
@@ -10,12 +11,12 @@ import 'package:tuple/tuple.dart';
 class AvailableServices extends StatelessWidget {
   const AvailableServices({
     Key? key,
-    required this.commerceID,
+    required this.commerce,
     required this.alreadySubscribedServices,
     required this.shouldRefetch,
   }) : super(key: key);
 
-  final String commerceID; 
+  final Commerce commerce; 
   final List<String> alreadySubscribedServices;
 
   final Function() shouldRefetch;
@@ -113,7 +114,7 @@ class AvailableServices extends StatelessWidget {
                             if (j == i)
                               Tuple2(services[i].item1, type)
                             else 
-                              services[i]
+                              services[j]
                         ];
                       });
                     },
@@ -122,7 +123,7 @@ class AvailableServices extends StatelessWidget {
                         MaterialPageRoute<bool?>(
                           builder: (context) => ServiceDetailsPage(
                             serviceInfo: services[i].item1,
-                            commerceID: commerceID,
+                            commerce: commerce,
                           )
                         )
                       ) ?? false;

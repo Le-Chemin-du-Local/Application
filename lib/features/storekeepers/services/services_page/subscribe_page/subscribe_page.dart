@@ -170,7 +170,7 @@ class SubscribePage extends ConsumerWidget {
                 MaterialPageRoute<dynamic>(
                   builder: (context) => ServiceDetailsPage(
                     serviceInfo: serviceInfo,
-                    commerceID: commerce.id!,
+                    commerce: commerce,
                   )
                 )
               );
@@ -198,7 +198,7 @@ class SubscribePage extends ConsumerWidget {
     bool success = await Navigator.of(context).push<bool?>(
       MaterialPageRoute<bool?>(
         builder: (context) => ServicesBasketPage(
-          commerceID: commerce.id!,
+          commerce: commerce,
         )
       )
     ) ?? false;

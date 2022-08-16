@@ -3,6 +3,8 @@ import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_card.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
+import 'package:chemin_du_local/features/basket/basket_page/basket_payment/cards_list/widgets/card_card.dart';
+import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_basket_controller.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_graphql.dart';
@@ -17,10 +19,10 @@ import 'package:tuple/tuple.dart';
 class ServicesBasketPage extends ConsumerStatefulWidget {
   const ServicesBasketPage({
     Key? key,
-    required this.commerceID
+    required this.commerce
   }) : super(key: key);
 
-  final String commerceID;
+  final Commerce commerce;
 
   @override
   ConsumerState<ServicesBasketPage> createState() => _ServicesBasketPageState();
@@ -180,37 +182,54 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
                 const SizedBox(height: 12,),
               },
     
-              Text(
-                "Rentrez votre moyen de paiement",
-                style: Theme.of(context).textTheme.headlineMedium,
-              ),
-              const SizedBox(height: 12,),
-              Flexible(
-                child: CardField(
-                  controller: _cardController,
-                  decoration: InputDecoration(
-                    label: const Text("Votre carte"),
-                    filled: true,
-                    fillColor: Theme.of(context).colorScheme.surface,
-                    floatingLabelBehavior: FloatingLabelBehavior.always,
-                    contentPadding: const EdgeInsets.all(12),
-                          
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.outline
+              if (widget.commerce.defaultPaymentMethod == null) ...{
+                Text(
+                  "Rentrez votre moyen de paiement",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                const SizedBox(height: 12,),
+                Flexible(
+                  child: CardField(
+                    controller: _cardController,
+                    decoration: InputDecoration(
+                      label: const Text("Votre carte"),
+                      filled: true,
+                      fillColor: Theme.of(context).colorScheme.surface,
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      contentPadding: const EdgeInsets.all(12),
+                            
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.outline
+                        ),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      borderRadius: BorderRadius.circular(12.0),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Theme.of(context).colorScheme.outline
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).colorScheme.outline
+                        ),
+                        borderRadius: BorderRadius.circular(12.0),
                       ),
-                      borderRadius: BorderRadius.circular(12.0),
                     ),
                   ),
+                )
+              }
+              else ...{
+                Text(
+                  "Vous avez déjà une carte d'enregistrée",
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
-              ),
-    
+                const SizedBox(height: 12,),
+                CardCard(
+                  choosedPaymentMethod: widget.commerce.defaultPaymentMethod!.stripeID!,
+                  onSelected: (value) {},
+                  paymentMethod: widget.commerce.defaultPaymentMethod!,
+                ),
+                // ignore: equal_elements_in_set
+                const SizedBox(height: 12,),
+                const Text("Vous pouvez la changer dans vos paramètres")
+              },
+      
               // Le bouton de souscription
               const SizedBox(height: 16,),
               Directionality(
@@ -229,12 +248,12 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
   }
 
   Future _handleSubscription(RunMutation? runMutation) async {
-    bool paymentSuccess = await _handlePayment();
+    bool paymentSuccess = widget.commerce.defaultPaymentMethod != null || await _handlePayment();
     final List<Tuple2<ServiceInfo, ServiceType>> servicesToAdd = ref.read(servicesBasketControllerProvider).services;
 
     if (paymentSuccess && runMutation != null) {
       runMutation(<String, dynamic>{
-        "commerceID": widget.commerceID,
+        "commerceID": widget.commerce.id,
         "services": <Map<String, dynamic>>[
           for (final serviceToAdd in servicesToAdd)
             if (!_serviceToDelete.contains(serviceToAdd.item1.id))

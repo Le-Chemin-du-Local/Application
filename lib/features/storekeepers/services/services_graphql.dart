@@ -8,6 +8,12 @@ query GetServicesForStoreKeeper {
       id
       name
       services
+      defaultPaymentMethod {
+        name
+        stripeID
+        cardBrand
+        cardLast4Digits
+      }
       dueBalance
       lastBilledDate
     }

@@ -116,6 +116,9 @@ class _ServicesPageState extends State<ServicesPage> {
                     });
                   }, 
                   onSuccess: () {
+                    if (refetch != null) {
+                      refetch();
+                    }
                     setState(() {
                       _currentTab = Tab.allServices;
                     });

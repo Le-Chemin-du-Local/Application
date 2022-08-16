@@ -39,6 +39,8 @@ mixin _$Commerce {
   BusinessHours? get clickAndCollectHours => throw _privateConstructorUsedError;
   double? get latitude => throw _privateConstructorUsedError;
   double? get longitude => throw _privateConstructorUsedError;
+  ClPaymentMethod? get defaultPaymentMethod =>
+      throw _privateConstructorUsedError;
   double? get dueBalance => throw _privateConstructorUsedError;
   DateTime? get lastBilledDate => throw _privateConstructorUsedError;
 
@@ -71,6 +73,7 @@ abstract class $CommerceCopyWith<$Res> {
       BusinessHours? clickAndCollectHours,
       double? latitude,
       double? longitude,
+      ClPaymentMethod? defaultPaymentMethod,
       double? dueBalance,
       DateTime? lastBilledDate});
 
@@ -78,6 +81,7 @@ abstract class $CommerceCopyWith<$Res> {
   $AddressCopyWith<$Res>? get address;
   $BusinessHoursCopyWith<$Res>? get businessHours;
   $BusinessHoursCopyWith<$Res>? get clickAndCollectHours;
+  $ClPaymentMethodCopyWith<$Res>? get defaultPaymentMethod;
 }
 
 /// @nodoc
@@ -108,6 +112,7 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? clickAndCollectHours = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? defaultPaymentMethod = freezed,
     Object? dueBalance = freezed,
     Object? lastBilledDate = freezed,
   }) {
@@ -185,6 +190,10 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
+      defaultPaymentMethod: defaultPaymentMethod == freezed
+          ? _value.defaultPaymentMethod
+          : defaultPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as ClPaymentMethod?,
       dueBalance: dueBalance == freezed
           ? _value.dueBalance
           : dueBalance // ignore: cast_nullable_to_non_nullable
@@ -239,6 +248,18 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
       return _then(_value.copyWith(clickAndCollectHours: value));
     });
   }
+
+  @override
+  $ClPaymentMethodCopyWith<$Res>? get defaultPaymentMethod {
+    if (_value.defaultPaymentMethod == null) {
+      return null;
+    }
+
+    return $ClPaymentMethodCopyWith<$Res>(_value.defaultPaymentMethod!,
+        (value) {
+      return _then(_value.copyWith(defaultPaymentMethod: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -266,6 +287,7 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       BusinessHours? clickAndCollectHours,
       double? latitude,
       double? longitude,
+      ClPaymentMethod? defaultPaymentMethod,
       double? dueBalance,
       DateTime? lastBilledDate});
 
@@ -277,6 +299,8 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
   $BusinessHoursCopyWith<$Res>? get businessHours;
   @override
   $BusinessHoursCopyWith<$Res>? get clickAndCollectHours;
+  @override
+  $ClPaymentMethodCopyWith<$Res>? get defaultPaymentMethod;
 }
 
 /// @nodoc
@@ -309,6 +333,7 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? clickAndCollectHours = freezed,
     Object? latitude = freezed,
     Object? longitude = freezed,
+    Object? defaultPaymentMethod = freezed,
     Object? dueBalance = freezed,
     Object? lastBilledDate = freezed,
   }) {
@@ -386,6 +411,10 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value.longitude
           : longitude // ignore: cast_nullable_to_non_nullable
               as double?,
+      defaultPaymentMethod: defaultPaymentMethod == freezed
+          ? _value.defaultPaymentMethod
+          : defaultPaymentMethod // ignore: cast_nullable_to_non_nullable
+              as ClPaymentMethod?,
       dueBalance: dueBalance == freezed
           ? _value.dueBalance
           : dueBalance // ignore: cast_nullable_to_non_nullable
@@ -420,6 +449,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       this.clickAndCollectHours,
       this.latitude,
       this.longitude,
+      this.defaultPaymentMethod,
       this.dueBalance,
       this.lastBilledDate})
       : _categories = categories,
@@ -485,13 +515,15 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   @override
   final double? longitude;
   @override
+  final ClPaymentMethod? defaultPaymentMethod;
+  @override
   final double? dueBalance;
   @override
   final DateTime? lastBilledDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, dueBalance: $dueBalance, lastBilledDate: $lastBilledDate)';
+    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, defaultPaymentMethod: $defaultPaymentMethod, dueBalance: $dueBalance, lastBilledDate: $lastBilledDate)';
   }
 
   @override
@@ -518,6 +550,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('clickAndCollectHours', clickAndCollectHours))
       ..add(DiagnosticsProperty('latitude', latitude))
       ..add(DiagnosticsProperty('longitude', longitude))
+      ..add(DiagnosticsProperty('defaultPaymentMethod', defaultPaymentMethod))
       ..add(DiagnosticsProperty('dueBalance', dueBalance))
       ..add(DiagnosticsProperty('lastBilledDate', lastBilledDate));
   }
@@ -554,6 +587,8 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality().equals(other.latitude, latitude) &&
             const DeepCollectionEquality().equals(other.longitude, longitude) &&
             const DeepCollectionEquality()
+                .equals(other.defaultPaymentMethod, defaultPaymentMethod) &&
+            const DeepCollectionEquality()
                 .equals(other.dueBalance, dueBalance) &&
             const DeepCollectionEquality()
                 .equals(other.lastBilledDate, lastBilledDate));
@@ -582,6 +617,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
         const DeepCollectionEquality().hash(clickAndCollectHours),
         const DeepCollectionEquality().hash(latitude),
         const DeepCollectionEquality().hash(longitude),
+        const DeepCollectionEquality().hash(defaultPaymentMethod),
         const DeepCollectionEquality().hash(dueBalance),
         const DeepCollectionEquality().hash(lastBilledDate)
       ]);
@@ -616,6 +652,7 @@ abstract class _Commerce implements Commerce {
       final BusinessHours? clickAndCollectHours,
       final double? latitude,
       final double? longitude,
+      final ClPaymentMethod? defaultPaymentMethod,
       final double? dueBalance,
       final DateTime? lastBilledDate}) = _$_Commerce;
 
@@ -658,6 +695,9 @@ abstract class _Commerce implements Commerce {
   double? get latitude => throw _privateConstructorUsedError;
   @override
   double? get longitude => throw _privateConstructorUsedError;
+  @override
+  ClPaymentMethod? get defaultPaymentMethod =>
+      throw _privateConstructorUsedError;
   @override
   double? get dueBalance => throw _privateConstructorUsedError;
   @override
