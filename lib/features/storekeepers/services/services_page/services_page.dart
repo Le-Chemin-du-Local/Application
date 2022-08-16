@@ -1,4 +1,3 @@
-import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
@@ -106,65 +105,60 @@ class _ServicesPageState extends State<ServicesPage> {
 
         // La page en cours
         Flexible(
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ScreenHelper.instance.horizontalPadding
-            ),
-            child: Builder(
-              builder: (context) {
-                if (_currentTab == Tab.subscription) {
-                  return SubscribePage(
-                    commerce: commerce, 
-                    onCancel: () {
-                      setState(() {
-                        _currentTab = Tab.allServices;
-                      });
-                    }, 
-                    onSuccess: () {
-                      setState(() {
-                        _currentTab = Tab.allServices;
-                      });
-                    }
-                  );
-                }
-
-                if (_currentTab == Tab.cancellation) {
-                  return RemovePage(
-                    commerce: commerce,
-                    subscribedServices: commerce.services,
-                    onCancel: () {
-                      setState(() {
-                        _currentTab = Tab.allServices;
-                      });
-                    },
-                    onSuccess: () {
-                      if (refetch != null) {
-                        refetch();
-                      }
-                      setState(() {
-                        _currentTab = Tab.allServices;
-                      });
-                    },
-                  );
-                }
-                return AllServicesPage(
-                  commerce: commerce,
+          child: Builder(
+            builder: (context) {
+              if (_currentTab == Tab.subscription) {
+                return SubscribePage(
+                  commerce: commerce, 
                   onCancel: () {
                     setState(() {
-                      _currentTab = Tab.cancellation;
+                      _currentTab = Tab.allServices;
                     });
-                  },
-                  onSubscribe: () {
+                  }, 
+                  onSuccess: () {
                     setState(() {
-                      _currentTab = Tab.subscription;
+                      _currentTab = Tab.allServices;
+                    });
+                  }
+                );
+              }
+
+              if (_currentTab == Tab.cancellation) {
+                return RemovePage(
+                  commerce: commerce,
+                  subscribedServices: commerce.services,
+                  onCancel: () {
+                    setState(() {
+                      _currentTab = Tab.allServices;
                     });
                   },
-                  shouldRefetch: () {
-                    if (refetch != null) refetch();
+                  onSuccess: () {
+                    if (refetch != null) {
+                      refetch();
+                    }
+                    setState(() {
+                      _currentTab = Tab.allServices;
+                    });
                   },
                 );
-              },
-            ),
+              }
+              return AllServicesPage(
+                commerce: commerce,
+                onCancel: () {
+                  setState(() {
+                    _currentTab = Tab.cancellation;
+                  });
+                },
+                onSubscribe: () {
+                  setState(() {
+                    _currentTab = Tab.subscription;
+                  });
+                },
+                shouldRefetch: () {
+                  if (refetch != null) refetch();
+                },
+              );
+            },
           ),
         )
       ] 

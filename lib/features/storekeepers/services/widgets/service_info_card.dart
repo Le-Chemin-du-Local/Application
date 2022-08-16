@@ -43,120 +43,117 @@ class ServiceInfoCard extends StatelessWidget {
           borderColor: (isSelected || onSelect != null) && !forceHideBorder 
             ? Theme.of(context).colorScheme.primary 
             : Theme.of(context).colorScheme.surface,
-          child: DefaultTextStyle(
-            style: Theme.of(context).textTheme.titleMedium!,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Flexible(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // L'image et le bouton
-                      AspectRatio(
-                        aspectRatio: 0.64,
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            // L'image
-                            Expanded(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.network(
-                                  "$kImagesBaseUrl/services/${serviceInfo.id}.png",
-                                  fit: BoxFit.cover,
-                                  loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
-                                    child: CircularProgressIndicator(
-                                      value: loadingProgress.expectedTotalBytes != null
-                                        ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                                        : null,
-                                    ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Flexible(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // L'image et le bouton
+                    AspectRatio(
+                      aspectRatio: 0.67,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // L'image
+                          Expanded(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                "$kImagesBaseUrl/services/${serviceInfo.id}.png",
+                                fit: BoxFit.cover,
+                                loadingBuilder: (context, child, loadingProgress) => loadingProgress == null ? child : Center(
+                                  child: CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes != null
+                                      ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                      : null,
                                   ),
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
-                                  },
                                 ),
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Icon(Icons.image, size: 92, color: Theme.of(context).colorScheme.outline,);
+                                },
                               ),
                             ),
-                            const SizedBox(height: 4,),
-                          
-                            if (onButtonClick != null) 
-                              ElevatedButton(
-                                onPressed: onButtonClick,
-                                child: Text(buttonText),
-                              )
-                          ],
-                        ),
+                          ),
+                          const SizedBox(height: 4,),
+                        
+                          if (onButtonClick != null) 
+                            ElevatedButton(
+                              onPressed: onButtonClick,
+                              child: Text(buttonText),
+                            )
+                        ],
                       ),
-                      const SizedBox(width: 10,),
-                          
-                      // Le reste
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            // Le titre
-                            Text(serviceInfo.name, style: Theme.of(context).textTheme.headlineMedium,),
-                            const SizedBox(height: 4,),
-                          
-                            // La description
-                            Text(serviceInfo.shortDescription),
-                            const SizedBox(height: 4,),
-                          
-                            // Le prix
-                            RichText(
-                              text: TextSpan(
-                                style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: Theme.of(context).colorScheme.secondary,
-                                ),
-                                text: serviceType == ServiceType.monthly 
-                                  ? "a partir de ${serviceInfo.monthPrice}€"
-                                  : "${serviceInfo.transactionPercentage}%",
-                                children: [
-                                  TextSpan(
-                                    style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
-                                    text: serviceType == ServiceType.monthly 
-                                      ? " /mois"
-                                      : " /transactions"
-                                  )
-                                ]
+                    ),
+                    const SizedBox(width: 10,),
+                        
+                    // Le reste
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Le titre
+                          Text(serviceInfo.name, style: Theme.of(context).textTheme.headlineSmall,),
+                          const SizedBox(height: 4,),
+                        
+                          // La description
+                          Text(serviceInfo.shortDescription),
+                          const SizedBox(height: 4,),
+                        
+                          // Le prix
+                          RichText(
+                            text: TextSpan(
+                              style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
+                              text: serviceType == ServiceType.monthly 
+                                ? "a partir de ${serviceInfo.monthPrice}€"
+                                : "${serviceInfo.transactionPercentage}%",
+                              children: [
+                                TextSpan(
+                                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                                  text: serviceType == ServiceType.monthly 
+                                    ? " /mois"
+                                    : " /transactions"
+                                )
+                              ]
                             ),
-                          
-                            // Le switch
-                            Expanded(
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: _buildSwitch(context),
-                              ),
+                          ),
+                        
+                          // Le switch
+                          Expanded(
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: _buildSwitch(context),
                             ),
-                          ],
-                        ),
-                      )
-                      
-                    ],
-                  ),
+                          ),
+                        ],
+                      ),
+                    )
+                    
+                  ],
                 ),
+              ),
 
-                // Le text d'info au besoin
-                if (isMonthlyTransitioning)
-                  const Text(
-                    "Ce changement prendra effet lors de la prochaine facture",
-                    style: TextStyle(fontSize: 12),
-                  )
-                else if (isRemoved)
-                  const Text(
-                    "Ce service sera supprimé lors de la prochaine facture",
-                    style: TextStyle(fontSize: 12),
-                  )
-                else 
-                  const SizedBox(height: 12,)
-              ],
-            ),
+              // Le text d'info au besoin
+              if (isMonthlyTransitioning)
+                const Text(
+                  "Ce changement prendra effet lors de la prochaine facture",
+                  style: TextStyle(fontSize: 12),
+                )
+              else if (isRemoved)
+                const Text(
+                  "Ce service sera supprimé lors de la prochaine facture",
+                  style: TextStyle(fontSize: 12),
+                )
+              else 
+                const SizedBox(height: 12,)
+            ],
           ),
         ),
       ),

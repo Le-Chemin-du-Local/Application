@@ -36,38 +36,66 @@ class DueBalance extends StatelessWidget {
       ),
       child: LayoutBuilder(
         builder: (context, constraints) {
+          final bool isBig = constraints.maxWidth >= ScreenHelper.breakpointTablet;
+
+          final List<Widget> servicesBages = [
+            for (final service in commerce.services)
+              Query<dynamic>(
+                options: _serviceInfoQueryOption(service.split("_").first),
+                builder: (result, {fetchMore, refetch}) {
+                  if (result.isLoading) {
+                    return const Badge(child: CircularProgressIndicator());
+                  }
+
+                  if (result.hasException) {
+                    return Badge(child: Text(service));
+                  }
+
+                  final ServiceInfo serviceInfo = ServiceInfo.fromJson(result.data!["serviceInfo"] as Map<String, dynamic>);
+
+                  return Badge(
+                    child: Text(serviceInfo.name)
+                  );
+                },
+              ),
+          ];
+
           final List<Widget> children = [
             Flexible(
-              child: Row(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  Text(
-                    "Vous êtes abonné à : ",
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                      fontWeight: FontWeight.w500
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "Vous êtes abonné à : ",
+                        style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                      const SizedBox(width: 8,),
+                      if (isBig) 
+                        Wrap(
+                          spacing: 8,
+                          runSpacing: 8,
+                          children: servicesBages,
+                        )
+                    ],
                   ),
-                  const SizedBox(width: 8,),
-
-                  for (final service in commerce.services) ...{
-                    Query<dynamic>(
-                      options: _serviceInfoQueryOption(service.split("_").first),
-                      builder: (result, {fetchMore, refetch}) {
-                        if (result.isLoading) {
-                          return const Badge(child: CircularProgressIndicator());
-                        }
-
-                        if (result.hasException) {
-                          return Badge(child: Text(service));
-                        }
-
-                        final ServiceInfo serviceInfo = ServiceInfo.fromJson(result.data!["serviceInfo"] as Map<String, dynamic>);
-
-                        return Badge(
-                          child: Text(serviceInfo.name)
-                        );
-                      },
+                  if (!isBig) ...{
+                    const SizedBox(height: 8,),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(maxHeight: 32),
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: servicesBages.length,
+                        separatorBuilder: (context, index) => const SizedBox(width: 8,),
+                        itemBuilder: (context, index) => servicesBages[index],
+                      ),
                     ),
-                    const SizedBox(width: 8,)
+                    const SizedBox(height: 12,),
                   }
                 ],
               )

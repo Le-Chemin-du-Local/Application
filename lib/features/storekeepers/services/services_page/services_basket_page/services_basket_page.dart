@@ -59,9 +59,11 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
+          bool isBig = constraints.maxWidth >= ScreenHelper.breakpointTablet;
+
           final List<Widget> children = [
             // La liste des services à faire payer
-            Flexible(
+            Expanded(
               child: SingleChildScrollView(
                 child: Padding(
                   padding: EdgeInsets.symmetric(
@@ -76,40 +78,44 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Transform.scale(
-                                scale: 2,
-                                child: Checkbox(
-                                  value: !_serviceToDelete.contains(service.item1.id), 
-                                  shape: const CircleBorder(),
-                                  onChanged: (mustKeep) {
-                                    if (!(mustKeep ?? false)) {
-                                      setState(() {
-                                        _serviceToDelete.add(service.item1.id);
-                                      });
+                              if (isBig) ...{
+                                Transform.scale(
+                                  scale: 2,
+                                  child: Checkbox(
+                                    value: !_serviceToDelete.contains(service.item1.id), 
+                                    shape: const CircleBorder(),
+                                    onChanged: (mustKeep) {
+                                      if (!(mustKeep ?? false)) {
+                                        setState(() {
+                                          _serviceToDelete.add(service.item1.id);
+                                        });
+                                      }
+                                      else {
+                                        setState(() {
+                                          _serviceToDelete.remove(service.item1.id);
+                                        });
+                                      }
                                     }
-                                    else {
-                                      setState(() {
-                                        _serviceToDelete.remove(service.item1.id);
-                                      });
-                                    }
-                                  }
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 32,),
-                        
-                              ConstrainedBox(
-                                constraints: const BoxConstraints(maxHeight: 236, maxWidth: 423),
-                                child: ServiceInfoCard(
-                                  serviceInfo: service.item1,
-                                  serviceType: service.item2,
-                                  buttonText: "En savoir plus",
-                                  onButtonClick: () {},
-                                  isSelected: !_serviceToDelete.contains(service.item1.id),
-                                  onSelect: (value) {},
-                                  forceHideBorder: true,
-                                  onTypeChanged: (type) {
-                                    ref.read(servicesBasketControllerProvider.notifier).replaceServiceInfoType(service.item1, type);
-                                  },
+                                const SizedBox(width: 32,),
+                              },
+              
+                              Flexible(
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(maxHeight: 236, maxWidth: 423),
+                                  child: ServiceInfoCard(
+                                    serviceInfo: service.item1,
+                                    serviceType: service.item2,
+                                    buttonText: "En savoir plus",
+                                    onButtonClick: () {},
+                                    isSelected: !_serviceToDelete.contains(service.item1.id),
+                                    onSelect: (value) {},
+                                    forceHideBorder: true,
+                                    onTypeChanged: (type) {
+                                      ref.read(servicesBasketControllerProvider.notifier).replaceServiceInfoType(service.item1, type);
+                                    },
+                                  ),
                                 ),
                               )
                             ],
@@ -124,80 +130,100 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
             ),
 
             // Le formulaire de paiement
-            Flexible(
-              child: SingleChildScrollView(
-                child: ClCard(
-                  child: _isLoading ? const Center(child: CircularProgressIndicator(),) : Mutation<dynamic>(
-                    options: _addServicesOption(),
-                    builder: (runMutation, result) {
-                      if (result?.isLoading ?? false) {
-                        return const Center(child: CircularProgressIndicator(),);
-                      }
-
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          if (_errorMessage.isNotEmpty) ...{
-                            ClStatusMessage(
-                              message: _errorMessage,
-                            ),
-                            const SizedBox(height: 12,),
-                          },
-
-                          Text(
-                            "Rentrez votre moyen de paiement",
-                            style: Theme.of(context).textTheme.headlineMedium,
-                          ),
-                          const SizedBox(height: 12,),
-                          CardField(
-                            controller: _cardController,
-                            decoration: InputDecoration(
-                              label: const Text("Votre carte"),
-                              filled: true,
-                              fillColor: Theme.of(context).colorScheme.surface,
-                              floatingLabelBehavior: FloatingLabelBehavior.always,
-                              contentPadding: const EdgeInsets.all(12),
-
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Theme.of(context).colorScheme.outline
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Theme.of(context).colorScheme.outline
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                            ),
-                          ),
-
-                          // Le bouton de souscription
-                          const SizedBox(height: 16,),
-                          Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: ElevatedButton.icon(
-                              onPressed: () => _handleSubscription(runMutation), 
-                              icon: const Icon(Icons.arrow_back),
-                              label: const Text("Souscrire maintenant"),
-                            ),
-                          )
-                        ],
-                      );
-                    }
+            if (isBig) 
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    right: ScreenHelper.instance.horizontalPadding
                   ),
-                ),
-              ),
-            )
+                  child: _buildPaymentCard(),
+                )
+              )
+            else 
+              _buildPaymentCard()
           ];
 
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          if (isBig) {
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: children,
+            );
+          }
+
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: children,
           );
         },
+      ),
+    );
+  }
+
+  Widget _buildPaymentCard() {
+    return ClCard(
+      child: _isLoading ? const Center(child: CircularProgressIndicator(),) : Mutation<dynamic>(
+        options: _addServicesOption(),
+        builder: (runMutation, result) {
+          if (result?.isLoading ?? false) {
+            return const Center(child: CircularProgressIndicator(),);
+          }
+    
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (_errorMessage.isNotEmpty) ...{
+                ClStatusMessage(
+                  message: _errorMessage,
+                ),
+                const SizedBox(height: 12,),
+              },
+    
+              Text(
+                "Rentrez votre moyen de paiement",
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              const SizedBox(height: 12,),
+              Flexible(
+                child: CardField(
+                  controller: _cardController,
+                  decoration: InputDecoration(
+                    label: const Text("Votre carte"),
+                    filled: true,
+                    fillColor: Theme.of(context).colorScheme.surface,
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                    contentPadding: const EdgeInsets.all(12),
+                          
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.outline
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.outline
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                ),
+              ),
+    
+              // Le bouton de souscription
+              const SizedBox(height: 16,),
+              Directionality(
+                textDirection: TextDirection.rtl,
+                child: ElevatedButton.icon(
+                  onPressed: () => _handleSubscription(runMutation), 
+                  icon: const Icon(Icons.arrow_back),
+                  label: const Text("Souscrire maintenant"),
+                ),
+              )
+            ],
+          );
+        }
       ),
     );
   }

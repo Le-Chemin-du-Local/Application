@@ -75,68 +75,72 @@ class SubscribedServices extends StatelessWidget {
                   },
 
                   Flexible(
-                    child: GridView(
-                      primary: false,
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                        childAspectRatio: 1.8,
-                        maxCrossAxisExtent: 423,
-                        mainAxisExtent: 248,
-                        mainAxisSpacing: 12,
-                        crossAxisSpacing: 12
-                      ),
-                      children: [
-                        for (final serviceString in subscribedServices) 
-                          Builder(
-                            builder: (context) {
-                              final List<String> splittedServiceString = serviceString.split("_");
-                              final String serviceID = splittedServiceString[0];
-                              final ServiceType serviceType = (splittedServiceString.length > 2 && splittedServiceString[2] == "UPDATE") ? ServiceType.transactions : splittedServiceString[1] == "T" ? ServiceType.transactions : ServiceType.monthly; 
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        return GridView(
+                          primary: false,
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            childAspectRatio: 1.8,
+                            crossAxisCount: constraints.maxWidth < 435 ? 1 : constraints.maxWidth ~/ 435,
+                            mainAxisExtent: 248,
+                            mainAxisSpacing: 12,
+                            crossAxisSpacing: 12
+                          ),
+                          children: [
+                            for (final serviceString in subscribedServices) 
+                              Builder(
+                                builder: (context) {
+                                  final List<String> splittedServiceString = serviceString.split("_");
+                                  final String serviceID = splittedServiceString[0];
+                                  final ServiceType serviceType = (splittedServiceString.length > 2 && splittedServiceString[2] == "UPDATE") ? ServiceType.transactions : splittedServiceString[1] == "T" ? ServiceType.transactions : ServiceType.monthly; 
                   
-                              return Query<dynamic>(
-                                options: _serviceInfoQueryOption(serviceID),
-                                builder: (result, {fetchMore, refetch}) {
-                                  if (result.isLoading) {
-                                    return const ClCard(
-                                      child: Center(child: CircularProgressIndicator(),),
-                                    );
-                                  } 
+                                  return Query<dynamic>(
+                                    options: _serviceInfoQueryOption(serviceID),
+                                    builder: (result, {fetchMore, refetch}) {
+                                      if (result.isLoading) {
+                                        return const ClCard(
+                                          child: Center(child: CircularProgressIndicator(),),
+                                        );
+                                      } 
                   
-                                  if (result.hasException) {
-                                    return const ClCard(
-                                      child: Center(
-                                        child: ClStatusMessage(
-                                          message: "Impossible de charger les infos du servie",
-                                        ),
-                                      ),
-                                    );
-                                  }
+                                      if (result.hasException) {
+                                        return const ClCard(
+                                          child: Center(
+                                            child: ClStatusMessage(
+                                              message: "Impossible de charger les infos du servie",
+                                            ),
+                                          ),
+                                        );
+                                      }
                   
-                                  final ServiceInfo serviceInfo = ServiceInfo.fromJson(result.data!["serviceInfo"] as Map<String, dynamic>);
+                                      final ServiceInfo serviceInfo = ServiceInfo.fromJson(result.data!["serviceInfo"] as Map<String, dynamic>);
                   
-                                  return ServiceInfoCard(
-                                    serviceInfo: serviceInfo, 
-                                    serviceType: serviceType, 
-                                    isMonthlyTransitioning: splittedServiceString.length > 2 && splittedServiceString[2] == "UPDATE",
-                                    isRemoved: splittedServiceString.length > 2 && splittedServiceString[2] == "REMOVE",
-                                    isSelected: true,
-                                    onSelect: (value) {},
-                                    buttonText: "Accéder",
-                                    onButtonClick: () => _onAccessService(context, serviceInfo),
-                                    onTypeChanged: (type) => _onUpdateServiceType(
-                                      context, 
-                                      serviceInfo, 
-                                      type, 
-                                      alreadyContainsUpdate: serviceString.split("_").length > 2 && serviceString.split("_")[2] == "UPDATE",
-                                      runMutation: runMutation
-                                    )
+                                      return ServiceInfoCard(
+                                        serviceInfo: serviceInfo, 
+                                        serviceType: serviceType, 
+                                        isMonthlyTransitioning: splittedServiceString.length > 2 && splittedServiceString[2] == "UPDATE",
+                                        isRemoved: splittedServiceString.length > 2 && splittedServiceString[2] == "REMOVE",
+                                        isSelected: true,
+                                        onSelect: (value) {},
+                                        buttonText: "Accéder",
+                                        onButtonClick: () => _onAccessService(context, serviceInfo),
+                                        onTypeChanged: (type) => _onUpdateServiceType(
+                                          context, 
+                                          serviceInfo, 
+                                          type, 
+                                          alreadyContainsUpdate: serviceString.split("_").length > 2 && serviceString.split("_")[2] == "UPDATE",
+                                          runMutation: runMutation
+                                        )
+                                      );
+                                    },
                                   );
                                 },
-                              );
-                            },
-                          )
-                      ],
+                              )
+                          ],
+                        );
+                      }
                     ),
                   ),
                 ],

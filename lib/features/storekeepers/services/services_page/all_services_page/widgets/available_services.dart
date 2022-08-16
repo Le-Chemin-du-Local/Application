@@ -88,47 +88,51 @@ class AvailableServices extends StatelessWidget {
   Widget _buildContent(BuildContext context, List<Tuple2<ServiceInfo, ServiceType>> services) {
     return StatefulBuilder(
       builder: (context, setState) {
-        return GridView(
-          primary: false,
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-            childAspectRatio: 1.8,
-            maxCrossAxisExtent: 563,
-            mainAxisExtent: 236,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-          ),
-          children: [
-            for (int i = 0; i < services.length; ++i) 
-              ServiceInfoCard(
-                serviceInfo: services[i].item1,
-                serviceType: services[i].item2,
-                onTypeChanged: (type) {
-                  setState(() {
-                    services = [
-                      for (int j = 0; j < services.length; ++j) 
-                        if (j == i)
-                          Tuple2(services[i].item1, type)
-                        else 
-                          services[i]
-                    ];
-                  });
-                },
-                onButtonClick: () async {
-                  bool success = await Navigator.of(context).push<bool?>(
-                    MaterialPageRoute<bool?>(
-                      builder: (context) => ServiceDetailsPage(
-                        serviceInfo: services[i].item1,
-                        commerceID: commerceID,
-                      )
-                    )
-                  ) ?? false;
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return GridView(
+              primary: false,
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1.8,
+                crossAxisCount: constraints.maxWidth < 435 ? 1 : constraints.maxWidth ~/ 435,
+                mainAxisExtent: 236,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+              ),
+              children: [
+                for (int i = 0; i < services.length; ++i) 
+                  ServiceInfoCard(
+                    serviceInfo: services[i].item1,
+                    serviceType: services[i].item2,
+                    onTypeChanged: (type) {
+                      setState(() {
+                        services = [
+                          for (int j = 0; j < services.length; ++j) 
+                            if (j == i)
+                              Tuple2(services[i].item1, type)
+                            else 
+                              services[i]
+                        ];
+                      });
+                    },
+                    onButtonClick: () async {
+                      bool success = await Navigator.of(context).push<bool?>(
+                        MaterialPageRoute<bool?>(
+                          builder: (context) => ServiceDetailsPage(
+                            serviceInfo: services[i].item1,
+                            commerceID: commerceID,
+                          )
+                        )
+                      ) ?? false;
 
-                  if (success) shouldRefetch();
-                },
-              )
-          ],
+                      if (success) shouldRefetch();
+                    },
+                  )
+              ],
+            );
+          }
         );
       }
     );

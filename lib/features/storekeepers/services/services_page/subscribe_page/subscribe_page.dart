@@ -1,3 +1,4 @@
+import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
@@ -33,93 +34,128 @@ class SubscribePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref,) {
     final List<String> alreadySubscribedServices = commerce.services;
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        // Le titre 
-        Row(
-          children: [
-            Expanded(
-              child: Text(
-                "Séléctionnez le ou les services à souscrire",
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                  fontWeight: FontWeight.w500
-                ),
-              ),
-            ),
-            const SizedBox(width: 12,),
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: ScreenHelper.instance.horizontalPadding
+      ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          bool isBig = constraints.maxWidth + ScreenHelper.instance.horizontalPadding * 2 >= ScreenHelper.breakpointTablet;
 
-            ElevatedButton.icon(
-              onPressed: ref.watch(servicesBasketControllerProvider).services.isEmpty ? null : () => _onSubscribe(context, ref),
-              icon: const Icon(Icons.arrow_forward),
-              label: const Text("Souscrire aux services sélectionnés"),
-            ),
-            const SizedBox(width: 8,),
-            OutlinedButton(
-              onPressed: onCancel, 
-              child: const Text("Annuler")
-            )
-          ],
-        ),
-        const SizedBox(height: 16,),
-
-        // La liste des services
-        Flexible(
-          child: Query<dynamic>(
-            options: _allServicesInfoQueryOptions(), 
-            builder: (result, {fetchMore, refetch}) {
-              if (result.isLoading) {
-                return const Center(child: CircularProgressIndicator(),);
-              }
-        
-              if (result.hasException) {
-                return const Center(
-                  child: ClStatusMessage(
-                    message: "Nous ne parvenons pas à charger la liste des services disponibles",
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Le titre 
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      "Séléctionnez le ou les services à souscrire",
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        fontWeight: FontWeight.w500
+                      ),
+                    ),
                   ),
-                );
-              }
-        
-              final List mapServices = result.data!["allServicesInfo"] as List;
-              final List<ServiceInfo> servicesInfo = [];
-        
-              for (final map in mapServices) {
-                final ServiceInfo serviceInfo = ServiceInfo.fromJson(map as Map<String, dynamic>);
-        
-                if (
-                  !alreadySubscribedServices.contains("${serviceInfo.id}_M") &&
-                  !alreadySubscribedServices.contains("${serviceInfo.id}_M_UPDATE") &&
-                  !alreadySubscribedServices.contains("${serviceInfo.id}_M_REMOVE") &&
-                  !alreadySubscribedServices.contains("${serviceInfo.id}_T")) {
-                    servicesInfo.add(serviceInfo);
+                  const SizedBox(width: 12,),
+                  
+                  if (isBig) ...{
+                    ElevatedButton.icon(
+                      onPressed: ref.watch(servicesBasketControllerProvider).services.isEmpty ? null : () => _onSubscribe(context, ref),
+                      icon: const Icon(Icons.arrow_forward),
+                      label: const Text("Souscrire aux services sélectionnés"),
+                    ),
+                    const SizedBox(width: 8,),
+                    OutlinedButton(
+                      onPressed: onCancel, 
+                      child: const Text("Annuler")
+                    )
                   }
+                ],
+              ),
+              if (!isBig)
+                const SizedBox(height: 16,),
+
+              // La liste des services
+              Expanded(
+                child: Query<dynamic>(
+                  options: _allServicesInfoQueryOptions(), 
+                  builder: (result, {fetchMore, refetch}) {
+                    if (result.isLoading) {
+                      return const Center(child: CircularProgressIndicator(),);
+                    }
+              
+                    if (result.hasException) {
+                      return const Align(
+                        alignment: Alignment.topCenter,
+                        child: ClStatusMessage(
+                          message: "Nous ne parvenons pas à charger la liste des services disponibles",
+                        ),
+                      );
+                    }
+              
+                    final List mapServices = result.data!["allServicesInfo"] as List;
+                    final List<ServiceInfo> servicesInfo = [];
+              
+                    for (final map in mapServices) {
+                      final ServiceInfo serviceInfo = ServiceInfo.fromJson(map as Map<String, dynamic>);
+              
+                      if (
+                        !alreadySubscribedServices.contains("${serviceInfo.id}_M") &&
+                        !alreadySubscribedServices.contains("${serviceInfo.id}_M_UPDATE") &&
+                        !alreadySubscribedServices.contains("${serviceInfo.id}_M_REMOVE") &&
+                        !alreadySubscribedServices.contains("${serviceInfo.id}_T")) {
+                          servicesInfo.add(serviceInfo);
+                        }
+                    }
+              
+                    if (servicesInfo.isEmpty) {
+                      return const Align(
+                        alignment: Alignment.topCenter,
+                        child: ClStatusMessage(
+                          type: ClStatusMessageType.success,
+                          message: "Vous avez souscrit à tous les services ! 🎉",
+                        ),
+                      );
+                    }
+              
+                    return _buildContent(context, ref, servicesInfo, constraints);
+                  }
+                )
+              ),
+
+              if (!isBig) ...{
+                const SizedBox(height: 12,),
+                OutlinedButton(
+                  onPressed: onCancel, 
+                  child: const Text("Annuler")
+                ),
+                const SizedBox(width: 8,),
+                ElevatedButton.icon(
+                  onPressed: ref.watch(servicesBasketControllerProvider).services.isEmpty ? null : () => _onSubscribe(context, ref),
+                  icon: const Icon(Icons.arrow_forward),
+                  label: const Text("Souscrire aux services sélectionnés"),
+                ),
+                const SizedBox(height: 8,)
               }
-        
-              if (servicesInfo.isEmpty) {
-                return const Align(
-                  alignment: Alignment.topCenter,
-                  child: ClStatusMessage(
-                    type: ClStatusMessageType.success,
-                    message: "Vous avez souscrit à tous les services ! 🎉",
-                  ),
-                );
-              }
-        
-              return _buildContent(context, ref, servicesInfo);
-            }
-          )
-        )
-      ],
+            ],
+          );
+        }
+      ),
     );
   }
 
-  Widget _buildContent(BuildContext context, WidgetRef ref, List<ServiceInfo> services) {
+  Widget _buildContent(
+    BuildContext context,
+    WidgetRef ref,
+    List<ServiceInfo> services,
+    BoxConstraints constraints,
+  ) {
     return GridView(
       shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         childAspectRatio: 1.8,
-        maxCrossAxisExtent: 423,
+        crossAxisCount: constraints.maxWidth < 435 ? 1 : constraints.maxWidth ~/ 435,
         mainAxisExtent: 236,
         mainAxisSpacing: 12,
         crossAxisSpacing: 12,
