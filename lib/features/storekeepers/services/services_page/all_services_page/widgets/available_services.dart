@@ -34,7 +34,7 @@ class AvailableServices extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Le titre
-        Text("Services non souscrit", style: Theme.of(context).textTheme.headlineMedium,),
+        Text("Services non souscrits", style: Theme.of(context).textTheme.headlineMedium,),
         const SizedBox(height: 12,),
 
         // Le contenue

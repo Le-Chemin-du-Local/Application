@@ -163,7 +163,7 @@ class ServiceInfoCard extends StatelessWidget {
   Widget _buildSwitch(BuildContext context) {
     return Row(
       children: [
-        const Flexible(child: Text("Mensuelle")),
+        const Flexible(child: Text("Mensuel")),
         Switch(
           value: serviceType == ServiceType.transactions, 
           onChanged: (value) {
