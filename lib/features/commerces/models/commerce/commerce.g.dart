@@ -35,6 +35,9 @@ _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
       facebook: json['facebook'] as String?,
       twitter: json['twitter'] as String?,
       instagram: json['instagram'] as String?,
+      ibanOwner: json['ibanOwner'] as String?,
+      iban: json['iban'] as String?,
+      bic: json['bic'] as String?,
       businessHours: json['businessHours'] == null
           ? null
           : BusinessHours.fromJson(
@@ -72,6 +75,9 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
       'facebook': instance.facebook,
       'twitter': instance.twitter,
       'instagram': instance.instagram,
+      'ibanOwner': instance.ibanOwner,
+      'iban': instance.iban,
+      'bic': instance.bic,
       'businessHours': instance.businessHours,
       'clickAndCollectHours': instance.clickAndCollectHours,
       'latitude': instance.latitude,

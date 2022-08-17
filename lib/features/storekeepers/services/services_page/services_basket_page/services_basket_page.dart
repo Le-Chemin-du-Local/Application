@@ -8,6 +8,7 @@ import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart
 import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_basket_controller.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_graphql.dart';
+import 'package:chemin_du_local/features/storekeepers/services/services_page/services_basket_page/widgets/iban_dialog.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/service_info_card.dart';
 import 'package:chemin_du_local/features/stripe/stripe_service.dart';
 import 'package:flutter/material.dart';
@@ -248,20 +249,29 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
   }
 
   Future _handleSubscription(RunMutation? runMutation) async {
+    final Map<String, dynamic>? bankInformations = widget.commerce.iban != null ? null : await showDialog<Map<String, dynamic>?>(
+      context: context, 
+      builder: (context) => const IbanDialog()
+    );
+
     bool paymentSuccess = widget.commerce.defaultPaymentMethod != null || await _handlePayment();
     final List<Tuple2<ServiceInfo, ServiceType>> servicesToAdd = ref.read(servicesBasketControllerProvider).services;
 
     if (paymentSuccess && runMutation != null) {
       runMutation(<String, dynamic>{
         "commerceID": widget.commerce.id,
-        "services": <Map<String, dynamic>>[
-          for (final serviceToAdd in servicesToAdd)
-            if (!_serviceToDelete.contains(serviceToAdd.item1.id))
-              <String, dynamic>{
-                "serviceID": "${serviceToAdd.item1.id}_${serviceToAdd.item2 == ServiceType.monthly ? "M" : "T"}",
-                "updateType": "ADD"
-              }
-        ]
+        "changes": <String, dynamic>{
+          if (bankInformations != null) 
+            ...bankInformations,
+          "services": <Map<String, dynamic>>[
+            for (final serviceToAdd in servicesToAdd)
+              if (!_serviceToDelete.contains(serviceToAdd.item1.id))
+                <String, dynamic>{
+                  "serviceID": "${serviceToAdd.item1.id}_${serviceToAdd.item2 == ServiceType.monthly ? "M" : "T"}",
+                  "updateType": "ADD"
+                }
+          ]
+        }
       });
     }
   }

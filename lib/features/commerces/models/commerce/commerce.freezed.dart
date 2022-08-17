@@ -35,6 +35,9 @@ mixin _$Commerce {
   String? get facebook => throw _privateConstructorUsedError;
   String? get twitter => throw _privateConstructorUsedError;
   String? get instagram => throw _privateConstructorUsedError;
+  String? get ibanOwner => throw _privateConstructorUsedError;
+  String? get iban => throw _privateConstructorUsedError;
+  String? get bic => throw _privateConstructorUsedError;
   BusinessHours? get businessHours => throw _privateConstructorUsedError;
   BusinessHours? get clickAndCollectHours => throw _privateConstructorUsedError;
   double? get latitude => throw _privateConstructorUsedError;
@@ -69,6 +72,9 @@ abstract class $CommerceCopyWith<$Res> {
       String? facebook,
       String? twitter,
       String? instagram,
+      String? ibanOwner,
+      String? iban,
+      String? bic,
       BusinessHours? businessHours,
       BusinessHours? clickAndCollectHours,
       double? latitude,
@@ -108,6 +114,9 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? facebook = freezed,
     Object? twitter = freezed,
     Object? instagram = freezed,
+    Object? ibanOwner = freezed,
+    Object? iban = freezed,
+    Object? bic = freezed,
     Object? businessHours = freezed,
     Object? clickAndCollectHours = freezed,
     Object? latitude = freezed,
@@ -173,6 +182,18 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
       instagram: instagram == freezed
           ? _value.instagram
           : instagram // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ibanOwner: ibanOwner == freezed
+          ? _value.ibanOwner
+          : ibanOwner // ignore: cast_nullable_to_non_nullable
+              as String?,
+      iban: iban == freezed
+          ? _value.iban
+          : iban // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bic: bic == freezed
+          ? _value.bic
+          : bic // ignore: cast_nullable_to_non_nullable
               as String?,
       businessHours: businessHours == freezed
           ? _value.businessHours
@@ -283,6 +304,9 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       String? facebook,
       String? twitter,
       String? instagram,
+      String? ibanOwner,
+      String? iban,
+      String? bic,
       BusinessHours? businessHours,
       BusinessHours? clickAndCollectHours,
       double? latitude,
@@ -329,6 +353,9 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? facebook = freezed,
     Object? twitter = freezed,
     Object? instagram = freezed,
+    Object? ibanOwner = freezed,
+    Object? iban = freezed,
+    Object? bic = freezed,
     Object? businessHours = freezed,
     Object? clickAndCollectHours = freezed,
     Object? latitude = freezed,
@@ -395,6 +422,18 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value.instagram
           : instagram // ignore: cast_nullable_to_non_nullable
               as String?,
+      ibanOwner: ibanOwner == freezed
+          ? _value.ibanOwner
+          : ibanOwner // ignore: cast_nullable_to_non_nullable
+              as String?,
+      iban: iban == freezed
+          ? _value.iban
+          : iban // ignore: cast_nullable_to_non_nullable
+              as String?,
+      bic: bic == freezed
+          ? _value.bic
+          : bic // ignore: cast_nullable_to_non_nullable
+              as String?,
       businessHours: businessHours == freezed
           ? _value.businessHours
           : businessHours // ignore: cast_nullable_to_non_nullable
@@ -445,6 +484,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       this.facebook,
       this.twitter,
       this.instagram,
+      this.ibanOwner,
+      this.iban,
+      this.bic,
       this.businessHours,
       this.clickAndCollectHours,
       this.latitude,
@@ -507,6 +549,12 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   @override
   final String? instagram;
   @override
+  final String? ibanOwner;
+  @override
+  final String? iban;
+  @override
+  final String? bic;
+  @override
   final BusinessHours? businessHours;
   @override
   final BusinessHours? clickAndCollectHours;
@@ -523,7 +571,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, defaultPaymentMethod: $defaultPaymentMethod, dueBalance: $dueBalance, lastBilledDate: $lastBilledDate)';
+    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, ibanOwner: $ibanOwner, iban: $iban, bic: $bic, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, defaultPaymentMethod: $defaultPaymentMethod, dueBalance: $dueBalance, lastBilledDate: $lastBilledDate)';
   }
 
   @override
@@ -546,6 +594,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('facebook', facebook))
       ..add(DiagnosticsProperty('twitter', twitter))
       ..add(DiagnosticsProperty('instagram', instagram))
+      ..add(DiagnosticsProperty('ibanOwner', ibanOwner))
+      ..add(DiagnosticsProperty('iban', iban))
+      ..add(DiagnosticsProperty('bic', bic))
       ..add(DiagnosticsProperty('businessHours', businessHours))
       ..add(DiagnosticsProperty('clickAndCollectHours', clickAndCollectHours))
       ..add(DiagnosticsProperty('latitude', latitude))
@@ -580,6 +631,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality().equals(other.facebook, facebook) &&
             const DeepCollectionEquality().equals(other.twitter, twitter) &&
             const DeepCollectionEquality().equals(other.instagram, instagram) &&
+            const DeepCollectionEquality().equals(other.ibanOwner, ibanOwner) &&
+            const DeepCollectionEquality().equals(other.iban, iban) &&
+            const DeepCollectionEquality().equals(other.bic, bic) &&
             const DeepCollectionEquality()
                 .equals(other.businessHours, businessHours) &&
             const DeepCollectionEquality()
@@ -613,6 +667,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
         const DeepCollectionEquality().hash(facebook),
         const DeepCollectionEquality().hash(twitter),
         const DeepCollectionEquality().hash(instagram),
+        const DeepCollectionEquality().hash(ibanOwner),
+        const DeepCollectionEquality().hash(iban),
+        const DeepCollectionEquality().hash(bic),
         const DeepCollectionEquality().hash(businessHours),
         const DeepCollectionEquality().hash(clickAndCollectHours),
         const DeepCollectionEquality().hash(latitude),
@@ -648,6 +705,9 @@ abstract class _Commerce implements Commerce {
       final String? facebook,
       final String? twitter,
       final String? instagram,
+      final String? ibanOwner,
+      final String? iban,
+      final String? bic,
       final BusinessHours? businessHours,
       final BusinessHours? clickAndCollectHours,
       final double? latitude,
@@ -687,6 +747,12 @@ abstract class _Commerce implements Commerce {
   String? get twitter => throw _privateConstructorUsedError;
   @override
   String? get instagram => throw _privateConstructorUsedError;
+  @override
+  String? get ibanOwner => throw _privateConstructorUsedError;
+  @override
+  String? get iban => throw _privateConstructorUsedError;
+  @override
+  String? get bic => throw _privateConstructorUsedError;
   @override
   BusinessHours? get businessHours => throw _privateConstructorUsedError;
   @override

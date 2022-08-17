@@ -7,6 +7,9 @@ query GetServicesForStoreKeeper {
     commerce {
       id
       name
+      ibanOwner
+      iban
+      bic
       services
       defaultPaymentMethod {
         name
@@ -60,13 +63,11 @@ query serviceInfo($serviceID: String!) {
 const String mutUpdateServices = r'''
 mutation updateCommerceServices(
   $commerceID: ID!,
-  $services: [ChangesService!]
+  $changes: ChangesCommerce!
 ) {
   updateCommerce(
     id: $commerceID,
-    changes: {
-      services: $services
-    }
+    changes: $changes
   ) {
     id
     name
