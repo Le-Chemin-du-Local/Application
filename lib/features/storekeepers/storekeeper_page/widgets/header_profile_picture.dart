@@ -20,7 +20,7 @@ class HeaderProfilePicture extends StatelessWidget {
 
   MutationOptions _updateCommerceMutationOptions() {
     return MutationOptions<dynamic>(
-      document: gql(mutUpdateStorekeerCommercePage),
+      document: gql(mutUpdateStorekeerCommerce),
     );
   }
 

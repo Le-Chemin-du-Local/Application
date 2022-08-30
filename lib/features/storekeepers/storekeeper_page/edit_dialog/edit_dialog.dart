@@ -72,7 +72,7 @@ class _EditDialogState extends State<EditDialog> {
 
   MutationOptions _updateCommerceOptions() {
     return MutationOptions<dynamic>(
-      document: gql(mutUpdateStorekeerCommercePage),
+      document: gql(mutUpdateStorekeerCommerce),
       onError: (error) {
         _errorMessage = "Nous n'avons pas pu mettre à jour votre commerce. Veuillez vérifier votre connexion internet et recommencer.";
       },
