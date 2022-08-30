@@ -3,11 +3,11 @@ import 'package:chemin_du_local/features/commands/storekeeper_commands/storekeep
 import 'package:chemin_du_local/features/main_page/main_page.dart';
 import 'package:chemin_du_local/features/main_page/page_item.dart';
 import 'package:chemin_du_local/features/products/storekeepers/products_main_page/products_main_page.dart';
+import 'package:chemin_du_local/features/settings/storekeeper_settings_page/storekeeper_settings_page.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services.dart';
 import 'package:chemin_du_local/features/storekeepers/services/services_page/services_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_home/storekeeper_home_page.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeeper_page/storekeeper_page.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeeper_settings/storekeeper_settings_page.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
 import 'package:flutter/material.dart';

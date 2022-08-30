@@ -1,5 +1,6 @@
 import 'package:chemin_du_local/features/commerces/models/business_hours/business_hours.dart';
 import 'package:chemin_du_local/features/products/models/product/product.dart';
+import 'package:chemin_du_local/features/storekeepers/services/models/transfert/transfert.dart';
 import 'package:chemin_du_local/features/user/models/cl_payment_method/cl_payment_method.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/features/place/models/address/address.dart';
@@ -18,6 +19,7 @@ class Commerce with _$Commerce {
     @Default(<String>[]) List<String> categories,
     @Default(<String>[]) List<String> services,
     @Default(<Product>[]) List<Product> productsAvailableForClickAndCollect,
+    @Default(<Transfert>[]) List<Transfert> transferts,
     String? storekeeperWord,
     String? description,
     Address? address,
@@ -34,6 +36,7 @@ class Commerce with _$Commerce {
     double? latitude,
     double? longitude,
     ClPaymentMethod? defaultPaymentMethod,
+    double? balance,
     double? dueBalance,
     DateTime? lastBilledDate,
   }) = _Commerce;

@@ -110,7 +110,34 @@ query GetStoreKeeperCommerce(
 }
 ''';
 
-const String mutUpdateStorekeerCommercePage = r'''
+const String qStorekeeperInfo = r'''
+query GetStoreKeeperInfo(
+  $id: ID
+) {
+  user(id: $id) {
+    role
+    email
+    commerce {
+      id
+      name
+      description
+      address {
+        number
+        route
+        optionalRoute
+        postalCode
+        city
+      }
+      latitude
+      longitude
+      balance
+      transferts
+    }
+  }
+}
+''';
+
+const String mutUpdateStorekeerCommerce = r'''
 mutation updateCommerce($id: ID!, $changes: ChangesCommerce!) {
   updateCommerce(
     id: $id,

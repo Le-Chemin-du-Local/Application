@@ -27,6 +27,7 @@ mixin _$Commerce {
   List<String> get services => throw _privateConstructorUsedError;
   List<Product> get productsAvailableForClickAndCollect =>
       throw _privateConstructorUsedError;
+  List<Transfert> get transferts => throw _privateConstructorUsedError;
   String? get storekeeperWord => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   Address? get address => throw _privateConstructorUsedError;
@@ -44,6 +45,7 @@ mixin _$Commerce {
   double? get longitude => throw _privateConstructorUsedError;
   ClPaymentMethod? get defaultPaymentMethod =>
       throw _privateConstructorUsedError;
+  double? get balance => throw _privateConstructorUsedError;
   double? get dueBalance => throw _privateConstructorUsedError;
   DateTime? get lastBilledDate => throw _privateConstructorUsedError;
 
@@ -64,6 +66,7 @@ abstract class $CommerceCopyWith<$Res> {
       List<String> categories,
       List<String> services,
       List<Product> productsAvailableForClickAndCollect,
+      List<Transfert> transferts,
       String? storekeeperWord,
       String? description,
       Address? address,
@@ -80,6 +83,7 @@ abstract class $CommerceCopyWith<$Res> {
       double? latitude,
       double? longitude,
       ClPaymentMethod? defaultPaymentMethod,
+      double? balance,
       double? dueBalance,
       DateTime? lastBilledDate});
 
@@ -106,6 +110,7 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? categories = freezed,
     Object? services = freezed,
     Object? productsAvailableForClickAndCollect = freezed,
+    Object? transferts = freezed,
     Object? storekeeperWord = freezed,
     Object? description = freezed,
     Object? address = freezed,
@@ -122,6 +127,7 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? defaultPaymentMethod = freezed,
+    Object? balance = freezed,
     Object? dueBalance = freezed,
     Object? lastBilledDate = freezed,
   }) {
@@ -151,6 +157,10 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
           ? _value.productsAvailableForClickAndCollect
           : productsAvailableForClickAndCollect // ignore: cast_nullable_to_non_nullable
               as List<Product>,
+      transferts: transferts == freezed
+          ? _value.transferts
+          : transferts // ignore: cast_nullable_to_non_nullable
+              as List<Transfert>,
       storekeeperWord: storekeeperWord == freezed
           ? _value.storekeeperWord
           : storekeeperWord // ignore: cast_nullable_to_non_nullable
@@ -215,6 +225,10 @@ class _$CommerceCopyWithImpl<$Res> implements $CommerceCopyWith<$Res> {
           ? _value.defaultPaymentMethod
           : defaultPaymentMethod // ignore: cast_nullable_to_non_nullable
               as ClPaymentMethod?,
+      balance: balance == freezed
+          ? _value.balance
+          : balance // ignore: cast_nullable_to_non_nullable
+              as double?,
       dueBalance: dueBalance == freezed
           ? _value.dueBalance
           : dueBalance // ignore: cast_nullable_to_non_nullable
@@ -296,6 +310,7 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       List<String> categories,
       List<String> services,
       List<Product> productsAvailableForClickAndCollect,
+      List<Transfert> transferts,
       String? storekeeperWord,
       String? description,
       Address? address,
@@ -312,6 +327,7 @@ abstract class _$$_CommerceCopyWith<$Res> implements $CommerceCopyWith<$Res> {
       double? latitude,
       double? longitude,
       ClPaymentMethod? defaultPaymentMethod,
+      double? balance,
       double? dueBalance,
       DateTime? lastBilledDate});
 
@@ -345,6 +361,7 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? categories = freezed,
     Object? services = freezed,
     Object? productsAvailableForClickAndCollect = freezed,
+    Object? transferts = freezed,
     Object? storekeeperWord = freezed,
     Object? description = freezed,
     Object? address = freezed,
@@ -361,6 +378,7 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? defaultPaymentMethod = freezed,
+    Object? balance = freezed,
     Object? dueBalance = freezed,
     Object? lastBilledDate = freezed,
   }) {
@@ -390,6 +408,10 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value._productsAvailableForClickAndCollect
           : productsAvailableForClickAndCollect // ignore: cast_nullable_to_non_nullable
               as List<Product>,
+      transferts: transferts == freezed
+          ? _value._transferts
+          : transferts // ignore: cast_nullable_to_non_nullable
+              as List<Transfert>,
       storekeeperWord: storekeeperWord == freezed
           ? _value.storekeeperWord
           : storekeeperWord // ignore: cast_nullable_to_non_nullable
@@ -454,6 +476,10 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
           ? _value.defaultPaymentMethod
           : defaultPaymentMethod // ignore: cast_nullable_to_non_nullable
               as ClPaymentMethod?,
+      balance: balance == freezed
+          ? _value.balance
+          : balance // ignore: cast_nullable_to_non_nullable
+              as double?,
       dueBalance: dueBalance == freezed
           ? _value.dueBalance
           : dueBalance // ignore: cast_nullable_to_non_nullable
@@ -476,6 +502,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       final List<String> services = const <String>[],
       final List<Product> productsAvailableForClickAndCollect =
           const <Product>[],
+      final List<Transfert> transferts = const <Transfert>[],
       this.storekeeperWord,
       this.description,
       this.address,
@@ -492,12 +519,14 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       this.latitude,
       this.longitude,
       this.defaultPaymentMethod,
+      this.balance,
       this.dueBalance,
       this.lastBilledDate})
       : _categories = categories,
         _services = services,
         _productsAvailableForClickAndCollect =
-            productsAvailableForClickAndCollect;
+            productsAvailableForClickAndCollect,
+        _transferts = transferts;
 
   factory _$_Commerce.fromJson(Map<String, dynamic> json) =>
       _$$_CommerceFromJson(json);
@@ -530,6 +559,14 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   List<Product> get productsAvailableForClickAndCollect {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_productsAvailableForClickAndCollect);
+  }
+
+  final List<Transfert> _transferts;
+  @override
+  @JsonKey()
+  List<Transfert> get transferts {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_transferts);
   }
 
   @override
@@ -565,13 +602,15 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   @override
   final ClPaymentMethod? defaultPaymentMethod;
   @override
+  final double? balance;
+  @override
   final double? dueBalance;
   @override
   final DateTime? lastBilledDate;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, ibanOwner: $ibanOwner, iban: $iban, bic: $bic, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, defaultPaymentMethod: $defaultPaymentMethod, dueBalance: $dueBalance, lastBilledDate: $lastBilledDate)';
+    return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, transferts: $transferts, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, ibanOwner: $ibanOwner, iban: $iban, bic: $bic, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, defaultPaymentMethod: $defaultPaymentMethod, balance: $balance, dueBalance: $dueBalance, lastBilledDate: $lastBilledDate)';
   }
 
   @override
@@ -586,6 +625,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('services', services))
       ..add(DiagnosticsProperty('productsAvailableForClickAndCollect',
           productsAvailableForClickAndCollect))
+      ..add(DiagnosticsProperty('transferts', transferts))
       ..add(DiagnosticsProperty('storekeeperWord', storekeeperWord))
       ..add(DiagnosticsProperty('description', description))
       ..add(DiagnosticsProperty('address', address))
@@ -602,6 +642,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
       ..add(DiagnosticsProperty('latitude', latitude))
       ..add(DiagnosticsProperty('longitude', longitude))
       ..add(DiagnosticsProperty('defaultPaymentMethod', defaultPaymentMethod))
+      ..add(DiagnosticsProperty('balance', balance))
       ..add(DiagnosticsProperty('dueBalance', dueBalance))
       ..add(DiagnosticsProperty('lastBilledDate', lastBilledDate));
   }
@@ -621,6 +662,8 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality().equals(
                 other._productsAvailableForClickAndCollect,
                 _productsAvailableForClickAndCollect) &&
+            const DeepCollectionEquality()
+                .equals(other._transferts, _transferts) &&
             const DeepCollectionEquality()
                 .equals(other.storekeeperWord, storekeeperWord) &&
             const DeepCollectionEquality()
@@ -642,6 +685,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
             const DeepCollectionEquality().equals(other.longitude, longitude) &&
             const DeepCollectionEquality()
                 .equals(other.defaultPaymentMethod, defaultPaymentMethod) &&
+            const DeepCollectionEquality().equals(other.balance, balance) &&
             const DeepCollectionEquality()
                 .equals(other.dueBalance, dueBalance) &&
             const DeepCollectionEquality()
@@ -659,6 +703,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
         const DeepCollectionEquality().hash(_services),
         const DeepCollectionEquality()
             .hash(_productsAvailableForClickAndCollect),
+        const DeepCollectionEquality().hash(_transferts),
         const DeepCollectionEquality().hash(storekeeperWord),
         const DeepCollectionEquality().hash(description),
         const DeepCollectionEquality().hash(address),
@@ -675,6 +720,7 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
         const DeepCollectionEquality().hash(latitude),
         const DeepCollectionEquality().hash(longitude),
         const DeepCollectionEquality().hash(defaultPaymentMethod),
+        const DeepCollectionEquality().hash(balance),
         const DeepCollectionEquality().hash(dueBalance),
         const DeepCollectionEquality().hash(lastBilledDate)
       ]);
@@ -697,6 +743,7 @@ abstract class _Commerce implements Commerce {
       final List<String> categories,
       final List<String> services,
       final List<Product> productsAvailableForClickAndCollect,
+      final List<Transfert> transferts,
       final String? storekeeperWord,
       final String? description,
       final Address? address,
@@ -713,6 +760,7 @@ abstract class _Commerce implements Commerce {
       final double? latitude,
       final double? longitude,
       final ClPaymentMethod? defaultPaymentMethod,
+      final double? balance,
       final double? dueBalance,
       final DateTime? lastBilledDate}) = _$_Commerce;
 
@@ -731,6 +779,8 @@ abstract class _Commerce implements Commerce {
   @override
   List<Product> get productsAvailableForClickAndCollect =>
       throw _privateConstructorUsedError;
+  @override
+  List<Transfert> get transferts => throw _privateConstructorUsedError;
   @override
   String? get storekeeperWord => throw _privateConstructorUsedError;
   @override
@@ -764,6 +814,8 @@ abstract class _Commerce implements Commerce {
   @override
   ClPaymentMethod? get defaultPaymentMethod =>
       throw _privateConstructorUsedError;
+  @override
+  double? get balance => throw _privateConstructorUsedError;
   @override
   double? get dueBalance => throw _privateConstructorUsedError;
   @override

@@ -25,6 +25,10 @@ _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
                   ?.map((e) => Product.fromJson(e as Map<String, dynamic>))
                   .toList() ??
               const <Product>[],
+      transferts: (json['transferts'] as List<dynamic>?)
+              ?.map((e) => Transfert.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Transfert>[],
       storekeeperWord: json['storekeeperWord'] as String?,
       description: json['description'] as String?,
       address: json['address'] == null
@@ -52,6 +56,7 @@ _$_Commerce _$$_CommerceFromJson(Map<String, dynamic> json) => _$_Commerce(
           ? null
           : ClPaymentMethod.fromJson(
               json['defaultPaymentMethod'] as Map<String, dynamic>),
+      balance: (json['balance'] as num?)?.toDouble(),
       dueBalance: (json['dueBalance'] as num?)?.toDouble(),
       lastBilledDate: json['lastBilledDate'] == null
           ? null
@@ -67,6 +72,7 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
       'services': instance.services,
       'productsAvailableForClickAndCollect':
           instance.productsAvailableForClickAndCollect,
+      'transferts': instance.transferts,
       'storekeeperWord': instance.storekeeperWord,
       'description': instance.description,
       'address': instance.address,
@@ -83,6 +89,7 @@ Map<String, dynamic> _$$_CommerceToJson(_$_Commerce instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'defaultPaymentMethod': instance.defaultPaymentMethod,
+      'balance': instance.balance,
       'dueBalance': instance.dueBalance,
       'lastBilledDate': instance.lastBilledDate?.toIso8601String(),
     };
