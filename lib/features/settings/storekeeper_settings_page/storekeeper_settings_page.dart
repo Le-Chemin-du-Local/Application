@@ -3,12 +3,14 @@ import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/address_page/address_page.dart';
+import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/commands_history_page/commands_history_page.dart';
 import 'package:chemin_du_local/features/settings/widgets/setting_button.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:intl/intl.dart';
 
 class StoreKeeperSettingsPage extends StatelessWidget {
   const StoreKeeperSettingsPage({
@@ -102,6 +104,28 @@ class StoreKeeperSettingsPage extends StatelessWidget {
                             color: Theme.of(context).colorScheme.secondary
                           ),
                         ),
+                        const SizedBox(height: 4,),
+                        RichText(
+                          textAlign: TextAlign.center,
+                          text: TextSpan(
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            children: [
+                              const TextSpan(
+                                text: "Le prochain virement sur votre compte se fera le "
+                              ),
+                              TextSpan(
+                                text: DateFormat("dd/MM/yyyy").format(DateTime.now().add(const Duration(days: 1))),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Theme.of(context).colorScheme.primary
+                                )
+                              ),
+                              const TextSpan(
+                                text: ". Les virements sont automatiquement effectués tous les jours."
+                              )
+                            ]
+                          ),
+                        ),
                         const SizedBox(height: 16,)
                       ],
                     ),
@@ -111,10 +135,10 @@ class StoreKeeperSettingsPage extends StatelessWidget {
               Expanded(
                 child: ListView(
                   children: [
-                    SettingButton(
+                    const SettingButton(
                       icon: Icons.history,
                       title: "Historique des commandes", 
-                      page: Container(),
+                      page: CommandsHistroyPage(),
                     ),
 
                     SettingButton(
