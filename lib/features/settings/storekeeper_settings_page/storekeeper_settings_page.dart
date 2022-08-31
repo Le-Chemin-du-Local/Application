@@ -5,7 +5,6 @@ import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart
 import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/address_page/address_page.dart';
 import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/commands_history_page/commands_history_page.dart';
 import 'package:chemin_du_local/features/settings/widgets/setting_button.dart';
-import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/theme/palette.dart';
 import 'package:flutter/material.dart';
@@ -111,7 +110,7 @@ class StoreKeeperSettingsPage extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyMedium,
                             children: [
                               const TextSpan(
-                                text: "Le prochain virement sur votre compte se fera le "
+                                text: "Le prochain virement vers votre compte bancaire aura lieu le "
                               ),
                               TextSpan(
                                 text: DateFormat("dd/MM/yyyy").format(DateTime.now().add(const Duration(days: 1))),
@@ -121,7 +120,7 @@ class StoreKeeperSettingsPage extends StatelessWidget {
                                 )
                               ),
                               const TextSpan(
-                                text: ". Les virements sont automatiquement effectués tous les jours."
+                                text: ". Les virements sont effectués automatiquement tous les jours."
                               )
                             ]
                           ),
