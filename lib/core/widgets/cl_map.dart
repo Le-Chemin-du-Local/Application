@@ -32,7 +32,7 @@ class _ClMapState extends State<ClMap> {
   @override
   void initState() {
     _controller = MapController(
-      location: widget.initialLatLgn ?? LatLng(47.6785, -3.2130),
+      location: widget.initialLatLgn ?? const LatLng(47.6785, -3.2130),
       zoom: widget.initialZoom
     );
 
@@ -58,7 +58,7 @@ class _ClMapState extends State<ClMap> {
     _scaleStart = 1.0;
   }
 
-  void _onScaleUpdate(ScaleUpdateDetails details) {
+  void _onScaleUpdate(ScaleUpdateDetails details, MapTransformer transformer) {
     final scaleDiff = details.scale - _scaleStart;
     _scaleStart = details.scale;
 
@@ -72,7 +72,7 @@ class _ClMapState extends State<ClMap> {
       final now = details.focalPoint;
       final diff = now - _dragStart!;
       _dragStart = now;
-      _controller.drag(diff.dx, diff.dy);
+      transformer.drag(diff.dx, diff.dy);
       setState(() {});
     }
   }
@@ -81,61 +81,61 @@ class _ClMapState extends State<ClMap> {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: const BoxConstraints(maxHeight: 280),
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onDoubleTap: _onDoubleTap,
-        onScaleStart: _onScaleStart,
-        onScaleUpdate: _onScaleUpdate,
-        child: Listener(
-          behavior: HitTestBehavior.opaque,
-          onPointerSignal: (event) {
-            if (event is PointerScrollEvent) {
-              final delta = event.scrollDelta;
-      
-              _controller.zoom -= delta.dy / 1000.0;
-              setState(() {});
-            }
-          },
-          child: MapLayoutBuilder(
+          child: MapLayout(
             controller: _controller,
             builder: (context, transformer) {
-              final Offset? initilalMarkerPosition = !widget.showInitialLatLgnMarker || widget.initialLatLgn == null ? null : transformer.fromLatLngToXYCoords(widget.initialLatLgn!);
+              final Offset? initilalMarkerPosition = !widget.showInitialLatLgnMarker || widget.initialLatLgn == null ? null : transformer.toOffset(widget.initialLatLgn!);
 
               final List<Offset> markersPositions = [];
 
               for (final marker in widget.markers) {
-                markersPositions.add(transformer.fromLatLngToXYCoords(marker));
+                markersPositions.add(transformer.toOffset(marker));
+                
               }
 
-              return Stack(
-                children: [
-                  Map(
-                    controller: _controller,
-                    builder: (context, x, y, z) {
-                      //Legal notice: This url is only used for demo and educational purposes. You need a license key for production use.
-                      //Google Maps
-                      final url = 'https://www.google.com/maps/vt/pb=!1m4!1m3!1i$z!2i$x!3i$y!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425';
-            
-                      return Image.network(
-                        url,
-                        fit: BoxFit.cover,
-                      );
-                    },
-                  ),
-                  // On affiche le centre si besoin
-                  if (initilalMarkerPosition != null)
-                    _buildMarkerWidget(initilalMarkerPosition),
+              return  GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onDoubleTap: _onDoubleTap,
+                onScaleStart: _onScaleStart,
+                onScaleUpdate: (details) => _onScaleUpdate(details, transformer),
+                child: Listener(
+                  behavior: HitTestBehavior.opaque,
+                  onPointerSignal: (event) {
+                    if (event is PointerScrollEvent) {
+                      final delta = event.scrollDelta;
+              
+                      _controller.zoom -= delta.dy / 1000.0;
+                      setState(() {});
+                    }
+                  },
+                  child: Stack(
+                    children: [
+                      TileLayer(
+                        builder: (context, x, y, z) {
+                          //Legal notice: This url is only used for demo and educational purposes. You need a license key for production use.
+                          //Google Maps
+                          final url = 'https://www.google.com/maps/vt/pb=!1m4!1m3!1i$z!2i$x!3i$y!2m3!1e0!2sm!3i420120488!3m7!2sen!5e1105!12m4!1e68!2m2!1sset!2sRoadmap!4e0!5m1!1e0!23i4111425';
+                
+                          return Image.network(
+                            url,
+                            fit: BoxFit.cover,
+                          );
+                        },
+                      ),
+                      // On affiche le centre si besoin
+                      if (initilalMarkerPosition != null)
+                        _buildMarkerWidget(initilalMarkerPosition),
 
-                  // Les autres markers
-                  for (final offset in markersPositions) 
-                    _buildMarkerWidget(offset),
-                ],
+                      // Les autres markers
+                      for (final offset in markersPositions) 
+                        _buildMarkerWidget(offset),
+                    ],
+                  )
+                )
               );
             },
           ),
-        ),
-      ),
-    );
+        );
   }
 
   Widget _buildMarkerWidget(Offset pos) {
