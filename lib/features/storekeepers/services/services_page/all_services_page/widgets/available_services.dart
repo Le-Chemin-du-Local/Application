@@ -37,7 +37,7 @@ class AvailableServices extends StatelessWidget {
         Text("Services non souscrits", style: Theme.of(context).textTheme.headlineMedium,),
         const SizedBox(height: 12,),
 
-        // Le contenue
+        // Le contenu
         Flexible(
           child: Query<dynamic>(
             options: _allServicesInfoQueryOptions(), 

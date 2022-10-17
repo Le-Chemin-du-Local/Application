@@ -122,7 +122,7 @@ class StoreKeeperPage extends StatelessWidget {
                   canEdit: canEdit,
                 ),
       
-                // Le contenue de la page
+                // Le contenu de la page
                 SliverToBoxAdapter(
                   child: LayoutBuilder(
                     builder: (context, constraints) {

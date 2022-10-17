@@ -51,7 +51,7 @@ class CommandsListState extends State<CommandsList> {
         ),
         const SizedBox(height: 20,),
 
-        // Le contenue
+        // Le contenu
         Flexible(
           child: Query<dynamic>(
             options: getCommandsQueryOptions(), 

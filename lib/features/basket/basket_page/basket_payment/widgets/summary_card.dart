@@ -27,7 +27,7 @@ class SummaryCard extends StatelessWidget {
           ),
           const SizedBox(height: 18,),
 
-          // Le contenue
+          // Le contenu
           BasketPrice(basket: basket)
         ],
       ),

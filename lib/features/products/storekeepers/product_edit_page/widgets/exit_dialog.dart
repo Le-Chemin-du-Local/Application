@@ -33,7 +33,7 @@ class ExitDialog extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop(true);
               }, 
-              child: const Text("Quitter et sauvegarder le contenue")
+              child: const Text("Quitter et sauvegarder le contenu")
             ),
             const SizedBox(height: 12,),
             OutlinedButton(
