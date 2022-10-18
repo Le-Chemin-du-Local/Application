@@ -96,10 +96,19 @@ class CommandDetailsPage extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
+                              // Le bouton de validation
                               ElevatedButton.icon(
                                 onPressed: command.status == CommandStatus.inProgress ? () => _markCommandReady(runMutation) : null,
                                 icon: const Icon(Icons.check), 
                                 label: const Text("Commande prête")
+                              ),
+                              const SizedBox(width: 4,),
+
+                              // Le bouton pour annuler
+                              OutlinedButton.icon(
+                                onPressed: command.status == CommandStatus.inProgress ? () => _markCommandCanceled(runMutation) : null, 
+                                icon: const Icon(Icons.close), 
+                                label: const Text('Annuler la commande')
                               )
                             ],
                           )
@@ -122,6 +131,17 @@ class CommandDetailsPage extends StatelessWidget {
         "id": command.id,
         "changes": <String, dynamic>{
           "status": CommandStatus.ready
+        }
+      });
+    }
+  }
+
+  void _markCommandCanceled(RunMutation? runMutation) {
+    if (runMutation != null) {
+      runMutation(<String, dynamic>{
+        "id": command.id,
+        "changes": <String, dynamic>{
+          "status": CommandStatus.canceled,
         }
       });
     }

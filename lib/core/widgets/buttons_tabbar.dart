@@ -44,7 +44,7 @@ class ButtonsTabBar extends StatelessWidget {
             style: OutlinedButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.titleMedium,
                 elevation: 0,
-                backgroundColor: Theme.of(context).colorScheme.secondary,
+                foregroundColor: Theme.of(context).colorScheme.secondary,
                 padding: const EdgeInsets.all(12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0)

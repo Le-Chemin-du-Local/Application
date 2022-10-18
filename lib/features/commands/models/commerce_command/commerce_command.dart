@@ -13,6 +13,7 @@ mixin CommandStatus {
   static const String inProgress = "INPROGRESS";
   static const String ready = "READY";
   static const String done = "DONE";
+  static const String canceled = "CANCELED";
 
   static const Map<String, String> detailed = {
     inProgress: "En cours",

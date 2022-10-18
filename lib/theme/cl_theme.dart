@@ -66,7 +66,7 @@ class ClTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          backgroundColor: Palette.colorPrimary,
+          foregroundColor: Palette.colorPrimary,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
