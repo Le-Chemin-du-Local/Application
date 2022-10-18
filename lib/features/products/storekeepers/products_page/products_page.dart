@@ -15,6 +15,7 @@ class ProductsPage extends StatelessWidget {
     required this.category,
     required this.onProductAdded(),
     required this.commerce,
+    this.productsAvailableForClickAndCollect = const [],
     this.isStoreKeeper = false,
     this.showAppBar = true,
   }) : super(key: key);
@@ -23,6 +24,8 @@ class ProductsPage extends StatelessWidget {
   final String category;
 
   final bool isStoreKeeper;
+
+  final List<String> productsAvailableForClickAndCollect;
 
   final Function() onProductAdded;
 
@@ -126,7 +129,8 @@ class ProductsPage extends StatelessWidget {
         MaterialPageRoute<dynamic>(
           builder: (context) => ProductDetailsPage(
             commerce: commerce!,
-            productID: product?.id ?? ""
+            productID: product?.id ?? "",
+            isAvailableForClickAndCollect: productsAvailableForClickAndCollect.contains(product?.id),
           )
         )
       );

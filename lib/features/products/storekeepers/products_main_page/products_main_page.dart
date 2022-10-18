@@ -14,12 +14,15 @@ class ProductsMainPage extends StatefulWidget {
   const ProductsMainPage({
     Key? key,
     this.isStorekeeper = false,
+    this.productsAvailableForClickAndCollect = const [],
     this.commerce,
     this.onShowDrawer,
   }) : super(key: key);
 
   final bool isStorekeeper;
   final Commerce? commerce;
+
+  final List<String> productsAvailableForClickAndCollect;
 
   final Function()? onShowDrawer;
 
@@ -102,6 +105,7 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
         commerce: commerce,
         category: commerce.categories.first, 
         showAppBar: false,
+        productsAvailableForClickAndCollect: widget.productsAvailableForClickAndCollect,
         onProductAdded: () => _onProductAdded(refetch)
       );
     }
@@ -139,6 +143,7 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
                       commerce: commerce,
                       category: _currentCategory, 
                       showAppBar: false,
+                      productsAvailableForClickAndCollect: widget.productsAvailableForClickAndCollect,
                       onProductAdded: () => _onProductAdded(refetch)
                     )
                   )
@@ -182,6 +187,7 @@ class _ProductsMainPageState extends State<ProductsMainPage> {
             commerce: widget.commerce,
             isStoreKeeper: widget.isStorekeeper,
             category: category,
+            productsAvailableForClickAndCollect: widget.productsAvailableForClickAndCollect,
             onProductAdded: () => _onProductAdded(refetch),
           )
         )

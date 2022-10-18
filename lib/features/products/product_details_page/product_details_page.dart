@@ -20,11 +20,14 @@ class ProductDetailsPage extends ConsumerWidget {
   const ProductDetailsPage({
     Key? key,
     required this.commerce,
+    required this.isAvailableForClickAndCollect,
     required this.productID
   }) : super(key: key);
 
   final Commerce commerce;
   final String productID;
+
+  final bool isAvailableForClickAndCollect;
 
   QueryOptions<dynamic> _detailledProductQueryOptions() {
     return QueryOptions<dynamic>(
@@ -227,42 +230,43 @@ class ProductDetailsPage extends ConsumerWidget {
             ),
       
             // Le bouton d'ajout au panier
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: ClCard(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      RichText(
-                        text: TextSpan(
-                          text: "${product.price}€",
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          children: const [
-                            TextSpan(text: "/pièce", style: TextStyle(fontSize: 12.0))
-                          ]
+            if (isAvailableForClickAndCollect) 
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: ClCard(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        RichText(
+                          text: TextSpan(
+                            text: "${product.price}€",
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            children: const [
+                              TextSpan(text: "/pièce", style: TextStyle(fontSize: 12.0))
+                            ]
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 10,),
-      
-                      Flexible(
-                        child: ref.watch(basketControllerProvider).basket.when(
-                          data: (data) => _buildBasketButton(context, ref, data, product),
-                          loading: () => const Center(child: CircularProgressIndicator(),),
-                          error: (error, stackTrace) => const Align(
-                            alignment: Alignment.topCenter,
-                            child: ClStatusMessage(
-                              message: "Quelque chose c'est mal passé...",
-                            ),
+                        const SizedBox(width: 10,),
+        
+                        Flexible(
+                          child: ref.watch(basketControllerProvider).basket.when(
+                            data: (data) => _buildBasketButton(context, ref, data, product),
+                            loading: () => const Center(child: CircularProgressIndicator(),),
+                            error: (error, stackTrace) => const Align(
+                              alignment: Alignment.topCenter,
+                              child: ClStatusMessage(
+                                message: "Quelque chose c'est mal passé...",
+                              ),
+                            )
                           )
                         )
-                      )
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),

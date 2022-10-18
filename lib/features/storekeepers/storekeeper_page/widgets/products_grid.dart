@@ -140,6 +140,7 @@ class ProductsGrid extends ConsumerWidget {
       MaterialPageRoute<dynamic>(
         builder: (context) => ProductsMainPage(
           commerce: commerce,
+          productsAvailableForClickAndCollect: availableForClickAndCollect,
         )
       )
     );
@@ -151,6 +152,7 @@ class ProductsGrid extends ConsumerWidget {
         builder: (context) => ProductDetailsPage(
           productID: productID,
           commerce: commerce!,
+          isAvailableForClickAndCollect: availableForClickAndCollect.contains(productID),
         )
       )
     );

@@ -147,7 +147,8 @@ class ProductsList extends ConsumerWidget {
     await Navigator.of(context).push<dynamic>(
       MaterialPageRoute<dynamic>(
         builder: (context) => ProductsMainPage(
-          commerce: commerce
+          commerce: commerce,
+          productsAvailableForClickAndCollect: availableForClickAndCollect,
         )
       )
     );
@@ -160,6 +161,7 @@ class ProductsList extends ConsumerWidget {
         builder: (context) => ProductDetailsPage(
           productID: productID,
           commerce: commerce!,
+          isAvailableForClickAndCollect: availableForClickAndCollect.contains(productID),
         )
       )
     );
