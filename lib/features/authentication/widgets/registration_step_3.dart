@@ -1,14 +1,17 @@
+import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_dropdown.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_phone_input.dart';
+import 'package:chemin_du_local/features/place/models/address/address.dart';
 import 'package:chemin_du_local/features/place/widgets/address_controller.dart';
 import 'package:chemin_du_local/features/place/widgets/address_form.dart';
 import 'package:flutter/material.dart';
 
-class RegistrationStep3 extends StatelessWidget {
+class RegistrationStep3 extends StatefulWidget {
   const RegistrationStep3({
     Key? key, 
     required this.formKey,
     required this.addressController,
+    required this.storeKeeperAddress,
     required this.phoneTextController,
     required this.onStoreTypeChanged,
     required this.storeType,
@@ -18,6 +21,8 @@ class RegistrationStep3 extends StatelessWidget {
   final GlobalKey<FormState> formKey;
 
   final AddressController addressController;
+  final Address storeKeeperAddress;
+
   final TextEditingController phoneTextController;
   
   final Function(String?) onStoreTypeChanged;
@@ -26,9 +31,16 @@ class RegistrationStep3 extends StatelessWidget {
   final Function() onNext;
 
   @override
+  State<RegistrationStep3> createState() => _RegistrationStep3State();
+}
+
+class _RegistrationStep3State extends State<RegistrationStep3> {
+  bool _isAddressTheSame = false;
+
+  @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKey,
+      key: widget.formKey,
       child: SingleChildScrollView(
         controller: ScrollController(),
         child: Column(
@@ -37,7 +49,7 @@ class RegistrationStep3 extends StatelessWidget {
           children: [
             // Le type du commerce
             ClDropdown<String>(
-              currentValue: storeType,
+              currentValue: widget.storeType,
               label: "Le type",
               items: const {
                 "": "",
@@ -51,7 +63,7 @@ class RegistrationStep3 extends StatelessWidget {
                 "Ostréiculture": "Ostréiculture",
                 "Primeur": "Primeur",
               },
-              onChanged: onStoreTypeChanged,
+              onChanged: widget.onStoreTypeChanged,
               validator: (value) {
                 if ((value ?? "").isEmpty) return "Vous devez rentrer un type de commerce";
                 return null;
@@ -69,14 +81,27 @@ class RegistrationStep3 extends StatelessWidget {
             const SizedBox(height: 10,),
       
             // l'adresse
-            AddressForm(
-              addressController: addressController,
+            ClCheckBox(
+              value: _isAddressTheSame, 
+              onChanged: (value) {
+                setState(() {
+                  _isAddressTheSame = value ?? false;
+                });
+              }, 
+              text: "L'adresse du commerce est la même que mon adresse."
             ),
             const SizedBox(height: 10,),
+            
+            if (!_isAddressTheSame) ...{
+              AddressForm(
+                addressController: widget.addressController,
+              ),
+              const SizedBox(height: 10,),
+            },
 
             // Le numéro de téléphone
             ClPhoneInput(
-              controller: phoneTextController, 
+              controller: widget.phoneTextController, 
               labelText: "Numéro de téléphone de mon commerce",
               hintText: "0652809335",
             ),
@@ -84,7 +109,13 @@ class RegistrationStep3 extends StatelessWidget {
       
             // Le bouton d'acceptation
             ElevatedButton(
-              onPressed: onNext,
+              onPressed: () {
+                if (_isAddressTheSame) {
+                  widget.addressController.address = widget.storeKeeperAddress.copyWith();
+                }
+
+                widget.onNext();
+              },
               child: const Text("Suivant"),
             ),
             const SizedBox(height: 20,)

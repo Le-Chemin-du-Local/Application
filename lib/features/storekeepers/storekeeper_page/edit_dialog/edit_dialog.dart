@@ -5,6 +5,7 @@ import 'package:chemin_du_local/core/utils/cl_file.dart';
 import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/dialog/closable_dialog.dart';
+import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_image_picker_big.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
@@ -16,6 +17,7 @@ import 'package:chemin_du_local/features/place/place_service.dart';
 import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart';
 import 'package:chemin_du_local/features/place/widgets/address_controller.dart';
 import 'package:chemin_du_local/features/place/widgets/address_form.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart';
@@ -70,6 +72,8 @@ class _EditDialogState extends State<EditDialog> {
   final ScheduleFieldController _ccSaturdayController = ScheduleFieldController();
   final ScheduleFieldController _ccSundayController = ScheduleFieldController();
 
+  bool _scheduleEqualCC = false;
+
   MutationOptions _updateCommerceOptions() {
     return MutationOptions<dynamic>(
       document: gql(mutUpdateStorekeerCommerce),
@@ -112,6 +116,14 @@ class _EditDialogState extends State<EditDialog> {
       _ccFridayController.schedules = widget.commerce?.clickAndCollectHours?.friday ?? [];
       _ccSaturdayController.schedules = widget.commerce?.clickAndCollectHours?.saturday ?? [];
       _ccSundayController.schedules = widget.commerce?.clickAndCollectHours?.sunday ?? [];
+
+      _scheduleEqualCC = listEquals(_mondayController.schedules, _ccMondayController.schedules) &&
+                         listEquals(_tuesdayController.schedules, _ccTuesdayController.schedules) &&
+                         listEquals(_wednesdayController.schedules, _ccWednesdayController.schedules) &&
+                         listEquals(_thursdayController.schedules, _ccThursdayController.schedules) &&
+                         listEquals(_fridayController.schedules, _ccFridayController.schedules) &&
+                         listEquals(_saturdayController.schedules, _ccSaturdayController.schedules) &&
+                         listEquals(_sundayController.schedules, _ccSundayController.schedules);
     }
   }
 
@@ -233,23 +245,37 @@ class _EditDialogState extends State<EditDialog> {
                       ),
                       const SizedBox(height: 22),
 
-                      // Les horaires de click and collect
-                      Text(
-                        "Gestion des créneaux de Click&Collect", 
-                        style: ScreenHelper.instance.isMobile 
-                          ? Theme.of(context).textTheme.titleMedium
-                          : Theme.of(context).textTheme.headlineSmall
+                      ClCheckBox(
+                        value: _scheduleEqualCC, 
+                        onChanged: (value) {
+                          setState(() {
+                            _scheduleEqualCC = value ?? false;
+                          });
+                        }, 
+                        text: "Les crénaux de Click&Collect sont les même que les horaires du magasin",
                       ),
-                      ScheduleForm(
-                        mondayController: _ccMondayController,
-                        tuesdayController: _ccTuesdayController,
-                        wednesdayController: _ccWednesdayController,
-                        thursdayController: _ccThursdayController,
-                        fridayController: _ccFridayController,
-                        saturdayController: _ccSaturdayController,
-                        sundayController: _ccSundayController,
-                      ),
-                      const SizedBox(height: 22),
+                      const SizedBox(height: 22,),
+
+                      if (!_scheduleEqualCC) ...{
+
+                        // Les horaires de click and collect
+                        Text(
+                          "Gestion des créneaux de Click&Collect", 
+                          style: ScreenHelper.instance.isMobile 
+                            ? Theme.of(context).textTheme.titleMedium
+                            : Theme.of(context).textTheme.headlineSmall
+                        ),
+                        ScheduleForm(
+                          mondayController: _ccMondayController,
+                          tuesdayController: _ccTuesdayController,
+                          wednesdayController: _ccWednesdayController,
+                          thursdayController: _ccThursdayController,
+                          fridayController: _ccFridayController,
+                          saturdayController: _ccSaturdayController,
+                          sundayController: _ccSundayController,
+                        ),
+                        const SizedBox(height: 22),
+                      },
 
                       // Le numéro de téléphone
                       ClTextInput(
@@ -402,13 +428,13 @@ class _EditDialogState extends State<EditDialog> {
           "sunday": _sundayController.schedules,
         },
         "clickAndCollectHours": {
-          "monday": _ccMondayController.schedules,
-          "tuesday": _ccTuesdayController.schedules,
-          "wednesday": _ccWednesdayController.schedules,
-          "thursday": _ccThursdayController.schedules,
-          "friday": _ccFridayController.schedules,
-          "saturday": _ccSaturdayController.schedules,
-          "sunday": _ccSundayController.schedules,
+          "monday": _scheduleEqualCC ? _mondayController.schedules : _ccMondayController.schedules,
+          "tuesday": _scheduleEqualCC ? _tuesdayController.schedules : _ccTuesdayController.schedules,
+          "wednesday": _scheduleEqualCC ? _wednesdayController.schedules : _ccWednesdayController.schedules,
+          "thursday": _scheduleEqualCC ? _thursdayController.schedules : _ccThursdayController.schedules,
+          "friday": _scheduleEqualCC ? _fridayController.schedules : _ccFridayController.schedules,
+          "saturday": _scheduleEqualCC ? _saturdayController.schedules : _ccSaturdayController.schedules,
+          "sunday": _scheduleEqualCC ? _sundayController.schedules : _ccSundayController.schedules,
         },
         if (_profilePicture != null) 
           "profilePicture": MultipartFile.fromBytes(

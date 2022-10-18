@@ -149,6 +149,7 @@ class RegistrationFormState extends State<RegistrationForm> {
                     RegistrationStep3(
                       formKey: _step3FormKey,
                       addressController: _storeAddressController,
+                      storeKeeperAddress: _addressController.address,
                       phoneTextController: _storePhoneTextController,
                       storeType: _storeType,
                       onStoreTypeChanged: (value) {
