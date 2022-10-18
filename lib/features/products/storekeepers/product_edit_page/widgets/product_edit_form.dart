@@ -13,9 +13,9 @@ import 'package:chemin_du_local/features/products/products_graphql.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_categories_page/widgets/product_categories_picker.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/widgets/exit_dialog.dart';
 import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/widgets/product_allergens.dart';
-import 'package:chemin_du_local/features/products/storekeepers/product_edit_page/widgets/product_tags_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_tags_x/flutter_tags_x.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:http/http.dart';
 
@@ -433,21 +433,76 @@ class _ProductEditFormState extends State<ProductEditForm> {
 
       // Les tags
       Flexible(
-        child: ProductTagsPicker(
-          tags: _productTags,
-          onTagAdded: (tag) {
-            if (_productTags.contains(tag)) return;
+        child: Tags(
+          runAlignment: WrapAlignment.center,
+          alignment: WrapAlignment.start,
+          textField: TagsTextField(
+            inputDecoration: InputDecoration(
+              hintText: 'Nouveau Tag',
+              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              fillColor: Theme.of(context).colorScheme.surface,
+              filled: true,
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.outline
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.outline
+                ),
+                borderRadius: BorderRadius.circular(12.0),
+              ),
+            ),
+            autofocus: false,
+            onSubmitted: (newTag) {
+              if (_productTags.contains(newTag)) return;
 
-            setState(() {
-              _productTags.add(tag);
-            });
+              setState(() {
+                _productTags.add(newTag);
+              });
+            },
+          ),
+          itemCount: _productTags.length,
+          itemBuilder: (index) {
+            final tag = _productTags[index];
+
+            return ItemTags(
+              alignment: MainAxisAlignment.center,
+              index: index, 
+              title: tag,
+              pressEnabled: false,
+              color: Theme.of(context).colorScheme.secondary,
+              activeColor: Theme.of(context).colorScheme.secondary,
+              textStyle: const TextStyle(fontSize: 12),
+              removeButton: ItemTagsRemoveButton(
+                onRemoved: () {
+                  setState(() {
+                    _productTags.removeAt(index);
+                  });
+
+                  return true;
+                }
+              ),
+            );
           },
-          onTagRemoved: (tag) {
-            setState(() {
-              _productTags.remove(tag);
-            });
-          },
-        ),
+        )
+        // child: ProductTagsPicker(
+        //   tags: _productTags,
+        //   onTagAdded: (tag) {
+        //     if (_productTags.contains(tag)) return;
+
+        //     setState(() {
+        //       _productTags.add(tag);
+        //     });
+        //   },
+        //   onTagRemoved: (tag) {
+        //     setState(() {
+        //       _productTags.remove(tag);
+        //     });
+        //   },
+        // ),
       ),
       const SizedBox(height: 6,),
     ];
