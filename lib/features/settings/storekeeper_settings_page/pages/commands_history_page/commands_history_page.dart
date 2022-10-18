@@ -8,7 +8,6 @@ import 'package:chemin_du_local/features/commands/models/commerce_command/commer
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:tuple/tuple.dart';
 
 class CommandsHistroyPage extends StatefulWidget {
   const CommandsHistroyPage({Key? key}) : super(key: key);

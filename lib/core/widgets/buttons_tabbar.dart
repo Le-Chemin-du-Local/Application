@@ -28,8 +28,8 @@ class ButtonsTabBar extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.titleMedium,
                 elevation: 0,
-                primary: Theme.of(context).colorScheme.secondaryContainer,
-                onPrimary: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+                foregroundColor: Theme.of(context).colorScheme.secondary,
                 padding: const EdgeInsets.all(12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0)
@@ -44,7 +44,7 @@ class ButtonsTabBar extends StatelessWidget {
             style: OutlinedButton.styleFrom(
                 textStyle: Theme.of(context).textTheme.titleMedium,
                 elevation: 0,
-                primary: Theme.of(context).colorScheme.secondary,
+                backgroundColor: Theme.of(context).colorScheme.secondary,
                 padding: const EdgeInsets.all(12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0)

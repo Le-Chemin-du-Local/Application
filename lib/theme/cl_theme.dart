@@ -55,8 +55,8 @@ class ClTheme {
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-          primary: Palette.colorPrimary,
-          onPrimary: Palette.colorWhite,
+          backgroundColor: Palette.colorPrimary,
+          foregroundColor: Palette.colorWhite,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0)
           )
@@ -66,7 +66,7 @@ class ClTheme {
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-          primary: Palette.colorPrimary,
+          backgroundColor: Palette.colorPrimary,
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),

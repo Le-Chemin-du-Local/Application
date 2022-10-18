@@ -38,7 +38,7 @@ class DashboardServicesCard extends StatelessWidget {
                 TextButton(
                   onPressed: onClick,
                   style: TextButton.styleFrom(
-                    primary: Palette.colorWhite,
+                    backgroundColor: Palette.colorWhite,
                   ),
                   child: Row(
                     children: const [
