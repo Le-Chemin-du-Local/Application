@@ -30,58 +30,60 @@ class _IbanDialogState extends State<IbanDialog> {
           padding: EdgeInsets.all(ScreenHelper.instance.horizontalPadding),
           child: Form(
             key: _formKey,
-            child: Column(
-              children: [
-                // Le titre et la description
-                Text("Entrez votre IBAN", style: Theme.of(context).textTheme.headlineLarge,),
-                const SizedBox(height: 12,),
-                const Text("Pour que vous poussiez recevoir l'argent des commandes de vos clients, nous avons besoin de votre IBAN pour pouvoir vous faire des virements bancaires"),
-                const SizedBox(height: 20,),
-          
-                // Les différents champs
-                ClTextInput(
-                  controller: _ibanOwnerTextController, 
-                  labelText: "Prénom/Nom du titulaire du compte",
-                  hintText: "Eskild LEGOURIEREC",
-                  validator: (value) {
-                    if (value.isEmpty) return "Vous devez rentrer une valeur";
-                    return null;
-                  }, 
-                ),
-                const SizedBox(height: 12,),
-          
-                ClTextInput(
-                  controller: _ibanTextController,
-                  labelText: "IBAN",
-                  hintText: "FRXXXXXXXXXXXXXXXXXXXXXXXXX",
-                  validator: (value) {
-                    if (value.isEmpty) return "Vous devez rentrer une valeur";
-          
-                    if (!isValid(value)) return "L'IBAN est invalide";
-          
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 12,),
-          
-                ClTextInput(
-                  controller: _bicTextController,
-                  labelText: "BIC",
-                  hintText: "Par exemple : SOGEFRPP",
-                  validator: (value) {
-                    if (value.isEmpty) return "Vous devez rentrer uen valeur";
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 20,),
-          
-                // Le bouton de validation
-                ElevatedButton.icon(
-                  onPressed: _onValidate, 
-                  icon: const Icon(Icons.check), 
-                  label: const Text("Confirmer la souscription")
-                )
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  // Le titre et la description
+                  Text("Entrez votre IBAN", style: Theme.of(context).textTheme.headlineLarge,),
+                  const SizedBox(height: 12,),
+                  const Text("Pour que vous poussiez recevoir l'argent des commandes de vos clients, nous avons besoin de votre IBAN pour pouvoir vous faire des virements bancaires"),
+                  const SizedBox(height: 20,),
+                      
+                  // Les différents champs
+                  ClTextInput(
+                    controller: _ibanOwnerTextController, 
+                    labelText: "Prénom/Nom du titulaire du compte",
+                    hintText: "Eskild LEGOURIEREC",
+                    validator: (value) {
+                      if (value.isEmpty) return "Vous devez rentrer une valeur";
+                      return null;
+                    }, 
+                  ),
+                  const SizedBox(height: 12,),
+                      
+                  ClTextInput(
+                    controller: _ibanTextController,
+                    labelText: "IBAN",
+                    hintText: "FRXXXXXXXXXXXXXXXXXXXXXXXXX",
+                    validator: (value) {
+                      if (value.isEmpty) return "Vous devez rentrer une valeur";
+                      
+                      if (!isValid(value)) return "L'IBAN est invalide";
+                      
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 12,),
+                      
+                  ClTextInput(
+                    controller: _bicTextController,
+                    labelText: "BIC",
+                    hintText: "Par exemple : SOGEFRPP",
+                    validator: (value) {
+                      if (value.isEmpty) return "Vous devez rentrer uen valeur";
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20,),
+                      
+                  // Le bouton de validation
+                  ElevatedButton.icon(
+                    onPressed: _onValidate, 
+                    icon: const Icon(Icons.check), 
+                    label: const Text("Confirmer la souscription")
+                  )
+                ],
+              ),
             ),
           ),
         ),
