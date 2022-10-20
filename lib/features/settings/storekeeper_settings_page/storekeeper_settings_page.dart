@@ -3,6 +3,8 @@ import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commerces/models/commerce/commerce.dart';
 import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/address_page/address_page.dart';
+import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/bank_details_page/bank_details_page.dart';
+import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/cards_page/cards_page.dart';
 import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/commands_history_page/commands_history_page.dart';
 import 'package:chemin_du_local/features/settings/widgets/setting_button.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
@@ -158,10 +160,16 @@ class StoreKeeperSettingsPage extends StatelessWidget {
                       page: AddressPage()
                     ),
 
-                    SettingButton(
+                    const SettingButton(
+                      icon: Icons.account_balance,
+                      title: "Gérer mes informations bancaire",
+                      page: BankDetailsPage()
+                    ),
+
+                    const SettingButton(
                       icon: Icons.credit_card,
                       title: "Gérer mes moyens de paiement",
-                      page: Container(),
+                      page: CardsPage(),
                     ),
 
                     SettingButton(
