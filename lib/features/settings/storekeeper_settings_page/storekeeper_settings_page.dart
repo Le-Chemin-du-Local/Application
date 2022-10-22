@@ -6,6 +6,7 @@ import 'package:chemin_du_local/features/settings/storekeeper_settings_page/page
 import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/bank_details_page/bank_details_page.dart';
 import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/cards_page/cards_page.dart';
 import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/commands_history_page/commands_history_page.dart';
+import 'package:chemin_du_local/features/settings/storekeeper_settings_page/pages/default_page/default_page.dart';
 import 'package:chemin_du_local/features/settings/widgets/setting_button.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/theme/palette.dart';
@@ -142,16 +143,16 @@ class StoreKeeperSettingsPage extends StatelessWidget {
                       page: CommandsHistroyPage(),
                     ),
 
-                    SettingButton(
+                    const SettingButton(
                       icon: Icons.history, 
                       title: "Historique des virements", 
-                      page: Container()
+                      page: DefaultPage()
                     ),
 
-                    SettingButton(
+                    const SettingButton(
                       icon: Icons.history, 
                       title: "Historique des factures", 
-                      page: Container()
+                      page: DefaultPage()
                     ),
 
                     const SettingButton(
@@ -172,22 +173,22 @@ class StoreKeeperSettingsPage extends StatelessWidget {
                       page: CardsPage(),
                     ),
 
-                    SettingButton(
+                    const SettingButton(
                       icon: Icons.person_outline,
                       title: "Gérer mes informations",
-                      page: Container(),
+                      page: DefaultPage(),
                     ),
 
-                    SettingButton(
+                    const SettingButton(
                       icon: Icons.notifications_outlined,
                       title: "Gérer mes notifications",
-                      page: Container(),
+                      page: DefaultPage(),
                     ),
 
-                    SettingButton(
+                    const SettingButton(
                       icon: Icons.info_outline,
                       title: "À propos du Chemin du Local",
-                      page: Container(),
+                      page: DefaultPage(),
                     ),
 
                     TextButton(
