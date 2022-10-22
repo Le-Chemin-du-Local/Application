@@ -10,10 +10,13 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 class CardForm extends ConsumerStatefulWidget {
   const CardForm({
     Key? key,
-    this.payButtonText = "Payer avec cette carte"
+    this.payButtonText = "Payer avec cette carte",
+    this.isFormCommerce = false,
   }) : super(key: key);
 
   final String payButtonText;
+
+  final bool isFormCommerce;
 
   @override
   ConsumerState<CardForm> createState() => _CardFormState();
@@ -198,6 +201,7 @@ class _CardFormState extends ConsumerState<CardForm> {
 
       final setupIntentResult = await StripeService.instance.handleSetupIntent(
         authorizationHeader: authHeader,
+        isForCommerce: widget.isFormCommerce,
         paymentMethodId: paymentMethod.id,
       );
 
