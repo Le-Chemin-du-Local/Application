@@ -69,8 +69,15 @@ class _CommerceCommandDetailsPageState extends ConsumerState<CommerceCommandDeta
                     // Les infos sur le commerce
                     if (widget.commerceCommand.commerce != null) ...{
                       CommerceInfoCard(commerce: widget.commerceCommand.commerce!),
-                      const SizedBox(height: 64,),
+                      const SizedBox(height: 12,),
                     },
+
+                    // Le bouton en cas d'échec
+                    OutlinedButton(
+                      onPressed: () {}, 
+                      child: const Text("Je n'ai pas réussi à récupérer ma commande"),
+                    ),
+                    const SizedBox(height: 64,),
                   ],
                 ),
               ),

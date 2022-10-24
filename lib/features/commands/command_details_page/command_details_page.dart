@@ -2,6 +2,7 @@ import 'package:chemin_du_local/core/helpers/screen_helper.dart';
 import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/features/commands/command_details_page/widgets/command_commerces_list.dart';
+import 'package:chemin_du_local/features/commands/command_details_page/widgets/command_number_card.dart';
 import 'package:chemin_du_local/features/commands/command_details_page/widgets/command_summary_card.dart';
 import 'package:chemin_du_local/features/commands/commands_graphql.dart';
 import 'package:chemin_du_local/features/commands/models/command/command.dart';
@@ -78,6 +79,10 @@ class CommandDetailsPage extends StatelessWidget {
 
             // Le résumé
             CommandSummaryCard(command: command),
+            const SizedBox(height: 12,),
+
+            // Le numéro de commande
+            CommandNumberCard(command: command),
             const SizedBox(height: 12,),
 
             // La liste des commerces
