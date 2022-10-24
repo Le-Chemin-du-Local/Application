@@ -429,64 +429,74 @@ class _ProductEditFormState extends State<ProductEditForm> {
           },
         ),
       ),
-      const SizedBox(height: 6,),
+      const SizedBox(height: 12,),
 
       // Les tags
       Flexible(
-        child: Tags(
-          runAlignment: WrapAlignment.center,
-          alignment: WrapAlignment.start,
-          textField: TagsTextField(
-            inputDecoration: InputDecoration(
-              hintText: 'Nouveau Tag',
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              fillColor: Theme.of(context).colorScheme.surface,
-              filled: true,
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.outline
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text("Tags spécifiques", style: Theme.of(context).textTheme.headlineSmall,),
+            const SizedBox(height: 6,),
+            Flexible(
+              child: Tags(
+                runAlignment: WrapAlignment.center,
+                alignment: WrapAlignment.start,
+                textField: TagsTextField(
+                  inputDecoration: InputDecoration(
+                    hintText: 'Nouveau Tag',
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    fillColor: Theme.of(context).colorScheme.surface,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.outline
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: Theme.of(context).colorScheme.outline
+                      ),
+                      borderRadius: BorderRadius.circular(12.0),
+                    ),
+                  ),
+                  autofocus: false,
+                  onSubmitted: (newTag) {
+                    if (_productTags.contains(newTag)) return;
+            
+                    setState(() {
+                      _productTags.add(newTag);
+                    });
+                  },
                 ),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.outline
-                ),
-                borderRadius: BorderRadius.circular(12.0),
+                itemCount: _productTags.length,
+                itemBuilder: (index) {
+                  final tag = _productTags[index];
+            
+                  return ItemTags(
+                    alignment: MainAxisAlignment.center,
+                    index: index, 
+                    title: tag,
+                    pressEnabled: false,
+                    color: Theme.of(context).colorScheme.secondary,
+                    activeColor: Theme.of(context).colorScheme.secondary,
+                    textStyle: const TextStyle(fontSize: 12),
+                    removeButton: ItemTagsRemoveButton(
+                      onRemoved: () {
+                        setState(() {
+                          _productTags.removeAt(index);
+                        });
+            
+                        return true;
+                      }
+                    ),
+                  );
+                },
               ),
             ),
-            autofocus: false,
-            onSubmitted: (newTag) {
-              if (_productTags.contains(newTag)) return;
-
-              setState(() {
-                _productTags.add(newTag);
-              });
-            },
-          ),
-          itemCount: _productTags.length,
-          itemBuilder: (index) {
-            final tag = _productTags[index];
-
-            return ItemTags(
-              alignment: MainAxisAlignment.center,
-              index: index, 
-              title: tag,
-              pressEnabled: false,
-              color: Theme.of(context).colorScheme.secondary,
-              activeColor: Theme.of(context).colorScheme.secondary,
-              textStyle: const TextStyle(fontSize: 12),
-              removeButton: ItemTagsRemoveButton(
-                onRemoved: () {
-                  setState(() {
-                    _productTags.removeAt(index);
-                  });
-
-                  return true;
-                }
-              ),
-            );
-          },
+          ],
         )
         // child: ProductTagsPicker(
         //   tags: _productTags,
