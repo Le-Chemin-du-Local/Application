@@ -11,6 +11,7 @@ import 'package:chemin_du_local/features/storekeepers/services/services_graphql.
 import 'package:chemin_du_local/features/storekeepers/services/services_page/services_basket_page/widgets/iban_dialog.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/service_info_card.dart';
 import 'package:chemin_du_local/features/stripe/stripe_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -311,9 +312,14 @@ class _ServicesBasketPageState extends ConsumerState<ServicesBasketPage> {
       final String? clientSecret = setupIntentResult["clientSecret"] as String?;
 
       if (clientSecret != null) {
-        await Stripe.instance.confirmSetupIntent(clientSecret, const PaymentMethodParams.card(
-          paymentMethodData: PaymentMethodData(),
-        ));
+        try {
+          await Stripe.instance.confirmSetupIntent(clientSecret, const PaymentMethodParams.card(
+            paymentMethodData: PaymentMethodData(),
+          ));
+        } catch (_) {
+          if (kIsWeb) { return true; }
+          else { rethrow; }
+        }
 
         return true;
       }

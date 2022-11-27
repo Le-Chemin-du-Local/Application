@@ -87,6 +87,10 @@ class MyApp extends ConsumerWidget {
                         document: gql(qGetLoggedUser),
                       ),
                       builder: (result, {fetchMore, refetch}) {
+                        if (result.isLoading) {
+                          return const SplashScreen();
+                        }
+
                         final User appUser = User.fromJson(result.data?["user"] as Map<String, dynamic>? ?? <String, dynamic>{});
                 
                 

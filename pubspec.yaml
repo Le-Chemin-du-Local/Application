@@ -38,8 +38,8 @@ dependencies:
   flutter_credit_card: ^3.0.0
   flutter_riverpod: ^1.0.3
   flutter_secure_storage: ^5.0.2
-  flutter_stripe: ^4.0.0
-  flutter_stripe_web: ^1.2.0
+  flutter_stripe: ^5.1.0
+  flutter_stripe_web: ^1.3.0
   flutter_tags_x: ^1.1.0
   flutter_vector_icons: ^1.0.0
   freezed_annotation: ^2.0.3
@@ -72,9 +72,11 @@ flutter_icons:
   ios: true
   image_path: "assets/logo.jpg"
 
-# dependency_overrides:
-#   flutter_stripe_web:
-#     path: ./packages/stripe_web
+dependency_overrides:
+  # flutter_stripe:
+  #   path: ./flutter_stripe/packages/stripe
+  flutter_stripe_web:
+    path: ./packages/stripe_web
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
