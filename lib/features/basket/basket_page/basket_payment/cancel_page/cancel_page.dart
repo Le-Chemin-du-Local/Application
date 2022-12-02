@@ -66,6 +66,7 @@ class _CancelPageState extends State<CancelPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(height: 20,),
             _buildLoadingIndicator(),
             const SizedBox(height: 20,),
 
