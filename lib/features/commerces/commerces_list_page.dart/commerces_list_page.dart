@@ -28,23 +28,19 @@ class _CommercesListPageState extends State<CommercesListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: ClAppBar(
+        canPop: false,
+        onShowDrawer: widget.onShowDrawer,
+        title: ClAddressInput(
+          label: "",
+          hint: "Où êtes vous en ce moment ?",
+          addressTextController: _addressTextController,
+          onSelected: _onAddressSelected,
+        ),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch, 
         children: [
-          const SizedBox(height: 48,),
-
-          // La bar de recherche
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
-            child: ClAddressInput(
-              label: "",
-              hint: "Où êtes vous en ce moment ?",
-              addressTextController: _addressTextController,
-              onSelected: _onAddressSelected,
-            ),
-          ),
-          const SizedBox(height: 12,),
-
           // La liste des commerces
           FutureBuilder(
             future: _getCoordinates(),
