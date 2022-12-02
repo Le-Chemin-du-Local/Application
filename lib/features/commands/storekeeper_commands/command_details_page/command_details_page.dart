@@ -73,10 +73,14 @@ class CommandDetailsPage extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Flexible(child: CCList(command: command.cccommands.first),),
-                          const SizedBox(height: 20,),
-                          Flexible(child: PaniersList(paniers: command.panierCommands,)),
-                          const SizedBox(height: 20,),
+                          if (command.cccommands.isNotEmpty) ...{
+                            Flexible(child: CCList(command: command.cccommands.first),),
+                            const SizedBox(height: 20,),
+                          },
+                          if (command.panierCommands.isNotEmpty) ...{
+                            Flexible(child: PaniersList(paniers: command.panierCommands,)),
+                            const SizedBox(height: 20,),
+                          },
 
                           // Le total
                           Text(

@@ -45,36 +45,38 @@ class _PaniersListState extends State<PaniersList> {
             const SizedBox(height: 20,),
 
             for (final category in sortedPaniers.keys) ...{
-              // Le header
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                    width: 300,
-                    child: Text("• $category", style: Theme.of(context).textTheme.headlineSmall,)
-                  ),
-                  if (isBig) ...{
+              if ((sortedPaniers[category] ?? []).isNotEmpty) ...{
+                // Le header
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
                     SizedBox(
-                      width: 200,
-                      child: Text("Item épuisé ?", style: Theme.of(context).textTheme.headlineSmall,),
+                      width: 300,
+                      child: Text("• $category", style: Theme.of(context).textTheme.headlineSmall,)
                     ),
-                    SizedBox(
-                      width: 60,
-                      child: Text("Prix", style: Theme.of(context).textTheme.headlineSmall,),
-                    ),
-                  }
-                ],
-              ),
-              const SizedBox(height: 7,),
+                    if (isBig) ...{
+                      SizedBox(
+                        width: 200,
+                        child: Text("Item épuisé ?", style: Theme.of(context).textTheme.headlineSmall,),
+                      ),
+                      SizedBox(
+                        width: 60,
+                        child: Text("Prix", style: Theme.of(context).textTheme.headlineSmall,),
+                      ),
+                    }
+                  ],
+                ),
+                const SizedBox(height: 7,),
 
-              // Les produits
-              for (final product in sortedPaniers[category]!) ...{
-                if (isBig)
-                  _buildBigPanierLine(product)
-                else 
-                  _buildSmallPanierLine(product),
+                // Les produits
+                for (final product in sortedPaniers[category]!) ...{
+                  if (isBig)
+                    _buildBigPanierLine(product)
+                  else 
+                    _buildSmallPanierLine(product),
 
-                const SizedBox(height: 5,),
+                  const SizedBox(height: 5,),
+                }
               }
             }
               
