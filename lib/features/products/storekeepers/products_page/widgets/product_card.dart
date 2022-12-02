@@ -133,8 +133,8 @@ class ProductCard extends StatelessWidget {
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                   color: Palette.colorWhite
                 ),
-                children: const [
-                  TextSpan(text: "/pièce", style: TextStyle(fontSize: 12.0))
+                children: [
+                  TextSpan(text: "/${product.unit}", style: const TextStyle(fontSize: 12.0))
                 ]
               ),
             ),

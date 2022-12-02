@@ -243,8 +243,8 @@ class ProductDetailsPage extends ConsumerWidget {
                           text: TextSpan(
                             text: "${product.price}€",
                             style: Theme.of(context).textTheme.bodyMedium,
-                            children: const [
-                              TextSpan(text: "/pièce", style: TextStyle(fontSize: 12.0))
+                            children: [
+                              TextSpan(text: "/${product.unit}", style: const TextStyle(fontSize: 12.0))
                             ]
                           ),
                         ),

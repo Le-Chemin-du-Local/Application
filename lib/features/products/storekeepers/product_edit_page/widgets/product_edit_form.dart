@@ -42,7 +42,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
   List<String> _productTags = [];
   List<String> _productAllergens = [];
 
-  String _currentUnit = 'unit';
+  String _currentUnit = 'Unitée';
   double _currentTVA = 20;
   bool _isBreton = false;
   bool _hasGluten = true;
@@ -91,7 +91,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
       _descriptionTextController.text = widget.product!.description ?? "";
 
       _currentTVA = widget.product!.tva ?? 20;
-      _currentUnit = widget.product!.unit ?? "unit";
+      _currentUnit = widget.product!.unit ?? "Unitée";
 
       _productTags = widget.product!.tags.toList();
       _productAllergens = widget.product!.allergens.toList();
@@ -281,9 +281,9 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                                 child: ClDropdown<String>(
                                                   currentValue: _currentUnit,
                                                   items: const {
-                                                    "unit": "Unité",
-                                                    "gramme": "Gramme",
-                                                    "pack": "Pack"
+                                                    "Unitée": "Unitée",
+                                                    "Gramme": "Gramme",
+                                                    "Pack": "Pack"
                                                   },
                                                   label: "",
                                                   validator: (value) {
@@ -293,7 +293,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                                   },
                                                   onChanged: (newValue) {
                                                     setState(() {
-                                                      _currentUnit = newValue ?? 'unit';
+                                                      _currentUnit = newValue ?? 'Unitée';
                                                     });
                                                   },
                                                 ),
