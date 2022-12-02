@@ -54,10 +54,11 @@ class _RegistrationStep3State extends State<RegistrationStep3> {
               items: const {
                 "": "",
                 "Apiculture": "Apiculture",
-                "Boulangerie - Patiserie": "Boulangerie - Patiserie",
+                "Boulangerie - Pâtisserie": "Boulangerie - Pâtisserie",
                 "Boucherie": "Boucherie",
                 "Brasserie": "Brasserie",
                 "Épicerie": "Épicerie",
+                "Fromagerie": "Fromagerie",
                 "Maraicher": "Maraicher",
                 "Micro-brasserie": "Micro-brasserie",
                 "Ostréiculture": "Ostréiculture",
