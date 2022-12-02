@@ -28,14 +28,11 @@ class _CommercesListPageState extends State<CommercesListPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ClAppBar(
-        canPop: false,
-        onShowDrawer: widget.onShowDrawer,
-        title: const Text("Bienvenue, Victor 👋"),
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch, 
         children: [
+          const SizedBox(height: 48,),
+
           // La bar de recherche
           Padding(
             padding: EdgeInsets.symmetric(horizontal: ScreenHelper.instance.horizontalPadding),
