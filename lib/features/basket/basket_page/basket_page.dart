@@ -88,7 +88,7 @@ class _BasketPageState extends ConsumerState<BasketPage> {
         appBar: ClAppBar(
           canPop: _currentIndex > 0,
           onShowDrawer: widget.onShowDrawer,
-          title: const Text("Mon Panier"),
+          title: const Text("Mon panier"),
         ),
         body: _successBasket != null ? BasketSuccess(basket: _successBasket!) : Column(
           // mainAxisSize: MainAxisSize.min,

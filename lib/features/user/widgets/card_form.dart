@@ -134,6 +134,15 @@ class _CardFormState extends ConsumerState<CardForm> {
                 ],
               ),
             ),
+            OutlinedButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: const [
+                  Text("Retourner aux cartes"),
+                ],
+              )
+            )
           ],
         ),
       )

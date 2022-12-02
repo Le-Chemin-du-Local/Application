@@ -19,5 +19,5 @@ class Address with _$Address {
 
   factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
 
-  String get detailled => "$number $route, $city";
+  String get detailled => "$number $route, $postalCode $city";
 }

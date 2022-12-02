@@ -19,7 +19,7 @@ class CommerceCommandSummaryCard extends StatelessWidget {
         children: [
           // Le titre
           Text(
-            "Récapitulatif de command", 
+            "Récapitulatif de commande", 
             style: Theme.of(context).textTheme.headlineSmall!.copyWith(
               fontWeight: FontWeight.w500
             )

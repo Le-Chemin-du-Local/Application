@@ -61,7 +61,7 @@ class AddressesSummary extends StatelessWidget {
 
                   final Commerce commerce = Commerce.fromJson(result.data!["commerce"] as Map<String, dynamic>);
                   final pickupDateString = basketCommerce.pickupDate != null
-                    ? "${DateFormat("dd/MM/yyyy").format(basketCommerce.pickupDate!)} -> ${DateFormat("hh:mm").format(basketCommerce.pickupDate!)} - ${DateFormat("hh:mm").format(basketCommerce.pickupDate!.add(const Duration(minutes: 30)))}"
+                    ? "${DateFormat("dd/MM/yyyy").format(basketCommerce.pickupDate!)} entre ${DateFormat("hh:mm").format(basketCommerce.pickupDate!)} et ${DateFormat("hh:mm").format(basketCommerce.pickupDate!.add(const Duration(minutes: 30)))}"
                     : "Inconnue";
 
                   return Row(
@@ -91,7 +91,7 @@ class AddressesSummary extends StatelessWidget {
                             // La date de collecte
                             Flexible(
                               child: Text(
-                                "Collecte : $pickupDateString"
+                                "À retirer le $pickupDateString", style: const TextStyle(fontStyle: FontStyle.italic),
                               ),
                             )
                           ],

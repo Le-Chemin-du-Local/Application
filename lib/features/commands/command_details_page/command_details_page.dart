@@ -33,7 +33,7 @@ class CommandDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: ClAppBar(
         canPop: Navigator.of(context).canPop(),
-        title: Text("commande du $commandDateString"),
+        title: Text("Commande du $commandDateString"),
       ),
       body: Query<dynamic>(
         options: _commandQueryOptions(),

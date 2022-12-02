@@ -33,7 +33,7 @@ class PaymentMethodCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Info de paiement", 
+                "Informations de paiement", 
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   fontWeight: FontWeight.w500
                 ),

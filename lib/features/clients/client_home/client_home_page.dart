@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/core/helpers/screen_helper.dart';
-import 'package:chemin_du_local/core/widgets/cl_appbar.dart';
 import 'package:chemin_du_local/core/widgets/cl_status_message.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_address_input.dart';
 import 'package:chemin_du_local/features/authentication/app_user_controller.dart';
@@ -47,11 +46,6 @@ class _ClientHomePageState extends ConsumerState<ClientHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ClAppBar(
-        onShowDrawer: widget.onShowDrawer,
-        canPop: false,
-        title: const Text("Bienvenue, Victor 👋"),
-      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(
@@ -61,6 +55,7 @@ class _ClientHomePageState extends ConsumerState<ClientHomePage> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              const SizedBox(height: 48,),
               // La barre d'adresse
               ClAddressInput(
                 label: "",

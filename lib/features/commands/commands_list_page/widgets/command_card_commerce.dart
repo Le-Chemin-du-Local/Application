@@ -19,7 +19,7 @@ class CommandCardCommerce extends StatelessWidget {
 
     final String collectDateString = pickupStartDate == null 
       ? "Date non définie"
-      : "${DateFormat("dd/MM/yyyy").format(pickupStartDate)} -> ${DateFormat("hh:mm").format(pickupStartDate)} - ${DateFormat("hh:mm").format(pickupEndDate!)}";
+      : "${DateFormat("dd/MM/yyyy").format(pickupStartDate)} entre ${DateFormat("hh:mm").format(pickupStartDate)} et ${DateFormat("hh:mm").format(pickupEndDate!)}";
 
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.bodyText1!,
@@ -34,7 +34,7 @@ class CommandCardCommerce extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(commerceCommand.commerce?.address?.detailled ?? "Addresse inconnue"),
-                Text("Collecte : $collectDateString")
+                Text("À retirer le $collectDateString", style: const TextStyle(fontStyle: FontStyle.italic),)
               ],
             ),
           ),

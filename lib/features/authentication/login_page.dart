@@ -111,11 +111,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
-                                if (loginMutationResult?.hasException ?? false) ...{
+                                if ((loginMutationResult?.hasException ?? false) && !_isRegistering) ...{
                                   const Align(
                                     alignment: Alignment.topCenter,
                                     child: ClStatusMessage(
-                                      message: "Nous n'arrivons pas à vous connecter... Vérifier votre email et votre mot de passe",
+                                      message: "Authentification impossible : email ou mot de passe incorrect",
                                     )
                                   ),
                                   const SizedBox(height: 20,)
