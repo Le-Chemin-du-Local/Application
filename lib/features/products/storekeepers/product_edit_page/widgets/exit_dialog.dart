@@ -22,7 +22,7 @@ class ExitDialog extends StatelessWidget {
             // Le texte d'informations
             Flexible(
               child: Text(
-                "Vous avez des modifications non sauvegardées, souhaitez-vous vraiment quitter la page ?",
+                "Vos produits n'ont pas pu être sauvegardés.",
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
@@ -33,7 +33,7 @@ class ExitDialog extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pop(true);
               }, 
-              child: const Text("Quitter et sauvegarder le contenu")
+              child: const Text("Rester sur la page")
             ),
             const SizedBox(height: 12,),
             OutlinedButton(

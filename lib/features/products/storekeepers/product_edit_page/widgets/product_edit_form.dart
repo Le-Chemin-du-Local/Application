@@ -48,9 +48,16 @@ class _ProductEditFormState extends State<ProductEditForm> {
   bool _hasGluten = true;
   ClFile? _currentImage;
 
-  MutationOptions<dynamic> _createProductMutationOptions(BuildContext context) {
+  MutationOptions<dynamic> _createProductMutationOptions() {
     return MutationOptions<dynamic>(
       document: gql(mutCreateProduct),
+      onError: (error) async {
+        final bool shouldStay = await showDialog<bool?>(
+          context: context, 
+          builder: (context) => const ExitDialog()) ?? true;
+
+          if (!shouldStay) Navigator.of(context).pop();
+      },
       onCompleted: (dynamic data) {
         if (data != null) {
           Navigator.of(context).pop(true);
@@ -59,9 +66,16 @@ class _ProductEditFormState extends State<ProductEditForm> {
     );
   }
 
-  MutationOptions<dynamic> _updateProductMutationOptions(BuildContext context) {
+  MutationOptions<dynamic> _updateProductMutationOptions() {
     return MutationOptions<dynamic>(
       document: gql(mutUpdateProduct),
+      onError: (error) async {
+        final bool shouldStay = await showDialog<bool?>(
+          context: context, 
+          builder: (context) => const ExitDialog()) ?? true;
+
+          if (!shouldStay) Navigator.of(context).pop();
+      },
       onCompleted: (dynamic data) {
         if (data != null) {
           Navigator.of(context).pop(true);
@@ -105,14 +119,14 @@ class _ProductEditFormState extends State<ProductEditForm> {
   @override
   Widget build(BuildContext context) {
     return Mutation<dynamic>(
-      options: _createProductMutationOptions(context),
+      options: _createProductMutationOptions(),
       builder: (runCreateMutation, createMutationResult) {
         if (createMutationResult?.isLoading ?? false) {
           return const Center(child: CircularProgressIndicator(),);
         }
 
         return Mutation<dynamic>(
-          options: _updateProductMutationOptions(context),
+          options: _updateProductMutationOptions(),
           builder: (runUpdateMutation, updateMutationResult) {
             if (updateMutationResult?.isLoading ?? false) {
               return const Center(child: CircularProgressIndicator(),);
@@ -137,14 +151,6 @@ class _ProductEditFormState extends State<ProductEditForm> {
   }) {
     return WillPopScope(
       onWillPop: () async {
-        bool shouldSave = await showDialog<bool?>(
-          context: context, 
-          barrierDismissible: false,
-          builder: (context) => const ExitDialog()
-        ) ?? false;
-
-        if (!shouldSave) return true;
-
         _onSave(runCreateMutation: runCreateMutation, runUpdateMutation: runUpdateMutation);
         return false;
       },
