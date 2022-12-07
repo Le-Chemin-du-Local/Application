@@ -1,7 +1,12 @@
+import 'package:chemin_du_local/core/utils/constants.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_checkbox.dart';
 import 'package:chemin_du_local/core/widgets/inputs/cl_text_input.dart';
 import 'package:chemin_du_local/theme/palette.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../../core/helpers/screen_helper.dart';
 
 class RegistrationStepPassword extends StatefulWidget {
   const RegistrationStepPassword({
@@ -102,7 +107,24 @@ class _RegistrationStepPasswordState extends State<RegistrationStepPassword> {
       
             // La case de politique de confidentialitée
             ClCheckBox(
-              text: "En cliquant sur J’accepte, je suis d’accord avec la Politique de confidentialité et les Termes de services",
+              child: RichText(
+                text: TextSpan(
+                  style: ScreenHelper.instance.isMobile 
+                    ? Theme.of(context).textTheme.titleMedium
+                    : Theme.of(context).textTheme.headlineSmall,
+                  text: "En cliquant sur J’accepte, je suis d’accord avec la ",
+                  children: [
+                    TextSpan(
+                      style: TextStyle(color: Theme.of(context).colorScheme.secondary),
+                      recognizer: TapGestureRecognizer()..onTap = () => launchUrl(
+                        Uri.parse(kPolitiqueConfidentialiteUrl),
+                        mode: LaunchMode.externalApplication
+                      ),
+                      text: "Politique de confidentialité.",
+                    )
+                  ]
+                )
+              ),
               onChanged: widget.onConditionAcceptationChanged,
               value: widget.hasAcceptedConditions,
             ),

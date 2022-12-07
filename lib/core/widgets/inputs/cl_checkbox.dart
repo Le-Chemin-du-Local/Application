@@ -6,13 +6,15 @@ class ClCheckBox extends StatelessWidget {
     Key? key,
     required this.value,
     required this.onChanged,
-    required this.text
+    this.child,
+    this.text = '',
   }) : super(key: key);
 
 
   final bool value;
   final Function(bool?) onChanged;
   
+  final Widget? child;
   final String text;
 
   @override
@@ -35,7 +37,7 @@ class ClCheckBox extends StatelessWidget {
         Flexible(
           child: GestureDetector(
             onTap: () => onChanged(!value),
-            child: Text(
+            child: child ?? Text(
               text, 
               style: ScreenHelper.instance.isMobile 
                 ? Theme.of(context).textTheme.titleMedium
