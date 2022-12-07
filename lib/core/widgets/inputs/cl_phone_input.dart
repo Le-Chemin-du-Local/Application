@@ -84,10 +84,10 @@ class ClPhoneInput extends StatelessWidget {
           validator: (value) {
             if ((value?.isEmpty ?? true) && !canBeEmpty) return "Vous devez rentrer un numéro"; 
 
-            // String pattern = r"/^((\+)33|0|0033)[1-9](\d{2}){4}$/g";
-            // RegExp phoneRegexp = RegExp(pattern);
+            String pattern = r"^((\+)33|0)[1-9](\d{2}){4}$";
+            RegExp phoneRegexp = RegExp(pattern);
 
-            // if (!phoneRegexp.hasMatch(value ?? "")) return "Vous devez rentrer un numéro valide.";
+            if (!phoneRegexp.hasMatch(value ?? "")) return "Vous devez rentrer un numéro valide.";
 
             return null;
           },

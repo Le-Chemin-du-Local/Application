@@ -46,6 +46,12 @@ class _RegistrationStep1State extends State<RegistrationStep1> {
               inputType: TextInputType.emailAddress,
               validator: (value) {
                 if (value.isEmpty) return "Vous devez rentrer un mail";
+
+                String pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+                RegExp emailRegexp = RegExp(pattern);
+
+                if (!emailRegexp.hasMatch(value)) return "Vous devez rentrer un email valide.";
+
                 return null;
               },
             ),
@@ -92,6 +98,7 @@ class _RegistrationStep1State extends State<RegistrationStep1> {
                 hintText: "90804680800014",
                 validator: (value) {
                   if (value.isEmpty) return "Vous devez rentrer un SIRET";
+                  if (value.length != 14) return "Le SIRET semble invalide";
                   return null;
                 },
               )

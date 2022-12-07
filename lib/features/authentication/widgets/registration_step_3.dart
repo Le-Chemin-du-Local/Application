@@ -62,21 +62,13 @@ class _RegistrationStep3State extends State<RegistrationStep3> {
                 "Micro-brasserie": "Micro-brasserie",
                 "Ostréiculture": "Ostréiculture",
                 "Primeur": "Primeur",
+                "Pas de type": "Mon type n'est pas dans la liste"
               },
               onChanged: widget.onStoreTypeChanged,
               validator: (value) {
                 if ((value ?? "").isEmpty) return "Vous devez rentrer un type de commerce";
                 return null;
               },
-            ),
-            const SizedBox(height: 10,),
-            InkWell(
-              onTap: () {}, // TODO: afficher un message
-              child: Text(
-                "Mon commerce n'est pas dans la liste, que faire ?",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Theme.of(context).colorScheme.secondary),
-              ),
             ),
             const SizedBox(height: 10,),
       
