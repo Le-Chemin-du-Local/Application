@@ -219,7 +219,8 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                           child: ClTextInput(
                                             controller: _nameTextController, 
                                             labelText: "Nom du produit",
-                                            maxLenght: 18,
+                                            hintText: "Bière IPA",
+                                            maxLenght: 38,
                                             maxLengthEnforcement: MaxLengthEnforcement.enforced,
                                             validator: (value) {
                                               if (value.isEmpty) return "Vous devez rentrer un nom";
@@ -265,7 +266,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                                   controller: _priceTextController,
                                                   inputType: const TextInputType.numberWithOptions(decimal: true),
                                                   labelText: "Prix TTC",
-                                                  hintText: "Ex : 5,00",
+                                                  hintText: "5,00",
                                                   validator: (price) {
                                                     if (double.tryParse(price) == null) return "Vous devez rentrer un nombre valide";
                                           

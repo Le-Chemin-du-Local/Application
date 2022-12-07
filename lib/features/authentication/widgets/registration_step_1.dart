@@ -60,7 +60,7 @@ class _RegistrationStep1State extends State<RegistrationStep1> {
             ClPhoneInput(
               controller: widget.phoneTextController,
               labelText: "Mon numéro de téléphone",
-              hintText: "0652809335",
+              hintText: "0605040302",
             ),
             const SizedBox(height: 10,),
           
@@ -82,7 +82,7 @@ class _RegistrationStep1State extends State<RegistrationStep1> {
               ClTextInput(              
                 controller: widget.storeNameTextController,
                 labelText: "Nom du commerce",
-                hintText: "La Bizhh",
+                hintText: "L'Hermine Blanche",
                 validator: (value) {
                   if (value.isEmpty) return "Vous devez rentrer le nom de votre commerce";
                   return null;

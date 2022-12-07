@@ -66,7 +66,7 @@ class RegistrationStep2 extends StatelessWidget {
             ClTextInput(
               controller: firstNameTextController, 
               labelText: "Mon prénom",
-              hintText: "Victor",
+              hintText: "Jack",
               validator: (value) {
                 if (value.isEmpty) return "Vous devez rentrer un prénom";
                 return null;
@@ -78,7 +78,7 @@ class RegistrationStep2 extends StatelessWidget {
             ClTextInput(
               controller: lastNameTextController,
               labelText: "Mon nom",
-              hintText: "DENIS",
+              hintText: "DUPONT",
               validator: (value) {
                 if (value.isEmpty) return "Vous devez rentrer un nom";
                 return null;

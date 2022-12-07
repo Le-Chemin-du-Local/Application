@@ -68,7 +68,11 @@ class _ClImagePickerBigState extends State<ClImagePickerBig> {
                   ),
                 ),
                 errorBuilder: (context, error, stackTrace) {
-                  return const SizedBox(height: 250,);
+                  return Container(
+                    height: 250,
+                    color: Theme.of(context).colorScheme.background,
+                    child: const Icon(Icons.image, size: 250 * 0.5,)
+                  );
                 },
               ),
             ),

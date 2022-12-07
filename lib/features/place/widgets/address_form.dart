@@ -129,7 +129,7 @@ class _AddressFormState extends State<AddressForm> {
                     controller: textEditingController,
                     focusNode: focusNode, 
                     labelText: "Adresse",
-                    hintText: "Rentrer une adresse",
+                    hintText: "10 rue de Bretagne",
                     onTap: () {
                       _sessionToken = const Uuid().v4();
                     },
