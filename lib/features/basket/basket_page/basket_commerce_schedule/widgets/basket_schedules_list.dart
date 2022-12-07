@@ -76,7 +76,7 @@ class BasketSchedulesList extends StatelessWidget {
       ),
       child: hours.isEmpty
         ? const ClStatusMessage(
-          message: "Le commerce ne propose pas de crénaux de Click&Collect ce jours là",
+          message: "Le commerce ne propose pas de créneaux de Click&Collect ce jours là",
           type: ClStatusMessageType.info,
         )
         : Column(

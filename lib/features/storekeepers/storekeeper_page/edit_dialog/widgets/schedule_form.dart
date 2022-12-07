@@ -51,7 +51,7 @@ class ScheduleForm extends StatelessWidget {
 
         // Jeudi
         ScheduleField(
-          dayString: "Thursay",
+          dayString: "Jeudi",
           controller: thursdayController,
         ),
         const SizedBox(height: 16,),

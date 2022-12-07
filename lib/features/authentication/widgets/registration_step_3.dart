@@ -56,7 +56,6 @@ class _RegistrationStep3State extends State<RegistrationStep3> {
                 "Apiculture": "Apiculture",
                 "Boulangerie - Pâtisserie": "Boulangerie - Pâtisserie",
                 "Boucherie": "Boucherie",
-                "Brasserie": "Brasserie",
                 "Épicerie": "Épicerie",
                 "Fromagerie": "Fromagerie",
                 "Maraicher": "Maraicher",

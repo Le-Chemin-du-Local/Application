@@ -252,7 +252,7 @@ class _EditDialogState extends State<EditDialog> {
                             _scheduleEqualCC = value ?? false;
                           });
                         }, 
-                        text: "Les crénaux de Click&Collect sont les même que les horaires du magasin",
+                        text: "Les créneaux de Click&Collect sont les mêmes que les horaires de la boutique",
                       ),
                       const SizedBox(height: 22,),
 

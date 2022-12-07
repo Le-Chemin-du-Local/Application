@@ -72,7 +72,7 @@ class StoreKeeperSettingsPage extends StatelessWidget {
                     return const Align(
                       alignment: Alignment.topCenter,
                       child: ClStatusMessage(
-                        message: "Nous n'arrivons malheursement pas à charger votre balance",
+                        message: "Nous n'arrivons malheuresement pas à charger votre balance",
                       ),
                     );
                   }
