@@ -268,7 +268,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                                   labelText: "Prix TTC",
                                                   hintText: "5,00",
                                                   validator: (price) {
-                                                    if (double.tryParse(price) == null) return "Vous devez rentrer un nombre valide";
+                                                    if (double.tryParse(price.replaceAll(",", ".")) == null) return "Vous devez rentrer un nombre valide";
                                           
                                                     return null;
                                                   },
@@ -534,7 +534,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
     final Map<String, dynamic> values = <String, dynamic>{
       "name": _nameTextController.text,
       "description": _descriptionTextController.text,
-      "price": double.parse(_priceTextController.text),
+      "price": double.parse(_priceTextController.text.replaceAll(",", ".")),
       "unit": _currentUnit,
       "tva": _currentTVA,
       "isBreton": _isBreton,

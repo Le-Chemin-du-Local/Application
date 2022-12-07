@@ -52,7 +52,7 @@ class _SimulationCardState extends State<SimulationCard> {
                   suffixIcon: Icons.euro,
                   validator: (value) {
                     if (value.isEmpty) return "Vous devez rentrer un CA";
-                    if (double.tryParse(value) == null) return "Vous devez rentrer un nombre valide";
+                    if (double.tryParse(value.replaceAll(",", ".")) == null) return "Vous devez rentrer un nombre valide";
                     return null;
                   },
                 ),
@@ -93,7 +93,7 @@ class _SimulationCardState extends State<SimulationCard> {
   void _simulate() {
     if (!_formKey.currentState!.validate()) return;
 
-    double currentCA = double.parse(_caTextController.text);
+    double currentCA = double.parse(_caTextController.text.replaceAll(",", "."));
     int augmentationFactor = 0;
     double nextCALimit = widget.serviceInfo.monthMinimumAllowedCA;
 
