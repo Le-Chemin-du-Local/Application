@@ -113,7 +113,7 @@ class __$$_CCProductCopyWithImpl<$Res> extends _$CCProductCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CCProduct with DiagnosticableTreeMixin implements _CCProduct {
+class _$_CCProduct implements _CCProduct {
   const _$_CCProduct({required this.quantity, required this.product});
 
   factory _$_CCProduct.fromJson(Map<String, dynamic> json) =>
@@ -125,17 +125,8 @@ class _$_CCProduct with DiagnosticableTreeMixin implements _CCProduct {
   final Product product;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CCProduct(quantity: $quantity, product: $product)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CCProduct'))
-      ..add(DiagnosticsProperty('quantity', quantity))
-      ..add(DiagnosticsProperty('product', product));
   }
 
   @override
@@ -161,7 +152,9 @@ class _$_CCProduct with DiagnosticableTreeMixin implements _CCProduct {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CCProductToJson(this);
+    return _$$_CCProductToJson(
+      this,
+    );
   }
 }
 
@@ -174,9 +167,9 @@ abstract class _CCProduct implements CCProduct {
       _$_CCProduct.fromJson;
 
   @override
-  int get quantity => throw _privateConstructorUsedError;
+  int get quantity;
   @override
-  Product get product => throw _privateConstructorUsedError;
+  Product get product;
   @override
   @JsonKey(ignore: true)
   _$$_CCProductCopyWith<_$_CCProduct> get copyWith =>
