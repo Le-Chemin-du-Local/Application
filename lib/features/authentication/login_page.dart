@@ -29,6 +29,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   String _registrationType = RegistrationType.client;
   int _currentStep = 0;
 
+  String _loginStatusMessage = "";
+
   MutationOptions<dynamic> _loginMutationOptions(WidgetRef ref) {
     return MutationOptions<dynamic>(
       document: gql(mutAuthentication),
@@ -38,6 +40,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         final String token = data['login'] as String? ?? "";
         
         if (token.isNotEmpty) {
+          if (token == "WAITINGVALIDATION") {
+            setState(() {
+              _loginStatusMessage = "Votre profile de commerçant n'a toujours pas été validé. 😢 Mais ne vous inquiétez pas, cela devrait être fait sous 24h ! 😉";
+            });
+            return;
+          }
           // Then we can actually login the user
           ref.read(appUserControllerProvider.notifier).loginUser(
             token,
@@ -116,6 +124,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                     alignment: Alignment.topCenter,
                                     child: ClStatusMessage(
                                       message: "Authentification impossible : email ou mot de passe incorrect",
+                                    )
+                                  ),
+                                  const SizedBox(height: 20,)
+                                } 
+                                else if (_loginStatusMessage.isNotEmpty && !_isRegistering) ...{
+                                  Align(
+                                    alignment: Alignment.topCenter,
+                                    child: ClStatusMessage(
+                                      type: ClStatusMessageType.info,
+                                      message: _loginStatusMessage,
                                     )
                                   ),
                                   const SizedBox(height: 20,)
