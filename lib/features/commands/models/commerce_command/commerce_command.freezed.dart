@@ -218,9 +218,7 @@ class __$$_CommerceCommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CommerceCommand
-    with DiagnosticableTreeMixin
-    implements _CommerceCommand {
+class _$_CommerceCommand implements _CommerceCommand {
   const _$_CommerceCommand(
       this.id,
       {required this.status,
@@ -266,23 +264,8 @@ class _$_CommerceCommand
   }
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CommerceCommand(id: $id, status: $status, pickupDate: $pickupDate, commerce: $commerce, user: $user, price: $price, cccommands: $cccommands, panierCommands: $panierCommands)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CommerceCommand'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('status', status))
-      ..add(DiagnosticsProperty('pickupDate', pickupDate))
-      ..add(DiagnosticsProperty('commerce', commerce))
-      ..add(DiagnosticsProperty('user', user))
-      ..add(DiagnosticsProperty('price', price))
-      ..add(DiagnosticsProperty('cccommands', cccommands))
-      ..add(DiagnosticsProperty('panierCommands', panierCommands));
   }
 
   @override
@@ -323,7 +306,9 @@ class _$_CommerceCommand
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CommerceCommandToJson(this);
+    return _$$_CommerceCommandToJson(
+      this,
+    );
   }
 }
 
@@ -342,22 +327,22 @@ abstract class _CommerceCommand implements CommerceCommand {
       _$_CommerceCommand.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String get status => throw _privateConstructorUsedError;
+  String get status;
   @override
-  DateTime? get pickupDate => throw _privateConstructorUsedError;
+  DateTime? get pickupDate;
   @override
-  Commerce? get commerce => throw _privateConstructorUsedError;
+  Commerce? get commerce;
   @override
-  User? get user => throw _privateConstructorUsedError;
+  User? get user;
   @override
-  double? get price => throw _privateConstructorUsedError;
+  double? get price;
   @override
-  List<CCCommand> get cccommands => throw _privateConstructorUsedError;
+  List<CCCommand> get cccommands;
   @override
   @JsonKey(name: "paniers")
-  List<PanierCommand> get panierCommands => throw _privateConstructorUsedError;
+  List<PanierCommand> get panierCommands;
   @override
   @JsonKey(ignore: true)
   _$$_CommerceCommandCopyWith<_$_CommerceCommand> get copyWith =>

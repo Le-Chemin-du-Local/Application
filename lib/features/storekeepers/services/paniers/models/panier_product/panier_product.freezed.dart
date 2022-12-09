@@ -117,7 +117,7 @@ class __$$_PanierProductCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
+class _$_PanierProduct implements _PanierProduct {
   const _$_PanierProduct({required this.quantity, required this.product});
 
   factory _$_PanierProduct.fromJson(Map<String, dynamic> json) =>
@@ -129,17 +129,8 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
   final Product product;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'PanierProduct(quantity: $quantity, product: $product)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PanierProduct'))
-      ..add(DiagnosticsProperty('quantity', quantity))
-      ..add(DiagnosticsProperty('product', product));
   }
 
   @override
@@ -165,7 +156,9 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PanierProductToJson(this);
+    return _$$_PanierProductToJson(
+      this,
+    );
   }
 }
 
@@ -178,9 +171,9 @@ abstract class _PanierProduct implements PanierProduct {
       _$_PanierProduct.fromJson;
 
   @override
-  int get quantity => throw _privateConstructorUsedError;
+  int get quantity;
   @override
-  Product get product => throw _privateConstructorUsedError;
+  Product get product;
   @override
   @JsonKey(ignore: true)
   _$$_PanierProductCopyWith<_$_PanierProduct> get copyWith =>

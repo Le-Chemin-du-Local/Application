@@ -28,6 +28,8 @@ mixin _$Product {
   String? get description => throw _privateConstructorUsedError;
   double? get price => throw _privateConstructorUsedError;
   String? get unit => throw _privateConstructorUsedError;
+  double? get perUnitQuantity => throw _privateConstructorUsedError;
+  String? get perUnitQuantityUnit => throw _privateConstructorUsedError;
   double? get tva => throw _privateConstructorUsedError;
   bool? get isBreton => throw _privateConstructorUsedError;
   bool? get hasGluten => throw _privateConstructorUsedError;
@@ -50,6 +52,8 @@ abstract class $ProductCopyWith<$Res> {
       String? description,
       double? price,
       String? unit,
+      double? perUnitQuantity,
+      String? perUnitQuantityUnit,
       double? tva,
       bool? isBreton,
       bool? hasGluten});
@@ -73,6 +77,8 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
     Object? description = freezed,
     Object? price = freezed,
     Object? unit = freezed,
+    Object? perUnitQuantity = freezed,
+    Object? perUnitQuantityUnit = freezed,
     Object? tva = freezed,
     Object? isBreton = freezed,
     Object? hasGluten = freezed,
@@ -110,6 +116,14 @@ class _$ProductCopyWithImpl<$Res> implements $ProductCopyWith<$Res> {
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as String?,
+      perUnitQuantity: perUnitQuantity == freezed
+          ? _value.perUnitQuantity
+          : perUnitQuantity // ignore: cast_nullable_to_non_nullable
+              as double?,
+      perUnitQuantityUnit: perUnitQuantityUnit == freezed
+          ? _value.perUnitQuantityUnit
+          : perUnitQuantityUnit // ignore: cast_nullable_to_non_nullable
+              as String?,
       tva: tva == freezed
           ? _value.tva
           : tva // ignore: cast_nullable_to_non_nullable
@@ -141,6 +155,8 @@ abstract class _$$_ProductCopyWith<$Res> implements $ProductCopyWith<$Res> {
       String? description,
       double? price,
       String? unit,
+      double? perUnitQuantity,
+      String? perUnitQuantityUnit,
       double? tva,
       bool? isBreton,
       bool? hasGluten});
@@ -165,6 +181,8 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
     Object? description = freezed,
     Object? price = freezed,
     Object? unit = freezed,
+    Object? perUnitQuantity = freezed,
+    Object? perUnitQuantityUnit = freezed,
     Object? tva = freezed,
     Object? isBreton = freezed,
     Object? hasGluten = freezed,
@@ -202,6 +220,14 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as String?,
+      perUnitQuantity: perUnitQuantity == freezed
+          ? _value.perUnitQuantity
+          : perUnitQuantity // ignore: cast_nullable_to_non_nullable
+              as double?,
+      perUnitQuantityUnit: perUnitQuantityUnit == freezed
+          ? _value.perUnitQuantityUnit
+          : perUnitQuantityUnit // ignore: cast_nullable_to_non_nullable
+              as String?,
       tva: tva == freezed
           ? _value.tva
           : tva // ignore: cast_nullable_to_non_nullable
@@ -220,7 +246,7 @@ class __$$_ProductCopyWithImpl<$Res> extends _$ProductCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Product with DiagnosticableTreeMixin implements _Product {
+class _$_Product implements _Product {
   const _$_Product(this.id,
       {required this.name,
       this.categories = const <String>[],
@@ -229,6 +255,8 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
       this.description,
       this.price,
       this.unit,
+      this.perUnitQuantity,
+      this.perUnitQuantityUnit,
       this.tva,
       this.isBreton,
       this.hasGluten});
@@ -256,6 +284,10 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
   @override
   final String? unit;
   @override
+  final double? perUnitQuantity;
+  @override
+  final String? perUnitQuantityUnit;
+  @override
   final double? tva;
   @override
   final bool? isBreton;
@@ -263,26 +295,8 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
   final bool? hasGluten;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Product(id: $id, name: $name, categories: $categories, tags: $tags, allergens: $allergens, description: $description, price: $price, unit: $unit, tva: $tva, isBreton: $isBreton, hasGluten: $hasGluten)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Product'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('categories', categories))
-      ..add(DiagnosticsProperty('tags', tags))
-      ..add(DiagnosticsProperty('allergens', allergens))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('price', price))
-      ..add(DiagnosticsProperty('unit', unit))
-      ..add(DiagnosticsProperty('tva', tva))
-      ..add(DiagnosticsProperty('isBreton', isBreton))
-      ..add(DiagnosticsProperty('hasGluten', hasGluten));
+  String toString() {
+    return 'Product(id: $id, name: $name, categories: $categories, tags: $tags, allergens: $allergens, description: $description, price: $price, unit: $unit, perUnitQuantity: $perUnitQuantity, perUnitQuantityUnit: $perUnitQuantityUnit, tva: $tva, isBreton: $isBreton, hasGluten: $hasGluten)';
   }
 
   @override
@@ -300,6 +314,10 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
                 .equals(other.description, description) &&
             const DeepCollectionEquality().equals(other.price, price) &&
             const DeepCollectionEquality().equals(other.unit, unit) &&
+            const DeepCollectionEquality()
+                .equals(other.perUnitQuantity, perUnitQuantity) &&
+            const DeepCollectionEquality()
+                .equals(other.perUnitQuantityUnit, perUnitQuantityUnit) &&
             const DeepCollectionEquality().equals(other.tva, tva) &&
             const DeepCollectionEquality().equals(other.isBreton, isBreton) &&
             const DeepCollectionEquality().equals(other.hasGluten, hasGluten));
@@ -317,6 +335,8 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
       const DeepCollectionEquality().hash(description),
       const DeepCollectionEquality().hash(price),
       const DeepCollectionEquality().hash(unit),
+      const DeepCollectionEquality().hash(perUnitQuantity),
+      const DeepCollectionEquality().hash(perUnitQuantityUnit),
       const DeepCollectionEquality().hash(tva),
       const DeepCollectionEquality().hash(isBreton),
       const DeepCollectionEquality().hash(hasGluten));
@@ -328,7 +348,9 @@ class _$_Product with DiagnosticableTreeMixin implements _Product {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ProductToJson(this);
+    return _$$_ProductToJson(
+      this,
+    );
   }
 }
 
@@ -341,6 +363,8 @@ abstract class _Product implements Product {
       final String? description,
       final double? price,
       final String? unit,
+      final double? perUnitQuantity,
+      final String? perUnitQuantityUnit,
       final double? tva,
       final bool? isBreton,
       final bool? hasGluten}) = _$_Product;
@@ -348,27 +372,31 @@ abstract class _Product implements Product {
   factory _Product.fromJson(Map<String, dynamic> json) = _$_Product.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  List<String> get categories => throw _privateConstructorUsedError;
+  List<String> get categories;
   @override
-  List<String> get tags => throw _privateConstructorUsedError;
+  List<String> get tags;
   @override
-  List<String> get allergens => throw _privateConstructorUsedError;
+  List<String> get allergens;
   @override
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
   @override
-  double? get price => throw _privateConstructorUsedError;
+  double? get price;
   @override
-  String? get unit => throw _privateConstructorUsedError;
+  String? get unit;
   @override
-  double? get tva => throw _privateConstructorUsedError;
+  double? get perUnitQuantity;
   @override
-  bool? get isBreton => throw _privateConstructorUsedError;
+  String? get perUnitQuantityUnit;
   @override
-  bool? get hasGluten => throw _privateConstructorUsedError;
+  double? get tva;
+  @override
+  bool? get isBreton;
+  @override
+  bool? get hasGluten;
   @override
   @JsonKey(ignore: true)
   _$$_ProductCopyWith<_$_Product> get copyWith =>

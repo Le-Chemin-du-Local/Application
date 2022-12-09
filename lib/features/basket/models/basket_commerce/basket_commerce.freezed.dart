@@ -135,9 +135,7 @@ class __$$_BasketCommerceCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BasketCommerce
-    with DiagnosticableTreeMixin
-    implements _BasketCommerce {
+class _$_BasketCommerce implements _BasketCommerce {
   const _$_BasketCommerce(
       {required this.commerceID,
       final List<BasketProduct> products = const <BasketProduct>[],
@@ -171,19 +169,8 @@ class _$_BasketCommerce
   final DateTime? pickupDate;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'BasketCommerce(commerceID: $commerceID, products: $products, paniers: $paniers, pickupDate: $pickupDate)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'BasketCommerce'))
-      ..add(DiagnosticsProperty('commerceID', commerceID))
-      ..add(DiagnosticsProperty('products', products))
-      ..add(DiagnosticsProperty('paniers', paniers))
-      ..add(DiagnosticsProperty('pickupDate', pickupDate));
   }
 
   @override
@@ -215,7 +202,9 @@ class _$_BasketCommerce
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BasketCommerceToJson(this);
+    return _$$_BasketCommerceToJson(
+      this,
+    );
   }
 }
 
@@ -230,13 +219,13 @@ abstract class _BasketCommerce implements BasketCommerce {
       _$_BasketCommerce.fromJson;
 
   @override
-  String get commerceID => throw _privateConstructorUsedError;
+  String get commerceID;
   @override
-  List<BasketProduct> get products => throw _privateConstructorUsedError;
+  List<BasketProduct> get products;
   @override
-  List<Panier> get paniers => throw _privateConstructorUsedError;
+  List<Panier> get paniers;
   @override
-  DateTime? get pickupDate => throw _privateConstructorUsedError;
+  DateTime? get pickupDate;
   @override
   @JsonKey(ignore: true)
   _$$_BasketCommerceCopyWith<_$_BasketCommerce> get copyWith =>

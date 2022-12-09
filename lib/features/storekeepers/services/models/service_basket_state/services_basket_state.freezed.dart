@@ -90,8 +90,7 @@ class __$$_ServicesBasketStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ServicesBasketState extends _ServicesBasketState
-    with DiagnosticableTreeMixin {
+class _$_ServicesBasketState extends _ServicesBasketState {
   const _$_ServicesBasketState(
       {required final List<Tuple2<ServiceInfo, ServiceType>> services})
       : _services = services,
@@ -105,16 +104,8 @@ class _$_ServicesBasketState extends _ServicesBasketState
   }
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ServicesBasketState(services: $services)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ServicesBasketState'))
-      ..add(DiagnosticsProperty('services', services));
   }
 
   @override
@@ -143,8 +134,7 @@ abstract class _ServicesBasketState extends ServicesBasketState {
   const _ServicesBasketState._() : super._();
 
   @override
-  List<Tuple2<ServiceInfo, ServiceType>> get services =>
-      throw _privateConstructorUsedError;
+  List<Tuple2<ServiceInfo, ServiceType>> get services;
   @override
   @JsonKey(ignore: true)
   _$$_ServicesBasketStateCopyWith<_$_ServicesBasketState> get copyWith =>

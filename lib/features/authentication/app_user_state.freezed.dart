@@ -99,7 +99,7 @@ class __$$_AppUserStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_AppUserState with DiagnosticableTreeMixin implements _AppUserState {
+class _$_AppUserState implements _AppUserState {
   const _$_AppUserState({this.token, this.goBackToBasketPayment = false});
 
   @override
@@ -109,18 +109,8 @@ class _$_AppUserState with DiagnosticableTreeMixin implements _AppUserState {
   final bool goBackToBasketPayment;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'AppUserState(token: $token, goBackToBasketPayment: $goBackToBasketPayment)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'AppUserState'))
-      ..add(DiagnosticsProperty('token', token))
-      ..add(
-          DiagnosticsProperty('goBackToBasketPayment', goBackToBasketPayment));
   }
 
   @override
@@ -151,9 +141,9 @@ abstract class _AppUserState implements AppUserState {
       final bool goBackToBasketPayment}) = _$_AppUserState;
 
   @override
-  String? get token => throw _privateConstructorUsedError;
+  String? get token;
   @override
-  bool get goBackToBasketPayment => throw _privateConstructorUsedError;
+  bool get goBackToBasketPayment;
   @override
   @JsonKey(ignore: true)
   _$$_AppUserStateCopyWith<_$_AppUserState> get copyWith =>

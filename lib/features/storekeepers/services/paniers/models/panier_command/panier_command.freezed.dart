@@ -117,7 +117,7 @@ class __$$_PanierCommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
+class _$_PanierCommand implements _PanierCommand {
   const _$_PanierCommand(this.id, {required this.panier});
 
   factory _$_PanierCommand.fromJson(Map<String, dynamic> json) =>
@@ -129,17 +129,8 @@ class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
   final Panier panier;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'PanierCommand(id: $id, panier: $panier)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PanierCommand'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('panier', panier));
   }
 
   @override
@@ -165,7 +156,9 @@ class _$_PanierCommand with DiagnosticableTreeMixin implements _PanierCommand {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PanierCommandToJson(this);
+    return _$$_PanierCommandToJson(
+      this,
+    );
   }
 }
 
@@ -177,9 +170,9 @@ abstract class _PanierCommand implements PanierCommand {
       _$_PanierCommand.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  Panier get panier => throw _privateConstructorUsedError;
+  Panier get panier;
   @override
   @JsonKey(ignore: true)
   _$$_PanierCommandCopyWith<_$_PanierCommand> get copyWith =>

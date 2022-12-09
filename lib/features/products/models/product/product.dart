@@ -57,6 +57,8 @@ class Product with _$Product {
     String? description,
     double? price,
     String? unit,
+    double? perUnitQuantity,
+    String? perUnitQuantityUnit,
     double? tva,
     bool? isBreton,
     bool? hasGluten,

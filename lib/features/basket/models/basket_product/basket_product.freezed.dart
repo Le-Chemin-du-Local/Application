@@ -156,7 +156,9 @@ class _$_BasketProduct implements _BasketProduct {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BasketProductToJson(this);
+    return _$$_BasketProductToJson(
+      this,
+    );
   }
 }
 
@@ -169,9 +171,9 @@ abstract class _BasketProduct implements BasketProduct {
       _$_BasketProduct.fromJson;
 
   @override
-  int get quantity => throw _privateConstructorUsedError;
+  int get quantity;
   @override
-  Product get product => throw _privateConstructorUsedError;
+  Product get product;
   @override
   @JsonKey(ignore: true)
   _$$_BasketProductCopyWith<_$_BasketProduct> get copyWith =>

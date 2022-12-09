@@ -104,7 +104,7 @@ class __$$_ClFileCopyWithImpl<$Res> extends _$ClFileCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ClFile with DiagnosticableTreeMixin implements _ClFile {
+class _$_ClFile implements _ClFile {
   const _$_ClFile(
       {@JsonKey(name: "name") required this.filename,
       @JsonKey(name: "content") this.base64content});
@@ -120,17 +120,8 @@ class _$_ClFile with DiagnosticableTreeMixin implements _ClFile {
   final String? base64content;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ClFile(filename: $filename, base64content: $base64content)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ClFile'))
-      ..add(DiagnosticsProperty('filename', filename))
-      ..add(DiagnosticsProperty('base64content', base64content));
   }
 
   @override
@@ -157,7 +148,9 @@ class _$_ClFile with DiagnosticableTreeMixin implements _ClFile {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ClFileToJson(this);
+    return _$$_ClFileToJson(
+      this,
+    );
   }
 }
 
@@ -170,10 +163,10 @@ abstract class _ClFile implements ClFile {
 
   @override
   @JsonKey(name: "name")
-  String get filename => throw _privateConstructorUsedError;
+  String get filename;
   @override
   @JsonKey(name: "content")
-  String? get base64content => throw _privateConstructorUsedError;
+  String? get base64content;
   @override
   @JsonKey(ignore: true)
   _$$_ClFileCopyWith<_$_ClFile> get copyWith =>

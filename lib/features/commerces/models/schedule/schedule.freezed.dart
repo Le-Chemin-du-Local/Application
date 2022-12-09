@@ -101,7 +101,7 @@ class __$$_ScheduleCopyWithImpl<$Res> extends _$ScheduleCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Schedule with DiagnosticableTreeMixin implements _Schedule {
+class _$_Schedule implements _Schedule {
   const _$_Schedule({required this.opening, required this.closing});
 
   factory _$_Schedule.fromJson(Map<String, dynamic> json) =>
@@ -113,17 +113,8 @@ class _$_Schedule with DiagnosticableTreeMixin implements _Schedule {
   final String closing;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Schedule(opening: $opening, closing: $closing)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Schedule'))
-      ..add(DiagnosticsProperty('opening', opening))
-      ..add(DiagnosticsProperty('closing', closing));
   }
 
   @override
@@ -149,7 +140,9 @@ class _$_Schedule with DiagnosticableTreeMixin implements _Schedule {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ScheduleToJson(this);
+    return _$$_ScheduleToJson(
+      this,
+    );
   }
 }
 
@@ -161,9 +154,9 @@ abstract class _Schedule implements Schedule {
   factory _Schedule.fromJson(Map<String, dynamic> json) = _$_Schedule.fromJson;
 
   @override
-  String get opening => throw _privateConstructorUsedError;
+  String get opening;
   @override
-  String get closing => throw _privateConstructorUsedError;
+  String get closing;
   @override
   @JsonKey(ignore: true)
   _$$_ScheduleCopyWith<_$_Schedule> get copyWith =>

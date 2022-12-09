@@ -135,9 +135,7 @@ class __$$_ClPaymentMethodCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ClPaymentMethod
-    with DiagnosticableTreeMixin
-    implements _ClPaymentMethod {
+class _$_ClPaymentMethod implements _ClPaymentMethod {
   const _$_ClPaymentMethod(
       {this.name, this.stripeID, this.cardBrand, this.cardLast4Digits});
 
@@ -154,19 +152,8 @@ class _$_ClPaymentMethod
   final String? cardLast4Digits;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ClPaymentMethod(name: $name, stripeID: $stripeID, cardBrand: $cardBrand, cardLast4Digits: $cardLast4Digits)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ClPaymentMethod'))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('stripeID', stripeID))
-      ..add(DiagnosticsProperty('cardBrand', cardBrand))
-      ..add(DiagnosticsProperty('cardLast4Digits', cardLast4Digits));
   }
 
   @override
@@ -197,7 +184,9 @@ class _$_ClPaymentMethod
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ClPaymentMethodToJson(this);
+    return _$$_ClPaymentMethodToJson(
+      this,
+    );
   }
 }
 
@@ -212,13 +201,13 @@ abstract class _ClPaymentMethod implements ClPaymentMethod {
       _$_ClPaymentMethod.fromJson;
 
   @override
-  String? get name => throw _privateConstructorUsedError;
+  String? get name;
   @override
-  String? get stripeID => throw _privateConstructorUsedError;
+  String? get stripeID;
   @override
-  String? get cardBrand => throw _privateConstructorUsedError;
+  String? get cardBrand;
   @override
-  String? get cardLast4Digits => throw _privateConstructorUsedError;
+  String? get cardLast4Digits;
   @override
   @JsonKey(ignore: true)
   _$$_ClPaymentMethodCopyWith<_$_ClPaymentMethod> get copyWith =>

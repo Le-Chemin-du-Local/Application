@@ -87,7 +87,7 @@ class __$$_BasketCopyWithImpl<$Res> extends _$BasketCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Basket extends _Basket with DiagnosticableTreeMixin {
+class _$_Basket extends _Basket {
   const _$_Basket(
       {final List<BasketCommerce> commerces = const <BasketCommerce>[]})
       : _commerces = commerces,
@@ -105,16 +105,8 @@ class _$_Basket extends _Basket with DiagnosticableTreeMixin {
   }
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Basket(commerces: $commerces)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Basket'))
-      ..add(DiagnosticsProperty('commerces', commerces));
   }
 
   @override
@@ -138,7 +130,9 @@ class _$_Basket extends _Basket with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BasketToJson(this);
+    return _$$_BasketToJson(
+      this,
+    );
   }
 }
 
@@ -149,7 +143,7 @@ abstract class _Basket extends Basket {
   factory _Basket.fromJson(Map<String, dynamic> json) = _$_Basket.fromJson;
 
   @override
-  List<BasketCommerce> get commerces => throw _privateConstructorUsedError;
+  List<BasketCommerce> get commerces;
   @override
   @JsonKey(ignore: true)
   _$$_BasketCopyWith<_$_Basket> get copyWith =>

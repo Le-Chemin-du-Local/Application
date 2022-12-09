@@ -87,23 +87,15 @@ class __$$_BasketStateCopyWithImpl<$Res> extends _$BasketStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_BasketState with DiagnosticableTreeMixin implements _BasketState {
+class _$_BasketState implements _BasketState {
   const _$_BasketState({required this.basket});
 
   @override
   final AsyncValue<Basket> basket;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'BasketState(basket: $basket)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'BasketState'))
-      ..add(DiagnosticsProperty('basket', basket));
   }
 
   @override
@@ -129,7 +121,7 @@ abstract class _BasketState implements BasketState {
       _$_BasketState;
 
   @override
-  AsyncValue<Basket> get basket => throw _privateConstructorUsedError;
+  AsyncValue<Basket> get basket;
   @override
   @JsonKey(ignore: true)
   _$$_BasketStateCopyWith<_$_BasketState> get copyWith =>

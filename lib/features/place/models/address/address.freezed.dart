@@ -142,7 +142,7 @@ class __$$_AddressCopyWithImpl<$Res> extends _$AddressCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Address extends _Address with DiagnosticableTreeMixin {
+class _$_Address extends _Address {
   const _$_Address(
       {this.number, this.route, this.optionalRoute, this.postalCode, this.city})
       : super._();
@@ -162,20 +162,8 @@ class _$_Address extends _Address with DiagnosticableTreeMixin {
   final String? city;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Address(number: $number, route: $route, optionalRoute: $optionalRoute, postalCode: $postalCode, city: $city)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Address'))
-      ..add(DiagnosticsProperty('number', number))
-      ..add(DiagnosticsProperty('route', route))
-      ..add(DiagnosticsProperty('optionalRoute', optionalRoute))
-      ..add(DiagnosticsProperty('postalCode', postalCode))
-      ..add(DiagnosticsProperty('city', city));
   }
 
   @override
@@ -209,7 +197,9 @@ class _$_Address extends _Address with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AddressToJson(this);
+    return _$$_AddressToJson(
+      this,
+    );
   }
 }
 
@@ -225,15 +215,15 @@ abstract class _Address extends Address {
   factory _Address.fromJson(Map<String, dynamic> json) = _$_Address.fromJson;
 
   @override
-  String? get number => throw _privateConstructorUsedError;
+  String? get number;
   @override
-  String? get route => throw _privateConstructorUsedError;
+  String? get route;
   @override
-  String? get optionalRoute => throw _privateConstructorUsedError;
+  String? get optionalRoute;
   @override
-  String? get postalCode => throw _privateConstructorUsedError;
+  String? get postalCode;
   @override
-  String? get city => throw _privateConstructorUsedError;
+  String? get city;
   @override
   @JsonKey(ignore: true)
   _$$_AddressCopyWith<_$_Address> get copyWith =>

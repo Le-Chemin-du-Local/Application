@@ -174,7 +174,7 @@ class __$$_BusinessHoursCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_BusinessHours extends _BusinessHours with DiagnosticableTreeMixin {
+class _$_BusinessHours extends _BusinessHours {
   const _$_BusinessHours(
       {this.monday,
       this.tuesday,
@@ -204,22 +204,8 @@ class _$_BusinessHours extends _BusinessHours with DiagnosticableTreeMixin {
   final List<Schedule>? sunday;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'BusinessHours(monday: $monday, tuesday: $tuesday, wednesday: $wednesday, thursday: $thursday, friday: $friday, saturday: $saturday, sunday: $sunday)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'BusinessHours'))
-      ..add(DiagnosticsProperty('monday', monday))
-      ..add(DiagnosticsProperty('tuesday', tuesday))
-      ..add(DiagnosticsProperty('wednesday', wednesday))
-      ..add(DiagnosticsProperty('thursday', thursday))
-      ..add(DiagnosticsProperty('friday', friday))
-      ..add(DiagnosticsProperty('saturday', saturday))
-      ..add(DiagnosticsProperty('sunday', sunday));
   }
 
   @override
@@ -255,7 +241,9 @@ class _$_BusinessHours extends _BusinessHours with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_BusinessHoursToJson(this);
+    return _$$_BusinessHoursToJson(
+      this,
+    );
   }
 }
 
@@ -274,19 +262,19 @@ abstract class _BusinessHours extends BusinessHours {
       _$_BusinessHours.fromJson;
 
   @override
-  List<Schedule>? get monday => throw _privateConstructorUsedError;
+  List<Schedule>? get monday;
   @override
-  List<Schedule>? get tuesday => throw _privateConstructorUsedError;
+  List<Schedule>? get tuesday;
   @override
-  List<Schedule>? get wednesday => throw _privateConstructorUsedError;
+  List<Schedule>? get wednesday;
   @override
-  List<Schedule>? get thursday => throw _privateConstructorUsedError;
+  List<Schedule>? get thursday;
   @override
-  List<Schedule>? get friday => throw _privateConstructorUsedError;
+  List<Schedule>? get friday;
   @override
-  List<Schedule>? get saturday => throw _privateConstructorUsedError;
+  List<Schedule>? get saturday;
   @override
-  List<Schedule>? get sunday => throw _privateConstructorUsedError;
+  List<Schedule>? get sunday;
   @override
   @JsonKey(ignore: true)
   _$$_BusinessHoursCopyWith<_$_BusinessHours> get copyWith =>

@@ -36,14 +36,16 @@ class _ProductEditFormState extends State<ProductEditForm> {
 
   final TextEditingController _nameTextController = TextEditingController();
   final TextEditingController _priceTextController = TextEditingController();
+  final TextEditingController _perUnitQuantityController = TextEditingController();
   final TextEditingController _descriptionTextController = TextEditingController();
 
   List<String> _productCategories = [];
   List<String> _productTags = [];
   List<String> _productAllergens = [];
 
-  String _currentUnit = 'Unitée';
-  double _currentTVA = 20;
+  String _currentUnit = 'Pièce';
+  String _currentPerUnitQuantityUnit = "kg";
+  double? _currentTVA;
   bool _isBreton = false;
   bool _hasGluten = true;
   ClFile? _currentImage;
@@ -89,9 +91,11 @@ class _ProductEditFormState extends State<ProductEditForm> {
       _nameTextController.text = widget.product!.name;
       _priceTextController.text = widget.product!.price.toString();
       _descriptionTextController.text = widget.product!.description ?? "";
+      _perUnitQuantityController.text = widget.product!.perUnitQuantity.toString();
 
       _currentTVA = widget.product!.tva ?? 20;
-      _currentUnit = widget.product!.unit ?? "Unitée";
+      _currentUnit = widget.product!.unit ?? "Pièce";
+      _currentPerUnitQuantityUnit = widget.product!.perUnitQuantityUnit ?? "kg";
 
       _productTags = widget.product!.tags.toList();
       _productAllergens = widget.product!.allergens.toList();
@@ -151,8 +155,12 @@ class _ProductEditFormState extends State<ProductEditForm> {
   }) {
     return WillPopScope(
       onWillPop: () async {
-        _onSave(runCreateMutation: runCreateMutation, runUpdateMutation: runUpdateMutation);
-        return false;
+        if (widget.product != null) {
+          _onSave(runCreateMutation: runCreateMutation, runUpdateMutation: runUpdateMutation);
+          return false;
+        }
+
+        return true;
       },
       child: Stack(
         children: [
@@ -234,8 +242,9 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                         // La TVA
                                         ConstrainedBox(
                                           constraints: const BoxConstraints(maxWidth: 150),
-                                          child: ClDropdown<double>(
+                                          child: ClDropdown<double?>(
                                             items: {
+                                              null: "",
                                               0: "0%",
                                               5.5: "5,5%",
                                               10: "10%",
@@ -245,10 +254,68 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                             label: "% de TVA",
                                             onChanged: (value) {
                                               setState(() {
-                                                _currentTVA = value ?? 20;
+                                                _currentTVA = value;
                                               });
                                             },
-                                            validator: null,
+                                            validator: (value) {
+                                              if (value == null) return "Vous devez rentrer la TVA";
+                                              return null;
+                                            },
+                                          ),
+                                        ),
+                                        const SizedBox(height: 6, width: 20,),
+
+                                        // La quantité
+                                        Flexible(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              // Quantité nombre
+                                              Flexible(
+                                                flex: 2,
+                                                child: ClTextInput(
+                                                  controller: _perUnitQuantityController,
+                                                  inputType: const TextInputType.numberWithOptions(decimal: true),
+                                                  labelText: "Quantité",
+                                                  hintText: "100",
+                                                  validator: (price) {
+                                                    if (double.tryParse(price.replaceAll(",", ".")) == null) return "Vous devez rentrer un nombre valide";
+                                          
+                                                    return null;
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(width: 12,),
+                                          
+                                              // Quantité unité
+                                              Flexible(
+                                                flex: 3,
+                                                child: ClDropdown<String>(
+                                                  currentValue: _currentPerUnitQuantityUnit,
+                                                  items: const {
+                                                    "": "",
+                                                    "ml": "ml",
+                                                    "cl": "cl",
+                                                    "l": "l",
+                                                    "mg": "mg",
+                                                    "g": "g",
+                                                    "kg": "kg",
+                                                  },
+                                                  label: "",
+                                                  validator: (value) {
+                                                    if ((value ?? '').isEmpty) return "Vous devez choisir une unité.";
+                                          
+                                                    return null;
+                                                  },
+                                                  onChanged: (newValue) {
+                                                    setState(() {
+                                                      _currentPerUnitQuantityUnit = newValue ?? 'g';
+                                                    });
+                                                  },
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                         const SizedBox(height: 6, width: 20,),
@@ -276,14 +343,16 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                               ),
                                               const SizedBox(width: 12,),
                                           
-                                              // Unitée
+                                              // Unité
                                               Flexible(
                                                 flex: 3,
                                                 child: ClDropdown<String>(
                                                   currentValue: _currentUnit,
                                                   items: const {
-                                                    "Unitée": "Unitée",
+                                                    "Pièce": "Pièce",
                                                     "Gramme": "Gramme",
+                                                    "Kg": "Kg",
+                                                    "Litre": "Litre",
                                                     "Pack": "Pack"
                                                   },
                                                   label: "",
@@ -294,7 +363,7 @@ class _ProductEditFormState extends State<ProductEditForm> {
                                                   },
                                                   onChanged: (newValue) {
                                                     setState(() {
-                                                      _currentUnit = newValue ?? 'Unitée';
+                                                      _currentUnit = newValue ?? 'Pièce';
                                                     });
                                                   },
                                                 ),
@@ -536,6 +605,8 @@ class _ProductEditFormState extends State<ProductEditForm> {
       "description": _descriptionTextController.text,
       "price": double.parse(_priceTextController.text.replaceAll(",", ".")),
       "unit": _currentUnit,
+      "perUnitQuantity": double.parse(_perUnitQuantityController.text.replaceAll(',', '.')),
+      "perUnitQuantityUnit": _currentPerUnitQuantityUnit,
       "tva": _currentTVA,
       "isBreton": _isBreton,
       "hasGluten": _hasGluten,

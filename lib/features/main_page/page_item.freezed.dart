@@ -152,7 +152,7 @@ class __$$_PageItemCopyWithImpl<$Res> extends _$PageItemCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
+class _$_PageItem implements _PageItem {
   const _$_PageItem(
       {required this.index,
       required this.title,
@@ -177,21 +177,8 @@ class _$_PageItem with DiagnosticableTreeMixin implements _PageItem {
   final bool isBasket;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'PageItem(index: $index, title: $title, appBarTitle: $appBarTitle, showOnMobile: $showOnMobile, icon: $icon, isBasket: $isBasket)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'PageItem'))
-      ..add(DiagnosticsProperty('index', index))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('appBarTitle', appBarTitle))
-      ..add(DiagnosticsProperty('showOnMobile', showOnMobile))
-      ..add(DiagnosticsProperty('icon', icon))
-      ..add(DiagnosticsProperty('isBasket', isBasket));
   }
 
   @override
@@ -235,17 +222,17 @@ abstract class _PageItem implements PageItem {
       final bool isBasket}) = _$_PageItem;
 
   @override
-  int get index => throw _privateConstructorUsedError;
+  int get index;
   @override
-  String get title => throw _privateConstructorUsedError;
+  String get title;
   @override
-  String get appBarTitle => throw _privateConstructorUsedError;
+  String get appBarTitle;
   @override
-  bool get showOnMobile => throw _privateConstructorUsedError;
+  bool get showOnMobile;
   @override
-  IconData? get icon => throw _privateConstructorUsedError;
+  IconData? get icon;
   @override
-  bool get isBasket => throw _privateConstructorUsedError;
+  bool get isBasket;
   @override
   @JsonKey(ignore: true)
   _$$_PageItemCopyWith<_$_PageItem> get copyWith =>

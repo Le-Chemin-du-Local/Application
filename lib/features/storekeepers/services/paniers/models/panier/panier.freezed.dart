@@ -209,7 +209,7 @@ class __$$_PanierProductCopyWithImpl<$Res> extends _$PanierCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
+class _$_PanierProduct implements _PanierProduct {
   const _$_PanierProduct(this.id,
       {required this.name,
       required this.type,
@@ -258,25 +258,8 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
   final DateTime? endingDate;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Panier(id: $id, name: $name, type: $type, category: $category, description: $description, quantity: $quantity, price: $price, reduction: $reduction, products: $products, endingDate: $endingDate)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Panier'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('type', type))
-      ..add(DiagnosticsProperty('category', category))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('quantity', quantity))
-      ..add(DiagnosticsProperty('price', price))
-      ..add(DiagnosticsProperty('reduction', reduction))
-      ..add(DiagnosticsProperty('products', products))
-      ..add(DiagnosticsProperty('endingDate', endingDate));
   }
 
   @override
@@ -320,7 +303,9 @@ class _$_PanierProduct with DiagnosticableTreeMixin implements _PanierProduct {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PanierProductToJson(this);
+    return _$$_PanierProductToJson(
+      this,
+    );
   }
 }
 
@@ -340,25 +325,25 @@ abstract class _PanierProduct implements Panier {
       _$_PanierProduct.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get type => throw _privateConstructorUsedError;
+  String get type;
   @override
-  String get category => throw _privateConstructorUsedError;
+  String get category;
   @override
-  String get description => throw _privateConstructorUsedError;
+  String get description;
   @override
-  int get quantity => throw _privateConstructorUsedError;
+  int get quantity;
   @override
-  double get price => throw _privateConstructorUsedError;
+  double get price;
   @override
-  double get reduction => throw _privateConstructorUsedError;
+  double get reduction;
   @override
-  List<PanierProduct> get products => throw _privateConstructorUsedError;
+  List<PanierProduct> get products;
   @override
-  DateTime? get endingDate => throw _privateConstructorUsedError;
+  DateTime? get endingDate;
   @override
   @JsonKey(ignore: true)
   _$$_PanierProductCopyWith<_$_PanierProduct> get copyWith =>

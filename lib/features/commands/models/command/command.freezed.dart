@@ -158,7 +158,7 @@ class __$$_CommandCopyWithImpl<$Res> extends _$CommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Command extends _Command with DiagnosticableTreeMixin {
+class _$_Command extends _Command {
   const _$_Command(this.id,
       {this.creationDate,
       this.user,
@@ -188,20 +188,8 @@ class _$_Command extends _Command with DiagnosticableTreeMixin {
   final String? status;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Command(id: $id, creationDate: $creationDate, user: $user, commerces: $commerces, status: $status)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Command'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('creationDate', creationDate))
-      ..add(DiagnosticsProperty('user', user))
-      ..add(DiagnosticsProperty('commerces', commerces))
-      ..add(DiagnosticsProperty('status', status));
   }
 
   @override
@@ -235,7 +223,9 @@ class _$_Command extends _Command with DiagnosticableTreeMixin {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CommandToJson(this);
+    return _$$_CommandToJson(
+      this,
+    );
   }
 }
 
@@ -250,15 +240,15 @@ abstract class _Command extends Command {
   factory _Command.fromJson(Map<String, dynamic> json) = _$_Command.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  DateTime? get creationDate => throw _privateConstructorUsedError;
+  DateTime? get creationDate;
   @override
-  User? get user => throw _privateConstructorUsedError;
+  User? get user;
   @override
-  List<CommerceCommand> get commerces => throw _privateConstructorUsedError;
+  List<CommerceCommand> get commerces;
   @override
-  String? get status => throw _privateConstructorUsedError;
+  String? get status;
   @override
   @JsonKey(ignore: true)
   _$$_CommandCopyWith<_$_Command> get copyWith =>

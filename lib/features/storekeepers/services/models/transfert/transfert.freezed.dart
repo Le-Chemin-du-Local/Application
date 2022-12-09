@@ -123,7 +123,7 @@ class __$$_TransfertCopyWithImpl<$Res> extends _$TransfertCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Transfert with DiagnosticableTreeMixin implements _Transfert {
+class _$_Transfert implements _Transfert {
   const _$_Transfert(
       {required this.value,
       required this.ibanOwner,
@@ -143,19 +143,8 @@ class _$_Transfert with DiagnosticableTreeMixin implements _Transfert {
   final String bic;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Transfert(value: $value, ibanOwner: $ibanOwner, iban: $iban, bic: $bic)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Transfert'))
-      ..add(DiagnosticsProperty('value', value))
-      ..add(DiagnosticsProperty('ibanOwner', ibanOwner))
-      ..add(DiagnosticsProperty('iban', iban))
-      ..add(DiagnosticsProperty('bic', bic));
   }
 
   @override
@@ -185,7 +174,9 @@ class _$_Transfert with DiagnosticableTreeMixin implements _Transfert {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TransfertToJson(this);
+    return _$$_TransfertToJson(
+      this,
+    );
   }
 }
 
@@ -200,13 +191,13 @@ abstract class _Transfert implements Transfert {
       _$_Transfert.fromJson;
 
   @override
-  double get value => throw _privateConstructorUsedError;
+  double get value;
   @override
-  String get ibanOwner => throw _privateConstructorUsedError;
+  String get ibanOwner;
   @override
-  String get iban => throw _privateConstructorUsedError;
+  String get iban;
   @override
-  String get bic => throw _privateConstructorUsedError;
+  String get bic;
   @override
   @JsonKey(ignore: true)
   _$$_TransfertCopyWith<_$_Transfert> get copyWith =>

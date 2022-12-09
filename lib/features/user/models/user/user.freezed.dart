@@ -239,7 +239,7 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_User with DiagnosticableTreeMixin implements _User {
+class _$_User implements _User {
   const _$_User(this.id,
       {required this.role,
       required this.email,
@@ -283,26 +283,8 @@ class _$_User with DiagnosticableTreeMixin implements _User {
   final ClPaymentMethod? defaultPaymentMethod;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'User(id: $id, role: $role, email: $email, phone: $phone, firstName: $firstName, lastName: $lastName, createdAt: $createdAt, commerce: $commerce, registeredPaymentMethods: $registeredPaymentMethods, defaultPaymentMethod: $defaultPaymentMethod)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'User'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('role', role))
-      ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('phone', phone))
-      ..add(DiagnosticsProperty('firstName', firstName))
-      ..add(DiagnosticsProperty('lastName', lastName))
-      ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('commerce', commerce))
-      ..add(DiagnosticsProperty(
-          'registeredPaymentMethods', registeredPaymentMethods))
-      ..add(DiagnosticsProperty('defaultPaymentMethod', defaultPaymentMethod));
   }
 
   @override
@@ -346,7 +328,9 @@ class _$_User with DiagnosticableTreeMixin implements _User {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_UserToJson(this);
+    return _$$_UserToJson(
+      this,
+    );
   }
 }
 
@@ -365,27 +349,25 @@ abstract class _User implements User {
   factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String get role => throw _privateConstructorUsedError;
+  String get role;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get email;
   @override
-  String? get phone => throw _privateConstructorUsedError;
+  String? get phone;
   @override
-  String? get firstName => throw _privateConstructorUsedError;
+  String? get firstName;
   @override
-  String? get lastName => throw _privateConstructorUsedError;
+  String? get lastName;
   @override
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+  DateTime? get createdAt;
   @override
-  Commerce? get commerce => throw _privateConstructorUsedError;
+  Commerce? get commerce;
   @override
-  List<ClPaymentMethod> get registeredPaymentMethods =>
-      throw _privateConstructorUsedError;
+  List<ClPaymentMethod> get registeredPaymentMethods;
   @override
-  ClPaymentMethod? get defaultPaymentMethod =>
-      throw _privateConstructorUsedError;
+  ClPaymentMethod? get defaultPaymentMethod;
   @override
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;

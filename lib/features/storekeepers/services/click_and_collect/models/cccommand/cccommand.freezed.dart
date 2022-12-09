@@ -101,7 +101,7 @@ class __$$_CCCommandCopyWithImpl<$Res> extends _$CCCommandCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_CCCommand with DiagnosticableTreeMixin implements _CCCommand {
+class _$_CCCommand implements _CCCommand {
   const _$_CCCommand(this.id,
       {final List<CCProduct> products = const <CCProduct>[]})
       : _products = products;
@@ -120,17 +120,8 @@ class _$_CCCommand with DiagnosticableTreeMixin implements _CCCommand {
   }
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'CCCommand(id: $id, products: $products)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'CCCommand'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('products', products));
   }
 
   @override
@@ -156,7 +147,9 @@ class _$_CCCommand with DiagnosticableTreeMixin implements _CCCommand {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CCCommandToJson(this);
+    return _$$_CCCommandToJson(
+      this,
+    );
   }
 }
 
@@ -168,9 +161,9 @@ abstract class _CCCommand implements CCCommand {
       _$_CCCommand.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  List<CCProduct> get products => throw _privateConstructorUsedError;
+  List<CCProduct> get products;
   @override
   @JsonKey(ignore: true)
   _$$_CCCommandCopyWith<_$_CCCommand> get copyWith =>

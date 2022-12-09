@@ -57,6 +57,8 @@ query getDetailledProduct(
     hasGluten,
     price,
     unit,
+    perUnitQuantity,
+    perUnitQuantityUnit,
     tva,
   }
 }

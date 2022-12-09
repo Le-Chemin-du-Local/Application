@@ -494,7 +494,7 @@ class __$$_CommerceCopyWithImpl<$Res> extends _$CommerceCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
+class _$_Commerce implements _Commerce {
   const _$_Commerce(this.id,
       {required this.name,
       this.storekeeper,
@@ -609,42 +609,8 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
   final DateTime? lastBilledDate;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'Commerce(id: $id, name: $name, storekeeper: $storekeeper, categories: $categories, services: $services, productsAvailableForClickAndCollect: $productsAvailableForClickAndCollect, transferts: $transferts, storekeeperWord: $storekeeperWord, description: $description, address: $address, phone: $phone, email: $email, facebook: $facebook, twitter: $twitter, instagram: $instagram, ibanOwner: $ibanOwner, iban: $iban, bic: $bic, businessHours: $businessHours, clickAndCollectHours: $clickAndCollectHours, latitude: $latitude, longitude: $longitude, defaultPaymentMethod: $defaultPaymentMethod, balance: $balance, dueBalance: $dueBalance, lastBilledDate: $lastBilledDate)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Commerce'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('storekeeper', storekeeper))
-      ..add(DiagnosticsProperty('categories', categories))
-      ..add(DiagnosticsProperty('services', services))
-      ..add(DiagnosticsProperty('productsAvailableForClickAndCollect',
-          productsAvailableForClickAndCollect))
-      ..add(DiagnosticsProperty('transferts', transferts))
-      ..add(DiagnosticsProperty('storekeeperWord', storekeeperWord))
-      ..add(DiagnosticsProperty('description', description))
-      ..add(DiagnosticsProperty('address', address))
-      ..add(DiagnosticsProperty('phone', phone))
-      ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('facebook', facebook))
-      ..add(DiagnosticsProperty('twitter', twitter))
-      ..add(DiagnosticsProperty('instagram', instagram))
-      ..add(DiagnosticsProperty('ibanOwner', ibanOwner))
-      ..add(DiagnosticsProperty('iban', iban))
-      ..add(DiagnosticsProperty('bic', bic))
-      ..add(DiagnosticsProperty('businessHours', businessHours))
-      ..add(DiagnosticsProperty('clickAndCollectHours', clickAndCollectHours))
-      ..add(DiagnosticsProperty('latitude', latitude))
-      ..add(DiagnosticsProperty('longitude', longitude))
-      ..add(DiagnosticsProperty('defaultPaymentMethod', defaultPaymentMethod))
-      ..add(DiagnosticsProperty('balance', balance))
-      ..add(DiagnosticsProperty('dueBalance', dueBalance))
-      ..add(DiagnosticsProperty('lastBilledDate', lastBilledDate));
   }
 
   @override
@@ -732,7 +698,9 @@ class _$_Commerce with DiagnosticableTreeMixin implements _Commerce {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_CommerceToJson(this);
+    return _$$_CommerceToJson(
+      this,
+    );
   }
 }
 
@@ -767,59 +735,57 @@ abstract class _Commerce implements Commerce {
   factory _Commerce.fromJson(Map<String, dynamic> json) = _$_Commerce.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  User? get storekeeper => throw _privateConstructorUsedError;
+  User? get storekeeper;
   @override
-  List<String> get categories => throw _privateConstructorUsedError;
+  List<String> get categories;
   @override
-  List<String> get services => throw _privateConstructorUsedError;
+  List<String> get services;
   @override
-  List<Product> get productsAvailableForClickAndCollect =>
-      throw _privateConstructorUsedError;
+  List<Product> get productsAvailableForClickAndCollect;
   @override
-  List<Transfert> get transferts => throw _privateConstructorUsedError;
+  List<Transfert> get transferts;
   @override
-  String? get storekeeperWord => throw _privateConstructorUsedError;
+  String? get storekeeperWord;
   @override
-  String? get description => throw _privateConstructorUsedError;
+  String? get description;
   @override
-  Address? get address => throw _privateConstructorUsedError;
+  Address? get address;
   @override
-  String? get phone => throw _privateConstructorUsedError;
+  String? get phone;
   @override
-  String? get email => throw _privateConstructorUsedError;
+  String? get email;
   @override
-  String? get facebook => throw _privateConstructorUsedError;
+  String? get facebook;
   @override
-  String? get twitter => throw _privateConstructorUsedError;
+  String? get twitter;
   @override
-  String? get instagram => throw _privateConstructorUsedError;
+  String? get instagram;
   @override
-  String? get ibanOwner => throw _privateConstructorUsedError;
+  String? get ibanOwner;
   @override
-  String? get iban => throw _privateConstructorUsedError;
+  String? get iban;
   @override
-  String? get bic => throw _privateConstructorUsedError;
+  String? get bic;
   @override
-  BusinessHours? get businessHours => throw _privateConstructorUsedError;
+  BusinessHours? get businessHours;
   @override
-  BusinessHours? get clickAndCollectHours => throw _privateConstructorUsedError;
+  BusinessHours? get clickAndCollectHours;
   @override
-  double? get latitude => throw _privateConstructorUsedError;
+  double? get latitude;
   @override
-  double? get longitude => throw _privateConstructorUsedError;
+  double? get longitude;
   @override
-  ClPaymentMethod? get defaultPaymentMethod =>
-      throw _privateConstructorUsedError;
+  ClPaymentMethod? get defaultPaymentMethod;
   @override
-  double? get balance => throw _privateConstructorUsedError;
+  double? get balance;
   @override
-  double? get dueBalance => throw _privateConstructorUsedError;
+  double? get dueBalance;
   @override
-  DateTime? get lastBilledDate => throw _privateConstructorUsedError;
+  DateTime? get lastBilledDate;
   @override
   @JsonKey(ignore: true)
   _$$_CommerceCopyWith<_$_Commerce> get copyWith =>

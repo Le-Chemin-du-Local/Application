@@ -227,7 +227,7 @@ class __$$_ServiceInfoCopyWithImpl<$Res> extends _$ServiceInfoCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_ServiceInfo with DiagnosticableTreeMixin implements _ServiceInfo {
+class _$_ServiceInfo implements _ServiceInfo {
   const _$_ServiceInfo(this.id,
       {required this.name,
       required this.shortDescription,
@@ -278,28 +278,8 @@ class _$_ServiceInfo with DiagnosticableTreeMixin implements _ServiceInfo {
   }
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'ServiceInfo(id: $id, name: $name, shortDescription: $shortDescription, longDescription: $longDescription, monthPrice: $monthPrice, monthMinimumAllowedCA: $monthMinimumAllowedCA, monthRangePercentage: $monthRangePercentage, monthAugmentationPerRangePercentage: $monthAugmentationPerRangePercentage, monthAdvantages: $monthAdvantages, transactionPercentage: $transactionPercentage, transactionAdvantages: $transactionAdvantages)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ServiceInfo'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('name', name))
-      ..add(DiagnosticsProperty('shortDescription', shortDescription))
-      ..add(DiagnosticsProperty('longDescription', longDescription))
-      ..add(DiagnosticsProperty('monthPrice', monthPrice))
-      ..add(DiagnosticsProperty('monthMinimumAllowedCA', monthMinimumAllowedCA))
-      ..add(DiagnosticsProperty('monthRangePercentage', monthRangePercentage))
-      ..add(DiagnosticsProperty('monthAugmentationPerRangePercentage',
-          monthAugmentationPerRangePercentage))
-      ..add(DiagnosticsProperty('monthAdvantages', monthAdvantages))
-      ..add(DiagnosticsProperty('transactionPercentage', transactionPercentage))
-      ..add(
-          DiagnosticsProperty('transactionAdvantages', transactionAdvantages));
   }
 
   @override
@@ -353,7 +333,9 @@ class _$_ServiceInfo with DiagnosticableTreeMixin implements _ServiceInfo {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_ServiceInfoToJson(this);
+    return _$$_ServiceInfoToJson(
+      this,
+    );
   }
 }
 
@@ -374,28 +356,27 @@ abstract class _ServiceInfo implements ServiceInfo {
       _$_ServiceInfo.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String get id;
   @override
-  String get name => throw _privateConstructorUsedError;
+  String get name;
   @override
-  String get shortDescription => throw _privateConstructorUsedError;
+  String get shortDescription;
   @override
-  String get longDescription => throw _privateConstructorUsedError;
+  String get longDescription;
   @override
-  double get monthPrice => throw _privateConstructorUsedError;
+  double get monthPrice;
   @override
-  double get monthMinimumAllowedCA => throw _privateConstructorUsedError;
+  double get monthMinimumAllowedCA;
   @override
-  double get monthRangePercentage => throw _privateConstructorUsedError;
+  double get monthRangePercentage;
   @override
-  double get monthAugmentationPerRangePercentage =>
-      throw _privateConstructorUsedError;
+  double get monthAugmentationPerRangePercentage;
   @override
-  List<String> get monthAdvantages => throw _privateConstructorUsedError;
+  List<String> get monthAdvantages;
   @override
-  double get transactionPercentage => throw _privateConstructorUsedError;
+  double get transactionPercentage;
   @override
-  List<String> get transactionAdvantages => throw _privateConstructorUsedError;
+  List<String> get transactionAdvantages;
   @override
   @JsonKey(ignore: true)
   _$$_ServiceInfoCopyWith<_$_ServiceInfo> get copyWith =>
