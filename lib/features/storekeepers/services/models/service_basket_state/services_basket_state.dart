@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/features/storekeepers/services/models/service_info/service_info.dart';
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:tuple/tuple.dart';
 

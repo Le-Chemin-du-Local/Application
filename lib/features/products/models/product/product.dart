@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/presentation/c_l_icons_icons.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 

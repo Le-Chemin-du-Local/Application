@@ -4,7 +4,6 @@ import 'package:chemin_du_local/features/storekeepers/services/models/transfert/
 import 'package:chemin_du_local/features/user/models/cl_payment_method/cl_payment_method.dart';
 import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:chemin_du_local/features/place/models/address/address.dart';
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'commerce.freezed.dart';

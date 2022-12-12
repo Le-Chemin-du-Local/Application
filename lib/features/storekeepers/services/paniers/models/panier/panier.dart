@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/features/storekeepers/services/paniers/models/panier_product/panier_product.dart';
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'panier.freezed.dart';

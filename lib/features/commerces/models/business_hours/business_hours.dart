@@ -1,5 +1,4 @@
 import 'package:chemin_du_local/features/commerces/models/schedule/schedule.dart';
-import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'business_hours.freezed.dart';
