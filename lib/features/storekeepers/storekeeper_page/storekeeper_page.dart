@@ -11,6 +11,7 @@ import 'package:chemin_du_local/features/storekeepers/storekeepers_graphql.dart'
 import 'package:chemin_du_local/features/user/models/user/user.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
+import 'package:map_launcher/map_launcher.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 class StoreKeeperPage extends StatelessWidget {
@@ -132,7 +133,8 @@ class StoreKeeperPage extends StatelessWidget {
                           products: products,
                           productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
                           enableAllProductsButton: !canEdit,
-                          onShowProducts: onShowProducts ?? () {}
+                          onShowProducts: onShowProducts ?? () {},
+                          onShowMap: () => _openMaps(commerce: commerce),
                         );
                       }
         
@@ -142,6 +144,7 @@ class StoreKeeperPage extends StatelessWidget {
                         productsAvailableForClickAndCollect: productsAvailableForClickAndCollect,
                         enableAllProductsButton: !canEdit,
                         onShowProducts: onShowProducts ?? () {},
+                        onShowMap: () => _openMaps(commerce: commerce),
                       );
                     },
                   ),
@@ -151,6 +154,20 @@ class StoreKeeperPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future _openMaps({
+    required Commerce? commerce
+  }) async {
+    if (commerce == null) return;
+
+    (await MapLauncher.installedMaps).first.showDirections(
+      destination: Coords(
+        commerce.latitude!,
+        commerce.longitude!
+      ),
+      destinationTitle: commerce.name
     );
   }
 

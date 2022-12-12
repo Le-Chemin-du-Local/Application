@@ -8,6 +8,7 @@ class AddressCard extends StatelessWidget {
   const AddressCard({
     Key? key, 
     this.initialLatLgn,
+    required this.onShowMap,
     required this.phone,
     required this.email, 
     required this.address,
@@ -15,6 +16,8 @@ class AddressCard extends StatelessWidget {
     required this.twitter,
     required this.instagram
   }) : super(key: key);
+
+  final Function() onShowMap;
 
   final LatLng? initialLatLgn;
 
@@ -122,7 +125,7 @@ class AddressCard extends StatelessWidget {
 
           // Le bouton d'intinéraire
           ElevatedButton(
-            onPressed: () {}, 
+            onPressed: onShowMap, 
             child: const Text("Voir l'itinéraire")
           ),
         ],

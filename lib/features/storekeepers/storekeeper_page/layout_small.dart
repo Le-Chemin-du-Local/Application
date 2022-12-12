@@ -17,6 +17,7 @@ class LayoutSmall extends StatelessWidget {
     required this.productsAvailableForClickAndCollect,
     required this.enableAllProductsButton,
     required this.onShowProducts,
+    required this.onShowMap,
   }) : super(key: key);
 
   final Commerce? commerce;
@@ -26,6 +27,7 @@ class LayoutSmall extends StatelessWidget {
   final bool enableAllProductsButton;
 
   final Function() onShowProducts;
+  final Function() onShowMap;
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +72,7 @@ class LayoutSmall extends StatelessWidget {
               facebook: commerce?.facebook ?? "",
               twitter: commerce?.twitter ?? "",
               instagram: commerce?.instagram ?? "",
+              onShowMap: onShowMap,
             ),
           ),
         ),

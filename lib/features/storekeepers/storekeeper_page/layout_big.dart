@@ -17,6 +17,7 @@ class LayoutBig extends StatelessWidget {
     required this.productsAvailableForClickAndCollect,
     required this.enableAllProductsButton,
     required this.onShowProducts,
+    required this.onShowMap,
   }) : super(key: key);
 
   final Commerce? commerce;
@@ -26,6 +27,7 @@ class LayoutBig extends StatelessWidget {
   final bool enableAllProductsButton;
 
   final Function() onShowProducts;
+  final Function() onShowMap;
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +107,7 @@ class LayoutBig extends StatelessWidget {
                         facebook: commerce?.facebook ?? "",
                         twitter: commerce?.twitter ?? "",
                         instagram: commerce?.instagram ?? "",
+                        onShowMap: onShowMap,
                       ),
                     ),
                     const SizedBox(height: 10,),
