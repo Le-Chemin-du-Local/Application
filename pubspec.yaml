@@ -77,8 +77,8 @@ flutter_icons:
 dependency_overrides:
   # flutter_stripe:
   #   path: ./flutter_stripe/packages/stripe
-  flutter_stripe_web:
-    path: ./packages/stripe_web
+  # flutter_stripe_web:
+  #   path: ./packages/stripe_web
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
