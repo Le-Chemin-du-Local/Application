@@ -3,6 +3,7 @@ import 'package:chemin_du_local/core/widgets/cl_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:latlng/latlng.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class AddressCard extends StatelessWidget {
   const AddressCard({
@@ -140,34 +141,43 @@ class AddressCard extends StatelessWidget {
       children: [
         // Logo Facebook
         if (facebook.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Icon(
-              FontAwesome.facebook_f,
-              size: 32,
-              color: Theme.of(context).colorScheme.secondary,
+          InkWell(
+            onTap: () => launchUrlString(facebook, mode: LaunchMode.externalApplication),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Icon(
+                FontAwesome.facebook_f,
+                size: 32,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           ),
 
         // Logo Twitter
         if (twitter.isNotEmpty)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Icon(
-              FontAwesome.twitter,
-              size: 32,
-              color: Theme.of(context).colorScheme.secondary,
+          InkWell(
+            onTap: () => launchUrlString(twitter, mode: LaunchMode.externalApplication),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Icon(
+                FontAwesome.twitter,
+                size: 32,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           ),
 
         // Logo Instagram
         if (instagram.isNotEmpty) 
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: Icon(
-              FontAwesome.instagram,
-              size: 32,
-              color: Theme.of(context).colorScheme.secondary,
+          InkWell(
+            onTap: () => launchUrlString(instagram, mode: LaunchMode.externalApplication),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Icon(
+                FontAwesome.instagram,
+                size: 32,
+                color: Theme.of(context).colorScheme.secondary,
+              ),
             ),
           )
       ],
