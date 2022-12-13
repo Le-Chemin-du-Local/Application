@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'service_info.freezed.dart';
@@ -14,8 +15,8 @@ class ServiceInfo with _$ServiceInfo {
     required String longDescription,
     required double monthPrice,
     required double monthMinimumAllowedCA,
-    required double monthRangePercentage,
-    required double monthAugmentationPerRangePercentage,
+    required double monthCARange,
+    required double monthCAPriceAugmentation,
     required List<String> monthAdvantages,
     required double transactionPercentage,
     required List<String> transactionAdvantages,

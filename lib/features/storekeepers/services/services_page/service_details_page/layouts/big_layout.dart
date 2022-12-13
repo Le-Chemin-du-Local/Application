@@ -4,6 +4,7 @@ import 'package:chemin_du_local/features/storekeepers/services/services_page/ser
 import 'package:chemin_du_local/features/storekeepers/services/services_page/service_details_page/widgets/tarif_card.dart';
 import 'package:chemin_du_local/features/storekeepers/services/widgets/why_us.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class BigLayout extends StatelessWidget {
   const BigLayout({
@@ -38,6 +39,15 @@ class BigLayout extends StatelessWidget {
 
                   // La description longue
                   Text(serviceInfo.longDescription),
+                  const SizedBox(height: 16,),
+
+                  ElevatedButton(
+                    onPressed: () => launchUrlString(
+                      "https://chemin-du-local.bzh/le-monde-de-breizhine-l-hermine",
+                      mode: LaunchMode.externalApplication
+                    ), 
+                    child: const Text("En savoir plus sur nos convictions")
+                  ),
                   const SizedBox(height: 16,),
 
                   // Les tarifs

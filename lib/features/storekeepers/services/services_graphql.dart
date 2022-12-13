@@ -34,8 +34,8 @@ query GetAllServicesInfo {
     monthPrice
     monthAdvantages
     monthMinimumAllowedCA
-    monthRangePercentage
-    monthAugmentationPerRangePercentage
+    monthCARange
+    monthCAPriceAugmentation
     transactionPercentage
     transactionAdvantages
   }
@@ -52,8 +52,8 @@ query serviceInfo($serviceID: String!) {
     monthPrice
     monthAdvantages
     monthMinimumAllowedCA
-    monthRangePercentage
-    monthAugmentationPerRangePercentage
+    monthCARange
+    monthCAPriceAugmentation
     transactionPercentage
     transactionAdvantages 
   }

@@ -26,9 +26,8 @@ mixin _$ServiceInfo {
   String get longDescription => throw _privateConstructorUsedError;
   double get monthPrice => throw _privateConstructorUsedError;
   double get monthMinimumAllowedCA => throw _privateConstructorUsedError;
-  double get monthRangePercentage => throw _privateConstructorUsedError;
-  double get monthAugmentationPerRangePercentage =>
-      throw _privateConstructorUsedError;
+  double get monthCARange => throw _privateConstructorUsedError;
+  double get monthCAPriceAugmentation => throw _privateConstructorUsedError;
   List<String> get monthAdvantages => throw _privateConstructorUsedError;
   double get transactionPercentage => throw _privateConstructorUsedError;
   List<String> get transactionAdvantages => throw _privateConstructorUsedError;
@@ -51,8 +50,8 @@ abstract class $ServiceInfoCopyWith<$Res> {
       String longDescription,
       double monthPrice,
       double monthMinimumAllowedCA,
-      double monthRangePercentage,
-      double monthAugmentationPerRangePercentage,
+      double monthCARange,
+      double monthCAPriceAugmentation,
       List<String> monthAdvantages,
       double transactionPercentage,
       List<String> transactionAdvantages});
@@ -74,8 +73,8 @@ class _$ServiceInfoCopyWithImpl<$Res> implements $ServiceInfoCopyWith<$Res> {
     Object? longDescription = freezed,
     Object? monthPrice = freezed,
     Object? monthMinimumAllowedCA = freezed,
-    Object? monthRangePercentage = freezed,
-    Object? monthAugmentationPerRangePercentage = freezed,
+    Object? monthCARange = freezed,
+    Object? monthCAPriceAugmentation = freezed,
     Object? monthAdvantages = freezed,
     Object? transactionPercentage = freezed,
     Object? transactionAdvantages = freezed,
@@ -105,14 +104,13 @@ class _$ServiceInfoCopyWithImpl<$Res> implements $ServiceInfoCopyWith<$Res> {
           ? _value.monthMinimumAllowedCA
           : monthMinimumAllowedCA // ignore: cast_nullable_to_non_nullable
               as double,
-      monthRangePercentage: monthRangePercentage == freezed
-          ? _value.monthRangePercentage
-          : monthRangePercentage // ignore: cast_nullable_to_non_nullable
+      monthCARange: monthCARange == freezed
+          ? _value.monthCARange
+          : monthCARange // ignore: cast_nullable_to_non_nullable
               as double,
-      monthAugmentationPerRangePercentage: monthAugmentationPerRangePercentage ==
-              freezed
-          ? _value.monthAugmentationPerRangePercentage
-          : monthAugmentationPerRangePercentage // ignore: cast_nullable_to_non_nullable
+      monthCAPriceAugmentation: monthCAPriceAugmentation == freezed
+          ? _value.monthCAPriceAugmentation
+          : monthCAPriceAugmentation // ignore: cast_nullable_to_non_nullable
               as double,
       monthAdvantages: monthAdvantages == freezed
           ? _value.monthAdvantages
@@ -144,8 +142,8 @@ abstract class _$$_ServiceInfoCopyWith<$Res>
       String longDescription,
       double monthPrice,
       double monthMinimumAllowedCA,
-      double monthRangePercentage,
-      double monthAugmentationPerRangePercentage,
+      double monthCARange,
+      double monthCAPriceAugmentation,
       List<String> monthAdvantages,
       double transactionPercentage,
       List<String> transactionAdvantages});
@@ -169,8 +167,8 @@ class __$$_ServiceInfoCopyWithImpl<$Res> extends _$ServiceInfoCopyWithImpl<$Res>
     Object? longDescription = freezed,
     Object? monthPrice = freezed,
     Object? monthMinimumAllowedCA = freezed,
-    Object? monthRangePercentage = freezed,
-    Object? monthAugmentationPerRangePercentage = freezed,
+    Object? monthCARange = freezed,
+    Object? monthCAPriceAugmentation = freezed,
     Object? monthAdvantages = freezed,
     Object? transactionPercentage = freezed,
     Object? transactionAdvantages = freezed,
@@ -200,14 +198,13 @@ class __$$_ServiceInfoCopyWithImpl<$Res> extends _$ServiceInfoCopyWithImpl<$Res>
           ? _value.monthMinimumAllowedCA
           : monthMinimumAllowedCA // ignore: cast_nullable_to_non_nullable
               as double,
-      monthRangePercentage: monthRangePercentage == freezed
-          ? _value.monthRangePercentage
-          : monthRangePercentage // ignore: cast_nullable_to_non_nullable
+      monthCARange: monthCARange == freezed
+          ? _value.monthCARange
+          : monthCARange // ignore: cast_nullable_to_non_nullable
               as double,
-      monthAugmentationPerRangePercentage: monthAugmentationPerRangePercentage ==
-              freezed
-          ? _value.monthAugmentationPerRangePercentage
-          : monthAugmentationPerRangePercentage // ignore: cast_nullable_to_non_nullable
+      monthCAPriceAugmentation: monthCAPriceAugmentation == freezed
+          ? _value.monthCAPriceAugmentation
+          : monthCAPriceAugmentation // ignore: cast_nullable_to_non_nullable
               as double,
       monthAdvantages: monthAdvantages == freezed
           ? _value._monthAdvantages
@@ -234,8 +231,8 @@ class _$_ServiceInfo implements _ServiceInfo {
       required this.longDescription,
       required this.monthPrice,
       required this.monthMinimumAllowedCA,
-      required this.monthRangePercentage,
-      required this.monthAugmentationPerRangePercentage,
+      required this.monthCARange,
+      required this.monthCAPriceAugmentation,
       required final List<String> monthAdvantages,
       required this.transactionPercentage,
       required final List<String> transactionAdvantages})
@@ -258,9 +255,9 @@ class _$_ServiceInfo implements _ServiceInfo {
   @override
   final double monthMinimumAllowedCA;
   @override
-  final double monthRangePercentage;
+  final double monthCARange;
   @override
-  final double monthAugmentationPerRangePercentage;
+  final double monthCAPriceAugmentation;
   final List<String> _monthAdvantages;
   @override
   List<String> get monthAdvantages {
@@ -279,7 +276,7 @@ class _$_ServiceInfo implements _ServiceInfo {
 
   @override
   String toString() {
-    return 'ServiceInfo(id: $id, name: $name, shortDescription: $shortDescription, longDescription: $longDescription, monthPrice: $monthPrice, monthMinimumAllowedCA: $monthMinimumAllowedCA, monthRangePercentage: $monthRangePercentage, monthAugmentationPerRangePercentage: $monthAugmentationPerRangePercentage, monthAdvantages: $monthAdvantages, transactionPercentage: $transactionPercentage, transactionAdvantages: $transactionAdvantages)';
+    return 'ServiceInfo(id: $id, name: $name, shortDescription: $shortDescription, longDescription: $longDescription, monthPrice: $monthPrice, monthMinimumAllowedCA: $monthMinimumAllowedCA, monthCARange: $monthCARange, monthCAPriceAugmentation: $monthCAPriceAugmentation, monthAdvantages: $monthAdvantages, transactionPercentage: $transactionPercentage, transactionAdvantages: $transactionAdvantages)';
   }
 
   @override
@@ -298,10 +295,9 @@ class _$_ServiceInfo implements _ServiceInfo {
             const DeepCollectionEquality()
                 .equals(other.monthMinimumAllowedCA, monthMinimumAllowedCA) &&
             const DeepCollectionEquality()
-                .equals(other.monthRangePercentage, monthRangePercentage) &&
+                .equals(other.monthCARange, monthCARange) &&
             const DeepCollectionEquality().equals(
-                other.monthAugmentationPerRangePercentage,
-                monthAugmentationPerRangePercentage) &&
+                other.monthCAPriceAugmentation, monthCAPriceAugmentation) &&
             const DeepCollectionEquality()
                 .equals(other._monthAdvantages, _monthAdvantages) &&
             const DeepCollectionEquality()
@@ -320,8 +316,8 @@ class _$_ServiceInfo implements _ServiceInfo {
       const DeepCollectionEquality().hash(longDescription),
       const DeepCollectionEquality().hash(monthPrice),
       const DeepCollectionEquality().hash(monthMinimumAllowedCA),
-      const DeepCollectionEquality().hash(monthRangePercentage),
-      const DeepCollectionEquality().hash(monthAugmentationPerRangePercentage),
+      const DeepCollectionEquality().hash(monthCARange),
+      const DeepCollectionEquality().hash(monthCAPriceAugmentation),
       const DeepCollectionEquality().hash(_monthAdvantages),
       const DeepCollectionEquality().hash(transactionPercentage),
       const DeepCollectionEquality().hash(_transactionAdvantages));
@@ -346,8 +342,8 @@ abstract class _ServiceInfo implements ServiceInfo {
       required final String longDescription,
       required final double monthPrice,
       required final double monthMinimumAllowedCA,
-      required final double monthRangePercentage,
-      required final double monthAugmentationPerRangePercentage,
+      required final double monthCARange,
+      required final double monthCAPriceAugmentation,
       required final List<String> monthAdvantages,
       required final double transactionPercentage,
       required final List<String> transactionAdvantages}) = _$_ServiceInfo;
@@ -368,9 +364,9 @@ abstract class _ServiceInfo implements ServiceInfo {
   @override
   double get monthMinimumAllowedCA;
   @override
-  double get monthRangePercentage;
+  double get monthCARange;
   @override
-  double get monthAugmentationPerRangePercentage;
+  double get monthCAPriceAugmentation;
   @override
   List<String> get monthAdvantages;
   @override

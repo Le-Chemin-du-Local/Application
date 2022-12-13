@@ -14,9 +14,9 @@ _$_ServiceInfo _$$_ServiceInfoFromJson(Map<String, dynamic> json) =>
       longDescription: json['longDescription'] as String,
       monthPrice: (json['monthPrice'] as num).toDouble(),
       monthMinimumAllowedCA: (json['monthMinimumAllowedCA'] as num).toDouble(),
-      monthRangePercentage: (json['monthRangePercentage'] as num).toDouble(),
-      monthAugmentationPerRangePercentage:
-          (json['monthAugmentationPerRangePercentage'] as num).toDouble(),
+      monthCARange: (json['monthCARange'] as num).toDouble(),
+      monthCAPriceAugmentation:
+          (json['monthCAPriceAugmentation'] as num).toDouble(),
       monthAdvantages: (json['monthAdvantages'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -34,9 +34,8 @@ Map<String, dynamic> _$$_ServiceInfoToJson(_$_ServiceInfo instance) =>
       'longDescription': instance.longDescription,
       'monthPrice': instance.monthPrice,
       'monthMinimumAllowedCA': instance.monthMinimumAllowedCA,
-      'monthRangePercentage': instance.monthRangePercentage,
-      'monthAugmentationPerRangePercentage':
-          instance.monthAugmentationPerRangePercentage,
+      'monthCARange': instance.monthCARange,
+      'monthCAPriceAugmentation': instance.monthCAPriceAugmentation,
       'monthAdvantages': instance.monthAdvantages,
       'transactionPercentage': instance.transactionPercentage,
       'transactionAdvantages': instance.transactionAdvantages,

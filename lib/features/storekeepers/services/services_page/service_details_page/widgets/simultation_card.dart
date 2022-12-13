@@ -101,12 +101,10 @@ class _SimulationCardState extends State<SimulationCard> {
 
     while(nextCALimit < currentCA) {
       augmentationFactor++;
-      nextCALimit *= 1 + (widget.serviceInfo.monthRangePercentage / 100);
+      nextCALimit += widget.serviceInfo.monthCARange;
     }
 
-    for (int i = 0; i < augmentationFactor; ++i) {
-      result *= 1 + (widget.serviceInfo.monthAugmentationPerRangePercentage / 100);
-    }
+    result += widget.serviceInfo.monthCAPriceAugmentation * augmentationFactor;
 
     setState(() {
       _result = result;
